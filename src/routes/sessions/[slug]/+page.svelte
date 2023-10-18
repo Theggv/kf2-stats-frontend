@@ -1,12 +1,8 @@
 <script lang="ts">
-  import ServerList from './ServerList.svelte';
-
   import type { PageData } from './$types';
-
-  export let data: PageData;
 </script>
 
-<ServerList {data} />
+<div>Session</div>
 
 <svelte:head>
   <title>KF2 Stats</title>

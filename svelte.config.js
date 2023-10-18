@@ -15,5 +15,9 @@ const config = {
   },
 };
 
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at: Promise', promise, 'reason:', reason);
+});
+
 export default config;
 
