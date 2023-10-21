@@ -5,7 +5,7 @@ import type {
   MatchData,
 } from './dto';
 
-export class SessionsApiService {
+export class MatchesApiService {
   static getById(session_id: number) {
     return $api.get<MatchData>(`/matches/${session_id}`);
   }
