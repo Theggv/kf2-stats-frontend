@@ -1,7 +1,3 @@
-import type { PaginationRequest, PaginationResponse } from '../common';
-import type { MapData } from '../maps';
-import type { ServerData } from '../servers';
-
 export enum Mode {
   Any = 0,
   Survival,
@@ -73,35 +69,18 @@ export interface CreateSessionResponse {
   id: number;
 }
 
-export interface FilterSessionsRequest {
-  server_id: number[];
-  map_id: number[];
-
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
-
-  include_server: boolean;
-  include_map: boolean;
-
-  pager: PaginationRequest;
-}
-
-export interface FilterSessionsResponse {
-  items: SessionData[];
-  metadata: PaginationResponse;
-}
-
 export interface UpdateStatusRequest {
   id: number;
   status: number;
 }
 
 export interface GameData {
+  max_players: number;
+  players_online: number;
+  players_alive: number;
   wave: number;
   is_trader_time: boolean;
   zeds_left: number;
-  players_alive: number;
 }
 
 export interface CDGameData {
@@ -109,22 +88,4 @@ export interface CDGameData {
   max_monsters: number;
   wave_size_fakes: number;
   zeds_type: string;
-}
-
-export interface LiveMatch {
-  session_id: number;
-
-  mode: Mode;
-  length: number;
-  diff: Difficulty;
-
-  map: MapData;
-  server: ServerData;
-
-  game_data: GameData;
-  cd_data?: CDGameData;
-}
-
-export interface GetLiveMatchesResponse {
-  items: LiveMatch[];
 }
