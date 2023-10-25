@@ -1,3 +1,4 @@
+import { Perk } from '$lib/api/matches';
 import { Difficulty, Length, Mode, Status } from '$lib/api/sessions';
 
 export function diffToString(diff: Difficulty) {
@@ -39,7 +40,7 @@ export function modeToString(mode: Mode) {
   }
 }
 
-export function statusToString(status: Status) {
+export function statusToString(status?: Status) {
   switch (status) {
     case Status.Lobby:
       return 'In Lobby';
@@ -53,5 +54,34 @@ export function statusToString(status: Status) {
       return 'Solomode';
     case Status.Aborted:
       return 'Aborted';
+    default:
+      return 'Unknown';
+  }
+}
+
+export function perkToString(perk: Perk) {
+  switch (perk) {
+    case Perk.Berserker:
+      return 'Berserker';
+    case Perk.Commando:
+      return 'Commando';
+    case Perk.Medic:
+      return 'Field Medic';
+    case Perk.Sharpshooter:
+      return 'Sharpshooter';
+    case Perk.Gunslinger:
+      return 'Gunslinger';
+    case Perk.Support:
+      return 'Support';
+    case Perk.Swat:
+      return 'Swat';
+    case Perk.Demolitionist:
+      return 'Demolitionist';
+    case Perk.Firebug:
+      return 'Firebug';
+    case Perk.Survivalist:
+      return 'Survivalist';
+    default:
+      return 'Unknown';
   }
 }

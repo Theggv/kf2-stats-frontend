@@ -9,5 +9,5 @@
 </AutoScroll>
 
 <svelte:head>
-  <title>{SITE_NAME}</title>
+  <title>{SITE_NAME} | Servers</title>
 </svelte:head>

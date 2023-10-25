@@ -1,4 +1,8 @@
-import type { PaginationRequest, PaginationResponse } from '../common';
+import type {
+  PaginationRequest,
+  PaginationResponse,
+  ZedCounter,
+} from '../common';
 import type {
   CDGameData,
   Difficulty,
@@ -7,6 +11,20 @@ import type {
   Mode,
   Status,
 } from '../sessions';
+
+export enum Perk {
+  Unknown = 0,
+  Berserker,
+  Commando,
+  Medic,
+  Sharpshooter,
+  Gunslinger,
+  Support,
+  Swat,
+  Demolitionist,
+  Firebug,
+  Survivalist,
+}
 
 export interface MatchSession {
   session_id: number;
@@ -34,10 +52,34 @@ export interface MatchServer {
 
 export interface MatchData {
   session: MatchSession;
-  map: MatchMap;
-  server: MatchServer;
-  game_data: GameData;
-  cd_data: CDGameData;
+  map?: MatchMap;
+  server?: MatchServer;
+  game_data?: GameData;
+  cd_data?: CDGameData;
+}
+
+export interface Player {
+  id: number;
+
+  profile_url?: string;
+  avatar?: string;
+  name: string;
+
+  player_stats_id: number;
+
+  perk: Perk;
+  level: number;
+  prestige: number;
+  is_dead: boolean;
+}
+
+export interface MatchWave {
+  id: number;
+  wave: number;
+  attempt: number;
+  players: Player[];
+  started_at: string;
+  completed_at: string;
 }
 
 export interface FilterMatchesRequest {
@@ -55,10 +97,69 @@ export interface FilterMatchesRequest {
   include_cd_data?: boolean;
 
   reverse_order?: boolean;
-  pager: PaginationRequest;
+  pager?: PaginationRequest;
 }
 
 export interface FilterMatchesResponse {
   items: MatchData[];
   metadata: PaginationResponse;
+}
+
+export interface GetMatchWavesResponse {
+  waves: MatchWave[];
+}
+
+export interface PlayerWaveStats {
+  player_stats_id: number;
+
+  shots_fired: number;
+  shots_hit: number;
+  shots_hs: number;
+
+  dosh_earned: number;
+
+  heals_given: number;
+  heals_recv: number;
+
+  damage_dealt: number;
+  damage_taken: number;
+
+  zedtime_count: number;
+  zedtime_length: number;
+
+  kills: ZedCounter;
+  husk_b: number;
+  husk_r: number;
+
+  injured_by: ZedCounter;
+}
+
+export interface GetMatchWaveStatsResponse {
+  players: PlayerWaveStats[];
+}
+
+export interface GetMatchPlayerStatsResponse {
+  waves: PlayerWaveStats[];
+}
+
+export interface AggregatedPlayerStats {
+  user_id: number;
+  play_time: number;
+  shots_fired: number;
+  shots_hit: number;
+  shots_hs: number;
+  dosh_earned: number;
+  heals_given: number;
+  heals_recv: number;
+  damage_dealt: number;
+  damage_taken: number;
+  zedtime_count: number;
+  zedtime_length: number;
+  kills: number;
+  large_kills: number;
+  husk_r: number;
+}
+
+export interface GetMatchAggregatedStatsResponse {
+  players: AggregatedPlayerStats[];
 }

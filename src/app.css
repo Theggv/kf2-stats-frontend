@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --text-primary: rgb(212 212 212 / 0.9);
+  --text-secondary: rgb(212 212 212 / 0.7);
+
+  --background-primary: rgba(0, 0, 0, 0.5);
+  --background-secondary: rgba(0, 0, 0, 0.5);
+
+  --hover-primary: rgb(185 28 28 / 0.5);
+
+  --selected-primary: rgb(234 88 12 / 0.5);
+}

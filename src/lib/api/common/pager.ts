@@ -1,6 +1,6 @@
 export interface PaginationRequest {
-  page: number;
-  results_per_page: number;
+  page?: number;
+  results_per_page?: number;
 }
 
 export interface PaginationResponse {
