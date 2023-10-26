@@ -39,6 +39,8 @@
   $: selectedPlayer = selectedWave?.players.find(
     (x) => x.id === $selectedPlayerId
   );
+  $: sortedPlayerList =
+    selectedWave?.players.sort((a, b) => a.perk - b.perk) || [];
 
   $: playerWaveStats =
     $horizontalStats.find(
@@ -77,15 +79,13 @@
 <div class="root">
   {#if waves.length > 0}
     <AutoScroll class="player-list">
-      {#if selectedWave}
-        {#each selectedWave.players as player (player.id)}
-          <PlayerView
-            {player}
-            selected={$selectedPlayerId === player.id}
-            on:click={() => onPlayerClick(player.id)}
-          />
-        {/each}
-      {/if}
+      {#each sortedPlayerList as player (player.id)}
+        <PlayerView
+          {player}
+          selected={$selectedPlayerId === player.id}
+          on:click={() => onPlayerClick(player.id)}
+        />
+      {/each}
     </AutoScroll>
     <ul class="tabs">
       {#each tabs as tab, index (tab.href + index)}
