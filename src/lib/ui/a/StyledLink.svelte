@@ -2,9 +2,17 @@
   export let href: string;
   export let selected = false;
   export let rounded = true;
+  export let newTab = false;
 </script>
 
-<a {href} class="root {$$restProps.class || ''}" class:selected class:rounded>
+<a
+  {href}
+  class="root {$$restProps.class || ''}"
+  target={newTab ? '_blank' : ''}
+  rel={newTab ? 'noopener noreferrer' : ''}
+  class:selected
+  class:rounded
+>
   <slot />
 </a>
 

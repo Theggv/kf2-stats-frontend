@@ -1,8 +1,9 @@
 <script lang="ts">
   import { SITE_NAME } from '$lib';
+  import SessionList from '$lib/components/session-list/SessionList.svelte';
 </script>
 
-<div>Session</div>
+<SessionList />
 
 <svelte:head>
   <title>{SITE_NAME} | Sessions</title>

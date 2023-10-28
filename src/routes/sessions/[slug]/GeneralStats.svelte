@@ -108,7 +108,7 @@
     <StatsCard
       category="Zed Time Enjoyer"
       player={getPlayer(zedTime)}
-      value={`${calcZT(zedTime).toFixed(0)}s Average Zed Time Length`}
+      value={`${calcZT(zedTime).toFixed(1)}s Average Zed Time Length`}
     />
   {/if}
   <StatsCard
@@ -120,7 +120,7 @@
     <StatsCard
       category="Oops hehe"
       player={getPlayer(memeGod)}
-      value={`${memeGod.husk_r} Large Rages From Husks`}
+      value={`${memeGod.husk_r} FP Rages From Husk Backpacks`}
     />
   {/if}
   <StatsCard

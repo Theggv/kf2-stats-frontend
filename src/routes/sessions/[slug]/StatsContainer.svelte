@@ -105,11 +105,8 @@
                 <GeneralStats summary={$playersSummary} {waves} />
               {/if}
             {:else if playerWaveStats}
-              {#if $selectedPlayerId}
-                <PlayerStatsGeneral
-                  playerId={$selectedPlayerId}
-                  stats={$horizontalStats}
-                />
+              {#if selectedPlayer}
+                <PlayerStatsGeneral {isCDGame} stats={$horizontalStats} />
               {/if}
             {/if}
           {:else if tab.href === '#detailed'}

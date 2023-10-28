@@ -1149,6 +1149,13 @@ svelte-hmr@^0.15.3:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.15.3.tgz#df54ccde9be3f091bf5f18fc4ef7b8eb6405fbe6"
   integrity sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==
 
+svelte-multiselect@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/svelte-multiselect/-/svelte-multiselect-10.2.0.tgz#24d36af77301586bb95929dd0cba87e177540f80"
+  integrity sha512-nbv0dTgSHGENbwKdiN5seFD4ljtGSAEZGcMkHfcc+Nnk7tVwM2jxvCgkRKp9FdPUKG1M6Zp8ZXLDU+xoZxHyTA==
+  dependencies:
+    svelte "^4.2.0"
+
 svelte-preprocess@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-5.0.4.tgz#2123898e079a074f7f4ef1799e10e037f5bcc55b"
@@ -1160,7 +1167,7 @@ svelte-preprocess@^5.0.4:
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
 
-svelte@^4.2.2:
+svelte@^4.2.0, svelte@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-4.2.2.tgz#07d42eefc1bce46e48d2056c5f11dc4cc1e06555"
   integrity sha512-My2tytF2e2NnHSpn2M7/3VdXT4JdTglYVUuSuK/mXL2XtulPYbeBfl8Dm1QiaKRn0zoULRnL+EtfZHHP0k4H3A==
@@ -1178,6 +1185,11 @@ svelte@^4.2.2:
     locate-character "^3.0.0"
     magic-string "^0.30.4"
     periscopic "^3.1.0"
+
+sveltekit-search-params@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/sveltekit-search-params/-/sveltekit-search-params-1.0.15.tgz#38b42e8743250ea346a310742e91bd04c322eeaa"
+  integrity sha512-LLuG961adpMMnyG/5Ixj9Cv++62ol7aSpVpE0qIFzQuOZ/5J3PwSoXu06pBw9DZi5Awj40OXtGLtpyh6WZjqVQ==
 
 tailwindcss@^3.3.3:
   version "3.3.3"

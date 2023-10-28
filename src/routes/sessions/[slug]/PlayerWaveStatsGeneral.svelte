@@ -54,7 +54,7 @@
   </div>
   <div class="metric">
     <div class="name">Large kills</div>
-    <div class="value">
+    <div class="value compact">
       {#if isCDGame}
         {$scrakeKills.toFixed(0)} SC
         {$fpKills.toFixed(0)} FP
@@ -67,7 +67,7 @@
   <div class="metric">
     {#if isCDGame}
       <div class="name">Husk kills</div>
-      <div class="value">
+      <div class="value compact">
         <span>N: {$husk_n_kills.toFixed(0)}</span>
         <span>B: {$husk_b_kills.toFixed(0)}</span>
         <span>R: {$husk_rages.toFixed(0)}</span>
@@ -139,5 +139,9 @@
 
   .metric .value {
     font-size: 36px;
+  }
+
+  .compact.value {
+    font-size: 30px;
   }
 </style>
