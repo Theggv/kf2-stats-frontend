@@ -6,5 +6,5 @@
 <SessionList />
 
 <svelte:head>
-  <title>{SITE_NAME} | Sessions</title>
+  <title>{SITE_NAME} | Matches</title>
 </svelte:head>

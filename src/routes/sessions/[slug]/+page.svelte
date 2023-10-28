@@ -54,7 +54,7 @@
 
 <svelte:head>
   {#if $match}
-    <title>{SITE_NAME} | Sessions | {$match.server.name}</title>
+    <title>{SITE_NAME} | Matches | {$match.server.name}</title>
   {/if}
 </svelte:head>
 
