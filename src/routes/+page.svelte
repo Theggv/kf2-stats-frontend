@@ -4,10 +4,10 @@
   import ServerList from '$lib/components/server-list/ServerList.svelte';
 </script>
 
-<AutoScroll>
-  <ServerList />
-</AutoScroll>
-
 <svelte:head>
   <title>{SITE_NAME}</title>
 </svelte:head>
+
+<AutoScroll>
+  <ServerList />
+</AutoScroll>

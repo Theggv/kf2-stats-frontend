@@ -14,6 +14,8 @@
     LinearScale,
     PointElement,
     CategoryScale,
+    ArcElement,
+    BarElement,
   } from 'chart.js';
 
   ChartJS.register(
@@ -23,7 +25,9 @@
     LineElement,
     LinearScale,
     PointElement,
-    CategoryScale
+    CategoryScale,
+    ArcElement,
+    BarElement
   );
 
   let active = false;

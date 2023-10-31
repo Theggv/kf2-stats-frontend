@@ -15,6 +15,12 @@
   $: fetchWaves(data.sessionId);
 </script>
 
+<svelte:head>
+  {#if $match}
+    <title>{$match.server.name} | Matches | {SITE_NAME}</title>
+  {/if}
+</svelte:head>
+
 <div class="root">
   <div class="header">
     {#if $matchLoading}
@@ -51,12 +57,6 @@
     <StatsContainer match={$match} waves={$waves} />
   {/if}
 </div>
-
-<svelte:head>
-  {#if $match}
-    <title>{SITE_NAME} | Matches | {$match.server.name}</title>
-  {/if}
-</svelte:head>
 
 <style>
   .root {

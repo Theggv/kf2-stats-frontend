@@ -1,3 +1,6 @@
+import type { PaginationRequest, PaginationResponse } from '../common';
+import type { CDGameData, Difficulty, Length, Mode, Status } from '../sessions';
+
 export enum AuthType {
   Steam = 1,
   EGS = 2,
@@ -26,4 +29,34 @@ export interface CreateUserRequest {
 
 export interface CreateUserResponse {
   id: number;
+}
+
+export interface FilterUsersRequest {
+  pager?: PaginationRequest;
+}
+
+export interface FilterUsersResponseUserSession {
+  id: number;
+  mode: Mode;
+  length: Length;
+  diff: Difficulty;
+  status: Status;
+  cd_data?: CDGameData;
+  server_name: string;
+  map_name: string;
+}
+
+export interface FilterUsersResponseUser {
+  id: number;
+  name: string;
+  profile_url: string;
+  avatar: string;
+  last_session?: FilterUsersResponseUserSession;
+  current_session?: FilterUsersResponseUserSession;
+  updated_at: string;
+}
+
+export interface FilterUsersResponse {
+  items: FilterUsersResponseUser[];
+  metadata: PaginationResponse;
 }

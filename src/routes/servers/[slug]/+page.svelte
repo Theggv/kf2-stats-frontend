@@ -35,9 +35,9 @@
 
 <svelte:head>
   {#if server}
-    <title>{SITE_NAME} | Servers | {server.name}</title>
+    <title>{server.name} | Servers | {SITE_NAME}</title>
   {:else}
-    <title>{SITE_NAME} | Servers</title>
+    <title>Servers | {SITE_NAME}</title>
   {/if}
 </svelte:head>
 

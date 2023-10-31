@@ -12,7 +12,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
-    "@types/": "bulatdashiev/svelte-slider",
+    "@types/": "sveltejs/svelte-virtual-list",
     "@types/lodash": "^4.14.200",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
@@ -27,6 +27,7 @@
   "type": "module",
   "dependencies": {
     "@bulatdashiev/svelte-slider": "^1.0.3",
+    "@sveltejs/svelte-virtual-list": "^3.0.1",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
     "lodash": "^4.17.21",

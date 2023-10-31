@@ -3,8 +3,8 @@
   import SessionList from '$lib/components/session-list/SessionList.svelte';
 </script>
 
-<SessionList />
-
 <svelte:head>
-  <title>{SITE_NAME} | Matches</title>
+  <title>Matches | {SITE_NAME}</title>
 </svelte:head>
+
+<SessionList />
