@@ -33,7 +33,7 @@
           include_map: true,
           include_game_data: true,
           include_cd_data: true,
-          status: Status.Aborted,
+          status: Status.InProgress,
           pager: { page, results_per_page: 100 },
         });
 
