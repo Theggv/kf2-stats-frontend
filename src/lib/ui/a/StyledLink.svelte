@@ -17,6 +17,10 @@
 </a>
 
 <style>
+  :root {
+    --background-from: var(--hover-primary);
+  }
+
   .root {
     position: relative;
     z-index: 10;
@@ -32,7 +36,7 @@
     width: 100%;
     height: 100%;
     z-index: -10;
-    background: linear-gradient(to right, var(--hover-primary), transparent);
+    background: linear-gradient(to right, var(--background-from), transparent);
     transition: opacity 100ms;
     border-radius: inherit;
   }

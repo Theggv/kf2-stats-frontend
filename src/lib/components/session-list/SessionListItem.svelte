@@ -11,21 +11,30 @@
   import type { WithRequired } from '$lib/util/types';
 
   export let data: WithRequired<MatchData, 'server' | 'map' | 'game_data'>;
+  export let withServer: boolean;
 </script>
 
 <div class="time">
   {new Date(data.session.updated_at).toLocaleTimeString()}
 </div>
 <StyledLink
-  newTab
+  newTab={withServer}
   href="/sessions/{data.session.session_id}"
   rounded={false}
   class="global-session-list-item"
 >
-  <div>{data.server.name}</div>
+  <div class="server-name">
+    {#if withServer}
+      {data.server.name}
+    {:else}
+      {data.map.name}
+    {/if}
+  </div>
 
   <div>
-    <div>{data.map.name}</div>
+    {#if withServer}
+      <div>{data.map.name}</div>
+    {/if}
     <div class="game-info">
       <span>
         {modeToString(data.session.mode)}
@@ -37,9 +46,11 @@
         <span>
           {data.cd_data.max_monsters}mm
         </span>
-        <span>
-          {data.cd_data.zeds_type} zeds
-        </span>
+        {#if data.cd_data.zeds_type !== 'vanilla'}
+          <span>
+            {data.cd_data.zeds_type} zeds
+          </span>
+        {/if}
       {:else}
         <span>
           {diffToString(data.session.diff)}
@@ -58,8 +69,17 @@
     {:else if data.session.mode !== Mode.Endless}
       {data.game_data.wave || 0} / {data.session.length}
     {:else}
-      {data.session.length}
+      {data.game_data.wave || 0}
     {/if}
+  </div>
+
+  <div
+    class="status"
+    class:lost={data.session.status === Status.Lose}
+    class:won={data.session.status === Status.Win}
+    class:in-progress={data.session.status === Status.InProgress}
+  >
+    {statusToString(data.session.status)}
   </div>
 
   <div class="match-length">
@@ -79,10 +99,6 @@
       -
     {/if}
   </div>
-
-  <div class="status">
-    {statusToString(data.session.status)}
-  </div>
 </StyledLink>
 
 <style>
@@ -91,6 +107,11 @@
     display: grid;
     grid-template-columns: subgrid;
     padding: 0.25rem;
+    font-weight: bold;
+  }
+
+  .server-name {
+    text-wrap: wrap;
   }
 
   .time {
@@ -120,5 +141,17 @@
 
   .match-length {
     text-align: center;
+  }
+
+  .lost {
+    color: rgb(217, 100, 100);
+  }
+
+  .won {
+    color: rgb(46, 158, 46);
+  }
+
+  .in-progress {
+    color: rgb(184, 197, 68);
   }
 </style>

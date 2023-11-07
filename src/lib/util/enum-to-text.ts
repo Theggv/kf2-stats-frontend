@@ -47,9 +47,9 @@ export function statusToString(status?: Status) {
     case Status.InProgress:
       return 'In Progress';
     case Status.Win:
-      return 'Won';
+      return 'Win';
     case Status.Lose:
-      return 'Lost';
+      return 'Loss';
     case Status.Solomode:
       return 'Solomode';
     case Status.Aborted:

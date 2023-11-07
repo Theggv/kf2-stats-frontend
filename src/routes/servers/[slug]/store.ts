@@ -1,5 +1,5 @@
 import type { SvelteComponent } from 'svelte';
-import SessionList from './SessionList.svelte';
+import RecentMatches from './RecentMatches.svelte';
 import AnalyticsContainer from './AnalyticsContainer.svelte';
 import { TimePeriod, type PeriodData } from '$lib/api/analytics';
 import { padStart } from 'lodash';
@@ -16,7 +16,7 @@ export const tabs: TabData[] = [
     options: ['', '#recent'],
     href: '#recent',
     content: 'Recent matches',
-    component: SessionList,
+    component: RecentMatches,
   },
   {
     href: '#stats',

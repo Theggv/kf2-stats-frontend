@@ -8,14 +8,14 @@ import { type ServerData, ServersApiService } from '$lib/api/servers';
 import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
 import type { WithRequired } from '$lib/util/types';
 import { type DebouncedFunc, debounce } from 'lodash';
-import { writable, type Readable } from 'svelte/store';
+import { writable, type Readable, type Writable, derived } from 'svelte/store';
 
 export const statusList: SelectOption[] = [
   { id: Status.Aborted, label: 'Aborted' },
   { id: Status.InProgress, label: 'In Progress' },
   { id: Status.Lobby, label: 'In Lobby' },
-  { id: Status.Lose, label: 'Lost' },
-  { id: Status.Win, label: 'Won' },
+  { id: Status.Lose, label: 'Loss' },
+  { id: Status.Win, label: 'Win' },
   { id: Status.Solomode, label: 'Solomode', disabled: true },
 ];
 
@@ -45,27 +45,38 @@ export type SelectOption = { id: number; label: string; disabled?: boolean };
 export type AvailableFilters = Partial<
   Pick<
     FilterMatchesRequest,
-    'diff' | 'length' | 'mode' | 'server_id' | 'map_id' | 'status'
+    | 'diff'
+    | 'length'
+    | 'mode'
+    | 'server_id'
+    | 'map_id'
+    | 'status'
+    | 'include_server'
   >
 >;
 
 export function sessionListStore(): [
   Readable<WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]>,
+  Writable<number>,
+  Writable<AvailableFilters>,
   Readable<boolean>,
-  Readable<unknown>,
-  DebouncedFunc<(page: number, body: AvailableFilters) => Promise<void>>
+  Readable<unknown>
 ] {
   const loading = writable(false);
   const error = writable<unknown>(false);
+
+  const page = writable(0);
+  const filter = writable<AvailableFilters>({});
+
   const sessions = writable<
     WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]
   >([]);
+  const hasMore = writable(false);
 
   const fetch = debounce(async (page: number, body: AvailableFilters) => {
     try {
       loading.set(true);
       const { data } = await MatchesApiService.filter({
-        include_server: true,
         include_map: true,
         include_cd_data: true,
         include_game_data: true,
@@ -73,15 +84,32 @@ export function sessionListStore(): [
         pager: { page, results_per_page: 100 },
         ...body,
       });
-      sessions.set(data.items as any);
+      sessions.update((prev) => {
+        return [...prev, ...(data.items as any)];
+      });
+
+      const meta = data.metadata;
+
+      hasMore.set(meta.total_results > meta.results_per_page * (meta.page + 1));
     } catch (err) {
       error.set(err);
     } finally {
       loading.set(false);
     }
-  }, 100);
+  }, 250);
 
-  return [sessions, loading, error, fetch];
+  const args = derived([page, filter], ([$s1, $s2]) => ({
+    page: $s1,
+    filter: $s2,
+  }));
+
+  filter.subscribe(() => {
+    page.set(0);
+    sessions.set([]);
+  });
+  args.subscribe(({ page, filter }) => fetch(page, filter));
+
+  return [sessions, page, filter, loading, error];
 }
 
 export function serverListStore(): [

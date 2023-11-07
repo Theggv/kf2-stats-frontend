@@ -54,8 +54,12 @@
     {:else if data.session.mode !== Mode.Endless}
       {data.game_data.wave || 0} / {data.session.length}
     {:else}
-      {data.session.length}
+      {data.game_data.wave}
     {/if}
+  </div>
+
+  <div class="status">
+    {statusToString(data.session.status)}
   </div>
 
   <div class="match-length">
@@ -74,10 +78,6 @@
     {:else}
       -
     {/if}
-  </div>
-
-  <div class="status">
-    {statusToString(data.session.status)}
   </div>
 </StyledLink>
 

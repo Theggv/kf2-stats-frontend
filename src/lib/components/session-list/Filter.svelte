@@ -26,6 +26,7 @@
   {#if $servers.length}
     <div class="multiple">
       <MultiSelect
+        id="filter_server"
         bind:selected={selectedServers}
         options={$servers.map((x) => ({ id: x.id, label: x.name }))}
         placeholder="Server"
@@ -35,6 +36,7 @@
   {#if $maps.length}
     <div class="multiple">
       <MultiSelect
+        id="filter_map"
         bind:selected={selectedMaps}
         options={$maps.map((x) => ({ id: x.id, label: x.name }))}
         placeholder="Map"
@@ -42,24 +44,28 @@
     </div>
   {/if}
   <MultiSelect
+    id="filter_difficulty"
     maxSelect={1}
     bind:selected={selectedDiff}
     options={difficultyList}
     placeholder="Difficulty"
   />
   <MultiSelect
+    id="filter_status"
     maxSelect={1}
     bind:selected={selectedStatus}
     options={statusList}
     placeholder="Status"
   />
   <MultiSelect
+    id="filter_mode"
     maxSelect={1}
     bind:selected={selectedMode}
     options={modeList}
     placeholder="Mode"
   />
   <MultiSelect
+    id="filter_length"
     maxSelect={1}
     bind:selected={selectedLength}
     options={lengthList}
