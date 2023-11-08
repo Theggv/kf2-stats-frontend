@@ -14,7 +14,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
   try {
     const { data } = await $backendApi.get<MatchData>(
-      `/matches/server/${server_id}/last`
+      `/matches/server/${server_id}`
     );
     return json(data);
   } catch (err) {
