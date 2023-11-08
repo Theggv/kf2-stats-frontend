@@ -1,9 +1,9 @@
-import { $api } from '$lib/http';
+import { $proxyApi } from '$lib/http';
 
-import type { MapAnalyticsRequest, MapAnalyticsResponse } from './dto';
+import type { MapAnalyticsRequest, MapAnalyticsResponseItem } from './dto';
 
 export class MapAnalyticsApiService {
   static get(body: MapAnalyticsRequest) {
-    return $api.post<MapAnalyticsResponse>(`/analytics/maps`, body);
+    return $proxyApi.post<MapAnalyticsResponseItem[]>(`/analytics/maps`, body);
   }
 }

@@ -16,7 +16,7 @@
       loading = true;
       const { data } = await ServersApiService.getByPattern();
       await delay(500);
-      serverList = data.items;
+      serverList = data;
     } catch (error) {
     } finally {
       loading = false;

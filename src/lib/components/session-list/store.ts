@@ -126,7 +126,7 @@ export function serverListStore(): [
     try {
       loading.set(true);
       const { data } = await ServersApiService.getByPattern();
-      servers.set(data.items);
+      servers.set(data);
     } catch (err) {
       error.set(err);
     } finally {
@@ -153,7 +153,7 @@ export function mapListStore(): [
     try {
       loading.set(true);
       const { data } = await MapsApiService.getByPattern();
-      maps.set(data.items.sort((a, b) => a.name.localeCompare(b.name)));
+      maps.set(data.sort((a, b) => a.name.localeCompare(b.name)));
     } catch (err) {
       error.set(err);
     } finally {

@@ -67,7 +67,7 @@
         ...params,
       });
 
-      data.set(res.items);
+      data.set(res);
     } catch (error) {}
   }
 

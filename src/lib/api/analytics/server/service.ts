@@ -1,27 +1,25 @@
-import { $api } from '$lib/http';
+import { $proxyApi } from '$lib/http';
 
 import type {
+  PeriodData,
   PlayersOnlineRequest,
-  PlayersOnlineResponse,
   SessionOnlineRequest,
-  SessionOnlineResponse,
   UsageInMinutesRequest,
-  UsageInMinutesResponse,
 } from './dto';
 
 export class ServerAnalyticsApiService {
   static getSessionCount(body: SessionOnlineRequest) {
-    return $api.post<SessionOnlineResponse>(
+    return $proxyApi.post<PeriodData[]>(
       `/analytics/server/session/count`,
       body
     );
   }
 
   static getUsageInMinutes(body: UsageInMinutesRequest) {
-    return $api.post<UsageInMinutesResponse>(`/analytics/server/usage`, body);
+    return $proxyApi.post<PeriodData[]>(`/analytics/server/usage`, body);
   }
 
   static getPlayersOnline(body: PlayersOnlineRequest) {
-    return $api.post<PlayersOnlineResponse>(`/analytics/server/online`, body);
+    return $proxyApi.post<PeriodData[]>(`/analytics/server/online`, body);
   }
 }

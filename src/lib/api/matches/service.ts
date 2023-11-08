@@ -1,4 +1,5 @@
-import { $api } from '$lib/http';
+import { $proxyApi } from '$lib/http';
+
 import type {
   FilterMatchesRequest,
   FilterMatchesResponse,
@@ -11,36 +12,36 @@ import type {
 
 export class MatchesApiService {
   static getById(session_id: number) {
-    return $api.get<MatchData>(`/matches/${session_id}`);
+    return $proxyApi.get<MatchData>(`/matches/${session_id}`);
   }
 
   static getMatchWaves(session_id: number) {
-    return $api.get<GetMatchWavesResponse>(`/matches/${session_id}/waves`);
+    return $proxyApi.get<GetMatchWavesResponse>(`/matches/${session_id}/waves`);
   }
 
   static getWavePlayersStats(wave_id: number) {
-    return $api.get<GetMatchWaveStatsResponse>(
+    return $proxyApi.get<GetMatchWaveStatsResponse>(
       `/matches/wave/${wave_id}/stats`
     );
   }
 
   static getMatchPlayerStats(session_id: number, user_id: number) {
-    return $api.get<GetMatchPlayerStatsResponse>(
+    return $proxyApi.get<GetMatchPlayerStatsResponse>(
       `/matches/${session_id}/user/${user_id}/stats`
     );
   }
 
   static getMatchSummary(session_id: number) {
-    return $api.get<GetMatchAggregatedStatsResponse>(
+    return $proxyApi.get<GetMatchAggregatedStatsResponse>(
       `/matches/${session_id}/summary`
     );
   }
 
   static getLastServerMatch(server_id: number) {
-    return $api.get<MatchData>(`/matches/server/${server_id}`);
+    return $proxyApi.get<MatchData>(`/matches/server/${server_id}/last`);
   }
 
   static filter(body: Partial<FilterMatchesRequest>) {
-    return $api.post<FilterMatchesResponse>(`/matches/filter`, body);
+    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter`, body);
   }
 }

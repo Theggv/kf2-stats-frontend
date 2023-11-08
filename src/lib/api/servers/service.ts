@@ -1,29 +1,14 @@
-import { $api } from '$lib/http';
-
-import type {
-  AddServerRequest,
-  AddServerResponse,
-  GetByPatternResponse,
-  ServerData,
-  UpdateNameRequest,
-} from './dto';
+import type { ServerData } from './dto';
+import { $proxyApi } from '$lib/http';
 
 export class ServersApiService {
-  static add(body: AddServerRequest) {
-    return $api.post<AddServerResponse>(`/servers/`, body);
-  }
-
   static getByPattern(pattern?: string) {
-    return $api.get<GetByPatternResponse>(`/servers/`, {
+    return $proxyApi.get<ServerData[]>(`/servers`, {
       params: { pattern },
     });
   }
 
   static getById(id: number) {
-    return $api.get<ServerData>(`/servers/${id}`);
-  }
-
-  static updatePreview(data: UpdateNameRequest) {
-    return $api.put(`/servers/name`, data);
+    return $proxyApi.get<ServerData>(`/servers/${id}`);
   }
 }

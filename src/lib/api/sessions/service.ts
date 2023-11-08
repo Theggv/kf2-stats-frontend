@@ -1,22 +1,9 @@
-import { $api } from '$lib/http';
+import { $proxyApi } from '$lib/http';
 
-import type {
-  CreateSessionRequest,
-  CreateSessionResponse,
-  SessionData,
-  UpdateStatusRequest,
-} from './dto';
+import type { SessionData } from './dto';
 
 export class SessionsApiService {
-  static add(body: CreateSessionRequest) {
-    return $api.post<CreateSessionResponse>(`/sessions/`, body);
-  }
-
   static getById(id: number) {
-    return $api.get<SessionData>(`/sessions/${id}`);
-  }
-
-  static updateStatus(data: UpdateStatusRequest) {
-    return $api.put(`/sessions/status`, data);
+    return $proxyApi.get<SessionData>(`/sessions/${id}`);
   }
 }
