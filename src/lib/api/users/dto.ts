@@ -58,5 +58,4 @@ export interface FilterUsersResponseUser {
 
 export interface FilterUsersResponse {
   items: FilterUsersResponseUser[];
-  metadata: PaginationResponse;
 }

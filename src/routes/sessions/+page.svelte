@@ -16,7 +16,7 @@
   let selectedMode: SelectOption[] = [];
   let selectedLength: SelectOption[] = [];
 
-  const [sessions, page, filter, loading, error] = sessionListStore();
+  const [page, filter, sessions, hasMore, loading, error] = sessionListStore();
 
   $: sortedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.session.updated_at).toDateString();
@@ -52,7 +52,7 @@
   <SessionList
     withServer
     data={sortedSessions}
-    hasMore={true}
+    hasMore={$hasMore}
     on:loadMore={() => page.update((p) => p + 1)}
   />
 </div>

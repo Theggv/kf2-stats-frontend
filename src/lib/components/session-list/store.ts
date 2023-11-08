@@ -56,9 +56,10 @@ export type AvailableFilters = Partial<
 >;
 
 export function sessionListStore(): [
-  Readable<WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]>,
   Writable<number>,
   Writable<AvailableFilters>,
+  Readable<WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]>,
+  Readable<boolean>,
   Readable<boolean>,
   Readable<unknown>
 ] {
@@ -109,7 +110,7 @@ export function sessionListStore(): [
   });
   args.subscribe(({ page, filter }) => fetch(page, filter));
 
-  return [sessions, page, filter, loading, error];
+  return [page, filter, sessions, hasMore, loading, error];
 }
 
 export function serverListStore(): [

@@ -6,7 +6,7 @@
 
   export let serverId: number;
 
-  const [sessions, page, filter, loading, error] = sessionListStore();
+  const [ page, filter, sessions, hasMore, loading, error] = sessionListStore();
 
   $: sortedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.session.updated_at).toDateString();
@@ -24,6 +24,6 @@
 <SessionList
   withServer={false}
   data={sortedSessions}
-  hasMore={true}
+  hasMore={$hasMore}
   on:loadMore={() => page.update((p) => p + 1)}
 />

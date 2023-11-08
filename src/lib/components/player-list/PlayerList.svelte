@@ -1,20 +1,17 @@
 <script lang="ts">
-  // @ts-ignore
-  import VirtualList from '@sveltejs/svelte-virtual-list';
-  import { usersStore } from './store';
-  import { writable } from 'svelte/store';
   import Player from './Player.svelte';
   import AutoScroll from '../auto-scroll/AutoScroll.svelte';
+  import InfiniteScroll from '../infinite-scroll/InfiniteScroll.svelte';
+  import type { FilterUsersResponseUser } from '$lib/api/users';
 
-  const [users, loading, err, fetch] = usersStore();
-
-  let page = writable(0);
-
-  $: fetch($page, false);
+  export let data: FilterUsersResponseUser[];
+  export let hasMore: boolean;
 </script>
 
 <AutoScroll>
-  <VirtualList items={$users} let:item>
-    <Player {item} />
-  </VirtualList>
+  {#each data as item (item.id)}
+   <Player {item} />
+  {/each}
+  <InfiniteScroll {hasMore} on:loadMore threshold={100} />
 </AutoScroll>
+

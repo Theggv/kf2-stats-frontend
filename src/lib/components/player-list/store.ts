@@ -1,28 +1,41 @@
-import { type FilterUsersResponseUser, UsersApiService } from '$lib/api/users';
-import { debounce, type DebouncedFunc } from 'lodash';
-import { writable, type Readable } from 'svelte/store';
+import {
+  type FilterUsersResponseUser,
+  UsersApiService,
+  type FilterUsersRequest,
+} from '$lib/api/users';
+import { debounce } from 'lodash';
+import { writable, type Readable, type Writable, derived } from 'svelte/store';
+
+export type AvailableFilters = Partial<Omit<FilterUsersRequest, 'pager'>>;
 
 export function usersStore(): [
+  Writable<number>,
+  Writable<AvailableFilters>,
   Readable<FilterUsersResponseUser[]>,
   Readable<boolean>,
-  Readable<unknown>,
-  DebouncedFunc<(page: number, reset: boolean) => Promise<void>>
+  Readable<boolean>,
+  Readable<unknown>
 ] {
   const loading = writable(false);
   const error = writable<unknown>(false);
-  const users = writable<FilterUsersResponseUser[]>([]);
 
-  const fetch = debounce(async (page: number, reset: boolean) => {
+  const page = writable(0);
+  const filter = writable<AvailableFilters>({});
+
+  const users = writable<FilterUsersResponseUser[]>([]);
+  const hasMore = writable(true);
+
+  const fetch = debounce(async (page: number, body: AvailableFilters) => {
     try {
       loading.set(true);
       const { data } = await UsersApiService.filter({
-        pager: {
-          page,
-        },
+        pager: { page, results_per_page: 100 },
+        ...body,
       });
 
-      if (reset) users.set(data.items);
-      else users.update((prev) => [...prev, ...data.items]);
+      users.update((prev) => [...prev, ...data.items]);
+
+      hasMore.set(data.items.length >= 100);
     } catch (err) {
       error.set(err);
     } finally {
@@ -30,5 +43,16 @@ export function usersStore(): [
     }
   }, 100);
 
-  return [users, loading, error, fetch];
+  const args = derived([page, filter], ([$s1, $s2]) => ({
+    page: $s1,
+    filter: $s2,
+  }));
+
+  filter.subscribe(() => {
+    page.set(0);
+    users.set([]);
+  });
+  args.subscribe(({ page, filter }) => fetch(page, filter));
+
+  return [page, filter, users, hasMore, loading, error];
 }

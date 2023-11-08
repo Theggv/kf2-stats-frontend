@@ -2,15 +2,16 @@
   import type { FilterUsersResponseUser } from '$lib/api/users';
 
   export let item: FilterUsersResponseUser;
+
+  $: session = item.current_session ? item.current_session : item.last_session
+  $: isOnline = !!item.current_session
 </script>
 
 <div class="root">
   <div>{item.name}</div>
   <div>
-    {#if item.current_session}
-      current session
-    {:else if item.last_session}
-      {item.last_session.server_name} ({item.last_session.map_name})
+    {#if session}
+      {session.server_name} ({session.map_name})
     {:else}
       -
     {/if}
