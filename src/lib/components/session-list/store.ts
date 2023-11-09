@@ -7,7 +7,7 @@ import {
 import { type ServerData, ServersApiService } from '$lib/api/servers';
 import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
 import type { WithRequired } from '$lib/util/types';
-import { type DebouncedFunc, debounce } from 'lodash';
+import lodash from 'lodash';
 import { writable, type Readable, type Writable, derived } from 'svelte/store';
 
 export const statusList: SelectOption[] = [
@@ -74,7 +74,7 @@ export function sessionListStore(): [
   >([]);
   const hasMore = writable(false);
 
-  const fetch = debounce(async (page: number, body: AvailableFilters) => {
+  const fetch = lodash.debounce(async (page: number, body: AvailableFilters) => {
     try {
       loading.set(true);
       const { data } = await MatchesApiService.filter({
@@ -117,13 +117,13 @@ export function serverListStore(): [
   Readable<ServerData[]>,
   Readable<boolean>,
   Readable<unknown>,
-  DebouncedFunc<() => Promise<void>>
+  lodash.DebouncedFunc<() => Promise<void>>
 ] {
   const loading = writable(false);
   const error = writable<unknown>(false);
   const servers = writable<ServerData[]>([]);
 
-  const fetch = debounce(async () => {
+  const fetch = lodash.debounce(async () => {
     try {
       loading.set(true);
       const { data } = await ServersApiService.getByPattern();
@@ -144,13 +144,13 @@ export function mapListStore(): [
   Readable<MapData[]>,
   Readable<boolean>,
   Readable<unknown>,
-  DebouncedFunc<() => Promise<void>>
+  lodash.DebouncedFunc<() => Promise<void>>
 ] {
   const loading = writable(false);
   const error = writable<unknown>(false);
   const maps = writable<MapData[]>([]);
 
-  const fetch = debounce(async () => {
+  const fetch = lodash.debounce(async () => {
     try {
       loading.set(true);
       const { data } = await MapsApiService.getByPattern();

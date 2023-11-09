@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { AggregatedPlayerStats, MatchWave } from '$lib/api/matches';
-  import { omit } from 'lodash';
+  import lodash from 'lodash';
 
   export let summary: AggregatedPlayerStats[];
   export let waves: MatchWave[];
@@ -8,7 +8,7 @@
   $: players = new Map(
     waves
       .flatMap((x) => x.players)
-      .map((x) => [x.id, omit(x, 'player_stats_id')])
+      .map((x) => [x.id, lodash.omit(x, 'player_stats_id')])
   );
 
   function getPlayer(stats: AggregatedPlayerStats) {

@@ -3,7 +3,7 @@ import {
   UsersApiService,
   type FilterUsersRequest,
 } from '$lib/api/users';
-import { debounce } from 'lodash';
+import lodash from 'lodash';
 import { writable, type Readable, type Writable, derived } from 'svelte/store';
 
 export type AvailableFilters = Partial<Omit<FilterUsersRequest, 'pager'>>;
@@ -25,7 +25,7 @@ export function usersStore(): [
   const users = writable<FilterUsersResponseUser[]>([]);
   const hasMore = writable(true);
 
-  const fetch = debounce(async (page: number, body: AvailableFilters) => {
+  const fetch = lodash.debounce(async (page: number, body: AvailableFilters) => {
     try {
       loading.set(true);
       const { data } = await UsersApiService.filter({

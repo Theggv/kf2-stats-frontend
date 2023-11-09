@@ -2,7 +2,7 @@ import type { SvelteComponent } from 'svelte';
 import RecentMatches from './RecentMatches.svelte';
 import AnalyticsContainer from './AnalyticsContainer.svelte';
 import { TimePeriod, type PeriodData } from '$lib/api/analytics';
-import { padStart } from 'lodash';
+import lodash from 'lodash';
 
 type TabData = {
   options?: string[];
@@ -55,13 +55,13 @@ function normalizeDataByHour(data: PeriodData[]) {
   const offset = -Math.round(new Date().getTimezoneOffset() / 60);
 
   for (let i = 0; i < 24; i++) {
-    const key = padStart(`${i}`, 2, '0');
+    const key = lodash.padStart(`${i}`, 2, '0');
     map.set(key, { count: 0, period: key, label: `${key}:00` });
   }
 
   for (const item of data) {
     const hour = Number(item.period);
-    let key = padStart(`${(hour + offset) % 24}`, 2, '0');
+    let key = lodash.padStart(`${(hour + offset) % 24}`, 2, '0');
     map.set(key, { ...map.get(key)!, count: item.count });
   }
 
@@ -119,7 +119,7 @@ function normalizeDataByMonth(data: PeriodData[]) {
 
   for (let i = 1; i <= 12; i++) {
     const date = new Date(now.getUTCFullYear(), i, 0, 0, 0, 0);
-    const key = padStart(`${i}`, 2, '0');
+    const key = lodash.padStart(`${i}`, 2, '0');
     map.set(key, {
       count: 0,
       period: key,
