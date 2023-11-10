@@ -61,7 +61,7 @@
   .name {
     grid-area: name;
 
-    text-align: right;
+    text-align: left;
     font-size: 16px;
     padding: 0 0.5rem;
 
@@ -88,6 +88,7 @@
   .perk {
     position: relative;
     grid-area: perk;
+    text-align: right;
   }
 
   .avatar {

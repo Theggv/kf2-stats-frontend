@@ -7,7 +7,7 @@
   import { writable } from 'svelte/store';
   import PlayerStatsCharts from './PlayerStatsCharts.svelte';
   import PlayerStatsGeneral from './PlayerStatsGeneral.svelte';
-  import PlayerView from './PlayerView.svelte';
+  import PlayerCard from './PlayerCard.svelte';
   import PlayerWaveStatsGeneral from './PlayerWaveStatsGeneral.svelte';
   import PlayerWaveStatsKills from './PlayerWaveStatsKills.svelte';
   import {
@@ -80,7 +80,7 @@
   {#if waves.length > 0}
     <AutoScroll class="player-list">
       {#each sortedPlayerList as player (player.id)}
-        <PlayerView
+        <PlayerCard
           {player}
           selected={$selectedPlayerId === player.id}
           on:click={() => onPlayerClick(player.id)}
