@@ -40,14 +40,15 @@
 </svelte:head>
 
 <div class="root" class:active>
-  <header><NavBar /></header>
-  <div class="main-container container mx-auto px-4">
+  <header>
+    <NavBar />
+  </header>
+  <div class="main-container container mx-auto">
     <main>
       <slot />
     </main>
     <LiveMatches />
   </div>
-  <Footer />
 </div>
 
 <style>
@@ -58,7 +59,6 @@
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     height: 100vh;
   }
 
@@ -88,6 +88,7 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    padding: 1rem;
     transition: all 250ms;
   }
 

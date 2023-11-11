@@ -27,15 +27,15 @@
       <div>loading</div>
     {:else if $match}
       <a class="server-name" href="/servers/{$match.session.server_id}"
-        >{$match.server.name}</a
-      >
+        >{$match.server.name}
+      </a>
       <div class="address">
         <StyledAddress address={$match.server.address}>
           {$match.server.address}
         </StyledAddress>
       </div>
       <div class="date">
-        {new Date($match.session.updated_at).toLocaleString('en', {
+        {new Date($match.session.updated_at).toLocaleString('default', {
           day: 'numeric',
           month: 'short',
           hour: 'numeric',
@@ -63,10 +63,10 @@
     flex: 1;
     min-height: 0;
 
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   @media (max-width: 1280px) {

@@ -4,7 +4,7 @@
   import { links } from './data';
 </script>
 
-<ul class="flex px-4 py-2 gap-2">
+<ul class="root">
   <Logo />
   {#each links as link (link.href)}
     <Link href={link.href} title={link.title} />
@@ -12,6 +12,12 @@
 </ul>
 
 <style>
+  .root {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.25rem 1rem;
+  }
+
   ul {
     background-color: var(--background-primary);
     backdrop-filter: blur(10px);

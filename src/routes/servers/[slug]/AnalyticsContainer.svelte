@@ -4,6 +4,8 @@
   import AnalyticsUniquePlayers from './AnalyticsUniquePlayers.svelte';
   import AnalyticsSessionCount from './AnalyticsSessionCount.svelte';
   import AnalyticsUsage from './AnalyticsUsage.svelte';
+  import AnalyticsPerksPlayTime from './AnalyticsPerksPlayTime.svelte';
+  import AnalyticsPerksKills from './AnalyticsPerksKills.svelte';
 
   export let serverId: number;
 </script>
@@ -14,6 +16,8 @@
     <AnalyticsUsage {serverId} />
     <AnalyticsUniquePlayers {serverId} />
     <AnalyticsMaps {serverId} />
+    <AnalyticsPerksPlayTime {serverId} />
+    <AnalyticsPerksKills {serverId} />
   </div>
 </AutoScroll>
 

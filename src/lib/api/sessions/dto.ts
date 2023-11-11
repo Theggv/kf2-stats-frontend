@@ -3,6 +3,9 @@ export enum Mode {
   Survival,
   Endless,
   ControlledDifficulty,
+  Weekly,
+  Objective,
+  Versus,
 }
 
 export enum Length {
