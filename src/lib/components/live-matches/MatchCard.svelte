@@ -34,7 +34,7 @@
   <div class="game-length">
     {dateDiff(
       new Date(match.session.started_at),
-      new Date(match.session.completed_at)
+      new Date()
     )}
   </div>
 </StyledLink>
