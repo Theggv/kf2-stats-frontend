@@ -11,7 +11,9 @@
   <div>{item.name}</div>
   <div class="session" class:live={isLive}>
     {#if session}
-      {session.server_name} ({session.map_name})
+      <a href="/sessions/{session.id}">
+        {session.server_name} ({session.map_name})
+      </a>
     {:else}
       -
     {/if}
