@@ -51,6 +51,7 @@
     grid-area: server;
     word-wrap: normal;
     text-wrap: pretty;
+    font-weight: bold;
   }
 
   .map {
@@ -58,6 +59,8 @@
     grid-area: map;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+    font-weight: bold;
+    color: var(--text-secondary);
   }
 
   .wave {
