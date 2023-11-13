@@ -54,7 +54,7 @@
     </div>
   </div>
 {:else}
-  Last Session was not found.
+  <div class="not-found">Last Session was not found.</div>
 {/if}
 
 <style>
@@ -64,6 +64,12 @@
     font-weight: bold;
     gap: 1rem;
     flex-wrap: wrap;
+  }
+
+  .not-found {
+    display: flex;
+    align-items: center;
+    height: 44px;
   }
 
   .column h4 {

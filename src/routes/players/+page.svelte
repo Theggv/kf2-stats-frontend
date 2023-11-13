@@ -4,7 +4,7 @@
   import PlayerList from '$lib/components/player-list/PlayerList.svelte';
   import { usersStore } from '$lib/components/player-list/store';
 
-  const [page, filter, users, hasMore, loading, error] = usersStore();
+  const [page, filter, users, total, hasMore] = usersStore();
 
   $: groupedUsers = $users.reduce((map, item) => {
     const key = new Date(item.updated_at).toDateString();
@@ -29,6 +29,7 @@
     hasMore={$hasMore}
     on:loadMore={() => page.update((p) => p + 1)}
   />
+  <div class="total-results">{$total} results</div>
 </div>
 
 <style>
@@ -47,11 +48,11 @@
     justify-content: space-between;
   }
 
-  h1 {
+  .header h1 {
     font-size: 20px;
   }
 
-  input {
+  .header input {
     padding: 0.5rem;
     background-color: transparent;
     border: 1px solid white;
@@ -59,8 +60,14 @@
     transition: all 100ms;
   }
 
-  input:focus {
+  .header input:focus {
     border: 1px solid var(--selected-primary);
     outline: 1px solid var(--selected-primary);
+  }
+
+  .total-results {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 </style>

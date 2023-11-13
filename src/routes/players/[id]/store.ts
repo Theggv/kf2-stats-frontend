@@ -1,8 +1,7 @@
 import type { SvelteComponent } from 'svelte';
 import RecentSessions from './RecentSessions.svelte';
 import lodash from 'lodash';
-import type { Readable } from 'svelte/motion';
-import { type Writable, writable } from 'svelte/store';
+import { type Readable, writable } from 'svelte/store';
 import { UsersApiService, type FilterUsersResponseUser } from '$lib/api/users';
 import StatsContainer from './StatsContainer.svelte';
 
@@ -12,6 +11,8 @@ type TabData = {
   content: string;
   component?: typeof SvelteComponent<{ userId: number }>;
 };
+
+export const totalMatches = writable(0);
 
 export function userStore(): [
   Readable<FilterUsersResponseUser>,

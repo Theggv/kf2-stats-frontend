@@ -2,6 +2,7 @@ import type { SvelteComponent } from 'svelte';
 import AnalyticsContainer from './AnalyticsContainer.svelte';
 import RecentMatches from './RecentMatches.svelte';
 import RecentPlayers from './RecentPlayers.svelte';
+import { writable } from 'svelte/store';
 
 type TabData = {
   options?: string[];
@@ -9,6 +10,9 @@ type TabData = {
   content: string;
   component?: typeof SvelteComponent<{ serverId: number }>;
 };
+
+export const totalRecentPlayers = writable(0);
+export const totalMatches = writable(0);
 
 export const tabs: TabData[] = [
   {

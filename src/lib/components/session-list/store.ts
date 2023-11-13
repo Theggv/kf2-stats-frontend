@@ -59,6 +59,7 @@ export function sessionListStore(): [
   Writable<number>,
   Writable<AvailableFilters>,
   Readable<WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]>,
+  Readable<number>,
   Readable<boolean>,
   Readable<boolean>,
   Readable<unknown>
@@ -72,32 +73,39 @@ export function sessionListStore(): [
   const sessions = writable<
     WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]
   >([]);
+  const total = writable(0);
   const hasMore = writable(false);
 
-  const fetch = lodash.debounce(async (page: number, body: AvailableFilters) => {
-    try {
-      loading.set(true);
-      const { data } = await MatchesApiService.filter({
-        include_map: true,
-        include_cd_data: true,
-        include_game_data: true,
-        reverse_order: true,
-        pager: { page, results_per_page: 100 },
-        ...body,
-      });
-      sessions.update((prev) => {
-        return [...prev, ...(data.items as any)];
-      });
+  const fetch = lodash.debounce(
+    async (page: number, body: AvailableFilters) => {
+      try {
+        loading.set(true);
+        const { data } = await MatchesApiService.filter({
+          include_map: true,
+          include_cd_data: true,
+          include_game_data: true,
+          reverse_order: true,
+          pager: { page, results_per_page: 100 },
+          ...body,
+        });
+        sessions.update((prev) => {
+          return [...prev, ...(data.items as any)];
+        });
 
-      const meta = data.metadata;
+        const meta = data.metadata;
 
-      hasMore.set(meta.total_results > meta.results_per_page * (meta.page + 1));
-    } catch (err) {
-      error.set(err);
-    } finally {
-      loading.set(false);
-    }
-  }, 250);
+        total.set(meta.total_results);
+        hasMore.set(
+          meta.total_results > meta.results_per_page * (meta.page + 1)
+        );
+      } catch (err) {
+        error.set(err);
+      } finally {
+        loading.set(false);
+      }
+    },
+    250
+  );
 
   const args = derived([page, filter], ([$s1, $s2]) => ({
     page: $s1,
@@ -110,7 +118,7 @@ export function sessionListStore(): [
   });
   args.subscribe(({ page, filter }) => fetch(page, filter));
 
-  return [page, filter, sessions, hasMore, loading, error];
+  return [page, filter, sessions, total, hasMore, loading, error];
 }
 
 export function serverListStore(): [

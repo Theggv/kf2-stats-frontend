@@ -2,10 +2,13 @@
   import type { RecentSessionsResponseSession } from '$lib/api/users';
   import SessionList from '$lib/components/player-recent-sessions/SessionList.svelte';
   import { recentSessionsStore as getStore } from '$lib/components/player-recent-sessions/store';
+  import { totalMatches } from './store';
 
   export let userId: number;
 
-  const [page, sessions, hasMore, loading, error] = getStore(userId);
+  const [page, sessions, total, hasMore, loading] = getStore(userId);
+
+  $: totalMatches.set($total);
 
   $: groupedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.updated_at).toDateString();

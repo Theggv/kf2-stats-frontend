@@ -12,6 +12,7 @@ export function usersStore(): [
   Writable<number>,
   Writable<AvailableFilters>,
   Readable<FilterUsersResponseUser[]>,
+  Readable<number>,
   Readable<boolean>,
   Readable<boolean>,
   Readable<unknown>
@@ -23,6 +24,7 @@ export function usersStore(): [
   const filter = writable<AvailableFilters>({});
 
   const users = writable<FilterUsersResponseUser[]>([]);
+  const total = writable(0);
   const hasMore = writable(true);
 
   const fetch = lodash.debounce(
@@ -38,6 +40,7 @@ export function usersStore(): [
         else users.update((prev) => [...prev, ...data.items]);
 
         hasMore.set(data.items.length >= 100);
+        total.set(data.metadata.total_results);
       } catch (err) {
         error.set(err);
       } finally {
@@ -57,5 +60,5 @@ export function usersStore(): [
   });
   args.subscribe(({ page, filter }) => fetch(page, filter));
 
-  return [page, filter, users, hasMore, loading, error];
+  return [page, filter, users, total, hasMore, loading, error];
 }

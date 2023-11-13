@@ -10,6 +10,7 @@ export function recentSessionsStore(
 ): [
   Writable<number>,
   Readable<RecentSessionsResponseSession[]>,
+  Readable<number>,
   Readable<boolean>,
   Readable<boolean>,
   Readable<unknown>
@@ -20,6 +21,7 @@ export function recentSessionsStore(
   const page = writable(0);
 
   const users = writable<RecentSessionsResponseSession[]>([]);
+  const total = writable(0);
   const hasMore = writable(true);
 
   const fetch = lodash.debounce(async (page: number) => {
@@ -32,6 +34,7 @@ export function recentSessionsStore(
 
       users.update((prev) => [...prev, ...data.items]);
 
+      total.set(data.metadata.total_results);
       hasMore.set(data.items.length >= 100);
     } catch (err) {
       error.set(err);
@@ -42,5 +45,5 @@ export function recentSessionsStore(
 
   page.subscribe(($page) => fetch($page));
 
-  return [page, users, hasMore, loading, error];
+  return [page, users, total, hasMore, loading, error];
 }

@@ -3,10 +3,13 @@
   import SessionList from '$lib/components/session-list/SessionList.svelte';
   import { sessionListStore } from '$lib/components/session-list/store';
   import type { WithRequired } from '$lib/util/types';
+  import { totalMatches } from './store';
 
   export let serverId: number;
 
-  const [ page, filter, sessions, hasMore, loading, error] = sessionListStore();
+  const [page, filter, sessions, total, hasMore] = sessionListStore();
+
+  $: totalMatches.set($total);
 
   $: sortedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.session.updated_at).toDateString();

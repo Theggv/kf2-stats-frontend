@@ -1,6 +1,11 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { isTabSelected, tabs } from './store';
+  import {
+    isTabSelected,
+    tabs,
+    totalRecentPlayers,
+    totalMatches,
+  } from './store';
 
   $: selected = $page.url.hash;
 </script>
@@ -8,7 +13,16 @@
 <ul>
   {#each tabs as tab (tab.href)}
     <li class:selected={isTabSelected(selected, tab)}>
-      <a href={tab.href}>{tab.content}</a>
+      <a href={tab.href}>
+        {tab.content}
+        {#if isTabSelected(selected, tab)}
+          {#if tab.href === '#matches' && $totalMatches}
+            ({$totalMatches})
+          {:else if tab.href === '#players' && $totalRecentPlayers}
+            ({$totalRecentPlayers})
+          {/if}
+        {/if}
+      </a>
     </li>
   {/each}
 </ul>

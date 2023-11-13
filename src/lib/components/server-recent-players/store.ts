@@ -12,6 +12,7 @@ export function getStore(
 ): [
   Writable<number>,
   Readable<RecentUsersResponseUser[]>,
+  Readable<number>,
   Readable<boolean>,
   Readable<boolean>,
   Readable<unknown>
@@ -22,6 +23,7 @@ export function getStore(
   const page = writable(0);
 
   const users = writable<RecentUsersResponseUser[]>([]);
+  const total = writable(0);
   const hasMore = writable(true);
 
   const fetch = lodash.debounce(async (page: number) => {
@@ -35,6 +37,7 @@ export function getStore(
       users.update((prev) => [...prev, ...data.items]);
 
       hasMore.set(data.items.length >= 100);
+      total.set(data.metadata.total_results);
     } catch (err) {
       error.set(err);
     } finally {
@@ -44,5 +47,5 @@ export function getStore(
 
   page.subscribe(($page) => fetch($page));
 
-  return [page, users, hasMore, loading, error];
+  return [page, users, total, hasMore, loading, error];
 }

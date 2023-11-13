@@ -2,10 +2,13 @@
   import type { RecentUsersResponseUser } from '$lib/api/servers';
   import PlayerList from '$lib/components/server-recent-players/PlayerList.svelte';
   import { getStore } from '$lib/components/server-recent-players/store';
+  import { totalRecentPlayers } from './store';
 
   export let serverId: number;
 
-  const [page, sessions, hasMore, loading, error] = getStore(serverId);
+  const [page, sessions, total, hasMore, loading] = getStore(serverId);
+
+  $: totalRecentPlayers.set($total);
 
   $: sortedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.updated_at).toDateString();
