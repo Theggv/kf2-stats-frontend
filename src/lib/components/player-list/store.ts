@@ -25,23 +25,27 @@ export function usersStore(): [
   const users = writable<FilterUsersResponseUser[]>([]);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(async (page: number, body: AvailableFilters) => {
-    try {
-      loading.set(true);
-      const { data } = await UsersApiService.filter({
-        pager: { page, results_per_page: 100 },
-        ...body,
-      });
+  const fetch = lodash.debounce(
+    async (page: number, body: AvailableFilters) => {
+      try {
+        loading.set(true);
+        const { data } = await UsersApiService.filter({
+          pager: { page, results_per_page: 100 },
+          ...body,
+        });
 
-      users.update((prev) => [...prev, ...data.items]);
+        if (!page) users.set([...data.items]);
+        else users.update((prev) => [...prev, ...data.items]);
 
-      hasMore.set(data.items.length >= 100);
-    } catch (err) {
-      error.set(err);
-    } finally {
-      loading.set(false);
-    }
-  }, 100);
+        hasMore.set(data.items.length >= 100);
+      } catch (err) {
+        error.set(err);
+      } finally {
+        loading.set(false);
+      }
+    },
+    300
+  );
 
   const args = derived([page, filter], ([$s1, $s2]) => ({
     page: $s1,
@@ -50,7 +54,6 @@ export function usersStore(): [
 
   filter.subscribe(() => {
     page.set(0);
-    users.set([]);
   });
   args.subscribe(({ page, filter }) => fetch(page, filter));
 

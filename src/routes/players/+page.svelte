@@ -19,7 +19,10 @@
 </svelte:head>
 
 <div class="root">
-  <h1>Recent Players</h1>
+  <div class="header">
+    <h1>Recent Players</h1>
+    <input bind:value={$filter.search_text} placeholder="Search by name" />
+  </div>
   <hr />
   <PlayerList
     data={groupedUsers}
@@ -36,7 +39,28 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   h1 {
     font-size: 20px;
+  }
+
+  input {
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    transition: all 100ms;
+  }
+
+  input:focus {
+    border: 1px solid var(--selected-primary);
+    outline: 1px solid var(--selected-primary);
   }
 </style>

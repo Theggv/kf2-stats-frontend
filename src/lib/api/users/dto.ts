@@ -32,6 +32,8 @@ export interface CreateUserResponse {
 }
 
 export interface FilterUsersRequest {
+  search_text?: string;
+
   pager?: PaginationRequest;
 }
 
