@@ -8,6 +8,7 @@
   } from '$lib/util/enum-to-text';
   import { MatchesApiService, type MatchData } from '$lib/api/matches';
   import type { WithRequired } from '$lib/util/types';
+  import { getWaveText } from '$lib/util/converters';
 
   let refreshIntervalId: number;
   let match: WithRequired<MatchData, 'game_data' | 'map'>;
@@ -68,11 +69,7 @@
       <div>
         <h4>Wave</h4>
         <div>
-          {#if match.session.mode !== Mode.Endless}
-            {match.game_data.wave} / {match.session.length}
-          {:else}
-            {match.game_data.wave}
-          {/if}
+          {getWaveText(match.game_data.wave, match.session)}
         </div>
       </div>
 

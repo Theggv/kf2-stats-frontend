@@ -1,32 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import type { PageData } from './$types';
-  import { ServersApiService, type ServerData } from '$lib/api/servers';
-  import HeaderSkeleton from './HeaderSkeleton.svelte';
   import Tabs from './Tabs.svelte';
-  import Session from './Session.svelte';
+  import CurrentSession from './CurrentSession.svelte';
   import { isTabSelected, tabs } from './store';
   import { page } from '$app/stores';
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
   import { SITE_NAME } from '$lib';
-
-  let loading: boolean = false;
-  let server: ServerData;
-
-  async function getServerInfo() {
-    try {
-      loading = true;
-      const { data: serverData } = await ServersApiService.getById(
-        data.serverId
-      );
-      server = serverData;
-    } catch (error) {
-    } finally {
-      loading = false;
-    }
-  }
-
-  onMount(() => getServerInfo());
 
   $: selected = $page.url.hash;
 
@@ -34,29 +13,21 @@
 </script>
 
 <svelte:head>
-  {#if server}
-    <title>{server.name} | Servers | {SITE_NAME}</title>
-  {:else}
-    <title>Servers | {SITE_NAME}</title>
-  {/if}
+  <title>{data.name} | Servers | {SITE_NAME}</title>
 </svelte:head>
 
 <div class="root">
   <div class="header">
-    {#if loading}
-      <HeaderSkeleton />
-    {:else if server}
-      <div class="server-name">{server.name}</div>
-      <StyledAddress address={server.address}>
-        {server.address}
-      </StyledAddress>
-    {/if}
+    <div class="server-name">{data.name}</div>
+    <StyledAddress address={data.address}>
+      {data.address}
+    </StyledAddress>
   </div>
-  <Session serverId={data.serverId} />
+  <CurrentSession serverId={data.id} />
   <Tabs />
   {#each tabs as tab (tab.href)}
     {#if isTabSelected(selected, tab) && tab.component}
-      <svelte:component this={tab.component} serverId={data.serverId} />
+      <svelte:component this={tab.component} serverId={data.id} />
     {/if}
   {/each}
 </div>

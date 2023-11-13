@@ -299,10 +299,6 @@
     svelte-hmr "^0.15.3"
     vitefu "^0.2.4"
 
-"@types/@sveltejs/svelte-virtual-list":
-  version "3.0.1"
-  resolved "https://codeload.github.com/sveltejs/svelte-virtual-list/tar.gz/bd13f93c5a172780726456565a35b85badf252b8"
-
 "@types/cookie@^0.5.1":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.2.tgz#9bf9d62c838c85a07c92fdf2334c2c14fd9c59a9"

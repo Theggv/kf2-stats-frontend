@@ -41,6 +41,7 @@ export interface FilterUsersResponseUserSession {
   length: Length;
   diff: Difficulty;
   status: Status;
+  wave: number;
   cd_data?: CDGameData;
   server_name: string;
   map_name: string;
@@ -58,4 +59,33 @@ export interface FilterUsersResponseUser {
 
 export interface FilterUsersResponse {
   items: FilterUsersResponseUser[];
+}
+
+export interface RecentSessionsRequest {
+  user_id: number;
+  pager: PaginationRequest;
+}
+
+export interface RecentSessionsResponseSessionServer {
+  id: number;
+  name: string;
+}
+
+export interface RecentSessionsResponseSession {
+  id: number;
+  mode: Mode;
+  length: Length;
+  diff: Difficulty;
+  status: Status;
+  wave: number;
+  cd_data?: CDGameData;
+  map_name: Status;
+  server: RecentSessionsResponseSessionServer;
+  perks: number[];
+  updated_at: Date;
+}
+
+export interface RecentSessionsResponse {
+  items: RecentSessionsResponseSession[];
+  metadata: PaginationResponse;
 }

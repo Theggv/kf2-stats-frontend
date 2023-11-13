@@ -2,6 +2,7 @@
   import type { MatchData } from '$lib/api/matches';
   import { Mode, Status } from '$lib/api/sessions';
   import StyledLink from '$lib/ui/a/StyledLink.svelte';
+  import { getWaveText } from '$lib/util/converters';
   import { dateDiff } from '$lib/util/date';
   import {
     diffToString,
@@ -66,10 +67,8 @@
   <div class="wave">
     {#if data.session.status === Status.Lobby}
       -
-    {:else if data.session.mode !== Mode.Endless}
-      {data.game_data.wave || 0} / {data.session.length}
     {:else}
-      {data.game_data.wave || 0}
+      {getWaveText(data.game_data.wave, data.session)}
     {/if}
   </div>
 

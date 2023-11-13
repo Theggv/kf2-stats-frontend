@@ -14,6 +14,7 @@
   <div
     on:click
     on:keypress
+    on:dblclick={() => window.open(`/players/${player.id}`, '_blank')}
     role="button"
     tabindex="0"
     class="info"

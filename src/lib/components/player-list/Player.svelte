@@ -4,35 +4,74 @@
   export let item: FilterUsersResponseUser;
 
   $: session = item.current_session ? item.current_session : item.last_session;
-  $: isLive = !!item.current_session;
+  $: isOnline = !!item.current_session;
 </script>
 
-<div class="root">
-  <div>{item.name}</div>
-  <div class="session" class:live={isLive}>
-    {#if session}
-      <a href="/sessions/{session.id}">
-        {session.server_name} ({session.map_name})
-      </a>
-    {:else}
-      -
-    {/if}
+<div class="time">
+  {new Date(item.updated_at).toLocaleTimeString()}
+</div>
+
+<div class="player" class:online={isOnline}>
+  <div class="avatar">
+    <a href={item.profile_url} target="_blank" rel="noopener noreferrer">
+      <img src={item.avatar} alt="" />
+    </a>
   </div>
-  <div class="last-update">
-    {new Date(item.updated_at).toLocaleString()}
-  </div>
+  <a class="name" href="/players/{item.id}">{item.name}</a>
+</div>
+
+<div class="session">
+  {#if session}
+    <a href="/sessions/{session.id}">
+      {session.server_name} ({session.map_name})
+    </a>
+  {:else}
+    -
+  {/if}
 </div>
 
 <style>
-  .root {
-    margin: 0.5rem;
-    display: grid;
-    grid-template-columns: 200px 1fr max-content;
-    gap: 0.5rem;
+  .time {
+    text-align: center;
+    color: var(--text-secondary);
   }
 
-  .last-update {
-    text-align: right;
+  .player {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .player .avatar {
+    position: relative;
+    outline: 2px solid var(--text-primary);
+    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .player .avatar img {
+    width: 100%;
+    border-radius: 0.25rem;
+  }
+
+  .online.player .avatar::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100px;
+    background-color: darkgreen;
+    bottom: -5px;
+    right: -5px;
+  }
+
+  .player .name {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
   }
 
   .session {
@@ -40,14 +79,5 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
-  }
-
-  .live.session::before {
-    content: '';
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100px;
-    background-color: var(--color-online);
   }
 </style>

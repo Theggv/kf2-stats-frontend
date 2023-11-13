@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Session from './Session.svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
-  import type { WithRequired } from '$lib/util/types';
-  import type { MatchData } from '$lib/api/matches';
   import InfiniteScroll from '../infinite-scroll/InfiniteScroll.svelte';
+  import type { RecentUsersResponseUser } from '$lib/api/servers';
+  import Player from './Player.svelte';
+  import Skeleton from './Skeleton.svelte';
 
   function formatDate(str: string) {
     return new Date(str).toLocaleString('en', {
@@ -12,34 +12,33 @@
     });
   }
 
-  export let data: Map<
-    string,
-    WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]
-  >;
-  export let withServer: boolean = false;
+  export let data: Map<string, RecentUsersResponseUser[]>;
   export let hasMore: boolean;
+  export let loading: boolean;
 </script>
 
 <AutoScroll>
   <div class="session-list">
     <div class="index" />
-    {#if withServer}
-      <div>Server</div>
-    {:else}
-      <div>Map</div>
-    {/if}
-    <div>Game Info</div>
-    <div class="wave">Wave</div>
-    <div class="status">Status</div>
-    <div>Match Length</div>
+    <div>Player</div>
+    <div>Perks</div>
+    <div>Settings</div>
+    <div class="center">Wave</div>
+    <div class="center">Status</div>
 
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
-      {#each sessions as data (data.session.session_id)}
-        <Session {data} {withServer} />
+      {#each sessions as data (data.id)}
+        <Player {data} />
       {/each}
     {:else}
-      <div class="empty">No sessions in the list</div>
+      <div class="empty">
+        {#if loading}
+          <Skeleton />
+        {:else}
+          No sessions in the list
+        {/if}
+      </div>
     {/each}
   </div>
   <InfiniteScroll {hasMore} on:loadMore threshold={100} />
@@ -49,7 +48,9 @@
   .session-list {
     position: relative;
     display: grid;
-    grid-template-columns: 75px minmax(200px, 300px) 1fr max-content max-content max-content;
+    grid-template-columns:
+      75px minmax(150px, auto) minmax(75px, auto) minmax(150px, auto)
+      max-content max-content;
     gap: 1rem 2rem;
     align-items: center;
   }
@@ -65,19 +66,18 @@
   }
 
   .date {
-    grid-column: span 7;
+    grid-column: span 6;
     padding-left: 1rem;
     color: var(--text-secondary);
     user-select: none;
   }
 
-  .wave,
-  .status {
+  .center {
     text-align: center;
   }
 
   .empty {
-    grid-column: span 7;
+    grid-column: span 6;
     text-align: center;
   }
 </style>

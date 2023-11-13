@@ -12,3 +12,10 @@ export function dateDiff(from: Date, to: Date): string {
   if (hours > 0) return `${hours}:${pad(minutes)}:${pad(seconds)}`;
   return `${pad(minutes)}:${pad(seconds)}`;
 }
+
+export function getDayAndMonth(str: string) {
+  return new Date(str).toLocaleString('en', {
+    day: 'numeric',
+    month: 'long',
+  });
+}

@@ -1,11 +1,11 @@
 <script lang="ts">
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
-  import AnalyticsMaps from './AnalyticsMaps.svelte';
-  import AnalyticsUniquePlayers from './AnalyticsUniquePlayers.svelte';
-  import AnalyticsSessionCount from './AnalyticsSessionCount.svelte';
-  import AnalyticsUsage from './AnalyticsUsage.svelte';
-  import AnalyticsPerksPlayTime from './AnalyticsPerksPlayTime.svelte';
-  import AnalyticsPerksKills from './AnalyticsPerksKills.svelte';
+  import AnalyticsMaps from '$lib/components/server-analytics/AnalyticsMaps.svelte';
+  import AnalyticsPerksKills from '$lib/components/server-analytics/AnalyticsPerksKills.svelte';
+  import AnalyticsPerksPlayTime from '$lib/components/server-analytics/AnalyticsPerksPlayTime.svelte';
+  import AnalyticsSessionCount from '$lib/components/server-analytics/AnalyticsSessionCount.svelte';
+  import AnalyticsUniquePlayers from '$lib/components/server-analytics/AnalyticsUniquePlayers.svelte';
+  import AnalyticsUsage from '$lib/components/server-analytics/AnalyticsUsage.svelte';
 
   export let serverId: number;
 </script>

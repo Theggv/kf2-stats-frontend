@@ -5,6 +5,7 @@
   import { Mode } from '$lib/api/sessions';
   import type { WithRequired } from '$lib/util/types';
   import { dateDiff } from '$lib/util/date';
+  import { getWaveText } from '$lib/util/converters';
 
   $: selected =
     $page.url.pathname.includes(`/sessions`) &&
@@ -25,17 +26,10 @@
     {match.map?.name}
   </div>
   <div class="wave">
-    {#if match.session.mode === Mode.Endless}
-      Wave {match.game_data.wave}
-    {:else}
-      {match.game_data.wave} / {match.session.length}
-    {/if}
+    {getWaveText(match.game_data.wave, match.session)}
   </div>
   <div class="game-length">
-    {dateDiff(
-      new Date(match.session.started_at),
-      new Date()
-    )}
+    {dateDiff(new Date(match.session.started_at), new Date())}
   </div>
 </StyledLink>
 

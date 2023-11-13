@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ServerListItem from './ServerListItem.svelte';
+  import Server from './Server.svelte';
   import Skeleton from './Skeleton.svelte';
   import { ServersApiService, type ServerData } from '$lib/api/servers';
   import { onMount } from 'svelte';
@@ -38,7 +38,7 @@
       <Skeleton />
     {:else if serverList.length}
       {#each serverList as server, index (server.address)}
-        <ServerListItem {server} {index} />
+        <Server {server} {index} />
       {/each}
     {:else}
       <div class="empty">No servers in the list</div>
