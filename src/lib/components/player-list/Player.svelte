@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { Status } from '$lib/api/sessions';
   import type { FilterUsersResponseUser } from '$lib/api/users';
+  import { getWaveText } from '$lib/util/converters';
+  import { statusToString } from '$lib/util/enum-to-text';
 
   export let item: FilterUsersResponseUser;
 
@@ -20,15 +23,30 @@
   <a class="name" href="/players/{item.id}">{item.name}</a>
 </div>
 
-<div class="session">
-  {#if session}
+{#if session}
+  <div class="session">
     <a href="/sessions/{session.id}">
       {session.server_name} ({session.map_name})
     </a>
-  {:else}
-    -
-  {/if}
-</div>
+  </div>
+
+  <div class="wave">
+    {getWaveText(session.wave, session)}
+  </div>
+
+  <div
+    class="status"
+    class:lost={session.status === Status.Lose}
+    class:won={session.status === Status.Win}
+    class:in-progress={session.status === Status.InProgress}
+  >
+    {statusToString(session.status)}
+  </div>
+{:else}
+  <div />
+  <div />
+  <div />
+{/if}
 
 <style>
   .time {
@@ -79,5 +97,23 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
+  }
+
+  .wave,
+  .status {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .lost {
+    color: rgb(217, 100, 100);
+  }
+
+  .won {
+    color: rgb(46, 158, 46);
+  }
+
+  .in-progress {
+    color: rgb(184, 197, 68);
   }
 </style>

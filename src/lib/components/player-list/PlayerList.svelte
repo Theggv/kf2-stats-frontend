@@ -14,6 +14,8 @@
     <div class="index" />
     <div>Player</div>
     <div>Game Info</div>
+    <div class="center">Wave</div>
+    <div class="center">Status</div>
 
     {#each data as [date, users] (date)}
       <div class="date">{getDayAndMonth(date)}</div>
@@ -31,7 +33,7 @@
   .root {
     position: relative;
     display: grid;
-    grid-template-columns: 75px 300px 1fr;
+    grid-template-columns: 75px 300px 1fr max-content max-content;
     gap: 1rem 2rem;
     align-items: center;
   }
@@ -47,14 +49,18 @@
   }
 
   .date {
-    grid-column: span 3;
+    grid-column: span 5;
     padding-left: 1rem;
     color: var(--text-secondary);
     user-select: none;
   }
 
+  .center {
+    text-align: center;
+  }
+
   .empty {
-    grid-column: span 3;
+    grid-column: span 5;
     text-align: center;
   }
 </style>

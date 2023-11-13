@@ -18,8 +18,25 @@
   <title>Players | {SITE_NAME}</title>
 </svelte:head>
 
-<PlayerList
-  data={groupedUsers}
-  hasMore={$hasMore}
-  on:loadMore={() => page.update((p) => p + 1)}
-/>
+<div class="root">
+  <h1>Recent Players</h1>
+  <hr />
+  <PlayerList
+    data={groupedUsers}
+    hasMore={$hasMore}
+    on:loadMore={() => page.update((p) => p + 1)}
+  />
+</div>
+
+<style>
+  .root {
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  h1 {
+    font-size: 20px;
+  }
+</style>
