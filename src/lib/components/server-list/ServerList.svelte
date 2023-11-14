@@ -1,10 +1,9 @@
 <script lang="ts">
   import Server from './Server.svelte';
-  import Skeleton from './Skeleton.svelte';
+  import ServerSkeleton from './ServerSkeleton.svelte';
   import { ServersApiService, type ServerData } from '$lib/api/servers';
   import { onMount } from 'svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
-  import { delay } from '$lib/util';
 
   let loading = false;
   let serverList: ServerData[] = [];
@@ -15,7 +14,6 @@
     try {
       loading = true;
       const { data } = await ServersApiService.getByPattern();
-      await delay(500);
       serverList = data;
     } catch (error) {
     } finally {
@@ -26,22 +24,21 @@
 
 <AutoScroll>
   <div class="root">
-    <div class="index">#</div>
-    <div>Server name</div>
-    <div>Address</div>
-
     {#if loading}
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-    {:else if serverList.length}
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+      <ServerSkeleton />
+    {:else if serverList}
       {#each serverList as server, index (server.address)}
         <Server {server} {index} />
+      {:else}
+        <div class="empty">No servers in the list</div>
       {/each}
-    {:else}
-      <div class="empty">No servers in the list</div>
     {/if}
   </div>
 </AutoScroll>
@@ -53,10 +50,6 @@
     grid-template-columns: minmax(max-content, 25px) 7fr 200px;
     gap: 1rem;
     align-items: center;
-  }
-
-  .index {
-    text-align: right;
   }
 
   .empty {

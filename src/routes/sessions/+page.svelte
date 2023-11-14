@@ -7,6 +7,7 @@
     sessionListStore,
     type SelectOption,
   } from '$lib/components/session-list/store';
+  import ListLayout from '$lib/layouts/ListLayout.svelte';
   import type { WithRequired } from '$lib/util/types';
 
   let selectedServers: SelectOption[] = [];
@@ -16,7 +17,7 @@
   let selectedMode: SelectOption[] = [];
   let selectedLength: SelectOption[] = [];
 
-  const [page, filter, sessions, hasMore, loading, error] = sessionListStore();
+  const [page, filter, sessions, total, hasMore, loading] = sessionListStore();
 
   $: sortedSessions = $sessions.reduce((map, item) => {
     const key = new Date(item.session.updated_at).toDateString();
@@ -40,28 +41,23 @@
   <title>Matches | {SITE_NAME}</title>
 </svelte:head>
 
-<div class="root">
-  <Filter
-    bind:selectedServers
-    bind:selectedMaps
-    bind:selectedStatus
-    bind:selectedDiff
-    bind:selectedMode
-    bind:selectedLength
-  />
-  <SessionList
-    withServer
-    data={sortedSessions}
-    hasMore={$hasMore}
-    on:loadMore={() => page.update((p) => p + 1)}
-  />
-</div>
-
-<style>
-  .root {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-</style>
+<ListLayout>
+  <svelte:fragment slot="header">
+    <Filter
+      bind:selectedServers
+      bind:selectedMaps
+      bind:selectedStatus
+      bind:selectedDiff
+      bind:selectedMode
+      bind:selectedLength
+    />
+  </svelte:fragment>
+  <svelte:fragment slot="content">
+    <SessionList
+      withServer
+      data={sortedSessions}
+      hasMore={$hasMore}
+      on:loadMore={() => page.update((p) => p + 1)}
+    />
+  </svelte:fragment>
+</ListLayout>

@@ -77,8 +77,7 @@
   .root {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    padding: 1rem;
+    gap: 0.5rem;
     z-index: 100;
   }
 
@@ -90,6 +89,12 @@
     grid-column: span 4;
     font-weight: bold;
     font-size: 20px;
+    padding-top: 0.25rem;
+    padding-left: 0.25rem;
+  }
+
+  :global(div .selected) {
+    min-height: 32px;
   }
 
   :global(div.multiselect > ul.options) {

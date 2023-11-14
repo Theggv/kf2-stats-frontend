@@ -58,18 +58,16 @@
         </span>
       {/if}
 
-      <span>
-        {data.session.length} Waves
-      </span>
+      {#if data.session.mode !== Mode.Endless}
+        <span>
+          {data.session.length} Waves
+        </span>
+      {/if}
     </div>
   </div>
 
   <div class="wave">
-    {#if data.session.status === Status.Lobby}
-      -
-    {:else}
-      {getWaveText(data.game_data.wave, data.session)}
-    {/if}
+    {getWaveText(data.game_data.wave, data.session)}
   </div>
 
   <div

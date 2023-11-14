@@ -22,17 +22,6 @@
 
 <AutoScroll>
   <div class="session-list">
-    <div class="index" />
-    {#if withServer}
-      <div>Server</div>
-    {:else}
-      <div>Map</div>
-    {/if}
-    <div>Game Info</div>
-    <div class="wave">Wave</div>
-    <div class="status">Status</div>
-    <div>Match Length</div>
-
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
       {#each sessions as data (data.session.session_id)}
@@ -60,20 +49,11 @@
     }
   }
 
-  .index {
-    text-align: right;
-  }
-
   .date {
     grid-column: span 7;
     padding-left: 1rem;
     color: var(--text-secondary);
     user-select: none;
-  }
-
-  .wave,
-  .status {
-    text-align: center;
   }
 
   .empty {

@@ -3,6 +3,7 @@
   import type { FilterUsersResponseUser } from '$lib/api/users';
   import PlayerList from '$lib/components/player-list/PlayerList.svelte';
   import { usersStore } from '$lib/components/player-list/store';
+  import ListLayout from '$lib/layouts/ListLayout.svelte';
 
   const [page, filter, users, _, hasMore] = usersStore();
 
@@ -18,28 +19,21 @@
   <title>Players | {SITE_NAME}</title>
 </svelte:head>
 
-<div class="root">
-  <div class="header">
+<ListLayout>
+  <div class="header" slot="header">
     <h1>Recent Players</h1>
     <input bind:value={$filter.search_text} placeholder="Search by name" />
   </div>
-  <hr />
-  <PlayerList
-    data={groupedUsers}
-    hasMore={$hasMore}
-    on:loadMore={() => page.update((p) => p + 1)}
-  />
-</div>
+  <svelte:fragment slot="content">
+    <PlayerList
+      data={groupedUsers}
+      hasMore={$hasMore}
+      on:loadMore={() => page.update((p) => p + 1)}
+    />
+  </svelte:fragment>
+</ListLayout>
 
 <style>
-  .root {
-    flex: 1;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .header {
     display: flex;
     flex-direction: row;
@@ -49,6 +43,9 @@
 
   .header h1 {
     font-size: 20px;
+    padding: 0.25rem;
+    padding-top: 0;
+    font-weight: bold;
   }
 
   .header input {

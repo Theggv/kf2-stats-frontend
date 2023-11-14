@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { SITE_NAME } from '$lib';
+  import ListLayout from '$lib/layouts/ListLayout.svelte';
   import type { PageData } from './$types';
   import HeaderSkeleton from './HeaderSkeleton.svelte';
   import LastPlayedGame from './LastPlayedGame.svelte';
@@ -26,55 +27,53 @@
   {/if}
 </svelte:head>
 
-<div class="root">
-  <div class="header">
-    {#if $loading}
-      <HeaderSkeleton />
-    {:else if $user}
-      <div class="player" class:online={isOnline}>
-        <div class="avatar">
-          <a href={$user.profile_url} target="_blank" rel="noopener noreferrer">
-            <img src={$user.avatar} alt="" />
-          </a>
+<ListLayout>
+  <svelte:fragment slot="header">
+    <div class="header">
+      {#if $loading}
+        <HeaderSkeleton />
+      {:else if $user}
+        <div class="player" class:online={isOnline}>
+          <div class="avatar">
+            <a
+              href={$user.profile_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={$user.avatar} alt="" />
+            </a>
+          </div>
+          <div class="name">{$user.name}</div>
         </div>
-        <div class="name">{$user.name}</div>
-      </div>
-      <div class="last-seen">
-        {#if isOnline}
-          Online
-        {:else}
-          Last seen: {new Date($user.updated_at).toLocaleString('default')}
-        {/if}
-      </div>
-    {/if}
-  </div>
-  <div class="recent-session">
-    {#if $loading}
-      <LastPlayedGameSkeleton />
-    {:else if $user}
-      <LastPlayedGame data={$user.current_session ?? $user.last_session} />
-    {/if}
-  </div>
-  <hr />
-  <Tabs />
-  {#each tabs as tab (tab.href)}
-    {#if isTabSelected(selected, tab) && tab.component}
-      <svelte:component this={tab.component} userId={data.userId} />
-    {/if}
-  {/each}
-</div>
+        <div class="last-seen">
+          {#if isOnline}
+            Online
+          {:else}
+            Last seen: {new Date($user.updated_at).toLocaleString('default')}
+          {/if}
+        </div>
+      {/if}
+    </div>
+    <div class="recent-session">
+      {#if $loading}
+        <LastPlayedGameSkeleton />
+      {:else if $user}
+        <LastPlayedGame data={$user.current_session ?? $user.last_session} />
+      {/if}
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="content">
+    <Tabs />
+    {#each tabs as tab (tab.href)}
+      {#if isTabSelected(selected, tab) && tab.component}
+        <svelte:component this={tab.component} userId={data.userId} />
+      {/if}
+    {/each}
+  </svelte:fragment>
+</ListLayout>
 
 <style>
-  .root {
-    flex: 1;
-    min-height: 0;
-
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .header {
     padding: 0.5rem;
     display: flex;

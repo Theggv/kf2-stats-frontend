@@ -163,3 +163,22 @@ export interface AggregatedPlayerStats {
 export interface GetMatchAggregatedStatsResponse {
   players: AggregatedPlayerStats[];
 }
+
+export interface GetMatchLiveDataResponsePlayer {
+  id: number;
+  name: string;
+  profile_url?: string;
+  avatar?: string;
+  perk: Perk;
+  level: number;
+  prestige: number;
+  health: number;
+  armor: number;
+}
+
+export interface GetMatchLiveDataResponse {
+  game_data: GameData;
+  cd_data?: CDGameData;
+  players: GetMatchLiveDataResponsePlayer[];
+  spectators: GetMatchLiveDataResponsePlayer[];
+}

@@ -4,6 +4,7 @@ import type {
   FilterMatchesRequest,
   FilterMatchesResponse,
   GetMatchAggregatedStatsResponse,
+  GetMatchLiveDataResponse,
   GetMatchPlayerStatsResponse,
   GetMatchWavesResponse,
   GetMatchWaveStatsResponse,
@@ -13,6 +14,12 @@ import type {
 export class MatchesApiService {
   static getById(session_id: number) {
     return $proxyApi.get<MatchData>(`/matches/${session_id}`);
+  }
+
+  static getMatchLive(session_id: number) {
+    return $proxyApi.get<GetMatchLiveDataResponse>(
+      `/matches/${session_id}/live`
+    );
   }
 
   static getMatchWaves(session_id: number) {
