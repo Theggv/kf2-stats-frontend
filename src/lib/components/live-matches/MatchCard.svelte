@@ -31,13 +31,16 @@
   <div class="game-length">
     {dateDiff(new Date(match.session.started_at), new Date())}
   </div>
+  <div class="online">
+    {match.game_data.players_online} / {match.game_data.max_players}
+  </div>
 </StyledLink>
 
 <style>
   :global(.match-view-container) {
     display: grid;
     grid-template:
-      'server server server' auto
+      'server server online' auto
       'map wave game-length' auto
       / 140px auto auto;
 
@@ -70,6 +73,12 @@
 
   .game-length {
     grid-area: game-length;
+    text-wrap: nowrap;
+    text-align: right;
+  }
+
+  .online {
+    grid-area: online;
     text-wrap: nowrap;
     text-align: right;
   }
