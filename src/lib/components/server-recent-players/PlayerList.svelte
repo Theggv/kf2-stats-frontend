@@ -2,7 +2,7 @@
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import InfiniteScroll from '../infinite-scroll/InfiniteScroll.svelte';
   import type { RecentUsersResponseUser } from '$lib/api/servers';
-  import Player from './Player.svelte';
+  import PlayerListItem from './PlayerListItem.svelte';
   import Skeleton from './Skeleton.svelte';
 
   function formatDate(str: string) {
@@ -29,7 +29,7 @@
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
       {#each sessions as data (data.id)}
-        <Player {data} />
+        <PlayerListItem {data} />
       {/each}
     {:else}
       <div class="empty">

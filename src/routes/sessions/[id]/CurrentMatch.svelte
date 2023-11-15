@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { MatchData } from '$lib/api/matches';
   import { Mode, Status } from '$lib/api/sessions';
+  import { getTimeSince } from '$lib/hooks';
   import { dateDiff } from '$lib/util/date';
   import {
     diffToString,
@@ -8,8 +9,14 @@
     statusToString,
   } from '$lib/util/enum-to-text';
   import type { WithRequired } from '$lib/util/types';
+  import { onDestroy } from 'svelte';
 
   export let match: WithRequired<MatchData, 'game_data' | 'map'>;
+
+  const { from, data: timeSince, interval } = getTimeSince();
+  $: match.session.started_at && from.set(new Date(match.session.started_at));
+
+  onDestroy(() => clearInterval(interval));
 </script>
 
 <div class="root">
@@ -52,9 +59,7 @@
         )}
       </span>
     {:else if match.session.status === Status.InProgress}
-      <span>
-        {dateDiff(new Date(match.session.started_at), new Date())}
-      </span>
+      <span>{$timeSince} </span>
     {:else if match.session.started_at && match.session.started_at != match.session.updated_at}
       <span>
         {dateDiff(

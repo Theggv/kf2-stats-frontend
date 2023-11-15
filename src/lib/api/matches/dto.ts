@@ -177,6 +177,7 @@ export interface GetMatchLiveDataResponsePlayer {
 }
 
 export interface GetMatchLiveDataResponse {
+  status: Status;
   game_data: GameData;
   cd_data?: CDGameData;
   players: GetMatchLiveDataResponsePlayer[];

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { SITE_NAME } from '$lib';
+  import Player from '$lib/components/player/Player.svelte';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
   import type { PageData } from './$types';
   import HeaderSkeleton from './HeaderSkeleton.svelte';
@@ -16,7 +17,7 @@
   const [user, loading, error, fetchUser] = userStore();
   $: fetchUser(data.userId);
 
-  $: isOnline = !!$user?.current_session;
+  $: online = !!$user?.current_session;
 </script>
 
 <svelte:head>
@@ -33,20 +34,9 @@
       {#if $loading}
         <HeaderSkeleton />
       {:else if $user}
-        <div class="player" class:online={isOnline}>
-          <div class="avatar">
-            <a
-              href={$user.profile_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={$user.avatar} alt="" />
-            </a>
-          </div>
-          <div class="name">{$user.name}</div>
-        </div>
+        <Player data={$user} {online} disableLink />
         <div class="last-seen">
-          {#if isOnline}
+          {#if online}
             Online
           {:else}
             Last seen: {new Date($user.updated_at).toLocaleString('default')}
@@ -81,44 +71,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-  }
-
-  .header .player {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .header .player .avatar {
-    position: relative;
-    outline: 2px solid var(--text-primary);
-    border-radius: 0.25rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    flex-shrink: 0;
-  }
-
-  .header .player .avatar img {
-    width: 100%;
-    border-radius: 0.25rem;
-  }
-
-  .header .online.player .avatar::after {
-    position: absolute;
-    content: '';
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100px;
-    background-color: darkgreen;
-    bottom: -5px;
-    right: -5px;
-  }
-
-  .header .player .name {
-    overflow: hidden;
-    text-wrap: nowrap;
-    text-overflow: ellipsis;
   }
 
   .header .last-seen {

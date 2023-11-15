@@ -4,55 +4,62 @@ import {
   type MatchWave,
   type PlayerWaveStats,
   type AggregatedPlayerStats,
+  type GetMatchLiveDataResponse,
 } from '$lib/api/matches';
 import lodash from 'lodash';
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
 import type { WithRequired } from '$lib/util/types';
 import type { Readable } from 'svelte/motion';
+import { Status } from '$lib/api/sessions';
 
 export type Match = WithRequired<MatchData, 'game_data' | 'map' | 'server'>;
 
-export function matchStore(): [
+export function isMatchLive(status?: Status) {
+  return status === Status.Lobby || status === Status.InProgress;
+}
+
+export function getStore(): [
+  Writable<number>,
   Readable<Match | null>,
-  Readable<boolean>,
-  Readable<unknown>,
-  lodash.DebouncedFunc<($sessionId: number) => Promise<void>>
+  Readable<MatchWave[]>,
+  Readable<GetMatchLiveDataResponse | null>,
+  Readable<boolean>
 ] {
+  let intervalId: number;
+
+  const sessionId = writable<number>();
+
   const loading = writable(false);
   const error = writable<unknown>(false);
   const match = writable<Match | null>(null);
-
-  const fetch = lodash.debounce(async ($sessionId: number) => {
-    try {
-      loading.set(true);
-      const { data } = await MatchesApiService.getById($sessionId);
-      match.set(data as any);
-    } catch (err) {
-      error.set(err);
-    } finally {
-      loading.set(false);
-    }
-  }, 100);
-
-  return [match, loading, error, fetch];
-}
-
-export function wavesStore(): [
-  Readable<MatchWave[]>,
-  Readable<boolean>,
-  Readable<unknown>,
-  lodash.DebouncedFunc<($sessionId: number) => Promise<void>>
-] {
-  const loading = writable(false);
-  const error = writable<unknown>(false);
   const waves = writable<MatchWave[]>([]);
+  const liveData = writable<GetMatchLiveDataResponse | null>(null);
 
   const fetch = lodash.debounce(async ($sessionId: number) => {
     try {
       loading.set(true);
-      const { data } = await MatchesApiService.getMatchWaves($sessionId);
-      waves.set(data.waves);
+
+      const status = await MatchesApiService.getById($sessionId).then(
+        ({ data }) => {
+          match.set(data as any);
+          return data.session.status;
+        }
+      );
+
+      if (isMatchLive(status)) {
+        intervalId = setTimeout(() => fetch($sessionId), 10000);
+
+        await MatchesApiService.getMatchLive($sessionId).then(({ data }) =>
+          liveData.set(data)
+        );
+      } else {
+        liveData.set(null);
+      }
+
+      await MatchesApiService.getMatchWaves($sessionId).then(({ data }) => {
+        waves.set(data.waves);
+      });
     } catch (err) {
       error.set(err);
     } finally {
@@ -60,7 +67,13 @@ export function wavesStore(): [
     }
   }, 100);
 
-  return [waves, loading, error, fetch];
+  sessionId.subscribe((id) => {
+    if (!id) return;
+    clearTimeout(intervalId);
+    fetch(id);
+  });
+
+  return [sessionId, match, waves, liveData, loading];
 }
 
 export function playersSummaryStore(): [

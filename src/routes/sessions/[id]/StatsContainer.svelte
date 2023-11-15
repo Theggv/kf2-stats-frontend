@@ -7,7 +7,6 @@
   import { writable } from 'svelte/store';
   import PlayerStatsCharts from './PlayerStatsCharts.svelte';
   import PlayerStatsGeneral from './PlayerStatsGeneral.svelte';
-  import PlayerCard from './PlayerCard.svelte';
   import PlayerWaveStatsGeneral from './PlayerWaveStatsGeneral.svelte';
   import PlayerWaveStatsKills from './PlayerWaveStatsKills.svelte';
   import {
@@ -19,6 +18,7 @@
   import { tabs, shouldRenderTab, isTabSelected } from './tabs';
   import GeneralStats from './GeneralStats.svelte';
   import DetailedStats from './DetailedStats.svelte';
+  import PlayerWithPerk from '$lib/components/player/PlayerWithPerk.svelte';
 
   export let match: Match;
   export let waves: MatchWave[];
@@ -79,11 +79,11 @@
 <div class="root">
   {#if waves.length > 0}
     <AutoScroll class="player-list">
-      {#each sortedPlayerList as player (player.id)}
-        <PlayerCard
-          {player}
-          selected={$selectedPlayerId === player.id}
-          on:click={() => onPlayerClick(player.id)}
+      {#each sortedPlayerList as data (data.id)}
+        <PlayerWithPerk
+          {data}
+          selected={$selectedPlayerId === data.id}
+          on:click={() => onPlayerClick(data.id)}
         />
       {/each}
     </AutoScroll>

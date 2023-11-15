@@ -3,34 +3,34 @@
   import type { Player } from '$lib/api/matches';
   import { perkToString } from '$lib/util/enum-to-text';
 
-  export let player: Player;
-  export let selected: boolean;
+  export let data: Player;
+  export let selected = false;
 </script>
 
 <div class="player">
   <div class="perk-icon">
-    <PerkIcon perk={player.perk} prestige={player.prestige} />
+    <PerkIcon perk={data.perk} prestige={data.prestige} />
   </div>
   <div
     on:click
     on:keypress
-    on:dblclick={() => window.open(`/players/${player.id}`, '_blank')}
+    on:dblclick={() => window.open(`/players/${data.id}`, '_blank')}
     role="button"
     tabindex="0"
     class="info"
     class:selected
   >
-    <div class="name" class:died={player.is_dead} title={player.name}>
-      {player.name}
+    <div class="name" class:died={data.is_dead} title={data.name}>
+      {data.name}
     </div>
     <div class="perk">
-      {player.level}
-      {perkToString(player.perk)}
+      {data.level}
+      {perkToString(data.perk)}
     </div>
   </div>
   <div class="avatar">
-    <a href={player.profile_url} target="_blank" rel="noopener noreferrer">
-      <img src={player.avatar} alt="" />
+    <a href={data.profile_url} target="_blank" rel="noopener noreferrer">
+      <img src={data.avatar} alt="" />
     </a>
   </div>
 </div>

@@ -8,6 +8,7 @@
     modeToString,
     statusToString,
   } from '$lib/util/enum-to-text';
+  import Player from '../player/Player.svelte';
 
   export let data: RecentUsersResponseUser;
 
@@ -17,14 +18,7 @@
 <div class="time">
   {new Date(data.updated_at).toLocaleTimeString()}
 </div>
-<div class="player">
-  <div class="avatar">
-    <a href={data.profile_url} target="_blank" rel="noopener noreferrer">
-      <img src={data.avatar} alt="" />
-    </a>
-  </div>
-  <a class="name" href="/players/{data.id}">{data.name}</a>
-</div>
+<Player {data} />
 
 <div class="perks">
   {#each perks as perk (perk)}
@@ -83,31 +77,6 @@
   .time {
     text-align: center;
     color: var(--text-secondary);
-  }
-
-  .player {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .player .avatar {
-    outline: 2px solid var(--text-primary);
-    border-radius: 0.25rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    flex-shrink: 0;
-  }
-
-  .player .avatar img {
-    width: 100%;
-    border-radius: 0.25rem;
-  }
-
-  .player .name {
-    overflow: hidden;
-    text-wrap: nowrap;
-    text-overflow: ellipsis;
   }
 
   .perks {
