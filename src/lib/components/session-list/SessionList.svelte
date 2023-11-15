@@ -12,6 +12,13 @@
     });
   }
 
+  function sortByDate(
+    a: WithRequired<MatchData, 'server' | 'map' | 'game_data'>,
+    b: WithRequired<MatchData, 'server' | 'map' | 'game_data'>
+  ) {
+    return b.session.updated_at.localeCompare(a.session.updated_at);
+  }
+
   export let data: Map<
     string,
     WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]
@@ -24,7 +31,7 @@
   <div class="session-list">
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
-      {#each sessions as data (data.session.session_id)}
+      {#each sessions.sort(sortByDate) as data (data.session.session_id)}
         <Session {data} {withServer} />
       {/each}
     {:else}

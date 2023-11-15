@@ -48,7 +48,7 @@ export interface RecentUsersResponseUser {
   profile_url?: string;
   avatar?: string;
   session: RecentUsersResponseUserSession;
-  updated_at: Date;
+  updated_at: string;
 }
 
 export interface RecentUsersResponse {

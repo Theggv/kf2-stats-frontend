@@ -7,6 +7,10 @@
 
   export let data: Map<string, FilterUsersResponseUser[]>;
   export let hasMore: boolean;
+
+  function sortByDate(a: FilterUsersResponseUser, b: FilterUsersResponseUser) {
+    return b.updated_at.localeCompare(a.updated_at);
+  }
 </script>
 
 <AutoScroll>
@@ -19,7 +23,7 @@
 
     {#each data as [date, users] (date)}
       <div class="date">{getDayAndMonth(date)}</div>
-      {#each users as item (item.id)}
+      {#each users.sort(sortByDate) as item (item.id)}
         <Player {item} />
       {/each}
     {:else}

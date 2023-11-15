@@ -14,21 +14,21 @@
   $: started = data.status === Status.InProgress;
 </script>
 
-<AutoScroll>
-  <div class="root">
-    <div class="session">
-      <CurrentMatch {match} />
-      {#if started}
-        <div class="game-info">
-          Wave {data.game_data.wave},
-          {#if data.game_data.is_trader_time}
-            Trader Time
-          {:else}
-            {data.game_data.zeds_left} Zeds Left
-          {/if}
-        </div>
-      {/if}
-    </div>
+<div class="root">
+  <div class="session">
+    <CurrentMatch {match} />
+    {#if started}
+      <div class="game-info">
+        Wave {data.game_data.wave},
+        {#if data.game_data.is_trader_time}
+          Trader Time
+        {:else}
+          {data.game_data.zeds_left} Zeds Left
+        {/if}
+      </div>
+    {/if}
+  </div>
+  <AutoScroll class="match-live-data-container">
     <div class="players" class:started>
       <div class="player header">
         <div>
@@ -67,11 +67,13 @@
         </div>
       {/each}
     </div>
-  </div>
-</AutoScroll>
+  </AutoScroll>
+</div>
 
 <style>
   .root {
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -83,8 +85,15 @@
     border-bottom: 2px solid var(--text-secondary);
   }
 
-  .session {
+  :global(.match-live-data-container) {
     flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .session {
     display: grid;
     grid-template-columns: auto 1fr;
     font-weight: bold;
@@ -105,7 +114,7 @@
 
   .player {
     display: grid;
-    grid-template-columns: minmax(100px, 200px) 1fr 1fr 1fr;
+    grid-template-columns: minmax(100px, 200px) 3fr 2fr 2fr;
     align-items: center;
     gap: 1rem;
     padding: 0.4rem 1rem;
@@ -121,9 +130,13 @@
     align-items: center;
     gap: 0.5rem;
     text-wrap: nowrap;
+    justify-self: left;
   }
 
-  .player .perk,
+  .player.header .perk {
+    padding-left: 1rem;
+  }
+
   .player .armor,
   .player .health {
     justify-self: center;

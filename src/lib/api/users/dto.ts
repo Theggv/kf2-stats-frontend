@@ -85,7 +85,7 @@ export interface RecentSessionsResponseSession {
   map_name: Status;
   server: RecentSessionsResponseSessionServer;
   perks: number[];
-  updated_at: Date;
+  updated_at: string;
 }
 
 export interface RecentSessionsResponse {

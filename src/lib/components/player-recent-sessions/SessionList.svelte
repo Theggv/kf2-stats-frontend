@@ -12,6 +12,13 @@
     });
   }
 
+  function sortByDate(
+    a: RecentSessionsResponseSession,
+    b: RecentSessionsResponseSession
+  ) {
+    return b.updated_at.localeCompare(a.updated_at);
+  }
+
   export let data: Map<string, RecentSessionsResponseSession[]>;
   export let hasMore: boolean;
   export let loading: boolean;
@@ -28,7 +35,7 @@
 
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
-      {#each sessions as data (data.id)}
+      {#each sessions.sort(sortByDate) as data (data.id)}
         <Session {data} />
       {/each}
     {:else}

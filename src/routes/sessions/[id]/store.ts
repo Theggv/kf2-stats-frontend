@@ -50,9 +50,9 @@ export function getStore(): [
       if (isMatchLive(status)) {
         intervalId = setTimeout(() => fetch($sessionId), 10000);
 
-        await MatchesApiService.getMatchLive($sessionId).then(({ data }) =>
-          liveData.set(data)
-        );
+        await MatchesApiService.getMatchLive($sessionId).then(({ data }) => {
+          liveData.set(data);
+        });
       } else {
         liveData.set(null);
       }

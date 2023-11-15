@@ -101,11 +101,9 @@
     <div class="name">Large kills</div>
     <div class="value">
       {($kills_sc + $kills_fp + $kills_qp).toFixed(0)}
-      {'('}
-      {$kills_sc.toFixed(0)} SC
+      ({$kills_sc.toFixed(0)} SC
       {$kills_fp.toFixed(0)} FP
-      {$kills_qp.toFixed(0)} QP
-      {')'}
+      {$kills_qp.toFixed(0)} QP)
     </div>
   </div>
 
@@ -114,11 +112,9 @@
       <div class="name">Husk kills</div>
       <div class="value">
         {($kills_husk_n + $kills_husk_b).toFixed(0)}
-        {'('}
-        <span>N: {$kills_husk_n.toFixed(0)}</span>
+        <span>(N: {$kills_husk_n.toFixed(0)}</span>
         <span>B: {$kills_husk_b.toFixed(0)}</span>
-        <span>R: {$husk_rages.toFixed(0)}</span>
-        {')'}
+        <span>R: {$husk_rages.toFixed(0)})</span>
       </div>
     </div>
   {/if}
