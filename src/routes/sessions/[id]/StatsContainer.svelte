@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import type { MatchWave } from '$lib/api/matches';
+  import type { MatchWave, Player } from '$lib/api/matches';
   import { Mode } from '$lib/api/sessions';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import { onMount } from 'svelte';
@@ -39,8 +39,7 @@
   $: selectedPlayer = selectedWave?.players.find(
     (x) => x.id === $selectedPlayerId
   );
-  $: sortedPlayerList =
-    selectedWave?.players.sort((a, b) => a.perk - b.perk) || [];
+  $: sortedPlayerList = selectedWave?.players.sort(comparePlayers) || [];
 
   $: playerWaveStats =
     $horizontalStats.find(
@@ -64,6 +63,15 @@
 
   $: isPlayerSelected = $selectedPlayerId !== null;
 
+  function comparePlayers(a: Player, b: Player) {
+    if (!a.perk && b.perk) return 1;
+    if (a.perk && !b.perk) return -1;
+    if (a.perk !== b.perk) return a.perk - b.perk;
+    if (a.level !== b.level) return b.level - a.level;
+
+    return a.name.localeCompare(b.name);
+  }
+
   function onPlayerClick(id: number) {
     selectedPlayerId.update((prev) => (prev === id ? null : id));
   }
@@ -77,6 +85,9 @@
 </script>
 
 <div class="root">
+  <div class="info">
+    Players ({sortedPlayerList.length} / {match.game_data.max_players})
+  </div>
   {#if waves.length > 0}
     <AutoScroll class="player-list">
       {#each sortedPlayerList as data (data.id)}
@@ -164,7 +175,7 @@
     min-height: 0;
     display: grid;
     grid-template:
-      '- tabs' max-content
+      'info tabs' max-content
       'players stats' 1fr
       'players slider' max-content
       / 250px 1fr;
@@ -177,6 +188,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .info {
+    grid-area: info;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 1rem;
   }
 
   .tabs {
