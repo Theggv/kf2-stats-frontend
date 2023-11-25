@@ -6,26 +6,30 @@
   export let compact = false;
   export let disableLink = false;
   export let newTab = false;
+  export let bold = false;
 </script>
 
-<div class="player" class:online class:compact>
+<div class="player" class:online class:compact class:bold>
   <div class="avatar">
     <a href={data.profile_url} target="_blank" rel="noopener noreferrer">
       <img src={data.avatar} alt="" />
     </a>
   </div>
-  {#if disableLink}
-    <div class="name">{data.name}</div>
-  {:else if newTab}
-    <a
-      class="name"
-      href="/players/{data.id}"
-      target="_blank"
-      rel="noopener noreferrer">{data.name}</a
-    >
-  {:else}
-    <a class="name" href="/players/{data.id}">{data.name}</a>
-  {/if}
+  <div class="content">
+    {#if disableLink}
+      <div class="name">{data.name}</div>
+      <slot />
+    {:else if newTab}
+      <a
+        class="name"
+        href="/players/{data.id}"
+        target="_blank"
+        rel="noopener noreferrer">{data.name}</a
+      >
+    {:else}
+      <a class="name" href="/players/{data.id}">{data.name}</a>
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -65,9 +69,19 @@
     width: 1.5rem;
   }
 
+  .player .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .player .name {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .player.bold .name {
+    font-weight: bold;
   }
 </style>

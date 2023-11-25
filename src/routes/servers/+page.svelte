@@ -1,6 +1,5 @@
 <script lang="ts">
   import { SITE_NAME } from '$lib';
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import ServerList from '$lib/components/server-list/ServerList.svelte';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
 </script>

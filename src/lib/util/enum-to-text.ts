@@ -27,17 +27,29 @@ export function lengthToString(len: number) {
   }
 }
 
-export function modeToString(mode: Mode) {
-  switch (mode) {
-    case Mode.Any:
-      return 'Any';
-    case Mode.Survival:
-      return 'Survival';
-    case Mode.Endless:
-      return 'Endless';
-    case Mode.ControlledDifficulty:
-      return 'CD';
-  }
+export function modeToString(mode: Mode, shorten: boolean = true) {
+  const data: any = {
+    [Mode.Any]: {
+      short: 'Any',
+      long: 'Any',
+    },
+    [Mode.Survival]: {
+      short: 'Any',
+      long: 'Survival',
+    },
+    [Mode.Endless]: {
+      short: 'Any',
+      long: 'Endless',
+    },
+    [Mode.ControlledDifficulty]: {
+      short: 'CD',
+      long: 'Controlled Difficulty',
+    },
+  };
+
+  const format = shorten ? 'short' : 'long';
+
+  return data[mode][format];
 }
 
 export function statusToString(status?: Status) {

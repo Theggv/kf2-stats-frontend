@@ -1,18 +1,15 @@
 <script lang="ts">
   import { SITE_NAME } from '$lib';
-  import type { FilterUsersResponseUser } from '$lib/api/users';
   import PlayerList from '$lib/components/player-list/PlayerList.svelte';
   import { usersStore } from '$lib/components/player-list/store';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
+  import { groupBy } from '$lib/util';
 
   const [page, filter, users, _, hasMore] = usersStore();
 
-  $: groupedUsers = $users.reduce((map, item) => {
-    const key = new Date(item.updated_at).toDateString();
-    if (map.has(key)) map.get(key)!.push(item);
-    else map.set(key, [item]);
-    return map;
-  }, new Map<string, FilterUsersResponseUser[]>());
+  $: groupedUsers = groupBy($users, (item) =>
+    new Date(item.updated_at).toDateString()
+  );
 </script>
 
 <svelte:head>

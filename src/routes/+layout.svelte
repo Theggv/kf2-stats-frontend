@@ -1,5 +1,4 @@
 <script>
-  import Footer from '$lib/components/Footer.svelte';
   import LiveMatches from '$lib/components/live-matches/LiveMatches.svelte';
   import NavBar from '$lib/components/navbar/NavBar.svelte';
   import { onMount } from 'svelte';
@@ -16,12 +15,14 @@
     CategoryScale,
     ArcElement,
     BarElement,
+    Filler,
   } from 'chart.js';
 
   ChartJS.register(
     Title,
     Tooltip,
     Legend,
+    Filler,
     LineElement,
     LinearScale,
     PointElement,
@@ -99,5 +100,6 @@
     display: flex;
     background-color: var(--background-primary);
     backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
   }
 </style>

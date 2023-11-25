@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { RecentUsersResponseUser } from '$lib/api/servers';
   import PlayerList from '$lib/components/server-recent-players/PlayerList.svelte';
   import { getStore } from '$lib/components/server-recent-players/store';
+  import { groupBy } from '$lib/util';
   import { totalRecentPlayers } from './store';
 
   export let serverId: number;
@@ -10,12 +10,9 @@
 
   $: totalRecentPlayers.set($total);
 
-  $: sortedSessions = $sessions.reduce((map, item) => {
-    const key = new Date(item.updated_at).toDateString();
-    if (map.has(key)) map.get(key)!.push(item);
-    else map.set(key, [item]);
-    return map;
-  }, new Map<string, RecentUsersResponseUser[]>());
+  $: sortedSessions = groupBy($sessions, (item) =>
+    new Date(item.updated_at).toDateString()
+  );
 </script>
 
 <PlayerList

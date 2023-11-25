@@ -18,9 +18,6 @@ export class UsersApiService {
   }
 
   static getRecentSessions(body: RecentSessionsRequest) {
-    return $proxyApi.post<RecentSessionsResponse>(
-      `/users/sessions/recent`,
-      body
-    );
+    return $proxyApi.post<RecentSessionsResponse>(`/users/sessions`, body);
   }
 }

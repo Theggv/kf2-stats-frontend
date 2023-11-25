@@ -34,6 +34,7 @@
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
     "svelte-chartjs": "^3.1.2",
+    "svelte-icons-pack": "^2.1.0",
     "svelte-multiselect": "^10.2.0"
   }
 }

@@ -46,6 +46,7 @@
 
     background-color: var(--background-primary);
     backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
   }
 
   @media (max-width: 1024px) {

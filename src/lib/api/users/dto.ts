@@ -66,6 +66,21 @@ export interface FilterUsersResponse {
 
 export interface RecentSessionsRequest {
   user_id: number;
+
+  date?: Date;
+  perks?: number[];
+  server_ids?: number[];
+  map_ids?: number[];
+
+  mode?: Mode;
+  length?: Length;
+  diff?: Difficulty;
+  status?: Status;
+
+  spawn_cycle?: string;
+  min_wave?: number;
+  min_mm?: number;
+
   pager: PaginationRequest;
 }
 

@@ -14,6 +14,7 @@
     [Perk.Demolitionist]: '/assets/perks/demolitionist.png',
     [Perk.Firebug]: '/assets/perks/firebug.png',
     [Perk.Survivalist]: '/assets/perks/survivalist.png',
+    [Perk.Unknown]: '/assets/perks/survivalist.png',
   };
 
   const prestigeIcons: any = {

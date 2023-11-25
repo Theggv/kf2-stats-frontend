@@ -1,21 +1,16 @@
 <script lang="ts">
+  import { tabs } from './Tabs.store';
   import { page } from '$app/stores';
-  import { isTabSelected, tabs, totalMatches } from './store';
 
-  $: selected = $page.url.hash;
+  export let userId: number;
 </script>
 
 <ul>
   {#each tabs as tab (tab.href)}
-    <li class:selected={isTabSelected(selected, tab)}>
-      <a href={tab.href}>
-        {tab.content}
-        {#if isTabSelected(selected, tab)}
-          {#if tab.href === '#matches' && $totalMatches}
-            ({$totalMatches})
-          {/if}
-        {/if}
-      </a>
+    {@const href = `/players/${userId}${tab.href}`}
+
+    <li class:selected={href === $page.url.pathname}>
+      <a {href}>{tab.content}</a>
     </li>
   {/each}
 </ul>
@@ -28,6 +23,7 @@
   }
 
   li {
+    padding: 0.5rem;
     font-weight: bold;
   }
 

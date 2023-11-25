@@ -1,6 +1,5 @@
 <script lang="ts">
   import { SITE_NAME } from '$lib';
-  import type { MatchData } from '$lib/api/matches';
   import Filter from '$lib/components/session-list/Filter.svelte';
   import SessionList from '$lib/components/session-list/SessionList.svelte';
   import {
@@ -8,7 +7,7 @@
     type SelectOption,
   } from '$lib/components/session-list/store';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
-  import type { WithRequired } from '$lib/util/types';
+  import { groupBy } from '$lib/util';
 
   let selectedServers: SelectOption[] = [];
   let selectedMaps: SelectOption[] = [];
@@ -19,12 +18,9 @@
 
   const [page, filter, sessions, total, hasMore, loading] = sessionListStore();
 
-  $: sortedSessions = $sessions.reduce((map, item) => {
-    const key = new Date(item.session.updated_at).toDateString();
-    if (map.has(key)) map.get(key)!.push(item);
-    else map.set(key, [item]);
-    return map;
-  }, new Map<string, WithRequired<MatchData, 'server' | 'map' | 'game_data'>[]>());
+  $: sortedSessions = groupBy($sessions, (item) =>
+    new Date(item.session.updated_at).toDateString()
+  );
 
   $: filter.set({
     include_server: true,

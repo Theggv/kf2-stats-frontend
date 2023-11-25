@@ -11,7 +11,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
   try {
     const { data } = await $backendApi.post<RecentSessionsRequest>(
-      `/users/sessions/recent`,
+      `/users/sessions`,
       body
     );
     return json(data);
