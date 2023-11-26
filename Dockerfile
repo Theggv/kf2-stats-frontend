@@ -16,7 +16,6 @@ WORKDIR /usr/app
 COPY --from=builder /usr/app/prod_node_modules ./node_modules
 COPY --from=builder /usr/app/package*.json ./
 COPY --from=builder /usr/app/.svelte-kit ./.svelte-kit
-COPY --from=builder /usr/app/deploy ./deploy
 
 EXPOSE 5000
 
