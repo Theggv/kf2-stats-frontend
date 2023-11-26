@@ -34,16 +34,28 @@ export function modeToString(mode: Mode, shorten: boolean = true) {
       long: 'Any',
     },
     [Mode.Survival]: {
-      short: 'Any',
+      short: 'Survival',
       long: 'Survival',
     },
     [Mode.Endless]: {
-      short: 'Any',
+      short: 'Endless',
       long: 'Endless',
     },
     [Mode.ControlledDifficulty]: {
       short: 'CD',
       long: 'Controlled Difficulty',
+    },
+    [Mode.Weekly]: {
+      short: 'Weekly',
+      long: 'Weekly',
+    },
+    [Mode.Objective]: {
+      short: 'Objective',
+      long: 'Objective',
+    },
+    [Mode.Versus]: {
+      short: 'Versus',
+      long: 'Versus',
     },
   };
 
