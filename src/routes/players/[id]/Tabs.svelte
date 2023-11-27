@@ -23,8 +23,9 @@
   }
 
   li {
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     font-weight: bold;
+    border-bottom: 2px solid transparent;
   }
 
   .selected {

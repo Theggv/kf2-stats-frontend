@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
+import { UsersApiService } from '$lib/api/users';
 
 export let ssr = false;
 
@@ -9,5 +10,10 @@ export const load: LayoutLoad = async ({ params }) => {
     throw error(400, 'user_id is not a number');
   }
 
-  return { userId };
+  try {
+    const { data: user } = await UsersApiService.getUserDetailed(userId);
+    return { user };
+  } catch (err) {
+    throw error(400, 'failed to fetch user data');
+  }
 };

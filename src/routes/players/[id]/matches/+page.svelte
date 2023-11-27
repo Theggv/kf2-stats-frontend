@@ -5,4 +5,4 @@
   export let data: PageData;
 </script>
 
-<Matches userId={data.userId} selectedDate={data.date || ''} />
+<Matches userId={data.user.id} selectedDate={data.date || ''} />

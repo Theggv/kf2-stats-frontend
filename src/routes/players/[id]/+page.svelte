@@ -10,8 +10,8 @@
     date = new Date(date.getTime() - offset * 60 * 1000);
     const formatted = date.toISOString().split('T')[0];
 
-    goto(`/players/${data.userId}/matches?date=${formatted}`);
+    goto(`/players/${data.user.id}/matches?date=${formatted}`);
   }
 </script>
 
-<Overview userId={data.userId} on:onClickDate={(e) => onClickDate(e.detail)} />
+<Overview userId={data.user.id} on:onClickDate={(e) => onClickDate(e.detail)} />

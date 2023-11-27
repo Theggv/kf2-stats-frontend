@@ -5,4 +5,4 @@
   export let data: LayoutData;
 </script>
 
-<Perks userId={data.userId} />
+<Perks userId={data.user.id} />
