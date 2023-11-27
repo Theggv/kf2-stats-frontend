@@ -3,8 +3,6 @@ import type { LayoutServerLoad } from './$types';
 import type { FilterUsersResponseUser } from '$lib/api/users';
 import { SITE_NAME } from '$lib';
 
-export let ssr = true;
-
 export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const userId = Number(params.id);
   if (isNaN(userId)) {
@@ -19,10 +17,8 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
       user,
       metadata: {
         title: `${user.name}'s Profile | ${SITE_NAME}`,
-        description: `${user.name}'s user page`,
         openGraph: {
           title: `${user.name}'s Profile | ${SITE_NAME}`,
-          description: `${user.name}'s user page`,
           type: 'profile',
           images: [{ url: user.avatar, width: 32, height: 32, alt: '' }],
           profile: {

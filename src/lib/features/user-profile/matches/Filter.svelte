@@ -28,8 +28,8 @@
   });
 
   onDestroy(() => {
-    inputRef.removeEventListener('focus', onFocus);
-    inputRef.removeEventListener('blur', onBlur);
+    inputRef?.removeEventListener('focus', onFocus);
+    inputRef?.removeEventListener('blur', onBlur);
   });
 </script>
 
