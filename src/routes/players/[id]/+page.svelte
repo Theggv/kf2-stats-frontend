@@ -1,5 +1,4 @@
 <script lang="ts">
-  import MetaData from './meta.svelte';
   import type { LayoutData } from './$types';
   import Overview from '$lib/features/user-profile/overview/Overview.svelte';
   import { goto } from '$app/navigation';
@@ -14,7 +13,5 @@
     goto(`/players/${data.user.id}/matches?date=${formatted}`);
   }
 </script>
-
-<MetaData data={data.user} />
 
 <Overview userId={data.user.id} on:onClickDate={(e) => onClickDate(e.detail)} />
