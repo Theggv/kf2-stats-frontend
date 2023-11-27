@@ -36,10 +36,6 @@
   onMount(() => (active = true));
 </script>
 
-<svelte:head>
-  <title>Better Stats</title>
-</svelte:head>
-
 <div class="root" class:active>
   <header>
     <NavBar />

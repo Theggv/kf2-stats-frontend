@@ -6,7 +6,7 @@
   export let data: FilterUsersResponseUser;
 
   $: titleTemplate = `%s | ${SITE_NAME}`;
-  $: title = `${data.name}'s Profile | ${SITE_NAME}`;
+  $: title = `${data.name}'s Profile > Matches | ${SITE_NAME}`;
   $: description = `${data.name}'s user page`;
 </script>
 
