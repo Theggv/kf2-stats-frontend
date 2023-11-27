@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { MetaTags } from 'svelte-meta-tags';
   import { SITE_NAME } from '$lib';
   import type { FilterUsersResponseUser } from '$lib/api/users';
 
@@ -7,10 +8,14 @@
   $: title = `${data.name}'s Profile | ${SITE_NAME}`;
 </script>
 
-<svelte:head>
-  <title>{title}</title>
-
-  <meta property="og:title" content={title} />
-  <meta property="og:site_name" content={SITE_NAME} />
-  <meta property="og:image" content={data.avatar} />
-</svelte:head>
+<MetaTags
+  openGraph={{
+    title,
+    description: '',
+    type: 'profile',
+    images: [{ url: data.avatar, alt: '' }],
+    profile: {
+      username: data.name,
+    },
+  }}
+/>

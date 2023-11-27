@@ -4,7 +4,7 @@
   import { userStore } from './store';
   import Header from './Header.svelte';
   import Tabs from './Tabs.svelte';
-  import MetaTitle from './meta.svelte';
+  import MetaData from './meta.svelte';
 
   export let data: LayoutData;
 
@@ -12,7 +12,7 @@
   $: userIdStore.set(data.user.id);
 </script>
 
-<MetaTitle data={data.user} />
+<MetaData data={data.user} />
 
 <ListLayout>
   <svelte:fragment slot="header">

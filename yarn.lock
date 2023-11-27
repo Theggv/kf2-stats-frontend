@@ -1191,6 +1191,11 @@ sander@^0.5.0:
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
+schema-dts@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-1.1.2.tgz#82ccf71b5dcb80065a1cc5941888507a4ce1e44b"
+  integrity sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==
+
 set-cookie-parser@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.6.0.tgz#131921e50f62ff1a66a461d7d62d7b21d5d15a51"
@@ -1273,6 +1278,13 @@ svelte-icons-pack@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/svelte-icons-pack/-/svelte-icons-pack-2.1.0.tgz#2ae00346fb1de033ed31cb146b61cf975eeec6e1"
   integrity sha512-6Il0vWi/6MW3wXSorZhCqhkJGH4Pcg1WTcdlfFMPXfJqafZVQgmKdhVFS1c2hXGvs4byttpLC9XmI3okV1uMWA==
+
+svelte-meta-tags@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/svelte-meta-tags/-/svelte-meta-tags-3.1.0.tgz#80fc0f9ef81ab8f9ace7260a3ecb88153efebe48"
+  integrity sha512-wFBfpktSua1R5rdvQ/aFucvXmRqzDhRYrPpMQ/pL4+KL5QHIzomPf29a5WN3yDR0reSy1PXyQ2ah0+uCYCbi0g==
+  dependencies:
+    schema-dts "^1.1.2"
 
 svelte-multiselect@^10.2.0:
   version "10.2.0"
