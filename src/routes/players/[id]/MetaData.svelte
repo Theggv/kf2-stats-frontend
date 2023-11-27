@@ -1,8 +1,6 @@
 <script lang="ts">
   import { MetaTags } from 'svelte-meta-tags';
-  import type { LayoutData } from './$types';
-
-  export let data: LayoutData['metadata'];
+  import { page } from '$app/stores';
 </script>
 
-<MetaTags {...data} />
+<MetaTags {...$page.data.metadata} />

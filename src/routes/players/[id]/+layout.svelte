@@ -12,7 +12,7 @@
   $: userIdStore.set(data.user.id);
 </script>
 
-<MetaData data={data.metadata} />
+<MetaData />
 
 <ListLayout>
   <svelte:fragment slot="header">
