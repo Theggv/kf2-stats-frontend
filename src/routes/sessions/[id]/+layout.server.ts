@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 import type { MatchData } from '$lib/api/matches';
 import { SITE_NAME } from '$lib';
-import { Status } from '$lib/api/sessions';
+import { Mode, Status } from '$lib/api/sessions';
 import { diffToString, modeToString } from '$lib/util/enum-to-text';
 import { dateDiff } from '$lib/util/date';
 
@@ -57,20 +57,27 @@ function getDescription(data: MatchData): string {
   } else {
     body += `${modeToString(data.session.mode)} `;
     body += `${diffToString(data.session.diff)}`;
+  }
 
-    if (data.session.started_at) {
-      body += ' — ';
-      if (data.session.completed_at) {
-        body += dateDiff(
-          new Date(data.session.started_at),
-          new Date(data.session.completed_at)
-        );
-      } else {
-        body += dateDiff(
-          new Date(data.session.started_at),
-          new Date(data.session.updated_at)
-        );
-      }
+  body += ' — ';
+  if (data.session.mode === Mode.Endless) {
+    body += `Wave ${data.game_data?.wave || 0}`;
+  } else {
+    body += `${data.game_data?.wave || 0} / ${data.session.length}`;
+  }
+
+  if (data.session.started_at) {
+    body += ' — ';
+    if (data.session.completed_at) {
+      body += dateDiff(
+        new Date(data.session.started_at),
+        new Date(data.session.completed_at)
+      );
+    } else {
+      body += dateDiff(
+        new Date(data.session.started_at),
+        new Date(data.session.updated_at)
+      );
     }
   }
 
