@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { SITE_NAME } from '$lib';
   import { Status } from '$lib/api/sessions';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
@@ -31,12 +30,6 @@
 
   const selectedTab = writable<string>('live');
 </script>
-
-<svelte:head>
-  {#if $match}
-    <title>{$match.server.name} | Matches | {SITE_NAME}</title>
-  {/if}
-</svelte:head>
 
 <ListLayout>
   <svelte:fragment slot="header">
