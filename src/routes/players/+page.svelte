@@ -1,20 +1,19 @@
 <script lang="ts">
-  import { SITE_NAME } from '$lib';
+  import { page } from '$app/stores';
   import PlayerList from '$lib/components/player-list/PlayerList.svelte';
   import { usersStore } from '$lib/components/player-list/store';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
   import { groupBy } from '$lib/util';
+  import { MetaTags } from 'svelte-meta-tags';
 
-  const [page, filter, users, _, hasMore] = usersStore();
+  const [pageStore, filter, users, _, hasMore] = usersStore();
 
   $: groupedUsers = groupBy($users, (item) =>
     new Date(item.updated_at).toDateString()
   );
 </script>
 
-<svelte:head>
-  <title>Players | {SITE_NAME}</title>
-</svelte:head>
+<MetaTags {...$page.data.metadata} />
 
 <ListLayout>
   <div class="header" slot="header">
@@ -25,7 +24,7 @@
     <PlayerList
       data={groupedUsers}
       hasMore={$hasMore}
-      on:loadMore={() => page.update((p) => p + 1)}
+      on:loadMore={() => pageStore.update((p) => p + 1)}
     />
   </svelte:fragment>
 </ListLayout>
