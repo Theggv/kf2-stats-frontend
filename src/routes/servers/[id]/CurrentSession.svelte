@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Mode } from '$lib/api/sessions';
   import { onMount } from 'svelte';
   import {
     diffToString,

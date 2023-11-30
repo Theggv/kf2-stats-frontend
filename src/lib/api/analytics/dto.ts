@@ -4,4 +4,6 @@ export enum TimePeriod {
   Week,
   Month,
   Year,
+  Date,
+  DateHour,
 }

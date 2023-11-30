@@ -5,33 +5,31 @@
   import { isTabSelected, tabs } from './store';
   import { page } from '$app/stores';
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
-  import { SITE_NAME } from '$lib';
   import ListLayout from '$lib/layouts/ListLayout.svelte';
+  import { MetaTags } from 'svelte-meta-tags';
 
   $: selected = $page.url.hash;
 
   export let data: PageData;
 </script>
 
-<svelte:head>
-  <title>{data.name} | Servers | {SITE_NAME}</title>
-</svelte:head>
+<MetaTags {...$page.data.metatags} />
 
 <ListLayout>
   <svelte:fragment slot="header">
     <div class="header">
-      <h1>{data.name}</h1>
-      <StyledAddress address={data.address}>
-        {data.address}
+      <h1>{data.server.name}</h1>
+      <StyledAddress address={data.server.address}>
+        {data.server.address}
       </StyledAddress>
     </div>
-    <CurrentSession serverId={data.id} />
+    <CurrentSession serverId={data.server.id} />
   </svelte:fragment>
   <svelte:fragment slot="content">
     <Tabs />
     {#each tabs as tab (tab.href)}
       {#if isTabSelected(selected, tab) && tab.component}
-        <svelte:component this={tab.component} serverId={data.id} />
+        <svelte:component this={tab.component} serverId={data.server.id} />
       {/if}
     {/each}
   </svelte:fragment>

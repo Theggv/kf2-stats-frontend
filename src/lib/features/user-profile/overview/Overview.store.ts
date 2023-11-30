@@ -6,7 +6,6 @@ import {
   UserAnalyticsApiService,
   TimePeriod,
 } from '$lib/api/analytics';
-import { Status } from '$lib/api/sessions';
 import {
   type RecentSessionsResponseSession,
   UsersApiService,

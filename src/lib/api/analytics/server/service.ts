@@ -3,7 +3,9 @@ import { $proxyApi } from '$lib/http';
 import type {
   PeriodData,
   PlayersOnlineRequest,
+  PopularServersResponse,
   SessionOnlineRequest,
+  TotalOnlineResponse,
   UsageInMinutesRequest,
 } from './dto';
 
@@ -21,5 +23,15 @@ export class ServerAnalyticsApiService {
 
   static getPlayersOnline(body: PlayersOnlineRequest) {
     return $proxyApi.post<PeriodData[]>(`/analytics/server/online`, body);
+  }
+
+  static getPopularServers() {
+    return $proxyApi.get<PopularServersResponse>(`/analytics/server/popular`);
+  }
+
+  static getCurrentOnline() {
+    return $proxyApi.get<TotalOnlineResponse>(
+      `/analytics/server/current-online`
+    );
   }
 }

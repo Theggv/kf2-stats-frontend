@@ -93,7 +93,7 @@
     padding-left: 0.25rem;
   }
 
-  :global(div .selected) {
+  :global(div.multiselect > .selected) {
     min-height: 32px;
   }
 

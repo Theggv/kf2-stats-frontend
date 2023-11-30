@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PlayerWaveStats, MatchWave } from '$lib/api/matches';
-  import ChartLine from './ChartLine.svelte';
+  import LineChart from '$lib/components/charts/LineChart.svelte';
 
   export let playerId: number;
   export let stats: PlayerWaveStats[];
@@ -44,33 +44,57 @@
     });
   }
 
+  function formatLabel(wave: number, attempt: number) {
+    if (attempt > 1) return `Wave ${wave} (${attempt})`;
+    return `Wave ${wave}`;
+  }
+
   function percentTooltip(value: number) {
     return value + '%';
+  }
+
+  function damageTooltip(value: number) {
+    return value + ' damage';
+  }
+
+  function largeKillsTooltip(value: number) {
+    return value + ' large kills';
   }
 </script>
 
 <div class="root">
-  <ChartLine
+  <LineChart
     label="Accuracy"
-    data={prepareData(accuracy)}
-    tooltip={percentTooltip}
-    beginAtZero={true}
+    data={prepareData(accuracy).map((x) => ({
+      label: formatLabel(x.wave, x.attempt),
+      value: x.value,
+    }))}
+    tooltop={percentTooltip}
   />
-  <ChartLine
+
+  <LineChart
     label="HS Accuracy"
-    data={prepareData(hsAccuracy)}
-    tooltip={percentTooltip}
-    beginAtZero={true}
+    data={prepareData(hsAccuracy).map((x) => ({
+      label: formatLabel(x.wave, x.attempt),
+      value: x.value,
+    }))}
+    tooltop={percentTooltip}
   />
-  <ChartLine
+  <LineChart
     label="Damage dealt"
-    data={prepareData(damageDealt)}
-    beginAtZero={true}
+    data={prepareData(damageDealt).map((x) => ({
+      label: formatLabel(x.wave, x.attempt),
+      value: x.value,
+    }))}
+    tooltop={damageTooltip}
   />
-  <ChartLine
+  <LineChart
     label="Large kills"
-    data={prepareData(largeKills)}
-    beginAtZero={true}
+    data={prepareData(largeKills).map((x) => ({
+      label: formatLabel(x.wave, x.attempt),
+      value: x.value,
+    }))}
+    tooltop={largeKillsTooltip}
   />
 </div>
 

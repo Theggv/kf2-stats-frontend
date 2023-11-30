@@ -13,10 +13,15 @@
     LinearScale,
     PointElement,
     CategoryScale,
+    TimeScale,
     ArcElement,
     BarElement,
     Filler,
+    TimeSeriesScale,
   } from 'chart.js';
+  import 'chartjs-adapter-date-fns';
+  // @ts-ignore
+  import chartTrendline from 'chartjs-plugin-trendline';
 
   ChartJS.register(
     Title,
@@ -25,10 +30,13 @@
     Filler,
     LineElement,
     LinearScale,
+    TimeScale,
     PointElement,
     CategoryScale,
     ArcElement,
-    BarElement
+    BarElement,
+    TimeSeriesScale,
+    chartTrendline
   );
 
   let active = false;
