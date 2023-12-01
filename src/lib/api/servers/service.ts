@@ -3,6 +3,7 @@ import type {
   ServerData,
   RecentUsersRequest,
   RecentUsersResponse,
+  ServerLastSessionResponse,
 } from './dto';
 
 export class ServersApiService {
@@ -18,5 +19,11 @@ export class ServersApiService {
 
   static getRecentUsers(body: RecentUsersRequest) {
     return $proxyApi.post<RecentUsersResponse>('/servers/users/recent', body);
+  }
+
+  static getLastSession(id: number) {
+    return $proxyApi.get<ServerLastSessionResponse>(
+      `/servers/${id}/last-session`
+    );
   }
 }

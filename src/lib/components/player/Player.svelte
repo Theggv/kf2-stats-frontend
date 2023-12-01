@@ -18,7 +18,6 @@
   <div class="content">
     {#if disableLink}
       <div class="name">{data.name}</div>
-      <slot />
     {:else if newTab}
       <a
         class="name"
@@ -29,6 +28,7 @@
     {:else}
       <a class="name" href="/players/{data.id}">{data.name}</a>
     {/if}
+    <slot />
   </div>
 </div>
 

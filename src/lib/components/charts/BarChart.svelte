@@ -1,22 +1,23 @@
 <script lang="ts">
-  import { Line } from 'svelte-chartjs';
-  import type { PeriodData } from '$lib/api/analytics';
-  import Tabs from '$lib/components/tabs/Tabs.svelte';
+  import { Bar } from 'svelte-chartjs';
   import { lineHoverPlugin } from './plugins';
-  import type { Period } from './periods';
+  import { barBackgroundColors } from './colors';
 
-  export let data: PeriodData[];
+  type Data = {
+    label: string;
+    value: number | undefined;
+  };
 
-  export let periods: Period[];
-  export let selectedPeriod: number;
-
+  export let label = '';
+  export let data: Data[];
   export let tooltop: (value: number) => string;
+
+  $: values = data.map((x) => x.value as any);
 </script>
 
-<div class="line-time-chart">
-  <Tabs tabs={periods.map((x) => x.label)} bind:selectedTab={selectedPeriod} />
+<div class="bar-chart">
   {#if data.length}
-    <Line
+    <Bar
       plugins={[lineHoverPlugin]}
       options={{
         maintainAspectRatio: false,
@@ -37,18 +38,9 @@
             radius: 0,
           },
         },
-        scales: {
-          x: {
-            display: true,
-            type: 'time',
-            time: {
-              ...periods[selectedPeriod].chartData,
-            },
-          },
-        },
         plugins: {
           legend: {
-            display: false,
+            display: true,
           },
           tooltip: {
             mode: 'index',
@@ -62,13 +54,12 @@
         },
       }}
       data={{
-        xLabels: data.map((x) => new Date(x.period)),
+        xLabels: data.map((x) => x.label),
         datasets: [
           {
-            data: data.map((x) => x.count),
-            fill: false,
-            borderColor: 'rgb(200 200 120 / 0.9)',
-            tension: 0.1,
+            label,
+            data: values,
+            backgroundColor: barBackgroundColors,
           },
         ],
       }}
@@ -79,21 +70,13 @@
 </div>
 
 <style>
-  .line-time-chart {
-    padding: 0 1rem;
+  .bar-chart {
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .secondary {
     font-weight: bold;
     color: var(--text-secondary);
-  }
-
-  :global(.line-time-chart > canvas) {
-    max-width: 100%;
-    max-height: 150px;
-    min-height: 150px;
   }
 </style>

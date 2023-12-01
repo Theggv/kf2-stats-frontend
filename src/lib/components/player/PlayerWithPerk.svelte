@@ -3,7 +3,7 @@
   import type { Player } from '$lib/api/matches';
   import { perkToString } from '$lib/util/enum-to-text';
 
-  export let data: Player;
+  export let data: Omit<Player, 'player_stats_id'>;
   export let selected = false;
 </script>
 

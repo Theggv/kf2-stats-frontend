@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { Line } from 'svelte-chartjs';
+  import { Bar } from 'svelte-chartjs';
   import type { PeriodData } from '$lib/api/analytics';
   import Tabs from '$lib/components/tabs/Tabs.svelte';
   import { lineHoverPlugin } from './plugins';
   import type { Period } from './periods';
+  import { barBackgroundColors } from './colors';
 
   export let data: PeriodData[];
 
@@ -13,10 +14,10 @@
   export let tooltop: (value: number) => string;
 </script>
 
-<div class="line-time-chart">
+<div class="bar-time-chart">
   <Tabs tabs={periods.map((x) => x.label)} bind:selectedTab={selectedPeriod} />
   {#if data.length}
-    <Line
+    <Bar
       plugins={[lineHoverPlugin]}
       options={{
         maintainAspectRatio: false,
@@ -66,9 +67,7 @@
         datasets: [
           {
             data: data.map((x) => x.count),
-            fill: false,
-            borderColor: 'rgb(200 200 120 / 0.9)',
-            tension: 0.1,
+            backgroundColor: barBackgroundColors,
           },
         ],
       }}
@@ -79,7 +78,7 @@
 </div>
 
 <style>
-  .line-time-chart {
+  .bar-time-chart {
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
@@ -91,9 +90,9 @@
     color: var(--text-secondary);
   }
 
-  :global(.line-time-chart > canvas) {
+  :global(.bar-time-chart > canvas) {
     max-width: 100%;
-    max-height: 150px;
-    min-height: 150px;
+    max-height: 250px;
+    min-height: 250px;
   }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Line } from 'svelte-chartjs';
-  import { lineHoverPlugin } from './line-hover-plugin';
+  import { lineHoverPlugin } from './plugins';
 
   type Data = {
     label: string;
@@ -15,7 +15,7 @@
   $: values = data.map((x) => x.value as any);
 </script>
 
-<div class="root">
+<div class="line-chart">
   {#if data.length}
     <Line
       plugins={[lineHoverPlugin]}
@@ -66,12 +66,19 @@
         ],
       }}
     />
+  {:else}
+    <div class="secondary">No Data</div>
   {/if}
 </div>
 
 <style>
-  .root {
+  .line-chart {
     flex: 1;
     display: flex;
+  }
+
+  .secondary {
+    font-weight: bold;
+    color: var(--text-secondary);
   }
 </style>

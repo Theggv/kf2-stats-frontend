@@ -5,6 +5,7 @@
   import AiOutlineLineChart from 'svelte-icons-pack/ai/AiOutlineLineChart';
   import RiSystemRadioButtonLine from 'svelte-icons-pack/ri/RiSystemRadioButtonLine';
   import BiServer from 'svelte-icons-pack/bi/BiServer';
+  import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
 
   import { getStore } from './MainPage.store';
   import { iconSettings } from './common';
@@ -12,16 +13,21 @@
   import SectionLayout from './common/SectionLayout.svelte';
   import { getStore as getPlayersOnlineStore } from './charts/PlayersOnline.store';
   import { getStore as getSessionsPlayedStore } from './charts/SessionsPlayed.store';
+  import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
   import LineTimeChart from '$lib/components/charts/LineTimeChart.svelte';
   import { periods } from '$lib/components/charts';
   import PopularServers from './PopularServers.svelte';
+  import PerkChart from '$lib/components/charts/PerkChart.svelte';
 
   const { currentOnline, popularServers } = getStore();
 
   const { selectedPeriod: onlinePeriod, data: onlineData } =
     getPlayersOnlineStore();
+
   const { selectedPeriod: sessionPeriod, data: sessionData } =
     getSessionsPlayedStore();
+
+  const { data: perkPlaytimeData } = perkPlaytimeStore();
 </script>
 
 <div class="root">
@@ -50,6 +56,20 @@
         </svelte:fragment>
         <svelte:fragment slot="content">
           <PopularServers data={$popularServers} />
+        </svelte:fragment>
+      </SectionLayout>
+
+      <SectionLayout>
+        <svelte:fragment slot="title">Popular Perks</svelte:fragment>
+        <svelte:fragment slot="subtitle">Last 30 Days</svelte:fragment>
+        <svelte:fragment slot="icon">
+          <Icon src={RiBusinessBarChartHorizontalFill} {...iconSettings} />
+        </svelte:fragment>
+        <svelte:fragment slot="content">
+          <PerkChart
+            tooltop={(x) => (x === 1 ? '1 hour' : `${x} hours`)}
+            data={$perkPlaytimeData}
+          />
         </svelte:fragment>
       </SectionLayout>
     </svelte:fragment>

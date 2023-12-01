@@ -1,10 +1,10 @@
 import { error } from '@sveltejs/kit';
 
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import type { ServerData } from '$lib/api/servers';
 import { SITE_NAME } from '$lib';
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
+export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const serverId = Number(params.id);
   if (isNaN(serverId)) {
     throw error(400, 'server_id is not a number');

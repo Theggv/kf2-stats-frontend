@@ -1,4 +1,4 @@
-export const backgroundColor = [
+export const barBackgroundColors = [
   'rgb(200 255 255 / 0.6)',
   'rgb(255 200 255 / 0.5)',
   'rgb(255 255 200 / 0.4)',

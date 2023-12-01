@@ -55,3 +55,8 @@ export interface RecentUsersResponse {
   items: RecentUsersResponseUser[];
   metadata: PaginationResponse;
 }
+
+export interface ServerLastSessionResponse {
+  id: number;
+  status: Status;
+}

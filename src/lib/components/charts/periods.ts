@@ -1,6 +1,7 @@
 import { TimePeriod } from '$lib/api/analytics';
 
 export type Period = {
+  id: string;
   label: string;
   date_from: Date;
   date_to: Date;
@@ -10,6 +11,7 @@ export type Period = {
 
 export const periods: Period[] = [
   {
+    id: 'all',
     label: 'All Time',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 18250),
     date_to: new Date(),
@@ -23,6 +25,7 @@ export const periods: Period[] = [
     },
   },
   {
+    id: 'year',
     label: 'Year',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365),
     date_to: new Date(),
@@ -36,6 +39,7 @@ export const periods: Period[] = [
     },
   },
   {
+    id: '3-month',
     label: '3 Months',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 90),
     date_to: new Date(),
@@ -49,6 +53,7 @@ export const periods: Period[] = [
     },
   },
   {
+    id: 'month',
     label: 'Month',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
     date_to: new Date(),
@@ -62,6 +67,7 @@ export const periods: Period[] = [
     },
   },
   {
+    id: 'week',
     label: 'Week',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
     date_to: new Date(),
