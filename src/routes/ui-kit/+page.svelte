@@ -13,9 +13,4 @@
     flex-direction: column;
     gap: 1rem;
   }
-
-  h2 {
-    font-weight: bold;
-    justify-self: right;
-  }
 </style>
