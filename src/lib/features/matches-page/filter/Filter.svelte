@@ -2,16 +2,14 @@
   import MultiSelect from 'svelte-multiselect';
   import {
     type SelectOption,
-    mapListStore,
-    serverListStore,
     difficultyList,
     statusList,
     modeList,
     lengthList,
-  } from './store';
+    getStore,
+  } from './Filter.store';
 
-  const [servers] = serverListStore();
-  const [maps] = mapListStore();
+  const { maps, servers } = getStore();
 
   export let selectedServers: SelectOption[] = [];
   export let selectedMaps: SelectOption[] = [];
