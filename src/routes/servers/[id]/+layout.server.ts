@@ -10,21 +10,20 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
     throw error(400, 'server_id is not a number');
   }
 
-  try {
-    const server: ServerData = await fetch(`/api/servers/${serverId}`).then(
-      (x) => x.json()
-    );
+  const server: ServerData = await fetch(`/api/servers/${serverId}`).then(
+    (x) => {
+      if (!x.ok) throw error(404, { message: 'server was not found' });
+      return x.json();
+    }
+  );
 
-    return {
-      server,
-      metatags: {
+  return {
+    server,
+    metatags: {
+      title: `${server.name} | Servers | ${SITE_NAME}`,
+      openGraph: {
         title: `${server.name} | Servers | ${SITE_NAME}`,
-        openGraph: {
-          title: `${server.name} | Servers | ${SITE_NAME}`,
-        },
       },
-    };
-  } catch (err) {
-    throw error(404, { message: 'Server is Not Found' });
-  }
+    },
+  };
 };

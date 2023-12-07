@@ -9,25 +9,25 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
     throw error(400, 'user_id is not a number');
   }
 
-  try {
-    const res = await fetch(`/api/users/${userId}/detailed`);
-    const user: FilterUsersResponseUser = await res.json();
+  const user: FilterUsersResponseUser = await fetch(
+    `/api/users/${userId}/detailed`
+  ).then((x) => {
+    if (!x.ok) throw error(404, { message: 'user was not found' });
+    return x.json();
+  });
 
-    return {
-      user,
-      metadata: {
+  return {
+    user,
+    metadata: {
+      title: `${user.name}'s Profile | ${SITE_NAME}`,
+      openGraph: {
         title: `${user.name}'s Profile | ${SITE_NAME}`,
-        openGraph: {
-          title: `${user.name}'s Profile | ${SITE_NAME}`,
-          type: 'profile',
-          images: [{ url: user.avatar, width: 32, height: 32, alt: '' }],
-          profile: {
-            username: user.name,
-          },
+        type: 'profile',
+        images: [{ url: user.avatar, width: 32, height: 32, alt: '' }],
+        profile: {
+          username: user.name,
         },
       },
-    };
-  } catch (err) {
-    throw error(400, 'failed to fetch user data: ' + err);
-  }
+    },
+  };
 };
