@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import SearchPlayers from '$lib/features/players-page/search/SearchPlayers.svelte';
+  import PlayersTop from '$lib/features/players-page/leaderboards/PlayersTop.svelte';
   import PlayersPage from '$lib/features/players-page/PlayersPage.svelte';
+  import { page } from '$app/stores';
   import { MetaTags } from 'svelte-meta-tags';
 </script>
 
 <MetaTags {...$page.data.metatags} />
 
 <PlayersPage>
-  <SearchPlayers />
+  <PlayersTop />
 </PlayersPage>

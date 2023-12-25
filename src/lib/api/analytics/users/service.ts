@@ -1,4 +1,5 @@
 import { $proxyApi } from '$lib/http';
+
 import type {
   AccuracyHist,
   GetTeammatesRequest,

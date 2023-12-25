@@ -27,9 +27,10 @@
 
   export let perk: Perk;
   export let prestige: number;
+  export let disabled: boolean = false;
 </script>
 
-<div class="root">
+<div class="root" class:disabled>
   {#if prestige > 0}
     <img class="prestige" src={prestigeIcons[prestige] || ''} alt="" />
     <img
@@ -50,6 +51,10 @@
     position: relative;
     width: 2rem;
     height: 2rem;
+  }
+
+  .disabled {
+    filter: brightness(0.5);
   }
 
   .prestige {

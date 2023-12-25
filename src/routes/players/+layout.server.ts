@@ -1,9 +1,9 @@
 import { SITE_NAME } from '$lib';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
+export const load: LayoutServerLoad = async () => {
   return {
-    metadata: {
+    metatags: {
       title: `Players | ${SITE_NAME}`,
       openGraph: {
         title: `Players | ${SITE_NAME}`,
