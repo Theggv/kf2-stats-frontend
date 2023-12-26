@@ -19,8 +19,3 @@ export function isPrecisionPerk(perk: Perk) {
     return true;
   return false;
 }
-
-export const iconSettings = {
-  color: 'var(--text-secondary)',
-  size: 24,
-};

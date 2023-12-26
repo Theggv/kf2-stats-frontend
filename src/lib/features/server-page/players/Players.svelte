@@ -4,7 +4,6 @@
 
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
   import { groupBy } from '$lib/util';
-  import { iconSettings } from '../common';
   import { getStore } from './Matches.store';
   import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
   import BsFilter from 'svelte-icons-pack/bs/BsFilter';
@@ -13,6 +12,7 @@
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import PlayersList from './PlayersList.svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let server: ServerData;
 

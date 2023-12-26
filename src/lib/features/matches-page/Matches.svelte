@@ -13,7 +13,7 @@
   import Filter from './filter/Filter.svelte';
   import type { SelectOption } from './filter/Filter.store';
   import MatchesList from './matches/MatchesList.svelte';
-  import { iconSettings } from './common';
+  import { iconSettings } from '$lib/ui/icons';
 
   const { page, filter, matches, total, hasMore } = getStore();
 

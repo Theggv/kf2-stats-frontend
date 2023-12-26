@@ -1,44 +1,85 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import LinkTabs from '$lib/components/tabs/LinkTabs.svelte';
-  import { tabs } from './common';
+  // @ts-ignore
+  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import FaSolidUsers from 'svelte-icons-pack/fa/FaSolidUsers';
 
-  $: selectedTab = $page.url.pathname;
+  import SectionLayout from '$lib/layouts/SectionLayout.svelte';
+  import { groupBy } from '$lib/util';
+  import { getStore } from './PlayersPage.store';
+  import PlayersList from './search/PlayersList.svelte';
+  import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
+  import { iconSettings } from '$lib/ui/icons';
+  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
+
+  const { filter, hasMore, page, total, users } = getStore();
+
+  $: groupedUsers = groupBy($users, (item) =>
+    new Date(item.updated_at).toDateString()
+  );
 </script>
 
-<div class="root">
-  <div class="header">
-    <h1>Players</h1>
-  </div>
-
-  <LinkTabs
-    tabs={tabs.map((x) => ({ ...x, href: `/players${x.href}` }))}
-    {selectedTab}
+<AutoScroll>
+  <SectionLayout>
+    <svelte:fragment slot="title">
+      <div class="title">
+        <div>Players</div>
+        <input
+          bind:value={$filter.search_text}
+          placeholder="Search by name"
+          class="input"
+        />
+      </div>
+    </svelte:fragment>
+    <svelte:fragment slot="subtitle">
+      {#if $total}
+        <div>{$total} players found</div>
+      {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="icon">
+      <Icon src={FaSolidUsers} {...iconSettings} />
+    </svelte:fragment>
+    <svelte:fragment slot="content">
+      <PlayersList data={groupedUsers} />
+    </svelte:fragment>
+  </SectionLayout>
+  <InfiniteScroll
+    hasMore={$hasMore}
+    on:loadMore={() => page.update((p) => p + 1)}
+    threshold={500}
   />
-
-  <slot />
-</div>
+</AutoScroll>
 
 <style>
-  .root {
-    padding: 0.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .header {
-    padding: 0.5rem;
+  .title {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  h1 {
-    font-size: 20px;
+  @media (max-width: 600px) {
+    .title {
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .input {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .input {
+    background: transparent;
+    border-radius: 0.25rem;
+    border: 1px solid var(--text-primary);
+    padding: 0.5rem 1rem;
     font-weight: bold;
+    font-size: 14px;
+  }
+
+  .input::placeholder {
+    color: var(--text-secondary);
+    font-size: 14px;
   }
 </style>

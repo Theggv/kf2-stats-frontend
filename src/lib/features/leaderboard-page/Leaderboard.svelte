@@ -2,25 +2,23 @@
   // @ts-ignore
   import Icon from 'svelte-icons-pack/Icon.svelte';
 
-  import AiOutlineSearch from 'svelte-icons-pack/ai/AiOutlineSearch';
-  import BiFilter from 'svelte-icons-pack/bi/BiFilter';
+  import IoPodium from 'svelte-icons-pack/io/IoPodium';
 
-  import ContentLayout from '$lib/layouts/ContentLayout.svelte';
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
-  import { iconSettings } from '../common';
-  import { LoaderBoardCtxKey, getStore } from './PlayersTop.store';
+  import { LoaderBoardCtxKey, getStore } from './Leaderboard.store';
   import PlayersList from './PlayersList.svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import { setContext } from 'svelte';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { periods } from './periods';
+  import { iconSettings } from '$lib/ui/icons';
 
   const { users, perk, period } = setContext(LoaderBoardCtxKey, getStore());
 </script>
 
 <AutoScroll>
   <SectionLayout>
-    <svelte:fragment slot="title">Search results</svelte:fragment>
+    <svelte:fragment slot="title">Leaderboard</svelte:fragment>
     <svelte:fragment slot="subtitle">
       <div class="filters">
         <div class="periods">
@@ -59,7 +57,7 @@
       </div>
     </svelte:fragment>
     <svelte:fragment slot="icon">
-      <Icon src={AiOutlineSearch} {...iconSettings} />
+      <Icon src={IoPodium} {...iconSettings} />
     </svelte:fragment>
     <svelte:fragment slot="content">
       <PlayersList data={$users} />
@@ -74,11 +72,27 @@
     flex-direction: row;
     gap: 2rem;
   }
+
+  @media (max-width: 600px) {
+    .perks,
+    .periods {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
   .perks {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .periods {

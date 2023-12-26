@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import Player from '$lib/components/player/Player.svelte';
-  import { shortenNumber } from '$lib/util/shorten-number';
   import { getContext } from 'svelte';
-  import TiArrowSortedDown from 'svelte-icons-pack/ti/TiArrowSortedDown';
-  import { iconSettings } from '../common';
   import { columns } from './PlayersListHeader.data';
-  import { type LeaderBoardStore, LoaderBoardCtxKey } from './PlayersTop.store';
+  import {
+    type LeaderBoardStore,
+    LoaderBoardCtxKey,
+  } from './Leaderboard.store';
 
   export let index: number;
   export let data: LeaderBoardsResponseItem;
@@ -32,7 +32,7 @@
 
   {#each columns as column}
     {#if !column.condition || column.condition($perk)}
-      <div class="container-end">
+      <div class="column" style={`min-width: ${column.width || 100}px`}>
         <div class="title" class:secondary={$type !== column.type}>
           {column.label}
         </div>
@@ -81,11 +81,10 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    width: 275px;
+    min-width: 275px;
   }
 
-  .container-end {
-    flex: 1;
+  .column {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -121,5 +120,18 @@
   .secondary {
     font-weight: bold;
     color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .root {
+      gap: 0.25rem;
+      padding-left: 1rem;
+    }
+
+    .player {
+      min-width: 200px;
+      width: 200px;
+      overflow: hidden;
+    }
   }
 </style>

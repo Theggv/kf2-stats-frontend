@@ -48,6 +48,12 @@
     aspect-ratio: 1;
   }
 
+  @media (max-width: 768px) {
+    .player .avatar {
+      outline: none;
+    }
+  }
+
   .player .avatar img {
     width: 100%;
     border-radius: 0.25rem;

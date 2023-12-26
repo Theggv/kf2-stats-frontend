@@ -4,7 +4,7 @@
 
   import Layout from '../common/Layout.svelte';
   import SectionLayout from '../common/SectionLayout.svelte';
-  import { iconSettings, isPrecisionPerk } from '../common';
+  import { isPrecisionPerk } from '../common';
   import BsFilter from 'svelte-icons-pack/bs/BsFilter';
   import Filter from './Filter.svelte';
   import { getStore, perks } from './Perks.store';
@@ -13,6 +13,7 @@
   import Accuracy from './Accuracy.svelte';
   import BiTrendingUp from 'svelte-icons-pack/bi/BiTrendingUp';
   import Stats from './Stats.svelte';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let userId: number;
 

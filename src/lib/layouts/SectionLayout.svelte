@@ -1,17 +1,23 @@
 <script lang="ts">
+  import MediaQuery from 'svelte-media-queries';
+
   export let sticky = false;
 </script>
 
 <div class="block" class:sticky>
-  <div class="title">
-    <slot name="icon" />
-    <div>
-      <div>
-        <slot name="title" />
-      </div>
-      <div class="subtitle">
-        <slot name="subtitle" />
-      </div>
+  <div class="header">
+    <div class="icon">
+      <MediaQuery query="(max-width: 600px)" let:matches>
+        {#if !matches}
+          <slot name="icon" />
+        {/if}
+      </MediaQuery>
+    </div>
+    <div class="title">
+      <slot name="title" />
+    </div>
+    <div class="subtitle">
+      <slot name="subtitle" />
     </div>
   </div>
   <div class="content">
@@ -32,14 +38,42 @@
     top: 0;
   }
 
-  .title {
+  .header {
     padding: 1rem;
     font-size: 20px;
     font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+    display: grid;
+    grid-template:
+      'icon title' auto
+      'icon subtitle' auto
+      / auto 1fr;
+    gap: 0 1rem;
+  }
+
+  .icon {
+    grid-area: icon;
+    align-self: center;
+  }
+
+  .title {
+    grid-area: title;
+  }
+
+  .subtitle {
+    grid-area: subtitle;
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .title,
+    .subtitle {
+      text-align: center;
+    }
   }
 
   .subtitle {

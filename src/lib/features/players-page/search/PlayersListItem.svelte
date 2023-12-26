@@ -221,4 +221,29 @@
   .root.in-progress::before {
     background: var(--color-in-progress);
   }
+
+  @media (max-width: 768px) {
+    .root {
+      padding-left: 1rem;
+    }
+
+    .settings,
+    .wave {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .player {
+      min-width: 200px;
+      width: 200px;
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .settings {
+      width: 200px;
+    }
+  }
 </style>

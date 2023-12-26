@@ -4,7 +4,7 @@
 
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
   import { groupBy } from '$lib/util';
-  import { iconSettings, notInProgress } from '../common';
+  import { notInProgress } from '../common';
   import SectionLayout from '../common/SectionLayout.svelte';
   import { getStore } from './Matches.store';
   import RecentSessionsList from './RecentSessionsList.svelte';
@@ -13,6 +13,7 @@
   import Layout from '../common/Layout.svelte';
   import Filter from './Filter.svelte';
   import type { SelectOption } from './Filter.store';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let userId: number;
   export let selectedDate: string;

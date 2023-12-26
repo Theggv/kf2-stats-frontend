@@ -20,7 +20,6 @@
   import { getStore as perkKillsStore } from './charts/PerkTotalKills';
   import { getStore as perkPlaytime } from './charts/PerkPlaytime';
 
-  import { iconSettings } from '../common';
   import {
     periodsWithoutWeek,
     serverUsagePeriods,
@@ -29,6 +28,7 @@
   import LineTimeChart from '$lib/components/charts/LineTimeChart.svelte';
   import PieTimeChart from '$lib/components/charts/PieTimeChart.svelte';
   import PerkChart from '$lib/components/charts/PerkTimeChart.svelte';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let server: ServerData;
 

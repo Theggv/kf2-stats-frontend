@@ -2,11 +2,6 @@ import type { MatchData } from '$lib/api/matches';
 import { Status } from '$lib/api/sessions';
 import type { WithRequired } from '$lib/util/types';
 
-export const iconSettings = {
-  color: 'var(--text-secondary)',
-  size: 24,
-};
-
 export function inProgress(item: ServerMatch) {
   return (
     item.session.status === Status.Lobby ||

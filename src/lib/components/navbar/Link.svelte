@@ -5,22 +5,26 @@
   $: selected = $page.url.pathname != '/' && href.includes($page.url.pathname);
 
   export let href: string;
-  export let title: string;
+  export let title: string = '';
 </script>
 
-<li>
+<li class:has-text={!!title}>
   <StyledLink class="navbar-link" {href} {selected}>
     {title}
+    <slot />
   </StyledLink>
 </li>
 
 <style>
   li {
     display: flex;
-    min-width: 150px;
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
+  }
+
+  .has-text {
+    min-width: 150px;
   }
 
   :global(.navbar-link) {

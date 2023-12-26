@@ -8,7 +8,6 @@
   import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
 
   import { getStore } from './MainPage.store';
-  import { iconSettings } from './common';
   import Layout from './common/Layout.svelte';
   import SectionLayout from './common/SectionLayout.svelte';
   import { getStore as getPlayersOnlineStore } from './charts/PlayersOnline.store';
@@ -18,6 +17,7 @@
   import { periods } from '$lib/components/charts';
   import PopularServers from './PopularServers.svelte';
   import PerkChart from '$lib/components/charts/PerkChart.svelte';
+  import { iconSettings } from '$lib/ui/icons';
 
   const { currentOnline, popularServers } = getStore();
 

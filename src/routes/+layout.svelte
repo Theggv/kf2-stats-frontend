@@ -106,4 +106,14 @@
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
   }
+
+  @media (max-width: 640px) {
+    .main-container {
+      padding: 1rem 0.25rem;
+    }
+
+    main {
+      padding: 0;
+    }
+  }
 </style>

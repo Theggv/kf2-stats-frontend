@@ -13,12 +13,13 @@
   import type { ServerData } from '$lib/api/servers';
 
   import { getStore } from './Overview.store';
-  import { iconSettings, inProgress, notInProgress } from '../common';
+  import { inProgress, notInProgress } from '../common';
   import MatchesList from '../matches/MatchesList.svelte';
   import MatchesListItem from '../matches/MatchesListItem.svelte';
   import LiveMatch from './LiveMatch.svelte';
 
   import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let server: ServerData;
 

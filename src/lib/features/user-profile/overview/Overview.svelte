@@ -4,7 +4,6 @@
 
   import { getStore } from './Overview.store';
   import { groupBy } from '$lib/util';
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import RecentSessionsList from '../matches/RecentSessionsList.svelte';
   import RecentSessionsListItem from '../matches/RecentSessionsListItem.svelte';
   import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
@@ -17,8 +16,9 @@
   import Accuracy from './Accuracy.svelte';
   import Teammates from './Teammates.svelte';
   import SectionLayout from '../common/SectionLayout.svelte';
-  import { iconSettings, inProgress, notInProgress } from '../common';
+  import { inProgress, notInProgress } from '../common';
   import Layout from '../common/Layout.svelte';
+  import { iconSettings } from '$lib/ui/icons';
 
   export let userId: number;
 

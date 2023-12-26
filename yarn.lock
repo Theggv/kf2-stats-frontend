@@ -1327,6 +1327,11 @@ svelte-icons-pack@^2.1.0:
   resolved "https://registry.yarnpkg.com/svelte-icons-pack/-/svelte-icons-pack-2.1.0.tgz#2ae00346fb1de033ed31cb146b61cf975eeec6e1"
   integrity sha512-6Il0vWi/6MW3wXSorZhCqhkJGH4Pcg1WTcdlfFMPXfJqafZVQgmKdhVFS1c2hXGvs4byttpLC9XmI3okV1uMWA==
 
+svelte-media-queries@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/svelte-media-queries/-/svelte-media-queries-1.6.2.tgz#43f3bd05163997b08838b59fa00d1dc7c1e92899"
+  integrity sha512-SMz6od/vIeZEGlc4P0HKJK4G0fZotuwFhCSpBQaPqh75h6sL6sNf+4+IjbegFKXbP7b+SOfyzVOIMXTr8jynkA==
+
 svelte-meta-tags@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/svelte-meta-tags/-/svelte-meta-tags-3.1.0.tgz#80fc0f9ef81ab8f9ace7260a3ecb88153efebe48"

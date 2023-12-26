@@ -49,7 +49,7 @@
     border-radius: 0.5rem;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     .root {
       display: none;
     }

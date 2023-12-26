@@ -3,10 +3,13 @@
   import Icon from 'svelte-icons-pack/Icon.svelte';
 
   import TiArrowSortedDown from 'svelte-icons-pack/ti/TiArrowSortedDown';
-  import { iconSettings } from '../common';
   import { columns } from './PlayersListHeader.data';
   import { getContext } from 'svelte';
-  import { type LeaderBoardStore, LoaderBoardCtxKey } from './PlayersTop.store';
+  import {
+    type LeaderBoardStore,
+    LoaderBoardCtxKey,
+  } from './Leaderboard.store';
+  import { iconSettings } from '$lib/ui/icons';
 
   const { type, perk } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
 </script>
@@ -27,6 +30,7 @@
         tabindex="0"
         on:click={() => type.set(column.type)}
         on:keypress={(e) => e.code === 'Enter' && type.set(column.type)}
+        style={`min-width: ${column.width || 100}px`}
       >
         <div class="title">{column.label}</div>
         {#if $type === column.type}
@@ -73,11 +77,10 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    width: 275px;
+    min-width: 275px;
   }
 
   .column {
-    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -95,5 +98,16 @@
 
   .active {
     color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .root {
+      gap: 0.25rem;
+      padding-left: 1rem;
+    }
+
+    .player {
+      min-width: 200px;
+    }
   }
 </style>
