@@ -7,6 +7,7 @@
   import Player from '$lib/components/player/Player.svelte';
   import { getWaveText } from '$lib/util/converters';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
+  import MediaQuery from 'svelte-media-queries';
 
   export let data: FilterUsersResponseUser;
 
@@ -37,37 +38,61 @@
   </div>
 
   {#if session}
-    <div class="settings">
-      <div class="title list">
-        <span>
-          {modeToString(session.mode, false)}
-        </span>
-        {#if session?.mode !== Mode.Endless}
-          <span>
-            ({session?.length} Waves)
-          </span>
-        {/if}
-      </div>
-      <div class="list">
-        {#if session.cd_data}
-          <span>
-            {session.cd_data.spawn_cycle}
-          </span>
-          <span>
-            {session.cd_data.max_monsters}mm
-          </span>
-          {#if session.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+    <MediaQuery query="(max-width: 1024px)" let:matches>
+      {#if matches}
+        <div class="settings">
+          <div class="title list">
             <span>
-              {session.cd_data.zeds_type.toLowerCase()} zeds
+              {session.server_name}
             </span>
-          {/if}
-        {:else}
-          <span>
-            {diffToString(session.diff)}
-          </span>
-        {/if}
-      </div>
-    </div>
+          </div>
+          <div class="list">
+            <span>
+              {session.map_name}
+            </span>
+          </div>
+        </div>
+      {:else}
+        <div class="settings">
+          <div class="title list">
+            <span>
+              {session.server_name}
+            </span>
+            <span>
+              {session.map_name}
+            </span>
+          </div>
+          <div class="list">
+            {#if session.cd_data}
+              <span>CD</span>
+              <span>
+                {session.cd_data.spawn_cycle}
+              </span>
+              <span>
+                {session.cd_data.max_monsters}mm
+              </span>
+              {#if session.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+                <span>
+                  {session.cd_data.zeds_type.toLowerCase()} zeds
+                </span>
+              {/if}
+            {:else}
+              <span>
+                {modeToString(session.mode, false)}
+              </span>
+              <span>
+                {diffToString(session.diff)}
+              </span>
+              {#if session?.mode !== Mode.Endless}
+                <span>
+                  ({session?.length} Waves)
+                </span>
+              {/if}
+            {/if}
+          </div>
+        </div>
+      {/if}
+    </MediaQuery>
 
     <div class="container-end">
       <div class="wave">
@@ -233,15 +258,13 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .player {
       min-width: 200px;
       width: 200px;
       overflow: hidden;
     }
-  }
 
-  @media (max-width: 1024px) {
     .settings {
       width: 200px;
     }

@@ -6,7 +6,7 @@
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import { groupBy } from '$lib/util';
   import { getStore } from './PlayersPage.store';
-  import PlayersList from './search/PlayersList.svelte';
+  import PlayersList from './PlayersList.svelte';
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
   import { iconSettings } from '$lib/ui/icons';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';

@@ -46,7 +46,7 @@ export interface LeaderBoardsResponseItem {
 
   total_kills: number;
   total_large_kills: number;
-  total_husk_rages: number;
+  total_husk_rages: number; // not supported yet
 
   total_heals: number;
   avg_zt: number;
