@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Mode, Status } from '$lib/api/sessions';
   import { getWaveText } from '$lib/util/converters';
-  import { getTimeSinceNow } from '$lib/util/date';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
+  import MediaQuery from 'svelte-media-queries';
   import type { ServerMatch } from '../common';
 
   export let data: ServerMatch;
@@ -17,6 +17,17 @@
 
     return '';
   }
+
+  function getZedsType(zedsType: string) {
+    switch (zedsType.toLowerCase()) {
+      case 'harder':
+        return 'HZ';
+      case 'nightcore':
+        return 'NCZ';
+    }
+
+    return '';
+  }
 </script>
 
 <a
@@ -25,28 +36,34 @@
   target="_blank"
   rel="noopener noreferrer"
 >
-  <div class="match">
-    <div class="secondary">
-      <div class="map">
-        {data.map.name}
-      </div>
-      <div class="time">
-        {getTimeSinceNow(new Date(data.session.updated_at), true)}
-      </div>
-    </div>
+  <div class="time">
+    {new Date(data.session.updated_at).toLocaleTimeString()}
+  </div>
+
+  <div class="map">
+    {data.map.name}
   </div>
 
   <div class="settings">
-    <div class="title list">
-      <span>
-        {modeToString(data.session.mode, false)}
-      </span>
-      {#if data.session.mode !== Mode.Endless}
-        <span>
-          ({data.session.length} Waves)
-        </span>
+    <MediaQuery query="(max-width: 768px)" let:matches>
+      {#if matches}
+        <div class="title">
+          {data.map.name}
+        </div>
+      {:else}
+        <div class="title list">
+          <span>
+            {modeToString(data.session.mode, false)}
+          </span>
+          {#if data.session.mode !== Mode.Endless}
+            <span>
+              ({data.session.length} Waves)
+            </span>
+          {/if}
+        </div>
       {/if}
-    </div>
+    </MediaQuery>
+
     <div class="list">
       {#if data.cd_data}
         <span>
@@ -57,7 +74,7 @@
         </span>
         {#if data.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {data.cd_data.zeds_type.toLowerCase()} zeds
+            {getZedsType(data.cd_data.zeds_type)}
           </span>
         {/if}
       {:else}
@@ -161,42 +178,25 @@
     margin: 0;
   }
 
-  .match {
+  .time {
+    color: var(--text-secondary);
     display: flex;
-    flex-direction: column;
-    text-wrap: nowrap;
-    width: 375px;
+    padding-right: 0.5rem;
   }
 
-  .match .secondary {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-  }
-
-  .match .map {
+  .map {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
-  }
-
-  .match .time {
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .match .time::before {
-    font-size: 10px;
-    content: '•';
+    width: 200px;
+    font-size: 14px;
   }
 
   .settings {
     display: flex;
     flex-direction: column;
     text-wrap: nowrap;
-    width: 275px;
+    width: 200px;
   }
 
   .settings .game-info span {
@@ -234,5 +234,21 @@
 
   .root.in-progress::before {
     background: var(--color-in-progress);
+  }
+
+  @media (max-width: 600px) {
+    .wave {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .root {
+      padding-left: 1rem;
+    }
+
+    .map {
+      display: none;
+    }
   }
 </style>

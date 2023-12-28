@@ -7,7 +7,6 @@
   import { getStore } from './Matches.store';
   import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
   import BsFilter from 'svelte-icons-pack/bs/BsFilter';
-  import Layout from '../common/Layout.svelte';
   import type { ServerData } from '$lib/api/servers';
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import PlayersList from './PlayersList.svelte';

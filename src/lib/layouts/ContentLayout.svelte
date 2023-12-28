@@ -22,6 +22,13 @@
     gap: 1rem;
   }
 
+  @media (max-width: 1280px) {
+    .root {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   .sidebar,
   .content {
     display: flex;

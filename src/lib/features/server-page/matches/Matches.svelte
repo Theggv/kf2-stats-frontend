@@ -7,13 +7,13 @@
   import { getStore } from './Matches.store';
   import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
   import BsFilter from 'svelte-icons-pack/bs/BsFilter';
-  import Layout from '../common/Layout.svelte';
   import Filter from './Filter.svelte';
   import type { SelectOption } from './Filter.store';
   import type { ServerData } from '$lib/api/servers';
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import MatchesList from './MatchesList.svelte';
   import { iconSettings } from '$lib/ui/icons';
+  import ContentLayout from '$lib/layouts/ContentLayout.svelte';
 
   export let server: ServerData;
 
@@ -33,7 +33,7 @@
   });
 </script>
 
-<Layout>
+<ContentLayout>
   <svelte:fragment slot="sidebar">
     <SectionLayout sticky>
       <svelte:fragment slot="title">Filter</svelte:fragment>
@@ -68,4 +68,4 @@
     on:loadMore={() => page.update((p) => p + 1)}
     threshold={300}
   />
-</Layout>
+</ContentLayout>
