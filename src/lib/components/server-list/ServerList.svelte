@@ -1,6 +1,5 @@
 <script lang="ts">
   import Server from './Server.svelte';
-  import ServerSkeleton from './ServerSkeleton.svelte';
   import { ServersApiService, type ServerData } from '$lib/api/servers';
   import { onMount } from 'svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
@@ -24,16 +23,7 @@
 
 <AutoScroll>
   <div class="root">
-    {#if loading}
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-      <ServerSkeleton />
-    {:else if serverList}
+    {#if !loading && serverList}
       {#each serverList as server, index (server.address)}
         <Server {server} {index} />
       {:else}
@@ -50,6 +40,12 @@
     grid-template-columns: minmax(max-content, 25px) 7fr 200px;
     gap: 1rem;
     align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .root {
+      grid-template-columns: minmax(max-content, 25px) 1fr;
+    }
   }
 
   .empty {
