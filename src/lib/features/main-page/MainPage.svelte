@@ -8,8 +8,6 @@
   import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
 
   import { getStore } from './MainPage.store';
-  import Layout from './common/Layout.svelte';
-  import SectionLayout from './common/SectionLayout.svelte';
   import { getStore as getPlayersOnlineStore } from './charts/PlayersOnline.store';
   import { getStore as getSessionsPlayedStore } from './charts/SessionsPlayed.store';
   import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
@@ -18,6 +16,8 @@
   import PopularServers from './PopularServers.svelte';
   import PerkChart from '$lib/components/charts/PerkChart.svelte';
   import { iconSettings } from '$lib/ui/icons';
+  import ContentLayout from '$lib/layouts/ContentLayout.svelte';
+  import SectionLayout from '$lib/layouts/SectionLayout.svelte';
 
   const { currentOnline, popularServers } = getStore();
 
@@ -31,7 +31,7 @@
 </script>
 
 <div class="root">
-  <Layout>
+  <ContentLayout>
     <svelte:fragment slot="sidebar">
       <div class="header">Better Stats</div>
 
@@ -105,7 +105,7 @@
         </svelte:fragment>
       </SectionLayout>
     </svelte:fragment>
-  </Layout>
+  </ContentLayout>
 </div>
 
 <style>
