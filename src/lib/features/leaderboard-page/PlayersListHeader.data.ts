@@ -28,7 +28,7 @@ export const columns: TableColumn[] = [
     width: 130,
   },
   {
-    label: 'Most Heals',
+    label: 'Total Heals',
     type: LeaderBoardType.TotalHeals,
     condition: (perk) => perk === Perk.Medic,
     render: (item) => shortenNumber(item.total_heals),
