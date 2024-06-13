@@ -29,7 +29,7 @@
 
   $: filter.set({
     map_id: selectedMaps.map((x) => x.id),
-    status: selectedStatus.length ? selectedStatus[0].id : undefined,
+    status: selectedStatus.length ? [selectedStatus[0].id] : undefined,
   });
 </script>
 

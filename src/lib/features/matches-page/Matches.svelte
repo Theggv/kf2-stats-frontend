@@ -32,7 +32,7 @@
     server_id: selectedServers.map((x) => x.id),
     map_id: selectedMaps.map((x) => x.id),
     diff: selectedDiff.length ? selectedDiff[0].id : undefined,
-    status: selectedStatus.length ? selectedStatus[0].id : undefined,
+    status: selectedStatus.length ? [selectedStatus[0].id] : undefined,
     mode: selectedMode.length ? selectedMode[0].id : undefined,
     length: selectedLength.length ? selectedLength[0].id : undefined,
   });

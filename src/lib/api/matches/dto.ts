@@ -85,11 +85,11 @@ export interface MatchWave {
 export interface FilterMatchesRequest {
   server_id: number[];
   map_id: number[];
+  status: Status[];
 
   mode: Mode;
   length: Length;
   diff: Difficulty;
-  status: Status;
 
   include_server?: boolean;
   include_map?: boolean;

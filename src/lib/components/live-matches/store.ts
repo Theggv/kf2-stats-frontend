@@ -62,7 +62,7 @@ export function matchesStore(): [
           include_map: true,
           include_game_data: true,
           include_cd_data: true,
-          status: Status.InProgress,
+          status: [Status.InProgress, Status.Lobby],
           pager: { page, results_per_page: 100 },
         });
 
