@@ -40,7 +40,12 @@
   {#if session}
     <MediaQuery query="(max-width: 1024px)" let:matches>
       {#if matches}
-        <div class="settings">
+        <a
+          class="settings"
+          href="/sessions/{session.id}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div class="title list">
             <span>
               {session.server_name}
@@ -51,9 +56,14 @@
               {session.map_name}
             </span>
           </div>
-        </div>
+        </a>
       {:else}
-        <div class="settings">
+        <a
+          class="settings"
+          href="/sessions/{session.id}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div class="title list">
             <span>
               {session.server_name}
@@ -90,7 +100,7 @@
               {/if}
             {/if}
           </div>
-        </div>
+        </a>
       {/if}
     </MediaQuery>
 
