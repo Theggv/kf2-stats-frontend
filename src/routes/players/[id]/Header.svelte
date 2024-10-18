@@ -49,6 +49,8 @@
   </div>
 </div>
 
+<hr />
+
 <style>
   .header,
   .header .secondary {

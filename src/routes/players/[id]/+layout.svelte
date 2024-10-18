@@ -14,15 +14,26 @@
 
 <MetaData />
 
-<ListLayout>
-  <svelte:fragment slot="header">
-    {#if $overview}
-      <Header user={data.user} overview={$overview} />
-    {/if}
-  </svelte:fragment>
+<div class="root">
+  <ListLayout>
+    <svelte:fragment slot="header">
+      {#if $overview}
+        <Header user={data.user} overview={$overview} />
+      {/if}
+    </svelte:fragment>
 
-  <svelte:fragment slot="content">
-    <Tabs userId={data.user.id} />
-    <slot />
-  </svelte:fragment>
-</ListLayout>
+    <svelte:fragment slot="content">
+      <Tabs userId={data.user.id} />
+      <slot />
+    </svelte:fragment>
+  </ListLayout>
+</div>
+
+<style>
+  .root {
+    flex: 1;
+    position: relative;
+    display: flex;
+    padding: 0.5rem;
+  }
+</style>
