@@ -1,6 +1,7 @@
 import type {
   PaginationRequest,
   PaginationResponse,
+  UserProfile,
   ZedCounter,
 } from '../common';
 import type {
@@ -50,68 +51,54 @@ export interface MatchServer {
   address: string;
 }
 
-export interface MatchData {
-  session: MatchSession;
-  map?: MatchMap;
-  server?: MatchServer;
-  game_data?: GameData;
-  cd_data?: CDGameData;
+export interface MatchPlayer {
+  profile: UserProfile;
+
+  perk: Perk;
+  level: number;
+  prestige: number;
+
+  health: number;
+  armor: number;
 }
 
-export interface Player {
-  id: number;
+export interface MatchData {
+  session: MatchSession;
 
-  profile_url?: string;
-  avatar?: string;
-  name: string;
+  map?: MatchMap;
+  server?: MatchServer;
 
+  game_data?: GameData;
+  cd_data?: CDGameData;
+
+  players?: MatchPlayer[];
+  spectators?: MatchPlayer[];
+}
+
+export interface MatchWave {
+  wave_id: number;
+  wave: number;
+  attempt: number;
+
+  players?: MatchWavePlayer[];
+
+  started_at: string;
+  completed_at: string;
+}
+
+export interface MatchWavePlayer {
+  user_id: number;
   player_stats_id: number;
 
   perk: Perk;
   level: number;
   prestige: number;
   is_dead: boolean;
+
+  stats: MatchWavePlayerStats;
 }
 
-export interface MatchWave {
-  id: number;
-  wave: number;
-  attempt: number;
-  players: Player[];
-  started_at: string;
-  completed_at: string;
-}
-
-export interface FilterMatchesRequest {
-  server_id: number[];
-  map_id: number[];
-  status: Status[];
-
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
-
-  include_server?: boolean;
-  include_map?: boolean;
-  include_game_data?: boolean;
-  include_cd_data?: boolean;
-
-  reverse_order?: boolean;
-  pager?: PaginationRequest;
-}
-
-export interface FilterMatchesResponse {
-  items: MatchData[];
-  metadata: PaginationResponse;
-}
-
-export interface GetMatchWavesResponse {
-  waves: MatchWave[];
-}
-
-export interface PlayerWaveStats {
-  player_stats_id: number;
-
+export interface MatchWavePlayerStats {
   shots_fired: number;
   shots_hit: number;
   shots_hs: number;
@@ -130,38 +117,35 @@ export interface PlayerWaveStats {
   kills: ZedCounter;
   husk_b: number;
   husk_r: number;
-
-  injured_by: ZedCounter;
 }
 
-export interface GetMatchWaveStatsResponse {
-  players: PlayerWaveStats[];
+export interface FilterMatchesRequest {
+  server_id: number[];
+  map_id: number[];
+  status: Status[];
+
+  mode: Mode;
+  length: Length;
+  diff: Difficulty;
+
+  include_server?: boolean;
+  include_map?: boolean;
+  include_game_data?: boolean;
+  include_cd_data?: boolean;
+  include_players?: boolean;
+
+  reverse_order?: boolean;
+  pager?: PaginationRequest;
 }
 
-export interface GetMatchPlayerStatsResponse {
-  waves: PlayerWaveStats[];
+export interface FilterMatchesResponse {
+  items: MatchData[];
+  metadata: PaginationResponse;
 }
 
-export interface AggregatedPlayerStats {
-  user_id: number;
-  play_time: number;
-  shots_fired: number;
-  shots_hit: number;
-  shots_hs: number;
-  dosh_earned: number;
-  heals_given: number;
-  heals_recv: number;
-  damage_dealt: number;
-  damage_taken: number;
-  zedtime_count: number;
-  zedtime_length: number;
-  kills: number;
-  large_kills: number;
-  husk_r: number;
-}
-
-export interface GetMatchAggregatedStatsResponse {
-  players: AggregatedPlayerStats[];
+export interface GetMatchWavesResponse {
+  waves: MatchWave[];
+  users: UserProfile[];
 }
 
 export interface GetMatchLiveDataResponsePlayer {

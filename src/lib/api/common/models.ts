@@ -1,3 +1,5 @@
+import type { MatchWavePlayerStats } from '../matches';
+
 export interface ZedCounter {
   cyst: number;
   alpha_clot: number;
@@ -20,20 +22,38 @@ export interface ZedCounter {
   boss: number;
 }
 
-export function groupZeds(zeds: ZedCounter) {
-  return {
+export type ZedGroups = {
+  trash: number;
+  medium: number;
+  large: number;
+  boss: number;
+  total: number;
+};
+
+export function groupZeds(stats: MatchWavePlayerStats): ZedGroups {
+  const groups = {
     trash:
-      zeds.cyst +
-      zeds.alpha_clot +
-      zeds.slasher +
-      zeds.stalker +
-      zeds.crawler +
-      zeds.gorefast +
-      zeds.rioter +
-      zeds.elite_crawler +
-      zeds.gorefiend,
-    medium: zeds.siren + zeds.bloat + zeds.edar + zeds.husk,
-    large: zeds.scrake + zeds.fp + zeds.qp,
-    boss: zeds.boss,
+      stats.kills.cyst +
+      stats.kills.alpha_clot +
+      stats.kills.slasher +
+      stats.kills.stalker +
+      stats.kills.crawler +
+      stats.kills.gorefast +
+      stats.kills.rioter +
+      stats.kills.elite_crawler +
+      stats.kills.gorefiend,
+    medium:
+      stats.kills.siren +
+      stats.kills.bloat +
+      stats.kills.edar +
+      stats.kills.husk +
+      stats.husk_b,
+    large: stats.kills.scrake + stats.kills.fp + stats.kills.qp,
+    boss: stats.kills.boss,
+  };
+
+  return {
+    ...groups,
+    total: groups.trash + groups.medium + groups.large + groups.boss,
   };
 }
