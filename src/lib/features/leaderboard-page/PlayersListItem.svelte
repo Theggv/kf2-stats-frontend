@@ -81,7 +81,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    min-width: 275px;
+    width: 275px;
   }
 
   .column {
