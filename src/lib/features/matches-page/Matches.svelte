@@ -34,8 +34,6 @@
     mode: selectedMode.length ? selectedMode[0].id : undefined,
     length: selectedLength.length ? selectedLength[0].id : undefined,
   });
-
-  $: console.log($page);
 </script>
 
 <ListLayout>
