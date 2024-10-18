@@ -2,9 +2,10 @@
   import MediaQuery from 'svelte-media-queries';
 
   export let sticky = false;
+  export let unroundBottom = false;
 </script>
 
-<div class="block" class:sticky>
+<div class="block" class:sticky class:unroundBottom>
   <div class="header">
     <div class="icon">
       <MediaQuery query="(max-width: 600px)" let:matches>
@@ -20,9 +21,11 @@
       <slot name="subtitle" />
     </div>
   </div>
-  <div class="content">
-    <slot name="content" />
-  </div>
+  {#if $$slots.content}
+    <div class="content">
+      <slot name="content" />
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -31,6 +34,11 @@
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
+  }
+
+  .block.unroundBottom {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .sticky {
