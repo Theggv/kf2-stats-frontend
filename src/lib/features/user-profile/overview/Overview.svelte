@@ -1,16 +1,15 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineHistory } from 'svelte-icons-pack/ai';
+  import { BiTrendingUp } from 'svelte-icons-pack/bi';
+  import { BsCalendar3 } from 'svelte-icons-pack/bs';
+  import { RiOthersSwordFill, RiUserFacesTeamLine } from 'svelte-icons-pack/ri';
 
   import { getStore } from './Overview.store';
   import { groupBy } from '$lib/util';
   import RecentSessionsList from '../matches/RecentSessionsList.svelte';
   import RecentSessionsListItem from '../matches/RecentSessionsListItem.svelte';
-  import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
-  import BiTrendingUp from 'svelte-icons-pack/bi/BiTrendingUp';
-  import BsCalendar3 from 'svelte-icons-pack/bs/BsCalendar3';
-  import RiOthersSwordFill from 'svelte-icons-pack/ri/RiOthersSwordFill';
-  import RiUserTeamLine from 'svelte-icons-pack/ri/RiUserTeamLine';
+
   import Playtime from './Playtime.svelte';
   import Perks from './Perks.svelte';
   import Accuracy from './Accuracy.svelte';
@@ -71,7 +70,7 @@
       <svelte:fragment slot="title">Teammates</svelte:fragment>
       <svelte:fragment slot="subtitle">Most games played</svelte:fragment>
       <svelte:fragment slot="icon">
-        <Icon src={RiUserTeamLine} {...iconSettings} />
+        <Icon src={RiUserFacesTeamLine} {...iconSettings} />
       </svelte:fragment>
       <svelte:fragment slot="content">
         <Teammates data={$teammates} />

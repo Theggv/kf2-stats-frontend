@@ -1,6 +1,4 @@
-<script>
-  import LiveMatches from '$lib/components/live-matches/LiveMatches.svelte';
-  import NavBar from '$lib/components/navbar/NavBar.svelte';
+<script lang="ts">
   import { onMount } from 'svelte';
   import '../app.css';
 
@@ -20,8 +18,10 @@
     TimeSeriesScale,
   } from 'chart.js';
   import 'chartjs-adapter-date-fns';
-  // @ts-ignore
+  import { SvelteUIProvider } from '@svelteuidev/core';
   import chartTrendline from 'chartjs-plugin-trendline';
+  import { AppNavBar } from '$lib/components/navbar';
+  import { LiveMatches } from '$lib/features/live-matches';
 
   ChartJS.register(
     Title,
@@ -44,17 +44,19 @@
   onMount(() => (active = true));
 </script>
 
-<div class="root" class:active>
-  <header>
-    <NavBar />
-  </header>
-  <div class="main-container container mx-auto">
-    <main>
-      <slot />
-    </main>
-    <LiveMatches />
+<SvelteUIProvider themeObserver={'dark'}>
+  <div class="root" class:active>
+    <header>
+      <AppNavBar />
+    </header>
+    <div class="main-container container mx-auto">
+      <main>
+        <slot />
+      </main>
+      <LiveMatches />
+    </div>
   </div>
-</div>
+</SvelteUIProvider>
 
 <style>
   .root {

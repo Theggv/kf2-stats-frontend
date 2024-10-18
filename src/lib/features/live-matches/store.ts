@@ -1,10 +1,14 @@
-import lodash from 'lodash';
+import { debounce } from 'lodash';
 import { writable } from 'svelte/store';
 
-import type { Readable } from 'svelte/motion';
 import { MatchesApiService, type MatchData } from '$lib/api/matches';
 import type { WithRequired } from '$lib/util/types';
 import { Mode, Status } from '$lib/api/sessions';
+
+export type LiveMatchData = WithRequired<
+  MatchData,
+  'game_data' | 'server' | 'map'
+>;
 
 function getModePriority(mode: Mode) {
   const priority = {
@@ -20,10 +24,7 @@ function getModePriority(mode: Mode) {
   return priority[mode];
 }
 
-function compareMatches(
-  a: WithRequired<MatchData, 'game_data' | 'server' | 'map'>,
-  b: WithRequired<MatchData, 'game_data' | 'server' | 'map'>
-) {
+function compareMatches(a: LiveMatchData, b: LiveMatchData) {
   if (a.session.diff !== b.session.diff) return b.session.diff - a.session.diff;
   if (a.session.mode !== b.session.mode)
     return getModePriority(a.session.mode) - getModePriority(b.session.mode);
@@ -37,24 +38,17 @@ function compareMatches(
   return a.map.name.localeCompare(b.map.name);
 }
 
-export function matchesStore(): [
-  Readable<WithRequired<MatchData, 'game_data' | 'server' | 'map'>[]>,
-  Readable<boolean>,
-  Readable<unknown>,
-  lodash.DebouncedFunc<() => Promise<void>>
-] {
+export function matchesStore() {
   const loading = writable(false);
   const error = writable<unknown>(false);
-  const matches = writable<
-    WithRequired<MatchData, 'game_data' | 'server' | 'map'>[]
-  >([]);
+  const matches = writable<LiveMatchData[]>([]);
 
-  const fetch = lodash.debounce(async () => {
+  const update = debounce(async () => {
     try {
       loading.set(true);
 
       let page = 0;
-      const temp: any[] = [];
+      const temp: LiveMatchData[] = [];
 
       do {
         const { data } = await MatchesApiService.filter({
@@ -62,18 +56,23 @@ export function matchesStore(): [
           include_map: true,
           include_game_data: true,
           include_cd_data: true,
-          status: [Status.InProgress, Status.Lobby],
+          include_players: true,
+          status: [Status.Lobby, Status.InProgress],
           pager: { page, results_per_page: 100 },
         });
 
-        temp.push(...data.items);
+        temp.push(...(data.items as LiveMatchData[]));
         const meta = data.metadata;
         page += 1;
 
         if (meta.total_results <= page * meta.results_per_page) break;
       } while (true);
 
-      matches.set(temp.sort(compareMatches));
+      matches.set(
+        temp
+          .filter((x) => x.players?.length || x.spectators?.length)
+          .sort(compareMatches)
+      );
     } catch (err) {
       error.set(err);
     } finally {
@@ -81,5 +80,5 @@ export function matchesStore(): [
     }
   }, 100);
 
-  return [matches, loading, error, fetch];
+  return { matches, loading, error, fetch: update };
 }

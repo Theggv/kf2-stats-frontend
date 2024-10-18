@@ -18,7 +18,7 @@
 <div class="time">
   {new Date(data.updated_at).toLocaleTimeString()}
 </div>
-<Player {data} />
+<Player profile={data} />
 
 <div class="perks">
   {#each perks as perk (perk)}

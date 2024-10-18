@@ -1,11 +1,8 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-
-  import AiOutlineLineChart from 'svelte-icons-pack/ai/AiOutlineLineChart';
-  import FaSolidChartPie from 'svelte-icons-pack/fa/FaSolidChartPie';
-  import AiOutlineBarChart from 'svelte-icons-pack/ai/AiOutlineBarChart';
-  import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineLineChart, AiOutlineBarChart } from 'svelte-icons-pack/ai';
+  import { FaSolidChartPie } from 'svelte-icons-pack/fa';
+  import { RiBusinessBarChartHorizontalFill } from 'svelte-icons-pack/ri';
 
   import BarChart from '$lib/components/charts/BarChart.svelte';
   import BarTimeChart from '$lib/components/charts/BarTimeChart.svelte';

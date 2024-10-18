@@ -1,10 +1,8 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-
-  import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
-  import BsCalendar3 from 'svelte-icons-pack/bs/BsCalendar3';
-  import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineHistory } from 'svelte-icons-pack/ai';
+  import { BsCalendar3 } from 'svelte-icons-pack/bs';
+  import { RiBusinessBarChartHorizontalFill } from 'svelte-icons-pack/ri';
 
   import ContentLayout from '$lib/layouts/ContentLayout.svelte';
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';

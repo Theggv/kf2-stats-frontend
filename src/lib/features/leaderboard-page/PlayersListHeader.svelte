@@ -1,8 +1,7 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import { Icon } from 'svelte-icons-pack';
+  import { TiArrowSortedDown } from 'svelte-icons-pack/ti';
 
-  import TiArrowSortedDown from 'svelte-icons-pack/ti/TiArrowSortedDown';
   import { columns } from './PlayersListHeader.data';
   import { getContext } from 'svelte';
   import {

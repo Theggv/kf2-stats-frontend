@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { PlayerData } from './data';
+  import type { UserProfile } from '$lib/api/common';
 
-  export let data: PlayerData;
+  export let profile: UserProfile;
   export let online = false;
   export let compact = false;
   export let disableLink = false;
@@ -11,22 +11,22 @@
 
 <div class="player" class:online class:compact class:bold>
   <div class="avatar">
-    <a href={data.profile_url} target="_blank" rel="noopener noreferrer">
-      <img src={data.avatar} alt="" />
+    <a href={profile.profile_url} target="_blank" rel="noopener noreferrer">
+      <img src={profile.avatar} alt="" />
     </a>
   </div>
   <div class="content">
     {#if disableLink}
-      <div class="name">{data.name}</div>
+      <div class="name">{profile.name}</div>
     {:else if newTab}
       <a
         class="name"
-        href="/players/{data.id}"
+        href="/players/{profile.id}"
         target="_blank"
-        rel="noopener noreferrer">{data.name}</a
+        rel="noopener noreferrer">{profile.name}</a
       >
     {:else}
-      <a class="name" href="/players/{data.id}">{data.name}</a>
+      <a class="name" href="/players/{profile.id}">{profile.name}</a>
     {/if}
     <slot />
   </div>

@@ -1,36 +1,41 @@
 <script lang="ts">
+  import type { UserProfile } from '$lib/api/common';
+  import type { MatchWavePlayer } from '$lib/api/matches';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
-  import type { Player } from '$lib/api/matches';
   import { perkToString } from '$lib/util/enum-to-text';
 
-  export let data: Omit<Player, 'player_stats_id'>;
+  export let profile: UserProfile;
+  export let playerData: Pick<
+    MatchWavePlayer,
+    'is_dead' | 'perk' | 'level' | 'prestige'
+  >;
   export let selected = false;
 </script>
 
 <div class="player">
   <div class="perk-icon">
-    <PerkIcon perk={data.perk} prestige={data.prestige} />
+    <PerkIcon perk={playerData.perk} prestige={playerData.prestige} />
   </div>
   <div
     on:click
     on:keypress
-    on:dblclick={() => window.open(`/players/${data.id}`, '_blank')}
+    on:dblclick={() => window.open(`/players/${profile.id}`, '_blank')}
     role="button"
     tabindex="0"
     class="info"
     class:selected
   >
-    <div class="name" class:died={data.is_dead} title={data.name}>
-      {data.name}
+    <div class="name" class:died={playerData.is_dead} title={profile.name}>
+      {profile.name}
     </div>
     <div class="perk">
-      {data.level}
-      {perkToString(data.perk)}
+      {playerData.level}
+      {perkToString(playerData.perk)}
     </div>
   </div>
   <div class="avatar">
-    <a href={data.profile_url} target="_blank" rel="noopener noreferrer">
-      <img src={data.avatar} alt="" />
+    <a href={profile.profile_url} target="_blank" rel="noopener noreferrer">
+      <img src={profile.avatar} alt="" />
     </a>
   </div>
 </div>

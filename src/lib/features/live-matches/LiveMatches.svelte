@@ -6,18 +6,18 @@
   import { matchesStore } from './store';
 
   let refreshIntervalId: number;
-  const [matches, loading, error, fetchMatches] = matchesStore();
-
-  onMount(() => {
-    updateData();
-    return () => clearInterval(refreshIntervalId);
-  });
+  const { matches, loading, error, fetch: fetchMatches } = matchesStore();
 
   function updateData() {
     clearInterval(refreshIntervalId);
     fetchMatches();
     refreshIntervalId = setInterval(fetchMatches, 15000);
   }
+
+  onMount(() => {
+    updateData();
+    return () => clearInterval(refreshIntervalId);
+  });
 </script>
 
 <aside class="root">
@@ -25,12 +25,18 @@
     <h3>Live Matches</h3>
     <RefreshIcon class="current-matches-refresh-btn" on:click={updateData} />
   </div>
-  <AutoScroll class="current-matches-list">
-    {#each $matches as match (match.session.session_id)}
-      <MatchCard {match} />
-    {:else}
-      <div class="no-matches">No matches available</div>
-    {/each}
+  <AutoScroll>
+    <div class="current-matches-list">
+      {#each $matches as match, index (index)}
+        <MatchCard {match} />
+
+        {#if index !== $matches.length - 1}
+          <hr />
+        {/if}
+      {:else}
+        <div class="no-matches">No matches available</div>
+      {/each}
+    </div>
   </AutoScroll>
 </aside>
 
@@ -79,17 +85,21 @@
     width: 1rem;
     height: 1rem;
     border-radius: 100px;
-    background-color: var(--hover-primary);
+    background-color: rgb(255 0 0 / 0.25);
   }
 
   :global(.current-matches-refresh-btn) {
     margin-right: 1rem;
   }
 
-  :global(.current-matches-list) {
+  .current-matches-list {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .current-matches-list hr {
+    border-top: 1px solid var(--hover-primary);
   }
 
   .no-matches {

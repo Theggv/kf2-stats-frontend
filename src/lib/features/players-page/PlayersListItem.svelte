@@ -34,7 +34,7 @@
   </div>
 
   <div class="player">
-    <Player {data} newTab online={isOnline} compact />
+    <Player profile={data} newTab online={isOnline} compact />
   </div>
 
   {#if session}

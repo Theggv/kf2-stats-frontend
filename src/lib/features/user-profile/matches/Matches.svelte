@@ -1,6 +1,7 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineHistory } from 'svelte-icons-pack/ai';
+  import { BsFilter } from 'svelte-icons-pack/bs';
 
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
   import { groupBy } from '$lib/util';
@@ -8,8 +9,6 @@
   import SectionLayout from '../common/SectionLayout.svelte';
   import { getStore } from './Matches.store';
   import RecentSessionsList from './RecentSessionsList.svelte';
-  import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
-  import BsFilter from 'svelte-icons-pack/bs/BsFilter';
   import Layout from '../common/Layout.svelte';
   import Filter from './Filter.svelte';
   import type { SelectOption } from './Filter.store';

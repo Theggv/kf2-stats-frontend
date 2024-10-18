@@ -1,7 +1,6 @@
 <script lang="ts">
   import Player from '$lib/components/player/Player.svelte';
   import PlayerWithPerk from '$lib/components/player/PlayerWithPerk.svelte';
-  import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { getStore } from './LiveMatch.store';
 
   export let serverId: number;
@@ -13,7 +12,20 @@
 <div class="root">
   {#if $liveData}
     {#each $liveData.players as player (player.id)}
-      <PlayerWithPerk data={{ ...player, is_dead: player.health === 0 }} />
+      <PlayerWithPerk
+        profile={{
+          id: player.id,
+          name: player.name,
+          profile_url: player.profile_url,
+          avatar: player.avatar,
+        }}
+        playerData={{
+          perk: player.perk,
+          level: player.level,
+          prestige: player.prestige,
+          is_dead: player.health <= 0,
+        }}
+      />
     {:else}
       <div class="secondary">No players on the server</div>
     {/each}
@@ -23,7 +35,7 @@
 
       {#each $liveData.spectators as player (player.id)}
         <div class="spectator">
-          <Player data={player} compact />
+          <Player profile={player} compact />
         </div>
       {/each}
     {/if}

@@ -27,7 +27,7 @@
   </div>
 
   <div class="player">
-    <Player {data} newTab compact />
+    <Player profile={data} newTab compact />
   </div>
 
   {#each columns as column}

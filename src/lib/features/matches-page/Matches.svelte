@@ -1,8 +1,6 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-
-  import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineHistory } from 'svelte-icons-pack/ai';
 
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';

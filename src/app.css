@@ -11,9 +11,9 @@
 
   --color-online: rgba(0, 180, 0, 0.5);
 
-  --hover-primary: rgb(185 28 28 / 0.5);
+  --hover-primary: rgb(255 255 255 / 0.2);
 
-  --selected-primary: rgb(234 88 12 / 0.5);
+  --selected-primary: rgba(212 212 212 / 0.5);
 
   --armor-color: rgba(0, 13, 255, 0.5);
 

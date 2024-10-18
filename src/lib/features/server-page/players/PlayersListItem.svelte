@@ -23,7 +23,7 @@
 
 <div class="root {getMatchClass(data)}">
   <div class="match">
-    <Player {data} compact>
+    <Player profile={data} compact>
       <div class="secondary">
         <div class="map">
           {data.session.map_name}

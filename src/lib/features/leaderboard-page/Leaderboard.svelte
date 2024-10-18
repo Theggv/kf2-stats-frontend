@@ -1,8 +1,6 @@
 <script>
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-
-  import IoPodium from 'svelte-icons-pack/io/IoPodium';
+  import { Icon } from 'svelte-icons-pack';
+  import { IoPodium } from 'svelte-icons-pack/io';
 
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import { LoaderBoardCtxKey, getStore } from './Leaderboard.store';

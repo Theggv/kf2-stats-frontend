@@ -8,7 +8,7 @@
 <div class="root">
   {#each data as player (player.id)}
     <div class="player">
-      <Player data={player} compact bold />
+      <Player profile={player} compact bold />
       <div class="matches">
         <div>
           <span class="secondary">Matches:</span>

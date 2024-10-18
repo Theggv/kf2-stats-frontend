@@ -1,6 +1,5 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import { Icon } from 'svelte-icons-pack';
 
   import MediaQuery from 'svelte-media-queries';
 

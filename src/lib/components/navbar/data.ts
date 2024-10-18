@@ -1,7 +1,6 @@
-import IoPodium from 'svelte-icons-pack/io/IoPodium';
-import FaSolidUsers from 'svelte-icons-pack/fa/FaSolidUsers';
-import FaSolidServer from 'svelte-icons-pack/fa/FaSolidServer';
-import AiOutlineHistory from 'svelte-icons-pack/ai/AiOutlineHistory';
+import { AiOutlineHistory } from 'svelte-icons-pack/ai';
+import { FaSolidServer, FaSolidUsers } from 'svelte-icons-pack/fa';
+import { IoPodium } from 'svelte-icons-pack/io';
 
 type Link = { href: string; title: string; icon: any };
 

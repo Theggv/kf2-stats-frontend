@@ -1,7 +1,6 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-  import FaSolidUsers from 'svelte-icons-pack/fa/FaSolidUsers';
+  import { Icon } from 'svelte-icons-pack';
+  import { FaSolidUsers } from 'svelte-icons-pack/fa';
 
   import SectionLayout from '$lib/layouts/SectionLayout.svelte';
   import { groupBy } from '$lib/util';

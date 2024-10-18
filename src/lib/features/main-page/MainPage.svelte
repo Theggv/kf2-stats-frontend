@@ -1,11 +1,11 @@
 <script lang="ts">
-  // @ts-ignore
-  import Icon from 'svelte-icons-pack/Icon.svelte';
-
-  import AiOutlineLineChart from 'svelte-icons-pack/ai/AiOutlineLineChart';
-  import RiSystemRadioButtonLine from 'svelte-icons-pack/ri/RiSystemRadioButtonLine';
-  import BiServer from 'svelte-icons-pack/bi/BiServer';
-  import RiBusinessBarChartHorizontalFill from 'svelte-icons-pack/ri/RiBusinessBarChartHorizontalFill';
+  import { Icon } from 'svelte-icons-pack';
+  import { AiOutlineLineChart } from 'svelte-icons-pack/ai';
+  import { BiServer } from 'svelte-icons-pack/bi';
+  import {
+    RiSystemRadioButtonLine,
+    RiBusinessBarChartHorizontalFill,
+  } from 'svelte-icons-pack/ri';
 
   import { getStore } from './MainPage.store';
   import { getStore as getPlayersOnlineStore } from './charts/PlayersOnline.store';
