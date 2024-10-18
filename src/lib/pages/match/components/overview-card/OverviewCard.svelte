@@ -1,25 +1,22 @@
 <script lang="ts">
-  import type { Player } from '$lib/api/matches';
+  import type { UserProfile } from '$lib/api/common';
 
-  export let category: string;
-  export let player: Pick<
-    Player,
-    'name' | 'avatar' | 'profile_url' | 'level' | 'perk' | 'prestige'
-  >;
+  export let title: string;
   export let value: string;
+  export let profile: UserProfile | undefined;
 </script>
 
 <div class="card">
   <a
     class="avatar"
-    href={player.profile_url}
+    href={profile?.profile_url}
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img src={player.avatar} alt="" />
+    <img src={profile?.avatar} alt="" />
   </a>
-  <div class="category">{@html category}</div>
-  <div class="name">{player.name}</div>
+  <div class="category">{title}</div>
+  <div class="name">{profile?.name}</div>
   <div class="value">{value}</div>
 </div>
 

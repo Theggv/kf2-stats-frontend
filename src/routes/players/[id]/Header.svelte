@@ -11,7 +11,7 @@
 </script>
 
 <div class="header">
-  <Player data={user} {online} bold disableLink>
+  <Player profile={user} {online} bold disableLink>
     {#if user.current_session}
       {@const session = user.current_session}
       <a href="/sessions/{session.id}" class="status">

@@ -76,13 +76,14 @@
   .root {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     gap: 0 1rem;
     flex-wrap: wrap;
   }
 
   .map {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .keyvalue {
