@@ -229,6 +229,12 @@ export const overviewCards: OverviewCardData[] = [
     formatter: (stats) =>
       `${stats.deaths} ${stats.deaths === 1 ? 'Death' : 'Deaths'}`,
   },
+  {
+    title: 'Oops hehe',
+    selector: (stats) => stats.stats.husk_r,
+    condition: (stats) => stats.stats.husk_r > 0,
+    formatter: (stats) => `${stats.stats.husk_r} FP Rages From Husk Backpacks`,
+  },
 ];
 
 export function getCardContent(
