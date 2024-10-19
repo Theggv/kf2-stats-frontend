@@ -7,6 +7,7 @@
   import UserProfile from './UserProfile.svelte';
   import { statusToString } from '$lib/util/enum-to-text';
   import { Accordion } from '@svelteuidev/core';
+  import { Status } from '$lib/api/sessions';
 
   $: selected =
     $page.url.pathname.includes(`/sessions`) &&
@@ -30,7 +31,9 @@
       {getWaveText(match.game_data.wave, match.session)}
     </div>
     <div class="game-length">
-      {dateDiff(new Date(match.session.started_at), new Date())}
+      {#if match.session.status === Status.InProgress}
+        {dateDiff(new Date(match.session.started_at), new Date())}
+      {/if}
     </div>
     <div class="accordion">
       {#if match.players?.length || match.spectators?.length}
