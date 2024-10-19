@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import lodash from 'lodash';
 import { writable } from 'svelte/store';
 
 import { MatchesApiService, type MatchData } from '$lib/api/matches';
@@ -43,7 +43,7 @@ export function matchesStore() {
   const error = writable<unknown>(false);
   const matches = writable<LiveMatchData[]>([]);
 
-  const update = debounce(async () => {
+  const update = lodash.debounce(async () => {
     try {
       loading.set(true);
 

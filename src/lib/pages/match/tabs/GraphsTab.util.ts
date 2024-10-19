@@ -5,7 +5,7 @@ import type {
   MatchWavePlayerStats,
 } from '$lib/api/matches';
 import { findUserProfile, groupByUserId, type UserWaveStats } from './util';
-import { cloneDeep } from 'lodash';
+import lodash from 'lodash';
 
 export const graphColors = [
   '#d98880',
@@ -97,7 +97,7 @@ export function normalizeData(waves: MatchWave[]): NormalizedData[] {
 }
 
 export function aggregateData(normalized: NormalizedData[]): NormalizedData[] {
-  const items = cloneDeep(normalized);
+  const items = lodash.cloneDeep(normalized);
 
   function aggregate(
     prev: MatchWavePlayerStats,
