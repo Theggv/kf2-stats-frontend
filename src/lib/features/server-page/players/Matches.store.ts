@@ -2,7 +2,7 @@ import {
   ServersApiService,
   type RecentUsersResponseUser,
 } from '$lib/api/servers';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 
 export function getStore() {
@@ -14,7 +14,7 @@ export function getStore() {
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(async (server_id: number, page: number) => {
+  const fetch = debounce(async (server_id: number, page: number) => {
     try {
       await ServersApiService.getRecentUsers({
         server_id,

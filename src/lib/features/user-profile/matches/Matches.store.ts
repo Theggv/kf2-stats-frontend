@@ -3,7 +3,7 @@ import {
   type RecentSessionsResponseSession,
   type RecentSessionsRequest,
 } from '$lib/api/users';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 
 type AvailableFilters = Omit<RecentSessionsRequest, 'user_id' | 'pager'>;
@@ -18,7 +18,7 @@ export function getStore() {
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(
+  const fetch = debounce(
     async (user_id: number, page: number, args: AvailableFilters) => {
       try {
         await UsersApiService.getRecentSessions({

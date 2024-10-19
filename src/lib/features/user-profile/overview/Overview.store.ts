@@ -10,7 +10,7 @@ import {
   type RecentSessionsResponseSession,
   UsersApiService,
 } from '$lib/api/users';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
 export function getStore() {
@@ -22,7 +22,7 @@ export function getStore() {
   const teammates = writable<GetTeammatesResponseItem[]>([]);
   const perks = writable<UserPerksAnalyticsResponseItem[]>([]);
 
-  const fetch = lodash.debounce(async (user_id: number) => {
+  const fetch = debounce(async (user_id: number) => {
     try {
       await UsersApiService.getRecentSessions({
         user_id,

@@ -7,7 +7,7 @@ import {
   MatchesApiService,
 } from '$lib/api/matches';
 import { Status } from '$lib/api/sessions';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { tweened } from 'svelte/motion';
 import { derived, get, writable, type Readable } from 'svelte/store';
 import type { WithRequired } from '$lib/util/types';
@@ -30,7 +30,7 @@ export function getMatchStore() {
 
   let intervalId: number;
 
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     const id = get(matchId);
     loading.set(true);
 

@@ -2,7 +2,7 @@ import {
   type RecentSessionsResponseSession,
   UsersApiService,
 } from '$lib/api/users';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { type Writable, type Readable, writable } from 'svelte/store';
 
 export function recentSessionsStore(
@@ -24,7 +24,7 @@ export function recentSessionsStore(
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(async (page: number) => {
+  const fetch = debounce(async (page: number) => {
     try {
       loading.set(true);
       const { data } = await UsersApiService.getRecentSessions({

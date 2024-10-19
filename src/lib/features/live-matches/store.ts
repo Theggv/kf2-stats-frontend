@@ -1,9 +1,9 @@
-import lodash from 'lodash';
 import { writable } from 'svelte/store';
 
 import { MatchesApiService, type MatchData } from '$lib/api/matches';
 import type { WithRequired } from '$lib/util/types';
 import { Mode, Status } from '$lib/api/sessions';
+import { debounce } from '$lib/util';
 
 export type LiveMatchData = WithRequired<
   MatchData,
@@ -43,7 +43,7 @@ export function matchesStore() {
   const error = writable<unknown>(false);
   const matches = writable<LiveMatchData[]>([]);
 
-  const update = lodash.debounce(async () => {
+  const update = debounce(async () => {
     try {
       loading.set(true);
 

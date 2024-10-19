@@ -1,6 +1,6 @@
 import { MatchesApiService, type FilterMatchesRequest } from '$lib/api/matches';
 
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 import type { Match } from './common';
 
@@ -19,28 +19,25 @@ export function getStore() {
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(
-    async (page: number, args: AvailableFilters) => {
-      try {
-        await MatchesApiService.filter({
-          include_server: true,
-          include_map: true,
-          include_game_data: true,
-          include_cd_data: true,
-          reverse_order: true,
-          pager: { page, results_per_page: 100 },
-          ...args,
-        }).then(({ data }) => {
-          if (!page) matches.set(data.items as any);
-          else matches.update((prev) => [...prev, ...(data.items as any)]);
+  const fetch = debounce(async (page: number, args: AvailableFilters) => {
+    try {
+      await MatchesApiService.filter({
+        include_server: true,
+        include_map: true,
+        include_game_data: true,
+        include_cd_data: true,
+        reverse_order: true,
+        pager: { page, results_per_page: 100 },
+        ...args,
+      }).then(({ data }) => {
+        if (!page) matches.set(data.items as any);
+        else matches.update((prev) => [...prev, ...(data.items as any)]);
 
-          total.set(data.metadata.total_results);
-          hasMore.set(data.items.length >= 100);
-        });
-      } catch (err) {}
-    },
-    100
-  );
+        total.set(data.metadata.total_results);
+        hasMore.set(data.items.length >= 100);
+      });
+    } catch (err) {}
+  }, 100);
 
   const args = derived([page, filter], ([page, filter]) => ({
     page,

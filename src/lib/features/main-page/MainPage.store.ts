@@ -2,14 +2,14 @@ import {
   ServerAnalyticsApiService,
   type PopularServersResponseItem,
 } from '$lib/api/analytics';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
 export function getStore() {
   const currentOnline = writable(0);
   const popularServers = writable<PopularServersResponseItem[]>([]);
 
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     try {
       await ServerAnalyticsApiService.getCurrentOnline().then(({ data }) =>
         currentOnline.set(data.count)

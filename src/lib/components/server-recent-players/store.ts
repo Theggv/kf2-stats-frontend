@@ -3,7 +3,7 @@ import {
   type RecentUsersRequest,
   type RecentUsersResponseUser,
 } from '$lib/api/servers';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { writable, type Readable, type Writable } from 'svelte/store';
 export type AvailableFilters = Partial<Omit<RecentUsersRequest, 'pager'>>;
 
@@ -26,7 +26,7 @@ export function getStore(
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(async (page: number) => {
+  const fetch = debounce(async (page: number) => {
     try {
       loading.set(true);
       const { data } = await ServersApiService.getRecentUsers({

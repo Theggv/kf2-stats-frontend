@@ -1,7 +1,7 @@
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 
 export function getStore() {
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     try {
     } catch (err) {}
   }, 100);

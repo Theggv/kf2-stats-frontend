@@ -1,6 +1,6 @@
 import { MatchesApiService, type FilterMatchesRequest } from '$lib/api/matches';
 
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 import type { ServerMatch } from '../common';
 
@@ -18,7 +18,7 @@ export function getStore() {
   const total = writable(0);
   const hasMore = writable(true);
 
-  const fetch = lodash.debounce(
+  const fetch = debounce(
     async (server_id: number, page: number, args: AvailableFilters) => {
       try {
         await MatchesApiService.filter({

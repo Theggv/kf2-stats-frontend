@@ -1,6 +1,6 @@
 import { PerksAnalyticsApiService, type PerkStats } from '$lib/api/analytics';
 import { periods } from '$lib/components/charts';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
 function sortByValue(a: PerkStats, b: PerkStats) {
@@ -10,7 +10,7 @@ function sortByValue(a: PerkStats, b: PerkStats) {
 export function getStore(server_id: number) {
   const data = writable<PerkStats[]>([]);
 
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     try {
       await PerksAnalyticsApiService.getPlayTime({
         server_id,

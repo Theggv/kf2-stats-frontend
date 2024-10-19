@@ -4,10 +4,10 @@ import {
   type LeaderBoardsResponseItem,
 } from '$lib/api/leaderboards';
 import type { Perk } from '$lib/api/matches';
-import lodash from 'lodash';
 import { derived, writable } from 'svelte/store';
 
 import { periods } from './periods';
+import { debounce } from '$lib/util';
 
 export function getStore() {
   const type = writable<LeaderBoardType>(LeaderBoardType.TotalGames);
@@ -17,24 +17,21 @@ export function getStore() {
   const loading = writable(false);
   const users = writable<LeaderBoardsResponseItem[]>([]);
 
-  const fetch = lodash.debounce(
-    async (type: number, perk: Perk, period: number) => {
-      try {
-        loading.set(true);
-        const { data } = await LeaderBoardsApiService.getLeaderboard({
-          type,
-          perk,
-          ...periods[period],
-        });
+  const fetch = debounce(async (type: number, perk: Perk, period: number) => {
+    try {
+      loading.set(true);
+      const { data } = await LeaderBoardsApiService.getLeaderboard({
+        type,
+        perk,
+        ...periods[period],
+      });
 
-        users.set(data.items);
-      } catch (err) {
-      } finally {
-        loading.set(false);
-      }
-    },
-    100
-  );
+      users.set(data.items);
+    } catch (err) {
+    } finally {
+      loading.set(false);
+    }
+  }, 100);
 
   perk.subscribe((_) => type.set(LeaderBoardType.TotalGames));
 

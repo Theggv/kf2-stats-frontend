@@ -4,7 +4,7 @@ import {
 } from '$lib/api/matches';
 import { ServersApiService } from '$lib/api/servers';
 import { Status } from '$lib/api/sessions';
-import lodash from 'lodash';
+import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
 function isMatchLive(status: Status) {
@@ -18,7 +18,7 @@ export function getStore() {
 
   const liveData = writable<GetMatchLiveDataResponse | null>(null);
 
-  const fetch = lodash.debounce(async (server_id: number) => {
+  const fetch = debounce(async (server_id: number) => {
     try {
       const { data: session } = await ServersApiService.getLastSession(
         server_id

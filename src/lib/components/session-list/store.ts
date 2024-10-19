@@ -1,14 +1,9 @@
 import { type MapData, MapsApiService } from '$lib/api/maps';
-import {
-  type FilterMatchesRequest,
-  type MatchData,
-  MatchesApiService,
-} from '$lib/api/matches';
+import { type FilterMatchesRequest } from '$lib/api/matches';
 import { type ServerData, ServersApiService } from '$lib/api/servers';
 import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
-import type { WithRequired } from '$lib/util/types';
-import lodash from 'lodash';
-import { writable, type Readable, type Writable, derived } from 'svelte/store';
+import { debounce } from '$lib/util';
+import { writable, type Readable } from 'svelte/store';
 
 export const statusList: SelectOption[] = [
   { id: Status.Aborted, label: 'Aborted' },
@@ -55,17 +50,12 @@ export type AvailableFilters = Partial<
   >
 >;
 
-export function serverListStore(): [
-  Readable<ServerData[]>,
-  Readable<boolean>,
-  Readable<unknown>,
-  lodash.DebouncedFunc<() => Promise<void>>
-] {
+export function serverListStore() {
   const loading = writable(false);
   const error = writable<unknown>(false);
   const servers = writable<ServerData[]>([]);
 
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     try {
       loading.set(true);
       const { data } = await ServersApiService.getByPattern();
@@ -82,17 +72,12 @@ export function serverListStore(): [
   return [servers, loading, error, fetch];
 }
 
-export function mapListStore(): [
-  Readable<MapData[]>,
-  Readable<boolean>,
-  Readable<unknown>,
-  lodash.DebouncedFunc<() => Promise<void>>
-] {
+export function mapListStore() {
   const loading = writable(false);
   const error = writable<unknown>(false);
   const maps = writable<MapData[]>([]);
 
-  const fetch = lodash.debounce(async () => {
+  const fetch = debounce(async () => {
     try {
       loading.set(true);
       const { data } = await MapsApiService.getByPattern();
