@@ -60,7 +60,7 @@
   </svelte:fragment>
 
   <svelte:fragment slot="content">
-    {#if !selectedTab.render || selectedTab.render()}
+    {#if selectedTab && (!selectedTab.render || selectedTab.render())}
       <div class="content" class:loading={$loading}>
         <svelte:component this={selectedTab.component} />
       </div>
