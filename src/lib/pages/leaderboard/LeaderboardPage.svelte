@@ -33,7 +33,7 @@
             {/each}
           </div>
           <div class="perks">
-            {#each Array(9).fill(0) as _, index}
+            {#each Array(10).fill(0) as _, index}
               {@const perkIdx = index + 1}
               <div
                 role="button"
