@@ -5,6 +5,7 @@
   import { perkToString } from '$lib/util/enum-to-text';
   import { Icon } from 'svelte-icons-pack';
   import { SlGraph } from 'svelte-icons-pack/sl';
+  import { createMediaStore } from 'svelte-media-queries';
 
   type PlayerData = Pick<
     MatchWavePlayer,
@@ -17,6 +18,8 @@
   export let active = false;
   export let hover = false;
   export let color: string;
+
+  const media = createMediaStore('(max-width: 640px)');
 </script>
 
 <div
@@ -28,7 +31,7 @@
   role="rowheader"
   tabindex="-1"
 >
-  <div class="avatar">
+  <div class="avatar" class:compact={$media}>
     {#if profile}
       <a href={profile.profile_url} target="_blank" rel="noopener noreferrer">
         <img src={profile.avatar} alt="" />
@@ -58,7 +61,9 @@
 
       <div class="perk">
         {playerData.level}
-        {perkToString(playerData.perk)}
+        {#if !$media}
+          {perkToString(playerData.perk)}
+        {/if}
       </div>
     {:else}
       <div class="perk">—</div>
@@ -88,8 +93,12 @@
 
     outline: 2px solid var(--text-primary);
     border-radius: 0.25rem;
-    width: 2.5rem;
+    aspect-ratio: 1;
     height: 2.5rem;
+  }
+
+  .avatar.compact {
+    height: 1.5rem;
   }
 
   .avatar img {
@@ -189,5 +198,11 @@
     border-radius: 0.25rem;
     padding: 0rem;
     background-color: rgb(0 0 0 / 0.3);
+  }
+
+  @media (max-width: 640px) {
+    .player {
+      gap: 0 0.25rem;
+    }
   }
 </style>

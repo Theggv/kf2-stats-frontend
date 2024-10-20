@@ -147,43 +147,10 @@
     overflow: hidden;
   }
 
-  @media (max-width: 640px) {
-    .root {
-      max-width: calc(100vw - 1.75rem);
-    }
-  }
-  @media (min-width: 640px) {
-    .root {
-      max-width: 572px;
-    }
-  }
-  @media (min-width: 768px) {
-    .root {
-      max-width: 700px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .root {
-      max-width: 956px;
-    }
-  }
-  @media (min-width: 1280px) {
-    .root {
-      max-width: 896px;
-    }
-  }
-  @media (min-width: 1536px) {
-    .root {
-      max-width: 1150px;
-    }
-  }
-
   .content {
     flex: 1;
     display: grid;
-    grid-template:
-      'left right' 1fr
-      / 250px 1fr;
+    grid-template-columns: 250px 1fr;
     position: relative;
     padding-bottom: 0.5rem;
     overflow-x: hidden;
@@ -211,7 +178,6 @@
   }
 
   .left {
-    grid-area: left;
     position: sticky;
     left: 0;
 
@@ -220,7 +186,6 @@
   }
 
   .right {
-    grid-area: right;
     flex: 1;
     overflow-x: auto;
     overflow-y: hidden;
@@ -273,10 +238,10 @@
   }
 
   .control {
-    display: grid;
-    grid-template-columns: 250px 1fr auto;
-    justify-content: center;
-    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: 0.5rem;
   }
 
   .slider {
@@ -290,6 +255,54 @@
   }
 
   .control > .checkbox {
-    padding-left: 1rem;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .root {
+      max-width: calc(100vw - 1.75rem);
+    }
+
+    .content {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+  @media (min-width: 640px) {
+    .root {
+      max-width: 572px;
+    }
+  }
+  @media (min-width: 768px) {
+    .root {
+      max-width: 700px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .root {
+      max-width: 956px;
+    }
+
+    .control {
+      display: grid;
+      grid-template-columns: 250px 1fr auto;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 0;
+    }
+
+    .control > .checkbox {
+      margin: 0;
+      padding-left: 1rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .root {
+      max-width: 896px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .root {
+      max-width: 1150px;
+    }
   }
 </style>

@@ -88,6 +88,8 @@
   @media (max-width: 640px) {
     .root {
       max-width: calc(100vw - 1.75rem);
+      display: flex;
+      flex-direction: column;
     }
   }
   @media (min-width: 640px) {

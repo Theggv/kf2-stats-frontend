@@ -17,6 +17,7 @@
   } from './GraphsTab.util';
   import { getSelecterUsersStore, graphOptions } from './GraphsTab.store';
   import { Checkbox } from '@svelteuidev/core';
+  import { AutoScroll } from '$lib/components/auto-scroll';
 
   const waves =
     getContext<ReturnType<typeof getMatchStore>['waves']>('match-waves');
@@ -48,71 +49,74 @@
     : datasets;
 </script>
 
-<div class="root">
-  <div class="content">
-    <div class="left">
-      <div class="info">Players ({userStats.length} / 6)</div>
+<AutoScroll>
+  <div class="root">
+    <div class="content">
+      <div class="left">
+        <div class="info">Players ({userStats.length} / 6)</div>
 
-      <div class="players">
-        {#each userStats as user, index (user.user_id)}
-          {@const profile = findUserProfile($users, user.user_id)}
-          {@const playerData = tryGetPlayerData(user, $currentWave)}
+        <div class="players">
+          {#each userStats as user, index (user.user_id)}
+            {@const profile = findUserProfile($users, user.user_id)}
+            {@const playerData = tryGetPlayerData(user, $currentWave)}
 
-          <div class="item">
-            <UserProfileColor
-              {profile}
-              {playerData}
-              on:mouseenter={() => ($hover = user.user_id)}
-              on:mouseleave={() => ($hover = -1)}
-              on:click={() => toggleUser(user.user_id)}
-              on:keypress={(e) => e.key === 'Enter' && toggleUser(user.user_id)}
-              hover={$hover === user.user_id}
-              active={$selected.includes(user.user_id)}
-              color={graphColors[index]}
+            <div class="item">
+              <UserProfileColor
+                {profile}
+                {playerData}
+                on:mouseenter={() => ($hover = user.user_id)}
+                on:mouseleave={() => ($hover = -1)}
+                on:click={() => toggleUser(user.user_id)}
+                on:keypress={(e) =>
+                  e.key === 'Enter' && toggleUser(user.user_id)}
+                hover={$hover === user.user_id}
+                active={$selected.includes(user.user_id)}
+                color={graphColors[index]}
+              />
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="header">
+          {#each graphOptions as option, idx (idx)}
+            <div
+              class="button"
+              class:selected={selectedStats === idx}
+              role="button"
+              tabindex="0"
+              on:click={() => (selectedStats = idx)}
+              on:keypress={(e) => e.key === 'Enter' && (selectedStats = idx)}
+            >
+              {option.title}
+            </div>
+          {/each}
+        </div>
+
+        <div class="graph">
+          <GraphContainer
+            labels={prepareLabels($waves)}
+            formatter={graphOptions[selectedStats].formatter}
+            datasets={filteredDatasets}
+            hoverId={$hover}
+          />
+          <div class="checkbox">
+            <Checkbox
+              bind:checked={shouldAggregate}
+              label="Sum previous waves"
             />
           </div>
-        {/each}
-      </div>
-    </div>
-
-    <div class="right">
-      <div class="header">
-        {#each graphOptions as option, idx (idx)}
-          <div
-            class="button"
-            class:selected={selectedStats === idx}
-            role="button"
-            tabindex="0"
-            on:click={() => (selectedStats = idx)}
-            on:keypress={(e) => e.key === 'Enter' && (selectedStats = idx)}
-          >
-            {option.title}
-          </div>
-        {/each}
-      </div>
-
-      <div class="graph">
-        <GraphContainer
-          labels={prepareLabels($waves)}
-          formatter={graphOptions[selectedStats].formatter}
-          datasets={filteredDatasets}
-          hoverId={$hover}
-        />
-        <div class="checkbox">
-          <Checkbox bind:checked={shouldAggregate} label="Sum previous waves" />
         </div>
       </div>
     </div>
   </div>
-</div>
+</AutoScroll>
 
 <style>
   .root {
     flex: 1;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
     overflow: hidden;
   }
 
@@ -150,12 +154,17 @@
   .content {
     flex: 1;
     display: grid;
-    grid-template:
-      'left right' 1fr
-      / 300px 1fr;
+    grid-template-columns: 300px 1fr;
     position: relative;
     padding-bottom: 0.5rem;
     overflow-x: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .content::-webkit-scrollbar {
@@ -180,7 +189,6 @@
   }
 
   .left {
-    grid-area: left;
     position: sticky;
     left: 0;
 
@@ -189,7 +197,6 @@
   }
 
   .right {
-    grid-area: right;
     flex: 1;
     overflow-x: auto;
     overflow-y: hidden;

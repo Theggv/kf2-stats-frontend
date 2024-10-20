@@ -9,17 +9,19 @@
     overflow-y: auto;
   }
 
-  .root::-webkit-scrollbar {
-    width: 12px;
-  }
+  @media (min-width: 768px) {
+    .root::-webkit-scrollbar {
+      width: 12px;
+    }
 
-  .root::-webkit-scrollbar-track {
-    border-radius: 100px;
-    background-color: rgb(212 212 212);
-  }
+    .root::-webkit-scrollbar-track {
+      border-radius: 100px;
+      background-color: rgb(212 212 212);
+    }
 
-  .root::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    background-color: #9ca3af;
+    .root::-webkit-scrollbar-thumb {
+      border-radius: 100px;
+      background-color: #9ca3af;
+    }
   }
 </style>
