@@ -1,17 +1,9 @@
 <script lang="ts">
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import Player from '$lib/components/player/Player.svelte';
-  import { getContext } from 'svelte';
-  import { columns } from './PlayersListHeader.data';
-  import {
-    type LeaderBoardStore,
-    LoaderBoardCtxKey,
-  } from './Leaderboard.store';
 
   export let index: number;
   export let data: LeaderBoardsResponseItem;
-
-  const { type, perk } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
 
   function getPlaceColor(place: number) {
     if (place === 1) return 'first';
@@ -29,23 +21,10 @@
   <div class="player">
     <Player profile={data} newTab compact />
   </div>
-
-  {#each columns as column}
-    {#if !column.condition || column.condition($perk)}
-      <div class="column" style={`min-width: ${column.width || 100}px`}>
-        <div class="title" class:secondary={$type !== column.type}>
-          {column.label}
-        </div>
-        <div class="value">{@html column.render(data)}</div>
-      </div>
-    {/if}
-  {/each}
 </div>
 
 <style>
   :root {
-    --color-bg-even: rgba(117, 147, 147, 0.1);
-    --color-bg-odd: rgba(175, 215, 215, 0.1);
     --color-first: gold;
     --color-second: silver;
     --color-third: #cd7f32;
@@ -53,41 +32,34 @@
 
   .root {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
     align-items: center;
+    gap: 0.5rem;
+
     padding: 0 0.25rem;
     padding-left: 2rem;
-    font-weight: bold;
-    min-height: 3rem;
-  }
 
-  .root:nth-child(even) {
-    background: var(--color-bg-even);
+    font-weight: bold;
+    height: 48px;
   }
 
   .root:nth-child(odd) {
-    background: var(--color-bg-odd);
+    background: linear-gradient(to right, rgb(0 0 0 / 0), rgb(0 0 0 / 0.2));
+  }
+
+  .root:nth-child(even) {
+    background: linear-gradient(to right, rgb(0 0 0 / 0), rgb(0 0 0 / 0.3));
   }
 
   .index {
     color: var(--text-secondary);
     display: flex;
-    width: 2rem;
   }
 
   .player {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 275px;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    padding: 0.25rem;
+    overflow: hidden;
   }
 
   .root::before {
@@ -124,14 +96,12 @@
 
   @media (max-width: 768px) {
     .root {
-      gap: 0.25rem;
+      grid-template-columns: 2ch 1fr;
       padding-left: 1rem;
     }
 
     .player {
-      min-width: 200px;
-      width: 200px;
-      overflow: hidden;
+      padding: 0;
     }
   }
 </style>

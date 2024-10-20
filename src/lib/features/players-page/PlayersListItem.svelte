@@ -132,7 +132,7 @@
     padding: 0 0.25rem;
     padding-left: 2rem;
     font-weight: bold;
-    min-height: 3rem;
+    height: 48px;
   }
 
   .root:nth-child(even) {

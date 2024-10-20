@@ -2,66 +2,68 @@
   import { Icon } from 'svelte-icons-pack';
   import { IoPodium } from 'svelte-icons-pack/io';
 
-  import SectionLayout from '$lib/layouts/SectionLayout.svelte';
-  import { LoaderBoardCtxKey, getStore } from './Leaderboard.store';
-  import PlayersList from './PlayersList.svelte';
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
-  import { setContext } from 'svelte';
-  import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
-  import { periods } from './periods';
+  import { ListLayout, SectionLayout } from '$lib/layouts';
   import { iconSettings } from '$lib/ui/icons';
+  import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
+  import { setContext } from 'svelte';
+  import { LoaderBoardCtxKey, getStore } from './Leaderboard.store';
+  import { periods } from './periods';
+  import Table from './Table.svelte';
 
   const { users, perk, period } = setContext(LoaderBoardCtxKey, getStore());
 </script>
 
-<AutoScroll>
-  <SectionLayout>
-    <svelte:fragment slot="title">Leaderboard</svelte:fragment>
-    <svelte:fragment slot="subtitle">
-      <div class="filters">
-        <div class="periods">
-          {#each periods as { label }, index}
-            <div
-              class:selected={$period === index}
-              role="button"
-              tabindex="0"
-              on:click={() => period.set(index)}
-              on:keypress={(e) => e.code === 'Enter' && period.set(index)}
-            >
-              {label}
-            </div>
-          {/each}
+<ListLayout>
+  <svelte:fragment slot="header">
+    <SectionLayout unroundBottom>
+      <svelte:fragment slot="title">Leaderboard</svelte:fragment>
+      <svelte:fragment slot="subtitle">
+        <div class="filters">
+          <div class="periods">
+            {#each periods as { label }, index}
+              <div
+                class:selected={$period === index}
+                role="button"
+                tabindex="0"
+                on:click={() => period.set(index)}
+                on:keypress={(e) => e.code === 'Enter' && period.set(index)}
+              >
+                {label}
+              </div>
+            {/each}
+          </div>
+          <div class="perks">
+            {#each Array(9).fill(0) as _, index}
+              {@const perkIdx = index + 1}
+              <div
+                role="button"
+                tabindex="0"
+                on:click={() =>
+                  perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
+                on:keypress={(e) =>
+                  e.code === 'Enter' &&
+                  perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
+              >
+                <PerkIcon
+                  perk={perkIdx}
+                  prestige={0}
+                  disabled={$perk !== perkIdx}
+                />
+              </div>
+            {/each}
+          </div>
         </div>
-        <div class="perks">
-          {#each Array(9).fill(0) as _, index}
-            {@const perkIdx = index + 1}
-            <div
-              role="button"
-              tabindex="0"
-              on:click={() =>
-                perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
-              on:keypress={(e) =>
-                e.code === 'Enter' &&
-                perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
-            >
-              <PerkIcon
-                perk={perkIdx}
-                prestige={0}
-                disabled={$perk !== perkIdx}
-              />
-            </div>
-          {/each}
-        </div>
-      </div>
-    </svelte:fragment>
-    <svelte:fragment slot="icon">
-      <Icon src={IoPodium} {...iconSettings} />
-    </svelte:fragment>
-    <svelte:fragment slot="content">
-      <PlayersList data={$users} />
-    </svelte:fragment>
-  </SectionLayout>
-</AutoScroll>
+      </svelte:fragment>
+      <svelte:fragment slot="icon">
+        <Icon src={IoPodium} {...iconSettings} />
+      </svelte:fragment>
+    </SectionLayout>
+  </svelte:fragment>
+
+  <svelte:fragment slot="content">
+    <Table data={$users} />
+  </svelte:fragment>
+</ListLayout>
 
 <style>
   .filters {
