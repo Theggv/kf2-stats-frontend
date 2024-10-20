@@ -2,10 +2,7 @@
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import { getContext } from 'svelte';
   import { columns } from './ColumnHeader.data';
-  import {
-    type LeaderBoardStore,
-    LoaderBoardCtxKey,
-  } from './Leaderboard.store';
+  import { type LeaderBoardStore, LoaderBoardCtxKey } from '../store';
 
   export let index: number;
   export let data: LeaderBoardsResponseItem;

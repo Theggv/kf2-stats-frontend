@@ -6,9 +6,9 @@
   import { iconSettings } from '$lib/ui/icons';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { setContext } from 'svelte';
-  import { LoaderBoardCtxKey, getStore } from './Leaderboard.store';
+  import { LoaderBoardCtxKey, getStore } from './store';
   import { periods } from './periods';
-  import Table from './Table.svelte';
+  import { LeaderboardTable } from './components';
 
   const { users, perk, period } = setContext(LoaderBoardCtxKey, getStore());
 </script>
@@ -61,7 +61,7 @@
   </svelte:fragment>
 
   <svelte:fragment slot="content">
-    <Table data={$users} />
+    <LeaderboardTable data={$users} />
   </svelte:fragment>
 </ListLayout>
 

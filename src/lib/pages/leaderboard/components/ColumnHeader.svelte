@@ -4,11 +4,9 @@
 
   import { columns } from './ColumnHeader.data';
   import { getContext } from 'svelte';
-  import {
-    type LeaderBoardStore,
-    LoaderBoardCtxKey,
-  } from './Leaderboard.store';
+
   import { iconSettings } from '$lib/ui/icons';
+  import { LoaderBoardCtxKey, type LeaderBoardStore } from '../store';
 
   const { type, perk } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
 </script>

@@ -2,10 +2,7 @@
   import RowHeader from './RowHeader.svelte';
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import { getContext } from 'svelte';
-  import {
-    type LeaderBoardStore,
-    LoaderBoardCtxKey,
-  } from './Leaderboard.store';
+  import { type LeaderBoardStore, LoaderBoardCtxKey } from '../store';
   import { AutoScroll } from '$lib/components/auto-scroll';
   import ColumnHeader from './ColumnHeader.svelte';
   import TableRow from './TableRow.svelte';

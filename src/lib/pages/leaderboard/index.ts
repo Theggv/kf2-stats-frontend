@@ -1,3 +1,3 @@
-import LeaderboardPage from './Leaderboard.svelte';
+import LeaderboardPage from './LeaderboardPage.svelte';
 
 export { LeaderboardPage };
