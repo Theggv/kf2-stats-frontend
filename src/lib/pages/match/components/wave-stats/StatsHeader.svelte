@@ -75,7 +75,7 @@
     <div class="cell">
       <div class="secondary">Accuracy</div>
       <div class="subcell">
-        <StatsHeaderCell primary half metric={Metrics.ACCURACY}>
+        <StatsHeaderCell primary w75 metric={Metrics.ACCURACY}>
           Overall
         </StatsHeaderCell>
         <StatsHeaderCell primary half metric={Metrics.HS_ACCURACY}>

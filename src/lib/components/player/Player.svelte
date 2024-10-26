@@ -40,6 +40,7 @@
   }
 
   .player .avatar {
+    margin: 2px;
     position: relative;
     outline: 2px solid var(--text-primary);
     border-radius: 0.25rem;
@@ -50,6 +51,7 @@
 
   @media (max-width: 768px) {
     .player .avatar {
+      margin: 0;
       outline: none;
     }
   }

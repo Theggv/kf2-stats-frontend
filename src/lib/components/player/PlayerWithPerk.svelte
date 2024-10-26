@@ -95,9 +95,11 @@
     position: relative;
     grid-area: perk;
     text-align: right;
+    font-size: 12px;
   }
 
   .avatar {
+    margin: 2px;
     outline: 2px solid var(--text-primary);
     border-radius: 0.25rem;
     grid-area: avatar;

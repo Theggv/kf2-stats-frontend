@@ -21,3 +21,8 @@
   --color-lose: rgb(217, 100, 100);
   --color-in-progress: rgb(184, 197, 68);
 }
+
+hr {
+  width: 100%;
+  opacity: 0.4;
+}

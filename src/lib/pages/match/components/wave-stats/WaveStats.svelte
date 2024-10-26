@@ -88,7 +88,7 @@
     </div>
 
     <div class="category">
-      <div class="cell secondary half">{($accuracy * 100).toFixed(0)}%</div>
+      <div class="cell secondary w75">{($accuracy * 100).toFixed(0)}%</div>
       <div class="cell secondary half">{($hsAccuracy * 100).toFixed(0)}%</div>
     </div>
 
