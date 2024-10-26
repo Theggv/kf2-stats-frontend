@@ -78,7 +78,7 @@
     width: 100%;
     height: 100%;
     opacity: 0.6;
-    background-image: url('/assets/background.png');
+    background-image: url('/assets/background.webp');
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
