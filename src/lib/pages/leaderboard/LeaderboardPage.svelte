@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
   import { Icon } from 'svelte-icons-pack';
   import { IoPodium } from 'svelte-icons-pack/io';
 
