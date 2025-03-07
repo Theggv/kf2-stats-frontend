@@ -13,6 +13,13 @@
 </script>
 
 <AutoScroll>
+  <img
+    class="loader"
+    class:visible={$loading}
+    src="/assets/pivozavr-loader.gif"
+    alt=""
+  />
+
   <div class="table" class:loading={$loading}>
     {#if data.length}
       <div class="header">
@@ -55,6 +62,28 @@
     overflow-x: hidden;
 
     transition: all 200ms;
+  }
+
+  .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto auto;
+    opacity: 0;
+    width: 150px;
+    aspect-ratio: 1;
+    z-index: 1;
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-delay: 0;
+    transition-timing-function: ease-in-out;
+  }
+
+  .loader.visible {
+    transition-delay: 1s;
+    opacity: 0.75;
   }
 
   @media (max-width: 640px) {
