@@ -3,9 +3,7 @@
   import { writable } from 'svelte/store';
   import {
     ContextName,
-    getMatchStore,
     getSelectedUserStore,
-    getWaveInputStore,
     getWaveUserIds,
     type ContextType,
   } from '../store';
@@ -21,8 +19,12 @@
   const userSelect = getSelectedUserStore();
   const { hover } = userSelect;
 
-  const wave = getContext<ReturnType<typeof getWaveInputStore>>('wave-input');
-  const { waveIdx, wave: currentWave, maxWaves, showOnlyCurrentWave } = wave;
+  const {
+    waveIdx,
+    wave: currentWave,
+    maxWaves,
+    showOnlyCurrentWave,
+  } = store.waveInput;
 
   $: userStats = groupByUserId($waves);
 
