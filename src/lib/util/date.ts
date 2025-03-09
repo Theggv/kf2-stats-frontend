@@ -1,7 +1,4 @@
-function pad(num: number, size: number = 2) {
-  const str = '00000000' + num;
-  return str.substring(str.length - size);
-}
+import { pad } from './pad';
 
 export function dateDiff(from: Date, to: Date): string {
   const totalSeconds = (to.getTime() - from.getTime()) / 1000;
