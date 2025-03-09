@@ -1,23 +1,34 @@
 <script lang="ts">
   import ListLayout from '$lib/layouts/ListLayout.svelte';
   import { getMatchStore, getWaveInputStore } from './store';
-  import { LiveDataTab, OverviewTab, StatsTab, GraphsTab } from './tabs';
+  import {
+    LiveDataTab,
+    OverviewTab,
+    StatsTab,
+    GraphsTab,
+    ReplayTab,
+  } from './tabs';
   import { setContext } from 'svelte';
   import { MatchHeader } from './components/match-header';
+  import { page } from '$app/stores';
 
   export let matchId: number;
 
+  $: isPreview = $page.url.searchParams.has('preview');
+
   const store = getMatchStore();
-  const { overview, waves, users, live, loading, error } = store;
+  const { overview, waves, users, live, loading, demo, error } = store;
   $: store.matchId.set(matchId);
 
   const waveInputStore = getWaveInputStore(waves);
 
+  setContext('match-store', store);
   setContext('match-loading', loading);
   setContext('match-overview', overview);
   setContext('match-waves', waves);
   setContext('match-users', users);
   setContext('match-live', live);
+  setContext('match-demo', demo);
   setContext('wave-input', waveInputStore);
 
   type TabData = {
@@ -31,6 +42,7 @@
     { label: 'Overview', component: OverviewTab },
     { label: 'Stats', component: StatsTab },
     { label: 'Graphs', component: GraphsTab },
+    { label: 'Replay', component: ReplayTab, render: () => isPreview },
   ] as TabData[];
 
   $: filteredTabs = tabs.filter((x) => !x.render || x.render());

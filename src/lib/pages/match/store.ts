@@ -11,6 +11,10 @@ import { debounce } from '$lib/util';
 import { tweened } from 'svelte/motion';
 import { derived, get, writable, type Readable } from 'svelte/store';
 import type { WithRequired } from '$lib/util/types';
+import {
+  DemoApiService,
+  type DemoRecordAnalysis,
+} from '$lib/api/sessions/demo';
 
 export type Match = WithRequired<MatchData, 'game_data' | 'map' | 'server'>;
 
@@ -27,8 +31,17 @@ export function getMatchStore() {
   const waves = writable<MatchWave[]>([]);
   const users = writable<UserProfile[]>([]);
   const live = writable<GetMatchLiveDataResponse | null>(null);
+  const demo = writable<DemoRecordAnalysis | null>(null);
 
   let intervalId: number;
+
+  const fetchDemo = debounce(async (matchId: number) => {
+    try {
+      const { data } = await DemoApiService.getById(matchId);
+
+      demo.set(data);
+    } catch (error) {}
+  }, 100);
 
   const fetch = debounce(async () => {
     const id = get(matchId);
@@ -66,9 +79,20 @@ export function getMatchStore() {
 
     clearInterval(intervalId);
     fetch();
+    fetchDemo(id);
   });
 
-  return { matchId, overview, waves, users, live, loading, error };
+  return {
+    matchId,
+    overview,
+    waves,
+    users,
+    live,
+    demo,
+    loading,
+    error,
+    fetchDemo,
+  };
 }
 
 export function getWaveInputStore(waves: Readable<MatchWave[]>) {

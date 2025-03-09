@@ -7,7 +7,7 @@ import type { RequestHandler } from './$types';
 import type { SessionData } from '$lib/api/sessions';
 
 export const GET: RequestHandler = async ({ params }) => {
-  const id = parseInt(params.slug);
+  const id = parseInt(params.id);
 
   if (!id) throw error(400, `id should be a number, got ${id}`);
 

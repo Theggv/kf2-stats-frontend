@@ -35,7 +35,7 @@
           point: {
             pointStyle: 'circle',
             hoverRadius: 3,
-            hoverBorderWidth: 5,
+            hoverBorderWidth: 3,
             radius: 0,
           },
         },
