@@ -15,7 +15,7 @@
 
   export let matchId: number;
 
-  $: isPreview = !$page.url.searchParams.has('preview');
+  $: isPreview = $page.url.searchParams.has('preview');
 
   const store = getMatchStore();
   const { live, loading } = store.match;
