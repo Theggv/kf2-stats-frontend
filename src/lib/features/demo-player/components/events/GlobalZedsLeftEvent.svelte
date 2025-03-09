@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MajorEventsData } from './MatchDemoPlayer.data';
+  import type { MajorEventsData } from '../../MatchDemoPlayer.data';
 
   export let event: MajorEventsData['zedsLeft'];
 </script>

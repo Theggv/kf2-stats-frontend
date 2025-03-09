@@ -10,6 +10,10 @@ export function getMatchDemoPlayerStore(tickRate: number = 10) {
   let intervalId: number;
 
   function play() {
+    if (get(currentTick) === get(range).end_tick) {
+      currentTick.set(get(range).start_tick);
+    }
+
     playing.set(true);
 
     const dt = 1000 / tickRate / get(speed);

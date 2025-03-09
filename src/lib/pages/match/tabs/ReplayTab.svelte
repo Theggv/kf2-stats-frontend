@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { ContextName, type ContextType } from '../store';
-  import { MatchDemoPlayer } from '../components/demo-player';
+  import { MatchDemoPlayer } from '$lib/features/demo-player';
 
   const store = getContext<ContextType>(ContextName);
   const { demo } = store.demo;

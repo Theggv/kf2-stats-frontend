@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { UserProfile } from '$lib/api/common';
   import type { DemoRecordAnalysisWaveKill } from '$lib/api/sessions/demo';
-  import { getZedName, tickToTime } from './utils';
+  import { tickToTime, getZedName } from '../../utils';
 
   export let event: DemoRecordAnalysisWaveKill;
   export let user: UserProfile | undefined;

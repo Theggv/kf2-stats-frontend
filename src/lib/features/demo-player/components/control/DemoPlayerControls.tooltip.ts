@@ -4,7 +4,7 @@ import type {
   Point,
   ScriptableTooltipContext,
 } from 'chart.js';
-import { tickToTime } from './utils';
+import { tickToTime } from '../../utils';
 
 function findNearest(
   dataset: ChartDataset<'scatter', Point[]>,

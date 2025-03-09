@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { MajorEventsData } from './MatchDemoPlayer.data';
-  import { tickToTime } from './utils';
+  import type { MajorEventsData } from '../../MatchDemoPlayer.data';
+  import { tickToTime } from '../../utils';
 
   export let event: MajorEventsData['zedtime'];
 </script>

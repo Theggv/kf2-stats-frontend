@@ -3,17 +3,15 @@
   import type { DemoRecordAnalysis } from '$lib/api/sessions/demo';
   import { AutoScroll } from '$lib/components/auto-scroll';
   import { writable } from 'svelte/store';
-  import DemoPlayerControls from './DemoPlayerControls.svelte';
   import { tickToTime } from './utils';
   import { getMatchDemoPlayerStore } from './MatchDemoPlayer.store';
-  import { getContext, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import type { UserProfile } from '$lib/api/common';
-  import ZedKillEvent from './ZedKillEvent.svelte';
   import { ActionIcon } from '@svelteuidev/core';
   import { AiOutlinePause } from 'svelte-icons-pack/ai';
   import { BsPlayFill } from 'svelte-icons-pack/bs';
   import { CgPlayBackwards, CgPlayForwards } from 'svelte-icons-pack/cg';
-  import PlayerState from './PlayerState.svelte';
+  import PlayerState from './components/player/PlayerState.svelte';
   import {
     prepareHealthData,
     prepareBuffsData,
@@ -26,8 +24,12 @@
     getUserProfileByUserId,
     prepareMajorEventsData,
   } from './MatchDemoPlayer.data';
-  import ZedTimeEvent from './ZedTimeEvent.svelte';
-  import ZedsLeftEvent from './ZedsLeftEvent.svelte';
+  import { DemoPlayerControls } from './components/control';
+  import {
+    GlobalZedsLeftEvent,
+    GlobalZedTimeEvent,
+    PlayerZedKillEvent,
+  } from './components/events';
 
   export let data: DemoRecordAnalysis;
   export let users: UserProfile[];
@@ -80,55 +82,59 @@
     <div class="waves">
       <div class="title">Waves</div>
 
-      {#each data.waves as wave, index (`${data.header.session_id} ${wave.start_tick}`)}
-        <div
-          class="item"
-          class:selected={$selectedWaveIdx === index}
-          role="button"
-          tabindex="0"
-          on:click={() => selectedWaveIdx.set(index)}
-          on:keypress={(e) => e.key === 'Enter' && selectedWaveIdx.set(index)}
-        >
-          <div class="number">Wave {wave.wave}</div>
-          <div class="period">
-            ({tickToTime(wave.start_tick)} - {tickToTime(wave.end_tick)})
+      <div class="content">
+        {#each data.waves as wave, index (`${data.header.session_id} ${wave.start_tick}`)}
+          <div
+            class="item"
+            class:selected={$selectedWaveIdx === index}
+            role="button"
+            tabindex="0"
+            on:click={() => selectedWaveIdx.set(index)}
+            on:keypress={(e) => e.key === 'Enter' && selectedWaveIdx.set(index)}
+          >
+            <div class="number">Wave {wave.wave}</div>
+            <div class="period">
+              ({tickToTime(wave.start_tick)} - {tickToTime(wave.end_tick)})
+            </div>
           </div>
-        </div>
-      {/each}
+        {/each}
+      </div>
     </div>
 
     <div class="players">
       <div class="title">Players</div>
 
-      {#if selectedWave}
-        {#each wavePlayers as player (player.unique_id)}
-          {@const { health, armor } = getLastHealthEvent(
-            player.user_id,
-            $currentTick,
-            healthData
-          )}
+      <div class="content">
+        {#if selectedWave}
+          {#each wavePlayers as player (player.unique_id)}
+            {@const { health, armor } = getLastHealthEvent(
+              player.user_id,
+              $currentTick,
+              healthData
+            )}
 
-          {@const buffs = getLastBuffEvent(
-            player.user_id,
-            $currentTick,
-            buffsData
-          )}
-          <PlayerState
-            profile={getUserProfile(player, users)}
-            perk={getPlayerPerk(player.user_id, selectedWave)}
-            {health}
-            {armor}
-            {buffs}
-          />
-        {/each}
-      {/if}
+            {@const buffs = getLastBuffEvent(
+              player.user_id,
+              $currentTick,
+              buffsData
+            )}
+            <PlayerState
+              profile={getUserProfile(player, users)}
+              perk={getPlayerPerk(player.user_id, selectedWave)}
+              {health}
+              {armor}
+              {buffs}
+            />
+          {/each}
+        {/if}
+      </div>
     </div>
 
     <div class="data">
       <div class="title">Events</div>
 
-      <ZedsLeftEvent event={majorEvents.zedsLeft} />
-      <ZedTimeEvent event={majorEvents.zedtime} />
+      <GlobalZedsLeftEvent event={majorEvents.zedsLeft} />
+      <GlobalZedTimeEvent event={majorEvents.zedtime} />
     </div>
 
     <div class="kill-feed">
@@ -147,7 +153,7 @@
 
       {#if selectedWave}
         {#each killEvents as kill, index (`${data.header.session_id} ${selectedWave.start_tick} ${index} ${JSON.stringify(kill)}`)}
-          <ZedKillEvent
+          <PlayerZedKillEvent
             event={kill}
             user={getUserProfileByUserId(kill.user_id, data, users)}
           />
@@ -210,13 +216,17 @@
     gap: 0.25rem 1rem;
   }
 
+  .waves,
+  .players {
+    max-height: 300px;
+  }
+
   .waves {
     grid-area: waves;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
-    padding-right: 1rem;
     border-right: 2px solid rgb(255 255 255 / 0.1);
   }
 
@@ -229,21 +239,34 @@
     padding: 0.25rem 0.5rem;
   }
 
-  .waves > .item {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+
+  .waves > .content > .item {
     padding: 0.25rem 0.5rem;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 8ch auto;
+    align-items: center;
 
     cursor: pointer;
     border-radius: 0.25rem;
     user-select: none;
   }
 
-  .waves > .item:hover {
+  .waves > .content > .item > .period {
+    font-size: 12px;
+  }
+
+  .waves > .content > .item:hover {
     background-color: rgb(255 255 255 / 0.1);
   }
 
-  .waves > .item.selected {
+  .waves > .content > .item.selected {
     background-color: rgb(255 255 255 / 0.15);
   }
 
@@ -319,5 +342,19 @@
   .checkbox > input {
     width: 1rem;
     aspect-ratio: 1;
+  }
+
+  .content::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .content::-webkit-scrollbar-track {
+    border-radius: 100px;
+    background-color: rgb(212 212 212);
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #9ca3af;
   }
 </style>
