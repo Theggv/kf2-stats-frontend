@@ -1,6 +1,6 @@
 <script lang="ts">
   import ListLayout from '$lib/layouts/ListLayout.svelte';
-  import { getMatchStore, getWaveInputStore } from './store';
+  import { ContextName, getMatchStore } from './store';
   import {
     LiveDataTab,
     OverviewTab,
@@ -11,30 +11,23 @@
   import { setContext } from 'svelte';
   import { MatchHeader } from './components/match-header';
   import { page } from '$app/stores';
+  import { get } from 'svelte/store';
 
   export let matchId: number;
 
-  $: isPreview = $page.url.searchParams.has('preview');
+  $: isPreview = !$page.url.searchParams.has('preview');
 
   const store = getMatchStore();
-  const { overview, waves, users, live, loading, demo, error } = store;
+  const { live, loading } = store.match;
   $: store.matchId.set(matchId);
 
-  const waveInputStore = getWaveInputStore(waves);
-
-  setContext('match-store', store);
-  setContext('match-loading', loading);
-  setContext('match-overview', overview);
-  setContext('match-waves', waves);
-  setContext('match-users', users);
-  setContext('match-live', live);
-  setContext('match-demo', demo);
-  setContext('wave-input', waveInputStore);
+  setContext(ContextName, store);
 
   type TabData = {
     label: string;
     component: any;
     render?: () => boolean;
+    onClick?: () => any;
   };
 
   $: tabs = [
@@ -42,13 +35,37 @@
     { label: 'Overview', component: OverviewTab },
     { label: 'Stats', component: StatsTab },
     { label: 'Graphs', component: GraphsTab },
-    { label: 'Replay', component: ReplayTab, render: () => isPreview },
+    {
+      label: 'Replay',
+      component: ReplayTab,
+      render: () => isPreview,
+      onClick: handleClickReplay,
+    },
   ] as TabData[];
 
   $: filteredTabs = tabs.filter((x) => !x.render || x.render());
 
   $: selectedTabIndex = 0;
   $: selectedTab = filteredTabs[selectedTabIndex];
+
+  function fetchReplayOnMatchChange(matchId: number) {
+    store.demo.error.set(false);
+    store.demo.loading.set(false);
+
+    if (selectedTab.label === 'Replay') {
+      store.demo.fetch(matchId);
+    }
+  }
+
+  function handleClickReplay() {
+    const { demo, error, loading } = store.demo;
+
+    if (get(demo) || get(error) || get(loading)) return;
+
+    store.demo.fetch(matchId);
+  }
+
+  $: fetchReplayOnMatchChange(matchId);
 </script>
 
 <ListLayout>
@@ -61,7 +78,10 @@
             class:selected={selectedTabIndex === index}
             role="button"
             tabindex="0"
-            on:click={() => (selectedTabIndex = index)}
+            on:click={() => {
+              selectedTabIndex = index;
+              tab.onClick && tab.onClick();
+            }}
             on:keypress={(e) => e.key === 'Enter' && (selectedTabIndex = index)}
           >
             {tab.label}

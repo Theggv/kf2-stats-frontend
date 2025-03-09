@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { getMatchStore } from '../store';
+  import { ContextName, type ContextType } from '../store';
   import {
     getCardContent,
     matchAnalysisStore,
@@ -17,14 +17,10 @@
   import { OverviewCard } from '../components/overview-card';
   import { IoPodium } from 'svelte-icons-pack/io';
 
-  const match =
-    getContext<ReturnType<typeof getMatchStore>['overview']>('match-overview');
-  const waves =
-    getContext<ReturnType<typeof getMatchStore>['waves']>('match-waves');
-  const users =
-    getContext<ReturnType<typeof getMatchStore>['users']>('match-users');
+  const store = getContext<ContextType>(ContextName);
+  const { waves, users, overview } = store.match;
 
-  const analysis = matchAnalysisStore(match, waves);
+  const analysis = matchAnalysisStore(overview, waves);
   const { wavesZedGroups, difficulty, aggregatedUserStats } = analysis;
 </script>
 

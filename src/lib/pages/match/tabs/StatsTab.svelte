@@ -2,10 +2,12 @@
   import { getContext, setContext } from 'svelte';
   import { writable } from 'svelte/store';
   import {
+    ContextName,
     getMatchStore,
     getSelectedUserStore,
     getWaveInputStore,
     getWaveUserIds,
+    type ContextType,
   } from '../store';
   import { findUserProfile, groupByUserId, tryGetPlayerData } from './util';
   import { Checkbox, Input } from '@svelteuidev/core';
@@ -13,10 +15,8 @@
   import { StatsHeader, WaveStats } from '../components/wave-stats';
   import { statSelectorsMultiple, statSelectorsSingle } from './StatsTab.store';
 
-  const waves =
-    getContext<ReturnType<typeof getMatchStore>['waves']>('match-waves');
-  const users =
-    getContext<ReturnType<typeof getMatchStore>['users']>('match-users');
+  const store = getContext<ContextType>(ContextName);
+  const { waves, users } = store.match;
 
   const userSelect = getSelectedUserStore();
   const { hover } = userSelect;

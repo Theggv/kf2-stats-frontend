@@ -1,9 +1,9 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import {
-    getMatchStore,
+    ContextName,
     getSelectedUserStore,
-    getWaveInputStore,
+    type ContextType,
   } from '../store';
   import { findUserProfile, groupByUserId, tryGetPlayerData } from './util';
   import { UserProfileColor } from '../components/user-profile';
@@ -19,12 +19,9 @@
   import { Checkbox } from '@svelteuidev/core';
   import { AutoScroll } from '$lib/components/auto-scroll';
 
-  const waves =
-    getContext<ReturnType<typeof getMatchStore>['waves']>('match-waves');
-  const users =
-    getContext<ReturnType<typeof getMatchStore>['users']>('match-users');
-  const { wave: currentWave } =
-    getContext<ReturnType<typeof getWaveInputStore>>('wave-input');
+  const store = getContext<ContextType>(ContextName);
+  const { waves, users } = store.match;
+  const { wave: currentWave } = store.waveInput;
 
   const { hover } = getSelectedUserStore();
   const { selected, toggle: toggleUser } = getSelecterUsersStore();

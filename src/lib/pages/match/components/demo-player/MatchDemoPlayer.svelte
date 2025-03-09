@@ -6,7 +6,7 @@
   import DemoPlayerControls from './DemoPlayerControls.svelte';
   import { tickToTime } from './utils';
   import { getMatchDemoPlayerStore } from './MatchDemoPlayer.store';
-  import { onMount } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import type { UserProfile } from '$lib/api/common';
   import ZedKillEvent from './ZedKillEvent.svelte';
   import { ActionIcon } from '@svelteuidev/core';

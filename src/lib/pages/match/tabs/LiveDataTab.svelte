@@ -1,25 +1,23 @@
 <script lang="ts">
   import { Status } from '$lib/api/sessions';
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
+  import { AutoScroll } from '$lib/components/auto-scroll';
   import Player from '$lib/components/player/Player.svelte';
-  import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
+  import { PerkIcon } from '$lib/ui/icons';
   import { perkToString } from '$lib/util/enum-to-text';
   import { getContext } from 'svelte';
-  import type { getMatchStore } from '../store';
   import CurrentMatch from '../components/match-header/CurrentMatch.svelte';
+  import { type ContextType, ContextName } from '../store';
 
-  const match =
-    getContext<ReturnType<typeof getMatchStore>['overview']>('match-overview');
-  const live =
-    getContext<ReturnType<typeof getMatchStore>['live']>('match-live');
+  const store = getContext<ContextType>(ContextName);
+  const { overview, live } = store.match;
 
   $: started = !!$live && $live.status === Status.InProgress;
 </script>
 
 <div class="root">
-  {#if $match && $live}
+  {#if $overview && $live}
     <div class="session">
-      <CurrentMatch match={$match} />
+      <CurrentMatch match={$overview} />
 
       {#if started}
         <div class="game-info">

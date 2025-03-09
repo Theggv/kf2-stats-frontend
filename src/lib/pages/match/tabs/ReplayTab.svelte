@@ -1,18 +1,15 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import type { getMatchStore } from '../store';
+  import { ContextName, type ContextType } from '../store';
   import { MatchDemoPlayer } from '../components/demo-player';
 
-  const match =
-    getContext<ReturnType<typeof getMatchStore>['overview']>('match-overview');
-  const demo =
-    getContext<ReturnType<typeof getMatchStore>['demo']>('match-demo');
-  const users =
-    getContext<ReturnType<typeof getMatchStore>['users']>('match-users');
+  const store = getContext<ContextType>(ContextName);
+  const { demo } = store.demo;
+  const { users } = store.match;
 </script>
 
 <div class="root">
-  {#if $match && $demo}
+  {#if $demo}
     <MatchDemoPlayer data={$demo} users={$users} />
   {/if}
 </div>

@@ -22,6 +22,9 @@ function isMatchLive(status?: Status) {
   return status === Status.Lobby || status === Status.InProgress;
 }
 
+export type ContextType = ReturnType<typeof getMatchStore>;
+export const ContextName = 'match-store';
+
 export function getMatchStore() {
   const matchId = writable<number>();
 
@@ -31,17 +34,11 @@ export function getMatchStore() {
   const waves = writable<MatchWave[]>([]);
   const users = writable<UserProfile[]>([]);
   const live = writable<GetMatchLiveDataResponse | null>(null);
-  const demo = writable<DemoRecordAnalysis | null>(null);
+
+  const demoStore = getDemoStore();
+  const waveInputStore = getWaveInputStore(waves);
 
   let intervalId: number;
-
-  const fetchDemo = debounce(async (matchId: number) => {
-    try {
-      const { data } = await DemoApiService.getById(matchId);
-
-      demo.set(data);
-    } catch (error) {}
-  }, 100);
 
   const fetch = debounce(async () => {
     const id = get(matchId);
@@ -79,20 +76,43 @@ export function getMatchStore() {
 
     clearInterval(intervalId);
     fetch();
-    fetchDemo(id);
   });
 
   return {
     matchId,
-    overview,
-    waves,
-    users,
-    live,
-    demo,
-    loading,
-    error,
-    fetchDemo,
+    match: {
+      overview,
+      waves,
+      users,
+      live,
+      loading,
+      error,
+    },
+    demo: demoStore,
+    waveInput: waveInputStore,
   };
+}
+
+export function getDemoStore() {
+  const demo = writable<DemoRecordAnalysis | null>(null);
+  const loading = writable(false);
+  const error = writable<unknown>(false);
+
+  const fetch = debounce(async (matchId: number) => {
+    loading.set(true);
+
+    try {
+      const { data } = await DemoApiService.getById(matchId);
+
+      demo.set(data);
+    } catch (err) {
+      error.set(err);
+    } finally {
+      loading.set(false);
+    }
+  }, 100);
+
+  return { demo, loading, error, fetch };
 }
 
 export function getWaveInputStore(waves: Readable<MatchWave[]>) {
