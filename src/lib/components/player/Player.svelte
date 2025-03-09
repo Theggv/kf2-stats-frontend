@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { UserProfile } from '$lib/api/common';
 
-  export let profile: UserProfile;
+  export let profile: Omit<UserProfile, 'auth_id'>;
   export let online = false;
   export let compact = false;
   export let disableLink = false;
