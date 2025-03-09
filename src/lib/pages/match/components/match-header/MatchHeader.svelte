@@ -3,14 +3,14 @@
   import { BsArrowLeft } from 'svelte-icons-pack/bs';
   import { iconSettings } from '$lib/ui/icons';
   import { getContext } from 'svelte';
-  import type { getMatchStore } from '../../store';
+  import { ContextName, type ContextType } from '../../store';
   import HeaderLayout from './HeaderLayout.svelte';
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
   import { ActionIcon } from '@svelteuidev/core';
   import CurrentMatch from './CurrentMatch.svelte';
 
-  const overview =
-    getContext<ReturnType<typeof getMatchStore>['overview']>('match-overview');
+  const store = getContext<ContextType>(ContextName);
+  const { overview } = store.match;
 </script>
 
 <HeaderLayout>

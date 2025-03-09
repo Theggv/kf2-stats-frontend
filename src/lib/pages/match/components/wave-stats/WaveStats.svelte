@@ -1,6 +1,10 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { getWaveStatsStore, type getWaveInputStore } from '../../store';
+  import {
+    ContextName,
+    getWaveStatsStore,
+    type ContextType,
+  } from '../../store';
   import type { UserStats } from '../../tabs/util';
   import type { MatchWave } from '$lib/api/matches';
 
@@ -8,8 +12,8 @@
   export let showOnlyCurrentWave: boolean;
   export let hover = false;
 
-  const wave = getContext<ReturnType<typeof getWaveInputStore>>('wave-input');
-  const { wave: currentWave } = wave;
+  const store = getContext<ContextType>(ContextName);
+  const { wave: currentWave } = store.waveInput;
 
   const stats = getWaveStatsStore();
   const {
