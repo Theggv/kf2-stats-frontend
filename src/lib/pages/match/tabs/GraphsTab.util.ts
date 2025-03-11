@@ -48,7 +48,7 @@ export const graphColors = [
 export function prepareLabels(waves: MatchWave[]): string[] {
   return waves.map((wave) => {
     if (wave.attempt > 1) {
-      return `Wave ${wave.wave} (Attempt ${wave.attempt})`;
+      return `Wave ${wave.wave} (#${wave.attempt})`;
     }
 
     return `Wave ${wave.wave}`;
