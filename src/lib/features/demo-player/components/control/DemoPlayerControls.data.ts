@@ -33,12 +33,16 @@ export function prepareZedtimeDataset(wave: DemoRecordAnalysisWave) {
 }
 
 export function prepareDeathDataset(wave: DemoRecordAnalysisWave) {
-  if (!wave.player_events.hp_changes) return { dataset: [] };
+  if (!wave.player_events.deaths) return { dataset: [] };
 
-  const dataset = wave.player_events.deaths.map((x) => [
-    { x: x.tick, y: 1 },
-    { x: x.tick, y: 100 },
-  ]);
+  const wavePlayers = wave.player_events.perks.map((x) => x.user_index);
+
+  const dataset = wave.player_events.deaths
+    .filter((x) => wavePlayers.includes(x.user_index))
+    .map((x) => [
+      { x: x.tick, y: 1 },
+      { x: x.tick, y: 100 },
+    ]);
 
   return { dataset };
 }

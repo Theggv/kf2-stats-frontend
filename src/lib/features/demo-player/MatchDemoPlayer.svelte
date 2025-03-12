@@ -2,9 +2,8 @@
   import { Icon } from 'svelte-icons-pack';
   import type { DemoRecordAnalysis } from '$lib/api/sessions/demo';
   import { AutoScroll } from '$lib/components/auto-scroll';
-  import { writable } from 'svelte/store';
   import { tickToTime } from './utils';
-  import { getControlStore, getDemoRecordStore } from './MatchDemoPlayer.store';
+  import { getDemoRecordStore } from './MatchDemoPlayer.store';
   import { onMount } from 'svelte';
   import { ActionIcon } from '@svelteuidev/core';
   import { AiOutlinePause } from 'svelte-icons-pack/ai';
@@ -12,7 +11,6 @@
   import { CgPlayBackwards, CgPlayForwards } from 'svelte-icons-pack/cg';
   import PlayerState from './components/player/PlayerState.svelte';
   import {
-    getKillEvents,
     getLastHealthEvent,
     getLastBuffEvent,
     prepareMajorEventsData,
@@ -21,11 +19,17 @@
   } from './MatchDemoPlayer.data';
   import { DemoPlayerControls } from './components/control';
   import {
-    GlobalZedsLeftEvent,
+    ConnectionEvent,
     GlobalZedTimeEvent,
+    HuskRageEvent,
+    PlayerBuffsEvent,
+    PlayerHealthEvent,
     PlayerZedKillEvent,
+    WaveProgressEvent,
+    WaveStateEvent,
   } from './components/events';
   import { SelectWaves } from './components/select-waves';
+  import { SelectEvents } from './components/select-events';
 
   export let data: DemoRecordAnalysis;
   $: users = data.players;
@@ -43,6 +47,7 @@
     currentTickWithOffset,
   } = store.control;
 
+  const { feed: eventsFeed, ticksSinceLastZt, eventFilter } = store.events;
   const { onlyLarges, filtered: killEvents } = store.events.kills;
 
   $: majorEvents = prepareMajorEventsData($currentTick, $selectedWave);
@@ -111,17 +116,67 @@
     </div>
 
     <div class="events">
-      <div class="title">Events</div>
+      <div class="title">
+        <div>Events</div>
+        <SelectEvents bind:value={$eventFilter} />
+      </div>
 
-      <GlobalZedsLeftEvent
+      <WaveProgressEvent
         offset={$controlRange.start_tick}
-        event={majorEvents.zedsLeft}
-      />
-      <GlobalZedTimeEvent
+        zedsLeft={majorEvents.zedsLeft}
         tick={$currentTick}
-        offset={$controlRange.start_tick}
-        event={majorEvents.zedtime}
+        ticksSinceLastZt={$ticksSinceLastZt}
       />
+
+      <div class="content">
+        {#each $eventsFeed as event (event)}
+          {#if event.type === 'wave-started' || event.type === 'wave-ended'}
+            <WaveStateEvent
+              offset={$controlRange.start_tick}
+              tick={event.from}
+              started={event.type === 'wave-started'}
+            />
+          {:else if event.type === 'zedtime'}
+            <GlobalZedTimeEvent
+              offset={$controlRange.start_tick}
+              tick={$currentTick}
+              event={event.payload}
+            />
+          {:else}
+            {@const profile = getUserProfileByUserIndex(
+              event.payload.user_index,
+              users
+            )}
+
+            {#if event.type === 'connect' || event.type === 'death'}
+              <ConnectionEvent
+                offset={$controlRange.start_tick}
+                tick={event.from}
+                type={event.type === 'connect' ? event.payload.type : 3}
+                {profile}
+              />
+            {:else if event.type === 'husk_r'}
+              <HuskRageEvent
+                offset={$controlRange.start_tick}
+                event={event.payload}
+                {profile}
+              />
+            {:else if event.type === 'buffs'}
+              <PlayerBuffsEvent
+                offset={$controlRange.start_tick}
+                event={event.payload}
+                {profile}
+              />
+            {:else if event.type === 'health'}
+              <PlayerHealthEvent
+                offset={$controlRange.start_tick}
+                event={event.payload}
+                {profile}
+              />
+            {/if}
+          {/if}
+        {/each}
+      </div>
     </div>
 
     <div class="kill-feed">
@@ -256,8 +311,22 @@
     flex-direction: column;
     gap: 0.25rem;
 
-    padding-right: 1rem;
+    padding-right: 0.5rem;
     border-right: 2px solid rgb(255 255 255 / 0.1);
+
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .events > .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .events > .content {
+    max-height: 300px;
+    gap: 0.125rem;
   }
 
   .kill-feed {

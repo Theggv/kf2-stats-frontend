@@ -1,11 +1,10 @@
 <script lang="ts">
   import type { DemoRecordAnalysisZedtime } from '$lib/api/sessions/demo';
-  import type { MajorEventsData } from '../../MatchDemoPlayer.data';
   import { tickToTime } from '../../utils';
 
   export let tick: number;
   export let offset: number;
-  export let event: MajorEventsData['zedtime'];
+  export let event: DemoRecordAnalysisZedtime;
 
   function getExtendsCount(zt: DemoRecordAnalysisZedtime, tick: number) {
     const meta = zt.meta_data;
@@ -25,96 +24,66 @@
 
     return ticks;
   }
+
+  $: completed = tick > event.meta_data.end_tick;
+
+  $: duration = completed
+    ? event.meta_data.duration
+    : (tick - event.meta_data.start_tick) / 100;
+  $: extends_count = getExtendsCount(event, tick);
+  $: ticks = getTicks(event, tick);
 </script>
 
-{#if event.current}
-  {@const zt = event.current}
-  {@const duration = (tick - zt.meta_data.start_tick) / 100}
-  {@const extends_count = getExtendsCount(zt, tick)}
-  {@const ticks = getTicks(zt, tick)}
-
-  <div class="root">
-    <div class="time">
-      {tickToTime(zt.meta_data.start_tick - offset, true)}
-    </div>
-    <div class="content">
-      <div class="item">
-        <div class="name">Zedtime Started</div>
-        {#if event.ticksSinceLast > 0}
-          <div class="since-last">
-            <div class="name">Time since last zedtime</div>
-            <div class="time">{tickToTime(event.ticksSinceLast, true)}</div>
-          </div>
+<div class="root">
+  <div class="time">
+    {#if completed}
+      {tickToTime(event.meta_data.start_tick - offset, true)}
+      -
+      {tickToTime(event.meta_data.end_tick - offset, true)}
+    {:else}
+      {tickToTime(event.meta_data.start_tick - offset, true)}
+    {/if}
+  </div>
+  <div class="content">
+    <div class="item">
+      <div class="name">
+        Zedtime
+        {#if completed}
+          Ended
+        {:else}
+          Started
         {/if}
       </div>
-      <div class="item">
-        <div>{duration.toFixed(2)}s,</div>
-        <div>{extends_count} extends</div>
-        {#if ticks.length}
-          ({ticks.map((x) => `${x.toFixed(2)}`).join(', ')})
-        {/if}
-      </div>
-      <div class="item">
-        <div>Kills: {zt.large_kills} larges,</div>
-        <div>{zt.husk_kills} husks,</div>
-        <div>{zt.total_kills} total</div>
-      </div>
+    </div>
+    <div class="item">
+      <div>{duration.toFixed(2)}s,</div>
+      <div>{extends_count} extends</div>
+      {#if ticks.length}
+        ({ticks.map((x) => `${x.toFixed(2)}`).join(', ')})
+      {/if}
+    </div>
+    <div class="item">
+      <div>Kills: {event.large_kills} larges,</div>
+      <div>{event.husk_kills} husks,</div>
+      <div>{event.total_kills} total</div>
     </div>
   </div>
-{:else if event.previous}
-  {@const zt = event.previous}
-  {@const ticks = getTicks(zt, tick)}
-
-  <div class="root">
-    <div class="time">
-      {tickToTime(zt.meta_data.end_tick - offset, true)}
-    </div>
-    <div class="content">
-      <div class="item">
-        <div class="name">Zedtime Ended</div>
-        <div class="since-last">
-          <div class="name">Time since last zedtime</div>
-          <div class="time">{tickToTime(event.ticksSinceLast, true)}</div>
-        </div>
-      </div>
-      <div class="item">
-        <div>{zt.meta_data.duration.toFixed(2)}s,</div>
-        <div>{zt.meta_data.extends_count} extends</div>
-        {#if ticks.length}
-          ({ticks.map((x) => `${x.toFixed(2)}`).join(', ')})
-        {/if}
-      </div>
-      <div class="item">
-        <div>Kills: {zt.large_kills} larges,</div>
-        <div>{zt.husk_kills} husks,</div>
-        <div>{zt.total_kills} total</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="root">
-    <div class="time">
-      {tickToTime(event.previous.meta_data.start_tick - offset, true)}
-    </div>
-    <div class="name">Zedtime Started</div>
-  </div>
-{/if}
+</div>
 
 <style>
   .root {
+    padding: 0.25rem 0.25rem;
     display: grid;
-    grid-template-columns: min-content 1fr auto;
+    grid-template-columns: max-content 1fr auto;
     gap: 0.5rem;
     border-radius: 0.25rem;
     font-size: 14px;
+    background-color: rgb(255 255 255 / 0.1);
   }
 
-  .since-last {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-    justify-content: flex-end;
-    flex: 1;
+  .time {
+    font-size: 12px;
+    font-weight: bold;
   }
 
   .name {

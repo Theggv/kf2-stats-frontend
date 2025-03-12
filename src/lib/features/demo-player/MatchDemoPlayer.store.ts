@@ -3,7 +3,14 @@ import type {
   DemoRecordAnalysisWave,
 } from '$lib/api/sessions/demo';
 import { derived, get, writable } from 'svelte/store';
-import { getKillEvents } from './MatchDemoPlayer.data';
+import {
+  clearBuffEvents,
+  clearHealthEvents,
+  getKillEvents,
+  prepareWaveEventsFeed,
+  type EventUnion,
+} from './MatchDemoPlayer.data';
+import { findLastLowerIndex } from './utils';
 
 export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
   const demo = writable(demoRecord);
@@ -24,6 +31,25 @@ export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
     ([wave, tick, onlyLarges]) => getKillEvents(wave, tick, onlyLarges)
   );
 
+  const eventFilter = writable<EventUnion['type'][]>([]);
+
+  const clearedData = derived([selectedWave], ([wave]) => ({
+    buffs: clearBuffEvents(wave),
+    hp_changes: clearHealthEvents(wave),
+  }));
+
+  const eventsFeed = derived(
+    [
+      selectedWave,
+      clearedData,
+      control.currentTick,
+      eventFilter,
+      selectedUserIndexes,
+    ],
+    ([wave, clearedData, tick, eventFilter, playerFilter]) =>
+      prepareWaveEventsFeed(wave, clearedData, tick, eventFilter, playerFilter)
+  );
+
   demo.subscribe((demo) => {
     selectedUserIndexes.set([]);
     selectedWaveIdx.set(0);
@@ -36,6 +62,43 @@ export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
     selectedWave,
     selectedUserIndexes,
     events: {
+      eventFilter,
+      ticksSinceLastZt: derived(
+        [selectedWave, control.currentTick],
+        ([wave, tick]) => {
+          if (!wave) return 0;
+
+          const idx = findLastLowerIndex(
+            wave?.zedtimes,
+            ({ meta_data: { start_tick, end_tick } }, needle) => {
+              if (needle >= start_tick && needle <= end_tick) return 0;
+
+              return needle < start_tick ? 1 : -1;
+            },
+            tick
+          );
+
+          if (idx < 0) return 0;
+
+          const zt = wave.zedtimes[idx];
+          if (!zt) return 0;
+
+          if (
+            idx > 0 &&
+            tick >= zt.meta_data.start_tick &&
+            tick <= zt.meta_data.end_tick
+          ) {
+            const prev = wave.zedtimes[idx - 1];
+
+            return zt.meta_data.start_tick - prev.meta_data.end_tick;
+          }
+
+          return tick - zt.meta_data.end_tick;
+        }
+      ),
+      feed: derived([eventsFeed], ([feed]) =>
+        feed.reverse().filter((_, i) => i < 10)
+      ),
       kills: {
         onlyLarges,
         data: killEvents,

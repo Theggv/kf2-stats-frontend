@@ -52,7 +52,7 @@ export function getZedName(zed: number) {
 
 export function findFirstGreaterIndex<T>(
   data: T[],
-  key: (item: T) => number,
+  predicate: (item: T, needle: number) => number,
   needle: number
 ) {
   if (!data.length) return -1;
@@ -63,16 +63,16 @@ export function findFirstGreaterIndex<T>(
 
   while (lo <= hi) {
     mid = (lo + hi) >> 1;
-    const value = key(data[mid]);
+    const condition = predicate(data[mid], needle);
 
-    if (value === needle) {
+    if (!condition) {
       for (let i = mid - 1; i >= lo; i--) {
-        if (key(data[i]) === needle) mid = i;
+        if (!predicate(data[i], needle)) mid = i;
         else break;
       }
 
       return mid;
-    } else if (value < needle) lo = mid + 1;
+    } else if (condition < 0) lo = mid + 1;
     else hi = mid - 1;
   }
 
@@ -83,7 +83,7 @@ export function findFirstGreaterIndex<T>(
 
 export function findLastLowerIndex<T>(
   data: T[],
-  key: (item: T) => number,
+  predicate: (item: T, needle: number) => number,
   needle: number
 ) {
   if (!data.length) return -1;
@@ -94,16 +94,16 @@ export function findLastLowerIndex<T>(
 
   while (lo <= hi) {
     mid = (lo + hi) >> 1;
-    const value = key(data[mid]);
+    const condition = predicate(data[mid], needle);
 
-    if (value === needle) {
+    if (!condition) {
       for (let i = mid + 1; i <= hi; i++) {
-        if (key(data[i]) === needle) mid = i;
+        if (!predicate(data[i], needle)) mid = i;
         else break;
       }
 
       return mid;
-    } else if (value < needle) lo = mid + 1;
+    } else if (condition < 0) lo = mid + 1;
     else hi = mid - 1;
   }
 
@@ -112,23 +112,23 @@ export function findLastLowerIndex<T>(
 
 export function findRangeIndex<T>(
   data: T[],
-  key: (item: T) => number,
+  predicate: (item: T, needle: number) => number,
   from: number,
   to: number
 ) {
   return {
-    start: findFirstGreaterIndex(data, key, from),
-    end: findLastLowerIndex(data, key, to),
+    start: findFirstGreaterIndex(data, predicate, from),
+    end: findLastLowerIndex(data, predicate, to),
   };
 }
 
 export function filterByRange<T>(
   data: T[],
-  key: (item: T) => number,
+  predicate: (item: T, needle: number) => number,
   from: number,
   to: number
 ) {
-  const range = findRangeIndex(data, key, from, to);
+  const range = findRangeIndex(data, predicate, from, to);
 
   if (range.start < 0 || range.end < 0) return [];
 

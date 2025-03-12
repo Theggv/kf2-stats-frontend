@@ -73,7 +73,7 @@ export const externalTooltipHandler =
       if (difficulty) {
         const idx = findLastLowerIndex(
           difficulty.data,
-          (item: any) => item.x,
+          (item: any, needle) => item.x - needle,
           selectedTick
         );
         const nearest = difficulty.data[idx] as Point;
