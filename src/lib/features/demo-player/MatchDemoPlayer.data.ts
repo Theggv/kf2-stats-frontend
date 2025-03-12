@@ -1,183 +1,138 @@
-import type { UserProfile } from '$lib/api/common';
 import type {
-  DemoRecordAnalysis,
-  DemoRecordAnalysisPlayer,
   DemoRecordAnalysisWave,
-  DemoRecordAnalysisWaveBuff,
-  DemoRecordAnalysisWaveHpChange,
-  DemoRecordAnalysisWaveZedtime,
+  DemoRecordAnalysisZedtime,
+  DemoRecordParsedEventBuff,
+  DemoRecordParsedEventHpChange,
+  DemoRecordParsedPlayer,
 } from '$lib/api/sessions/demo';
+import { filterByRange, findLastLowerIndex } from './utils';
 
-export function findEvents<T extends { tick: number }>(
-  data: T[],
-  tick: number,
-  duration: number
-): { start: number; end: number } {
-  if (data.length == 0) return { start: -1, end: 0 };
-
-  function binarySearch<T extends { tick: number }>(
-    data: T[],
-    tick: number,
-    preferMin: boolean
-  ) {
-    let res = data[0].tick;
-    let start = 0;
-    let end = data.length - 1;
-    let mid = 0;
-
-    while (start <= end) {
-      mid = (start + end) >> 1;
-      const value = data[mid].tick;
-
-      if (Math.abs(value - tick) < Math.abs(res - tick)) {
-        res = value;
-      } else if (Math.abs(value - tick) == Math.abs(res - tick)) {
-        res = preferMin ? Math.min(value, res) : Math.max(value, res);
-      }
-
-      if (value == tick) return mid;
-      else if (value < tick) start = mid + 1;
-      else end = mid - 1;
-    }
-
-    return mid;
-  }
-
-  const startIdx = binarySearch(data, tick - duration, false);
-  const endIdx = binarySearch(data, tick, true);
-
-  return { start: startIdx, end: endIdx };
+export function getUserProfileByUserIndex(
+  userIndex: number,
+  players: DemoRecordParsedPlayer[]
+) {
+  return players.find((x) => x.user_index === userIndex)?.profile;
 }
 
 export function getWavePlayers(
-  demo: DemoRecordAnalysis,
-  selectedWave: DemoRecordAnalysisWave | undefined
+  selectedWave: DemoRecordAnalysisWave | undefined,
+  players: DemoRecordParsedPlayer[]
 ) {
-  if (!selectedWave || !selectedWave.perks || !selectedWave.perks.length) {
+  if (!selectedWave || !selectedWave.player_events.perks.length) {
     return [];
   }
 
-  const perks = selectedWave.perks;
-  const waveUserIds = perks.map((x) => x.user_id);
+  const perks = selectedWave.player_events.perks;
+  const waveUserIds = perks.map((x) => x.user_index);
 
-  return demo.players.filter((x) => waveUserIds.includes(x.user_id));
+  return players.filter((x) => waveUserIds.includes(x.user_index));
 }
 
-export function getPlayerPerk(
-  userId: number,
-  selectedWave: DemoRecordAnalysisWave
-) {
-  return selectedWave.perks!.find((x) => x.user_id === userId)!.perk;
-}
+export type PreparedPlayerWaveData = {
+  perk: number;
 
-export function getUserProfile(
-  player: DemoRecordAnalysisPlayer,
-  users: UserProfile[]
-) {
-  return users.find((x) => x.auth_id === player.unique_id);
-}
+  profile?: DemoRecordParsedPlayer['profile'];
 
-export function getUserProfileByUserId(
-  userId: number,
-  data: DemoRecordAnalysis,
-  users: UserProfile[]
-) {
-  const player = data.players.find((x) => x.user_id === userId);
-  if (!player) return undefined;
+  health: DemoRecordParsedEventHpChange[];
+  buffs: DemoRecordParsedEventBuff[];
+};
 
-  return getUserProfile(player, users);
+export function getPlayerWaveData(
+  selectedWave: DemoRecordAnalysisWave | undefined,
+  players: DemoRecordParsedPlayer[]
+) {
+  const lookup = new Map<number, PreparedPlayerWaveData>();
+
+  if (!selectedWave) return lookup;
+
+  for (const ev of selectedWave.player_events.perks) {
+    const player = players.find((x) => x.user_index === ev.user_index);
+
+    const health = selectedWave.player_events.hp_changes.filter(
+      (x) => x.user_index === ev.user_index
+    );
+
+    const buffs = selectedWave.player_events.buffs.filter(
+      (x) => x.user_index === ev.user_index
+    );
+
+    const death = selectedWave.player_events.deaths.find(
+      (x) => x.user_index === ev.user_index
+    );
+
+    if (death) {
+      health.push({
+        user_index: ev.user_index,
+        tick: death.tick,
+        armor: 0,
+        health: 0,
+      });
+    }
+
+    lookup.set(ev.user_index, {
+      perk: ev.perk,
+
+      profile: player?.profile,
+      health,
+      buffs,
+    });
+  }
+
+  return lookup;
 }
 
 export function getKillEvents(
-  selectedWave: DemoRecordAnalysisWave | undefined,
+  wave: DemoRecordAnalysisWave | undefined,
   currentTick: number,
   onlyLarges: boolean
 ) {
-  if (!selectedWave || !selectedWave.kills) return [];
+  if (!wave || !wave.player_events.kills.length) return [];
 
-  return selectedWave.kills
+  const to = currentTick - 1000;
+
+  return filterByRange(
+    wave.player_events.kills,
+    ({ tick }) => tick,
+    to,
+    currentTick
+  )
     .filter((kill) => {
-      if (onlyLarges && ![7, 8, 9].includes(kill.zed)) return false;
+      if (onlyLarges && !(kill.zed >= 7 && kill.zed <= 9)) return false;
 
-      return kill.tick >= currentTick - 1000 && kill.tick <= currentTick;
+      return true;
     })
     .reverse()
     .filter((_, idx) => idx < 8);
 }
 
 export function getLastHealthEvent(
-  userId: number,
   currentTick: number,
-  data: ReturnType<typeof prepareHealthData>
+  data: PreparedPlayerWaveData['health']
 ) {
-  const userEvents = data.get(userId);
-  if (!userEvents || !userEvents.length) return { health: 0, armor: 0 };
+  const idx = findLastLowerIndex(data, ({ tick }) => tick, currentTick);
+  const item = data[Math.max(0, idx)];
 
-  let last = userEvents[0];
+  if (!item) return { health: 0, armor: 0 };
 
-  for (let i = 0; i < userEvents.length; i++) {
-    if (userEvents[i].tick < currentTick) last = userEvents[i];
-    else break;
-  }
-
-  return { health: last.health, armor: last.armor };
+  return { health: item.health, armor: item.armor };
 }
 
 export function getLastBuffEvent(
-  userId: number,
   currentTick: number,
-  data: ReturnType<typeof prepareBuffsData>
+  data: PreparedPlayerWaveData['buffs']
 ) {
-  const userEvents = data.get(userId);
-  if (!userEvents || !userEvents.length) return 0;
+  const idx = findLastLowerIndex(data, ({ tick }) => tick, currentTick);
+  const item = data[Math.max(0, idx)];
 
-  let last = userEvents[0];
+  if (!item) return 0;
 
-  for (let i = 0; i < userEvents.length; i++) {
-    if (userEvents[i].tick < currentTick) last = userEvents[i];
-    else break;
-  }
-
-  return last.max_buffs;
-}
-
-export function prepareHealthData(wave: DemoRecordAnalysisWave | undefined) {
-  const map = new Map<
-    number,
-    Omit<DemoRecordAnalysisWaveHpChange, 'user_id'>[]
-  >();
-
-  if (!wave || !wave.hp_changes) return map;
-
-  for (const event of wave.hp_changes) {
-    const { user_id, ...rest } = event;
-
-    if (map.get(user_id)) map.get(user_id)!.push(rest);
-    else map.set(user_id, [rest]);
-  }
-
-  return map;
-}
-
-export function prepareBuffsData(wave: DemoRecordAnalysisWave | undefined) {
-  const map = new Map<number, Omit<DemoRecordAnalysisWaveBuff, 'user_id'>[]>();
-
-  if (!wave || !wave.buffs) return map;
-
-  for (const event of wave.buffs) {
-    const { user_id, ...rest } = event;
-
-    if (map.get(user_id)) map.get(user_id)!.push(rest);
-    else map.set(user_id, [rest]);
-  }
-
-  return map;
+  return item.max_buffs;
 }
 
 export type MajorEventsData = {
   zedtime: {
-    current?: DemoRecordAnalysisWaveZedtime;
-    previous?: DemoRecordAnalysisWaveZedtime;
+    current?: DemoRecordAnalysisZedtime;
+    previous?: DemoRecordAnalysisZedtime;
     ticksSinceLast: number;
     largesKilled: number;
   };
@@ -195,39 +150,52 @@ export function prepareMajorEventsData(
 
   if (!wave) return res;
 
-  if (wave.zed_times) {
-    const idx = wave.zed_times.findIndex(
-      (x) => currentTick >= x.start_tick && currentTick <= x.end_tick
+  if (wave.zedtimes) {
+    const idx = wave.zedtimes.findIndex(
+      (x) =>
+        currentTick >= x.meta_data.start_tick &&
+        currentTick <= x.meta_data.end_tick
     );
 
     if (idx >= 0) {
-      res.zedtime.current = wave.zed_times[idx];
+      res.zedtime.current = wave.zedtimes[idx];
 
-      res.zedtime.largesKilled = (wave.kills || []).filter(
-        (x) =>
-          [7, 8, 9].includes(x.zed) &&
-          x.tick >= res.zedtime.current!.start_tick &&
-          x.tick <= currentTick
-      ).length;
+      res.zedtime.largesKilled = filterByRange(
+        wave.player_events.kills,
+        ({ tick }) => tick,
+        res.zedtime.current.meta_data.start_tick,
+        currentTick
+      ).filter((x) => [7, 8, 9].includes(x.zed)).length;
     }
 
     if (idx > 0) {
       res.zedtime.ticksSinceLast =
-        wave.zed_times[idx].start_tick - wave.zed_times[idx - 1].end_tick;
+        wave.zedtimes[idx].meta_data.start_tick -
+        wave.zedtimes[idx - 1].meta_data.end_tick;
 
-      res.zedtime.previous = wave.zed_times[idx - 1];
+      res.zedtime.previous = wave.zedtimes[idx - 1];
     } else {
-      const lastZt = wave.zed_times.findLast((x) => currentTick > x.end_tick);
+      const lastZt = wave.zedtimes.findLast(
+        (x) => currentTick > x.meta_data.end_tick
+      );
 
       if (lastZt) {
         res.zedtime.previous = lastZt;
-        res.zedtime.ticksSinceLast = currentTick - lastZt.end_tick;
+        res.zedtime.ticksSinceLast = currentTick - lastZt.meta_data.end_tick;
       }
     }
   }
 
-  res.zedsLeft =
-    wave.zeds_left?.findLast((x) => x.tick <= currentTick)?.zeds_left || 0;
+  if (wave.zeds_left && wave.zeds_left.length) {
+    const idx = findLastLowerIndex(
+      wave.zeds_left,
+      ({ tick }) => tick,
+      currentTick
+    );
+    const item = wave.zeds_left[Math.max(0, idx)];
+
+    res.zedsLeft = item.zeds_left;
+  }
 
   return res;
 }

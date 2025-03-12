@@ -4,25 +4,20 @@
   import { AutoScroll } from '$lib/components/auto-scroll';
   import { writable } from 'svelte/store';
   import { tickToTime } from './utils';
-  import { getMatchDemoPlayerStore } from './MatchDemoPlayer.store';
+  import { getControlStore, getDemoRecordStore } from './MatchDemoPlayer.store';
   import { onMount } from 'svelte';
-  import type { UserProfile } from '$lib/api/common';
   import { ActionIcon } from '@svelteuidev/core';
   import { AiOutlinePause } from 'svelte-icons-pack/ai';
   import { BsPlayFill } from 'svelte-icons-pack/bs';
   import { CgPlayBackwards, CgPlayForwards } from 'svelte-icons-pack/cg';
   import PlayerState from './components/player/PlayerState.svelte';
   import {
-    prepareHealthData,
-    prepareBuffsData,
-    getWavePlayers,
     getKillEvents,
     getLastHealthEvent,
     getLastBuffEvent,
-    getUserProfile,
-    getPlayerPerk,
-    getUserProfileByUserId,
     prepareMajorEventsData,
+    getPlayerWaveData,
+    getUserProfileByUserIndex,
   } from './MatchDemoPlayer.data';
   import { DemoPlayerControls } from './components/control';
   import {
@@ -30,42 +25,43 @@
     GlobalZedTimeEvent,
     PlayerZedKillEvent,
   } from './components/events';
+  import { SelectWaves } from './components/select-waves';
 
   export let data: DemoRecordAnalysis;
-  export let users: UserProfile[];
+  $: users = data.players;
 
-  const control = getMatchDemoPlayerStore();
-  const { speed, playing, currentTick } = control;
+  const store = getDemoRecordStore(data);
+  $: store.demo.set(data);
 
-  const selectedWaveIdx = writable<number>(0);
+  const { selectedWave, selectedWaveIdx, selectedUserIndexes } = store;
 
-  $: selectedWave = data.waves.length
-    ? data.waves[$selectedWaveIdx]
-    : undefined;
+  const {
+    range: controlRange,
+    speed,
+    playing,
+    currentTick,
+    currentTickWithOffset,
+  } = store.control;
 
-  $: {
-    selectedWave &&
-      control.range.set({
-        start_tick: selectedWave.start_tick,
-        end_tick: selectedWave.end_tick,
-      });
+  const { onlyLarges, filtered: killEvents } = store.events.kills;
+
+  $: majorEvents = prepareMajorEventsData($currentTick, $selectedWave);
+
+  $: wavePlayers = getPlayerWaveData($selectedWave, users);
+
+  function handleClickUser(idx: number) {
+    if ($selectedUserIndexes.includes(idx)) {
+      $selectedUserIndexes = $selectedUserIndexes.filter((x) => x !== idx);
+    } else {
+      $selectedUserIndexes = [...$selectedUserIndexes, idx];
+    }
   }
-
-  $: majorEvents = prepareMajorEventsData($currentTick, selectedWave);
-
-  $: healthData = prepareHealthData(selectedWave);
-  $: buffsData = prepareBuffsData(selectedWave);
-
-  $: wavePlayers = getWavePlayers(data, selectedWave);
-
-  $: killEvents = getKillEvents(selectedWave, $currentTick, onlyLarges);
-  $: onlyLarges = false;
 
   onMount(() => {
     function handleKeyDown(ev: KeyboardEvent) {
       if (ev.key === ' ') {
-        if ($playing) control.pause();
-        else control.play();
+        if ($playing) store.control.pause();
+        else store.control.play();
       }
     }
 
@@ -78,51 +74,35 @@
 </script>
 
 <AutoScroll>
-  <div role="none" class="root">
+  <div class="root">
     <div class="waves">
-      <div class="title">Waves</div>
-
-      <div class="content">
-        {#each data.waves as wave, index (`${data.header.session_id} ${wave.start_tick}`)}
-          <div
-            class="item"
-            class:selected={$selectedWaveIdx === index}
-            role="button"
-            tabindex="0"
-            on:click={() => selectedWaveIdx.set(index)}
-            on:keypress={(e) => e.key === 'Enter' && selectedWaveIdx.set(index)}
-          >
-            <div class="number">Wave {wave.wave}</div>
-            <div class="period">
-              ({tickToTime(wave.start_tick)} - {tickToTime(wave.end_tick)})
-            </div>
-          </div>
-        {/each}
-      </div>
+      <SelectWaves
+        items={data.waves}
+        bind:selectedIndex={$selectedWaveIdx}
+        value={$selectedWave}
+      />
     </div>
+
+    <div class="header"></div>
 
     <div class="players">
       <div class="title">Players</div>
 
       <div class="content">
-        {#if selectedWave}
-          {#each wavePlayers as player (player.unique_id)}
-            {@const { health, armor } = getLastHealthEvent(
-              player.user_id,
-              $currentTick,
-              healthData
-            )}
+        {#if $selectedWave}
+          {#each wavePlayers as [user_index, player] (user_index)}
+            {@const hp = getLastHealthEvent($currentTick, player.health)}
+            {@const buffs = getLastBuffEvent($currentTick, player.buffs)}
 
-            {@const buffs = getLastBuffEvent(
-              player.user_id,
-              $currentTick,
-              buffsData
-            )}
             <PlayerState
-              profile={getUserProfile(player, users)}
-              perk={getPlayerPerk(player.user_id, selectedWave)}
-              {health}
-              {armor}
+              on:click={() => handleClickUser(user_index)}
+              on:keypress={(e) =>
+                e.key === 'Enter' && handleClickUser(user_index)}
+              selected={$selectedUserIndexes.includes(user_index)}
+              profile={player.profile}
+              perk={player.perk}
+              health={hp.health}
+              armor={hp.armor}
               {buffs}
             />
           {/each}
@@ -130,11 +110,18 @@
       </div>
     </div>
 
-    <div class="data">
+    <div class="events">
       <div class="title">Events</div>
 
-      <GlobalZedsLeftEvent event={majorEvents.zedsLeft} />
-      <GlobalZedTimeEvent event={majorEvents.zedtime} />
+      <GlobalZedsLeftEvent
+        offset={$controlRange.start_tick}
+        event={majorEvents.zedsLeft}
+      />
+      <GlobalZedTimeEvent
+        tick={$currentTick}
+        offset={$controlRange.start_tick}
+        event={majorEvents.zedtime}
+      />
     </div>
 
     <div class="kill-feed">
@@ -146,25 +133,26 @@
           <input
             id="checkbox-only-larges"
             type="checkbox"
-            bind:checked={onlyLarges}
+            bind:checked={$onlyLarges}
           />
         </div>
       </div>
 
-      {#if selectedWave}
-        {#each killEvents as kill, index (`${data.header.session_id} ${selectedWave.start_tick} ${index} ${JSON.stringify(kill)}`)}
+      {#if $selectedWave}
+        {#each $killEvents as kill, index (`${data.session_id} ${$selectedWave.meta_data.start_tick} ${index} ${JSON.stringify(kill)}`)}
           <PlayerZedKillEvent
+            offset={$selectedWave.meta_data.start_tick}
             event={kill}
-            user={getUserProfileByUserId(kill.user_id, data, users)}
+            user={getUserProfileByUserIndex(kill.user_index, users)}
           />
         {/each}
       {/if}
     </div>
 
     <div class="progress">
-      {#if selectedWave}
+      {#if $selectedWave}
         <DemoPlayerControls
-          wave={selectedWave}
+          wave={$selectedWave}
           bind:currentTick={$currentTick}
         />
       {/if}
@@ -173,19 +161,22 @@
     <div class="control">
       <div class="button">
         {#if $playing}
-          <ActionIcon on:click={() => control.pause()}>
+          <ActionIcon on:click={() => store.control.pause()}>
             <Icon src={AiOutlinePause} size={40} />
           </ActionIcon>
         {:else}
-          <ActionIcon on:click={() => control.play()}>
+          <ActionIcon on:click={() => store.control.play()}>
             <Icon src={BsPlayFill} size={40} />
           </ActionIcon>
         {/if}
       </div>
 
       <div class="timer">
-        {#if selectedWave}
-          {tickToTime($currentTick)} / {tickToTime(selectedWave.end_tick)}
+        {#if $selectedWave}
+          {tickToTime($currentTickWithOffset)} / {tickToTime(
+            $selectedWave.meta_data.end_tick -
+              $selectedWave.meta_data.start_tick
+          )}
         {/if}
       </div>
 
@@ -208,35 +199,27 @@
   .root {
     display: grid;
     grid-template:
-      'waves players data kill-feed' 400px
-      'progress progress progress progress' 1px
-      'control control control control' auto
-      / 200px 300px 1fr 300px;
+      'waves events kill-feed' auto
+      'players events kill-feed' 350px
+      'progress progress progress' 1px
+      'control control control' auto
+      / 300px 1fr 300px;
 
-    gap: 0.25rem 1rem;
+    gap: 0.5rem 1rem;
   }
 
-  .waves,
-  .players {
-    max-height: 300px;
-  }
+  .root > .header {
+    grid-area: header;
+    padding: 0.5rem;
 
-  .waves {
-    grid-area: waves;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
-
-    border-right: 2px solid rgb(255 255 255 / 0.1);
   }
 
   .title {
     font-weight: bold;
     font-size: 16px;
-  }
-
-  .waves > .title {
-    padding: 0.25rem 0.5rem;
   }
 
   .content {
@@ -247,42 +230,27 @@
     padding-right: 0.5rem;
   }
 
-  .waves > .content > .item {
-    padding: 0.25rem 0.5rem;
-    display: grid;
-    grid-template-columns: 8ch auto;
-    align-items: center;
-
-    cursor: pointer;
-    border-radius: 0.25rem;
-    user-select: none;
-  }
-
-  .waves > .content > .item > .period {
-    font-size: 12px;
-  }
-
-  .waves > .content > .item:hover {
-    background-color: rgb(255 255 255 / 0.1);
-  }
-
-  .waves > .content > .item.selected {
-    background-color: rgb(255 255 255 / 0.15);
-  }
-
   .players {
     grid-area: players;
 
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
 
-    padding-right: 1rem;
+    padding-right: 0.5rem;
     border-right: 2px solid rgb(255 255 255 / 0.1);
   }
 
-  .data {
-    grid-area: data;
+  .players > .title {
+    padding-left: 0.5rem;
+  }
+
+  .players > .content {
+    max-height: 300px;
+  }
+
+  .events {
+    grid-area: events;
 
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { MajorEventsData } from '../../MatchDemoPlayer.data';
 
+  export let offset: number;
   export let event: MajorEventsData['zedsLeft'];
 </script>
 

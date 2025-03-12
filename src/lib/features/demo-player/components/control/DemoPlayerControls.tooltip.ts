@@ -1,42 +1,5 @@
-import type {
-  Chart,
-  ChartDataset,
-  Point,
-  ScriptableTooltipContext,
-} from 'chart.js';
-import { tickToTime } from '../../utils';
-
-function findNearest(
-  dataset: ChartDataset<'scatter', Point[]>,
-  target: number
-) {
-  if (dataset.data.length == 0) return null;
-
-  let res = dataset.data[0];
-  let start = 0;
-  let end = dataset.data.length - 1;
-
-  while (start <= end) {
-    let mid = (start + end) >> 1;
-    const value = dataset.data[mid];
-
-    if (Math.abs(value.x - target) < Math.abs(res.x - target)) {
-      res = value;
-    } else if (Math.abs(value.x - target) == Math.abs(res.x - target)) {
-      res = value.x > res.x ? value : res;
-    }
-
-    if (value.x == target) {
-      return value;
-    } else if (value.x < target) {
-      start = mid + 1;
-    } else {
-      end = mid - 1;
-    }
-  }
-
-  return res;
-}
+import type { Chart, Point, ScriptableTooltipContext } from 'chart.js';
+import { findLastLowerIndex, tickToTime } from '../../utils';
 
 const getOrCreateTooltip = (chart: Chart) => {
   let tooltipEl = chart.canvas.parentNode!.querySelector('div');
@@ -75,6 +38,7 @@ export const externalTooltipHandler =
     }
 
     const scale = chart.scales['x'];
+    const waveStartTick = scale.min;
     const selectedTick = Math.round(
       scale.getValueForPixel((chart as any).corsair.x) || 0
     );
@@ -87,7 +51,9 @@ export const externalTooltipHandler =
       timer.style.fontWeight = 'bold';
 
       const div = document.createElement('div');
-      div.appendChild(document.createTextNode(tickToTime(selectedTick)));
+      div.appendChild(
+        document.createTextNode(tickToTime(selectedTick - waveStartTick))
+      );
 
       timer.appendChild(div);
 
@@ -105,14 +71,19 @@ export const externalTooltipHandler =
       );
 
       if (difficulty) {
-        const nearest = findNearest(difficulty as any, selectedTick);
+        const idx = findLastLowerIndex(
+          difficulty.data,
+          (item: any) => item.x,
+          selectedTick
+        );
+        const nearest = difficulty.data[idx] as Point;
 
         if (nearest) {
           const name = document.createElement('div');
           name.appendChild(document.createTextNode('Difficulty'));
 
           const value = document.createElement('div');
-          value.innerHTML = `${nearest.y}`;
+          value.innerHTML = `${(nearest.y - 10).toFixed(2)}`;
 
           table.appendChild(name);
           table.appendChild(value);
@@ -142,9 +113,9 @@ export const externalTooltipHandler =
         name.appendChild(document.createTextNode('Zedtime event'));
 
         const value = document.createElement('div');
-        value.innerHTML = `${tickToTime(start_tick)} - ${tickToTime(
-          end_tick
-        )} (${duration.toFixed(2)}s)`;
+        value.innerHTML = `${tickToTime(
+          start_tick - waveStartTick
+        )} - ${tickToTime(end_tick - waveStartTick)} (${duration.toFixed(2)}s)`;
 
         table.appendChild(name);
         table.appendChild(value);

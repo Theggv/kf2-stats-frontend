@@ -1,28 +1,127 @@
-export interface DemoRecordRawEvent {
-  tick: number;
-  event_type: number;
-  payload: any;
+import type { UserProfile } from '$lib/api/common';
+
+export interface DifficultyScore {
+  score: number;
+
+  wave_size_bonus: number;
+  speed_bonus: number;
+  zeds_bonus: number;
+  players_bonus: number;
+  zt_bonus: number;
 }
 
-export interface DemoRecordAnalysisPlayer {
-  user_id: number;
+export interface DifficultyAnalyticsDetails {
+  step: number;
+  period: number;
 
-  user_type: number;
-  unique_id: string;
+  buckets: DifficultyScore[];
 }
 
-export interface DemoRecordAnalysisWavePerk {
-  user_id: number;
-  perk: number;
+export interface DifficultyAnalytics {
+  overall: DifficultyScore;
+
+  details: DifficultyAnalyticsDetails;
 }
 
-export interface DemoRecordAnalysisWaveZedtime {
+export interface DemoRecordParsedPlayer {
+  user_index: number;
+
+  auth_id: string;
+  auth_type: number;
+
+  profile: UserProfile;
+}
+
+export interface DemoRecordParsedZedtime {
   start_tick: number;
   end_tick: number;
   ticks: number[];
 
   duration: number;
   extends_count: number;
+}
+
+export interface DemoRecordParsedWave {
+  wave: number;
+  attempt: number;
+
+  start_tick: number;
+  end_tick: number;
+}
+
+export interface DemoRecordParsedEventZedsLeft {
+  tick: number;
+  zeds_left: number;
+}
+
+export interface DemoRecordParsedEventPerkChange {
+  tick: number;
+
+  user_index: number;
+  perk: number;
+}
+
+export interface DemoRecordParsedEventDeath {
+  tick: number;
+
+  user_index: number;
+  cause: number;
+}
+
+export interface DemoRecordParsedEventKill {
+  tick: number;
+
+  user_index: number;
+  zed: number;
+}
+
+export interface DemoRecordParsedEventBuff {
+  tick: number;
+
+  user_index: number;
+  max_buffs: number;
+}
+
+export interface DemoRecordParsedEventHpChange {
+  tick: number;
+
+  user_index: number;
+  health: number;
+  armor: number;
+}
+
+export interface DemoRecordParsedEventConnection {
+  tick: number;
+
+  user_index: number;
+  type: number;
+}
+
+export interface DemoRecordParsedEventHuskRage {
+  tick: number;
+  user_index: number;
+}
+
+export interface DemoRecordParsedPlayerEvents {
+  connection_log: DemoRecordParsedEventConnection[];
+  perks: DemoRecordParsedEventPerkChange[];
+  kills: DemoRecordParsedEventKill[];
+  buffs: DemoRecordParsedEventBuff[];
+  deaths: DemoRecordParsedEventDeath[];
+  husk_rages: DemoRecordParsedEventHuskRage[];
+  hp_changes: DemoRecordParsedEventHpChange[];
+}
+
+export interface DemoRecordAnalysisWaveBuffsUptime {
+  user_index: number;
+  total_ticks: number;
+  percent: number;
+}
+
+export interface DemoRecordAnalysisZedtime {
+  meta_data: DemoRecordParsedZedtime;
+
+  ticks_since_last: number;
 
   total_kills: number;
   large_kills: number;
@@ -30,77 +129,83 @@ export interface DemoRecordAnalysisWaveZedtime {
   siren_kills: number;
 }
 
-export interface DemoRecordAnalysisWaveKill {
-  tick: number;
-
-  user_id: number;
-  zed: number;
+export interface Metric {
+  min: number;
+  max: number;
+  avg: number;
 }
 
-export interface DemoRecordAnalysisWaveBuff {
-  tick: number;
+export interface ZedtimeAnalytics {
+  total_zt_count: number;
 
-  user_id: number;
-  max_buffs: number;
+  first_zt_tick: Metric;
+  zt_duration_seconds: Metric;
+  time_between_zt_seconds: Metric;
+
+  avg_extends_count: number;
+  avg_extend_duration: number;
 }
 
-export interface DemoRecordAnalysisWaveZedsLeft {
-  tick: number;
+export interface DifficultyDetailed {
+  score: number;
 
+  wave_size_bonus: number;
+  speed_bonus: number;
+  zeds_bonus: number;
+  players_bonus: number;
+}
+
+export interface Summary {
+  wave_size: number;
   zeds_left: number;
+  completion_percent: number;
+
+  duration: number;
+  avg_kills_per_second: number;
+
+  difficulty: DifficultyDetailed;
+
+  total_killed: number;
+  trash_killed: number;
+  medium_killed: number;
+  large_killed: number;
+
+  trash_percent: number;
+  medium_percent: number;
+  large_percent: number;
 }
 
-export interface DemoRecordAnalysisWaveHpChange {
-  tick: number;
-
-  user_id: number;
-  health: number;
-  armor: number;
-}
-
-export interface DemoRecordAnalysisWaveBuffsUptime {
-  user_id: number;
-  total_ticks: number;
-  percent: number;
-}
-
-export interface DemoRecordAnalysisWaveDifficultyItem {
-  tick: number;
-
-  trash_kills: number;
-  medium_kills: number;
-  large_kills: number;
-}
-
-export interface DemoRecordAnalysisWaveDifficulty {
-  step: number;
-  period: number;
-  ticks: DemoRecordAnalysisWaveDifficultyItem[];
+export interface DemoRecordAnalysisWaveAnalytics {
+  summary: Summary;
+  difficulty: DifficultyAnalytics;
+  zedtime: ZedtimeAnalytics;
+  buffs_uptime: DemoRecordAnalysisWaveBuffsUptime[];
 }
 
 export interface DemoRecordAnalysisWave {
-  wave: number;
+  meta_data: DemoRecordParsedWave;
+  analytics: DemoRecordAnalysisWaveAnalytics;
 
-  start_tick: number;
-  end_tick: number;
+  zedtimes: DemoRecordAnalysisZedtime[];
+  zeds_left: DemoRecordParsedEventZedsLeft[];
 
-  raw_events?: DemoRecordRawEvent[];
-  perks?: DemoRecordAnalysisWavePerk[];
-  zed_times?: DemoRecordAnalysisWaveZedtime[];
-  kills?: DemoRecordAnalysisWaveKill[];
-  buffs?: DemoRecordAnalysisWaveBuff[];
-  zeds_left?: DemoRecordAnalysisWaveZedsLeft[];
+  player_events: DemoRecordParsedPlayerEvents;
+}
 
-  hp_changes?: DemoRecordAnalysisWaveHpChange[];
-  buffs_uptime?: DemoRecordAnalysisWaveBuffsUptime[];
-
-  difficulty: DemoRecordAnalysisWaveDifficulty;
+export interface DemoRecordAnalysisAnalytics {
+  summary: Summary;
+  zedtime: ZedtimeAnalytics;
+  difficulty: DifficultyAnalytics;
 }
 
 export interface DemoRecordAnalysis {
-  header: any;
+  protocol_version: number;
+  session_id: number;
+
   start_tick: number;
   end_tick: number;
-  players: DemoRecordAnalysisPlayer[];
+
+  analytics: DemoRecordAnalysisAnalytics;
+  players: DemoRecordParsedPlayer[];
   waves: DemoRecordAnalysisWave[];
 }

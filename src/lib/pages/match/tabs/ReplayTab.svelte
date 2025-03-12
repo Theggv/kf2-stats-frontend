@@ -5,12 +5,11 @@
 
   const store = getContext<ContextType>(ContextName);
   const { demo } = store.demo;
-  const { users } = store.match;
 </script>
 
 <div class="root">
   {#if $demo}
-    <MatchDemoPlayer data={$demo} users={$users} />
+    <MatchDemoPlayer data={$demo} />
   {/if}
 </div>
 

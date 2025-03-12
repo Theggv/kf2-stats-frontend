@@ -1,9 +1,10 @@
 <script lang="ts">
   import type { UserProfile } from '$lib/api/common';
-  import type { DemoRecordAnalysisWaveKill } from '$lib/api/sessions/demo';
+  import type { DemoRecordParsedEventKill } from '$lib/api/sessions/demo';
   import { tickToTime, getZedName } from '../../utils';
 
-  export let event: DemoRecordAnalysisWaveKill;
+  export let offset: number;
+  export let event: DemoRecordParsedEventKill;
   export let user: UserProfile | undefined;
 </script>
 
@@ -12,7 +13,7 @@
   class:medium={[10, 11, 12].includes(event.zed)}
   class:large={[7, 8, 9].includes(event.zed)}
 >
-  <div class="time">{tickToTime(event.tick, true)}</div>
+  <div class="time">{tickToTime(event.tick - offset, true)}</div>
   <div class="name">{user?.name}</div>
   <div class="zed">{getZedName(event.zed)}</div>
 </div>

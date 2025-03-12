@@ -1,61 +1,44 @@
-import type {
-  DemoRecordAnalysisWave,
-  DemoRecordAnalysisWaveDifficultyItem,
-} from '$lib/api/sessions/demo';
+import type { DemoRecordAnalysisWave } from '$lib/api/sessions/demo';
 
 function lerp(start: number, end: number, t: number) {
   return start * (1 - t) + end * t;
 }
 
 export function prepareDifficultyDataset(wave: DemoRecordAnalysisWave) {
-  const diffCoeffs = {
-    trash: 1,
-    medium: 2,
-    large: 4,
-  };
-
-  function calcDifficulty(tick: DemoRecordAnalysisWaveDifficultyItem) {
-    return (
-      tick.trash_kills * diffCoeffs.trash +
-      tick.medium_kills * diffCoeffs.medium +
-      tick.large_kills * diffCoeffs.large
-    );
-  }
-
   function getMaxValue(values: number[]) {
     if (!values.length) return 0;
 
     return values.reduce((a, x) => (x > a ? x : a), 0);
   }
 
-  const dataset = wave.difficulty.ticks.map((x) => ({
-    x: x.tick + wave.start_tick,
-    y: calcDifficulty(x) + 10,
+  const diff = wave.analytics.difficulty.details;
+
+  const dataset = diff.buckets.map((bucket, i) => ({
+    x: wave.meta_data.start_tick + diff.step * i,
+    y: bucket.score + 10,
   }));
 
   return { dataset, max: getMaxValue(dataset.map((item) => item.y)) };
 }
 
 export function prepareZedtimeDataset(wave: DemoRecordAnalysisWave) {
-  if (!wave.zed_times) return { dataset: [] };
+  if (!wave.zedtimes) return { dataset: [] };
 
-  const dataset = wave.zed_times.map((x) => [
-    { x: x.start_tick, y: 1 },
-    { x: x.end_tick, y: 1 },
+  const dataset = wave.zedtimes.map((x) => [
+    { x: x.meta_data.start_tick, y: 1 },
+    { x: x.meta_data.end_tick, y: 1 },
   ]);
 
   return { dataset };
 }
 
 export function prepareDeathDataset(wave: DemoRecordAnalysisWave) {
-  if (!wave.hp_changes) return { dataset: [] };
+  if (!wave.player_events.hp_changes) return { dataset: [] };
 
-  const dataset = wave.hp_changes
-    .filter((x) => x.health === 0)
-    .map((x) => [
-      { x: x.tick, y: 1 },
-      { x: x.tick, y: 100 },
-    ]);
+  const dataset = wave.player_events.deaths.map((x) => [
+    { x: x.tick, y: 1 },
+    { x: x.tick, y: 100 },
+  ]);
 
   return { dataset };
 }

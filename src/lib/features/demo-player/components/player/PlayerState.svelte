@@ -7,18 +7,28 @@
   export let health: number;
   export let armor: number;
   export let buffs: number;
+  export let selected: boolean = false;
 
   $: arr = new Array(buffs).fill(0);
 </script>
 
-<div class="root">
+<div
+  class="root"
+  class:selected
+  role="button"
+  tabindex="0"
+  on:click
+  on:keypress
+>
   <div class="avatar">
     <a href={profile?.profile_url} target="_blank" rel="noopener noreferrer">
       <img src={profile?.avatar} alt="" />
     </a>
   </div>
 
-  <div class="name" class:died={health <= 0}>{profile?.name}</div>
+  <div class="name" class:died={health <= 0} title={profile?.name}>
+    {profile?.name}
+  </div>
 
   <div class="perk">
     <PerkIcon {perk} prestige={0} />
@@ -46,6 +56,19 @@
     gap: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 14px;
+    padding: 0.125rem 0.25rem;
+  }
+
+  .root:not(.selected):hover {
+    background: linear-gradient(to right, rgb(0 0 0 / 0), var(--hover-primary));
+  }
+
+  .root.selected {
+    background: linear-gradient(
+      to right,
+      rgb(0 0 0 / 0),
+      rgba(228, 226, 164, 0.3)
+    );
   }
 
   .root .avatar {

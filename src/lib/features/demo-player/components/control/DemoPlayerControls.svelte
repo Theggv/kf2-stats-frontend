@@ -18,12 +18,15 @@
   export let wave: DemoRecordAnalysisWave;
   export let currentTick: number;
 
+  $: start_tick = wave.meta_data.start_tick;
+  $: end_tick = wave.meta_data.end_tick;
+
   $: difficulty = prepareDifficultyDataset(wave);
   $: zedtime = prepareZedtimeDataset(wave);
   $: deaths = prepareDeathDataset(wave);
 
   $: hovered = false;
-  $: hoverTick = wave.start_tick;
+  $: hoverTick = start_tick;
 
   const suppressTypeError = (data: any) => data;
 
@@ -94,14 +97,14 @@
         spanGaps: true,
         scales: {
           x: {
-            min: wave.start_tick,
-            max: wave.end_tick,
+            min: start_tick,
+            max: end_tick,
             ticks: { display: false },
             grid: { display: false },
           },
           y: {
             suggestedMin: 0,
-            suggestedMax: 100,
+            suggestedMax: 50,
             ticks: { display: false },
             grid: { display: false },
           },
@@ -179,9 +182,10 @@
           },
           {
             label: 'timeline-selected',
-            data: [wave.start_tick, Math.max(wave.start_tick, currentTick)].map(
-              (x) => ({ x, y: 1 })
-            ),
+            data: [start_tick, Math.max(start_tick, currentTick)].map((x) => ({
+              x,
+              y: 1,
+            })),
             fill: true,
             borderColor: '#cc433d',
             pointBorderColor: '#c43730',
@@ -196,9 +200,10 @@
           },
           {
             label: 'timeline-hover',
-            data: [wave.start_tick, Math.max(wave.start_tick, hoverTick)].map(
-              (x) => ({ x, y: 1 })
-            ),
+            data: [start_tick, Math.max(start_tick, hoverTick)].map((x) => ({
+              x,
+              y: 1,
+            })),
             fill: true,
             borderColor: 'rgb(200 200 200 / 0.7)',
             borderWidth: 4,
@@ -208,7 +213,7 @@
           },
           {
             label: 'timeline',
-            data: [wave.start_tick, wave.end_tick].map((x) => ({
+            data: [start_tick, end_tick].map((x) => ({
               x,
               y: 1,
             })),
