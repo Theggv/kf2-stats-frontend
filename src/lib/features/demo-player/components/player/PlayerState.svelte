@@ -9,7 +9,7 @@
   export let buffs: number;
   export let selected: boolean = false;
 
-  $: arr = new Array(buffs).fill(0);
+  $: arr = new Array(health > 0 ? buffs : 0).fill(0);
 </script>
 
 <div

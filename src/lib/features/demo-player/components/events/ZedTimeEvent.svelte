@@ -47,11 +47,11 @@
   <div class="content">
     <div class="item">
       <div class="name">
-        Zedtime
+        Zed time
         {#if completed}
-          Ended
+          ended
         {:else}
-          Started
+          started
         {/if}
       </div>
     </div>

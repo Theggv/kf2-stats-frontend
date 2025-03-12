@@ -20,7 +20,7 @@
   import { DemoPlayerControls } from './components/control';
   import {
     ConnectionEvent,
-    GlobalZedTimeEvent,
+    ZedTimeEvent,
     HuskRageEvent,
     PlayerBuffsEvent,
     PlayerHealthEvent,
@@ -137,7 +137,7 @@
               started={event.type === 'wave-started'}
             />
           {:else if event.type === 'zedtime'}
-            <GlobalZedTimeEvent
+            <ZedTimeEvent
               offset={$controlRange.start_tick}
               tick={$currentTick}
               event={event.payload}

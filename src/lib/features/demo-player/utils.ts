@@ -2,8 +2,8 @@ import { pad } from '$lib/util';
 
 export function tickToTime(tick: number, withMs?: boolean) {
   const hours = Math.floor(tick / 360000);
-  const minutes = Math.floor((tick - hours * 36000) / 6000);
-  const seconds = Math.floor((tick - minutes * 6000) / 100);
+  const minutes = Math.floor((tick - hours * 360000) / 6000);
+  const seconds = Math.floor((tick - hours * 360000 - minutes * 6000) / 100);
 
   let str = '';
 
@@ -12,7 +12,7 @@ export function tickToTime(tick: number, withMs?: boolean) {
 
   str += `:${pad(seconds)}`;
 
-  if (withMs) str += `:${pad(Math.floor(tick % 100))}`;
+  if (withMs) str += `.${pad(Math.floor(tick % 100))}`;
 
   return str;
 }

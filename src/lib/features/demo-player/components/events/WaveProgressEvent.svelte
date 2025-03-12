@@ -8,14 +8,14 @@
 </script>
 
 <div class="root">
-  <div class="time">{tickToTime(tick - offset, true)}</div>
+  <div class="time">{tickToTime(Math.max(0, tick - offset), true)}</div>
   <div class="name">
-    Zeds left: {zedsLeft}
+    Zeds Left: <span class="bold">{zedsLeft}</span>
   </div>
 
   {#if ticksSinceLastZt > 0}
     <div class="last-zt">
-      <span> Time since last zedtime: </span>
+      <span> Time since last Zed time: </span>
       <span class="time">{tickToTime(ticksSinceLastZt, true)} </span>
     </div>
   {/if}
@@ -41,6 +41,10 @@
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 
   .last-zt {
