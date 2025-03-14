@@ -3,8 +3,8 @@
   import type { DemoRecordAnalysis } from '$lib/api/sessions/demo';
   import { AutoScroll } from '$lib/components/auto-scroll';
   import { tickToTime } from './utils';
-  import { getDemoRecordStore } from './MatchDemoPlayer.store';
-  import { onMount } from 'svelte';
+  import { ContextName, getDemoRecordStore } from './MatchDemoPlayer.store';
+  import { onMount, setContext } from 'svelte';
   import { ActionIcon } from '@svelteuidev/core';
   import { AiOutlinePause } from 'svelte-icons-pack/ai';
   import { BsPlayFill } from 'svelte-icons-pack/bs';
@@ -13,23 +13,14 @@
   import {
     getLastHealthEvent,
     getLastBuffEvent,
-    prepareMajorEventsData,
     getPlayerWaveData,
-    getUserProfileByUserIndex,
+    type ReplayTabsEnum,
   } from './MatchDemoPlayer.data';
   import { DemoPlayerControls } from './components/control';
-  import {
-    ConnectionEvent,
-    ZedTimeEvent,
-    HuskRageEvent,
-    PlayerBuffsEvent,
-    PlayerHealthEvent,
-    PlayerZedKillEvent,
-    WaveProgressEvent,
-    WaveStateEvent,
-  } from './components/events';
+
   import { SelectWaves } from './components/select-waves';
-  import { SelectEvents } from './components/select-events';
+  import { writable } from 'svelte/store';
+  import { MatchAnalysis, WaveAnalysis, WaveReplay } from './tabs';
 
   export let data: DemoRecordAnalysis;
   $: users = data.players;
@@ -38,19 +29,16 @@
   $: store.demo.set(data);
 
   const { selectedWave, selectedWaveIdx, selectedUserIndexes } = store;
+  setContext(ContextName, store);
 
-  const {
-    range: controlRange,
-    speed,
-    playing,
-    currentTick,
-    currentTickWithOffset,
-  } = store.control;
+  const { speed, playing, currentTick, currentTickWithOffset } = store.control;
 
-  const { feed: eventsFeed, ticksSinceLastZt, eventFilter } = store.events;
-  const { onlyLarges, filtered: killEvents } = store.events.kills;
-
-  $: majorEvents = prepareMajorEventsData($currentTick, $selectedWave);
+  const tabs: { title: string; value: ReplayTabsEnum }[] = [
+    { title: 'Wave Replay', value: 'wave-replay' },
+    { title: 'Wave Analysis', value: 'wave-overview' },
+    { title: 'Match Analysis', value: 'match-overview' },
+  ];
+  const selectedTab = writable<ReplayTabsEnum>('wave-replay');
 
   $: wavePlayers = getPlayerWaveData($selectedWave, users);
 
@@ -88,7 +76,20 @@
       />
     </div>
 
-    <div class="header"></div>
+    <div class="tabs">
+      {#each tabs as tab (tab.value)}
+        <div
+          class="item"
+          class:selected={$selectedTab === tab.value}
+          role="button"
+          tabindex="0"
+          on:click={() => selectedTab.set(tab.value)}
+          on:keypress={(e) => e.key === 'Enter' && selectedTab.set(tab.value)}
+        >
+          {tab.title}
+        </div>
+      {/each}
+    </div>
 
     <div class="players">
       <div class="title">Players</div>
@@ -115,92 +116,13 @@
       </div>
     </div>
 
-    <div class="events">
-      <div class="title">
-        <div>Events</div>
-        <SelectEvents bind:value={$eventFilter} />
-      </div>
-
-      <WaveProgressEvent
-        offset={$controlRange.start_tick}
-        zedsLeft={majorEvents.zedsLeft}
-        tick={$currentTick}
-        ticksSinceLastZt={$ticksSinceLastZt}
-      />
-
-      <div class="content">
-        {#each $eventsFeed as event (event)}
-          {#if event.type === 'wave-started' || event.type === 'wave-ended'}
-            <WaveStateEvent
-              offset={$controlRange.start_tick}
-              tick={event.from}
-              started={event.type === 'wave-started'}
-            />
-          {:else if event.type === 'zedtime'}
-            <ZedTimeEvent
-              offset={$controlRange.start_tick}
-              tick={$currentTick}
-              event={event.payload}
-            />
-          {:else}
-            {@const profile = getUserProfileByUserIndex(
-              event.payload.user_index,
-              users
-            )}
-
-            {#if event.type === 'connect' || event.type === 'death'}
-              <ConnectionEvent
-                offset={$controlRange.start_tick}
-                tick={event.from}
-                type={event.type === 'connect' ? event.payload.type : 3}
-                {profile}
-              />
-            {:else if event.type === 'husk_r'}
-              <HuskRageEvent
-                offset={$controlRange.start_tick}
-                event={event.payload}
-                {profile}
-              />
-            {:else if event.type === 'buffs'}
-              <PlayerBuffsEvent
-                offset={$controlRange.start_tick}
-                event={event.payload}
-                {profile}
-              />
-            {:else if event.type === 'health'}
-              <PlayerHealthEvent
-                offset={$controlRange.start_tick}
-                event={event.payload}
-                {profile}
-              />
-            {/if}
-          {/if}
-        {/each}
-      </div>
-    </div>
-
-    <div class="kill-feed">
-      <div class="header">
-        <div class="title">Kill ticket</div>
-
-        <div class="checkbox">
-          <label for="checkbox-only-larges">Only larges</label>
-          <input
-            id="checkbox-only-larges"
-            type="checkbox"
-            bind:checked={$onlyLarges}
-          />
-        </div>
-      </div>
-
-      {#if $selectedWave}
-        {#each $killEvents as kill, index (`${data.session_id} ${$selectedWave.meta_data.start_tick} ${index} ${JSON.stringify(kill)}`)}
-          <PlayerZedKillEvent
-            offset={$selectedWave.meta_data.start_tick}
-            event={kill}
-            user={getUserProfileByUserIndex(kill.user_index, users)}
-          />
-        {/each}
+    <div class="tab-content">
+      {#if $selectedTab === 'wave-replay'}
+        <WaveReplay />
+      {:else if $selectedTab === 'wave-overview'}
+        <WaveAnalysis />
+      {:else if $selectedTab === 'match-overview'}
+        <MatchAnalysis />
       {/if}
     </div>
 
@@ -254,22 +176,34 @@
   .root {
     display: grid;
     grid-template:
-      'waves events kill-feed' auto
-      'players events kill-feed' 350px
+      'waves tabs tabs' auto
+      'players tab-content tab-content' 1fr
       'progress progress progress' 1px
       'control control control' auto
       / 300px 1fr 300px;
 
     gap: 0.5rem 1rem;
+    height: calc(100% - 1rem);
+    overflow-y: hidden;
   }
 
-  .root > .header {
-    grid-area: header;
+  .root > .tabs {
+    grid-area: tabs;
     padding: 0.5rem;
 
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 1rem;
+  }
+
+  .root > .tabs > .item {
+    display: flex;
+    padding: 0.25rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  .root > .tabs > .item.selected {
+    border-bottom-color: var(--text-secondary);
   }
 
   .title {
@@ -283,6 +217,13 @@
     gap: 0.5rem;
     overflow-y: auto;
     padding-right: 0.5rem;
+  }
+
+  .root > .tab-content {
+    grid-area: tab-content;
+    padding: 0.5rem;
+
+    overflow-y: hidden;
   }
 
   .players {
@@ -302,46 +243,6 @@
 
   .players > .content {
     max-height: 300px;
-  }
-
-  .events {
-    grid-area: events;
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-
-    padding-right: 0.5rem;
-    border-right: 2px solid rgb(255 255 255 / 0.1);
-
-    overflow-x: hidden;
-    overflow-wrap: break-word;
-  }
-
-  .events > .title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .events > .content {
-    max-height: 300px;
-    gap: 0.125rem;
-  }
-
-  .kill-feed {
-    grid-area: kill-feed;
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .kill-feed > .header {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: space-between;
-    align-items: center;
   }
 
   .progress {
@@ -368,17 +269,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .checkbox {
-    display: flex;
-    gap: 0.25rem;
-    align-items: center;
-  }
-
-  .checkbox > input {
-    width: 1rem;
-    aspect-ratio: 1;
   }
 
   .content::-webkit-scrollbar {

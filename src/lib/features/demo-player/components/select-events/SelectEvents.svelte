@@ -5,7 +5,7 @@
   export let value: EventUnion['type'][];
 
   let listOpen = false;
-  let checked: string[] = ['zedtime', 'connect', 'death', 'husk_r'];
+  let checked: string[] = value;
   let isChecked: any = {};
 
   $: {

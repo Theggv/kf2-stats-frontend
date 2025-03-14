@@ -12,6 +12,9 @@ import {
 } from './MatchDemoPlayer.data';
 import { findLastLowerIndex } from './utils';
 
+export const ContextName = 'replay-store';
+export type ContextType = ReturnType<typeof getDemoRecordStore>;
+
 export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
   const demo = writable(demoRecord);
   const control = getControlStore();
@@ -31,7 +34,12 @@ export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
     ([wave, tick, onlyLarges]) => getKillEvents(wave, tick, onlyLarges)
   );
 
-  const eventFilter = writable<EventUnion['type'][]>([]);
+  const eventFilter = writable<EventUnion['type'][]>([
+    'zedtime',
+    'connect',
+    'death',
+    'husk_r',
+  ]);
 
   const clearedData = derived([selectedWave], ([wave]) => ({
     buffs: clearBuffEvents(wave),

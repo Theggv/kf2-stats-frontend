@@ -10,6 +10,8 @@ import type {
 } from '$lib/api/sessions/demo';
 import { filterByRange, findLastLowerIndex } from './utils';
 
+export type ReplayTabsEnum = 'wave-replay' | 'wave-overview' | 'match-overview';
+
 export function getUserProfileByUserIndex(
   userIndex: number,
   players: DemoRecordParsedPlayer[]
