@@ -17,10 +17,16 @@ export interface DifficultyAnalyticsDetails {
   buckets: DifficultyScore[];
 }
 
+export interface ZedsSnapshot {
+  tick: number;
+  score: number;
+}
+
 export interface DifficultyAnalytics {
   overall: DifficultyScore;
 
   details: DifficultyAnalyticsDetails;
+  zeds_distribution: ZedsSnapshot[];
 }
 
 export interface DemoRecordParsedPlayer {
@@ -114,8 +120,9 @@ export interface DemoRecordParsedPlayerEvents {
 
 export interface DemoRecordAnalysisWaveBuffsUptime {
   user_index: number;
+
+  buffed_ticks: number;
   total_ticks: number;
-  percent: number;
 }
 
 export interface DemoRecordAnalysisZedtime {
@@ -144,6 +151,13 @@ export interface ZedtimeAnalytics {
 
   avg_extends_count: number;
   avg_extend_duration: number;
+}
+
+export interface BuffsUptimeAnalytics {
+  buffed_ticks: number;
+  total_ticks: number;
+
+  detailed: DemoRecordAnalysisWaveBuffsUptime[];
 }
 
 export interface DifficultyDetailed {
@@ -179,7 +193,7 @@ export interface DemoRecordAnalysisWaveAnalytics {
   summary: Summary;
   difficulty: DifficultyAnalytics;
   zedtime: ZedtimeAnalytics;
-  buffs_uptime: DemoRecordAnalysisWaveBuffsUptime[];
+  buffs_uptime: BuffsUptimeAnalytics;
 }
 
 export interface DemoRecordAnalysisWave {
@@ -196,6 +210,7 @@ export interface DemoRecordAnalysisAnalytics {
   summary: Summary;
   zedtime: ZedtimeAnalytics;
   difficulty: DifficultyAnalytics;
+  buffs_uptime: BuffsUptimeAnalytics;
 }
 
 export interface DemoRecordAnalysis {
