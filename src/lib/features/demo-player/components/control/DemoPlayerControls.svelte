@@ -69,7 +69,7 @@
 
     if (!value) return;
 
-    currentTick = Math.round(value);
+    currentTick = Math.min(end_tick, Math.max(start_tick, Math.round(value)));
   }
 
   function handleMouseMove(

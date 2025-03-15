@@ -28,6 +28,7 @@
   .wave {
     min-width: 7ch;
   }
+
   .small {
     font-size: 12px;
   }

@@ -11,7 +11,6 @@
     PlayerHealthEvent,
     PlayerZedKillEvent,
   } from '../components/events';
-  import { SelectEvents } from '../components/select-events';
   import {
     getUserProfileByUserIndex,
     prepareMajorEventsData,
@@ -22,7 +21,7 @@
 
   const { range: controlRange, currentTick } = store.control;
 
-  const { feed: eventsFeed, ticksSinceLastZt, eventFilter } = store.events;
+  const { feed: eventsFeed, ticksSinceLastZt } = store.events;
   const { onlyLarges, filtered: killEvents } = store.events.kills;
 
   $: users = $demo.players;
@@ -31,11 +30,6 @@
 
 <div class="root">
   <div class="events">
-    <div class="title">
-      <div>Events</div>
-      <SelectEvents bind:value={$eventFilter} />
-    </div>
-
     <WaveProgressEvent
       offset={$controlRange.start_tick}
       zedsLeft={majorEvents.zedsLeft}
@@ -157,12 +151,6 @@
 
     overflow-x: hidden;
     overflow-wrap: break-word;
-  }
-
-  .root > .events > .title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   .root > .events > .content {

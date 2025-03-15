@@ -4,12 +4,14 @@
   import { MatchDemoPlayer } from '$lib/features/demo-player';
 
   const store = getContext<ContextType>(ContextName);
-  const { demo } = store.demo;
+  const { demo, error: demoError } = store.demo;
 </script>
 
 <div class="root">
   {#if $demo}
     <MatchDemoPlayer data={$demo} />
+  {:else if $demoError}
+    <div class="missing">Replay is unavailable</div>
   {/if}
 </div>
 
@@ -20,5 +22,11 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .root .missing {
+    margin: 1rem auto;
+    font-size: 24px;
+    font-weight: bold;
   }
 </style>

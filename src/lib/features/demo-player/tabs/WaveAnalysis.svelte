@@ -38,7 +38,7 @@
 
   <div class="root">
     <div class="zedtime">
-      <div class="title">Zed time</div>
+      <div class="title">Zed Time</div>
 
       <div class="content">
         <div class="item">
@@ -100,7 +100,7 @@
       <div class="title">Buffs Uptime</div>
 
       <div class="item">
-        <div class="name">Overall</div>
+        <div class="name">Average for team</div>
         <div class="value">{(waveBuffsPercent * 100).toFixed(2)}%</div>
       </div>
 
@@ -112,13 +112,15 @@
           {@const percent = item.buffed_ticks / Math.max(item.total_ticks, 1)}
           {@const perk = getPlayerPerk(item.user_index, $selectedWave)}
 
-          <div class="item">
-            <div class="name">
-              <PerkIcon {perk} prestige={0} />
-              {profile?.name}
+          {#if perk}
+            <div class="item">
+              <div class="name">
+                <PerkIcon {perk} prestige={0} />
+                {profile?.name}
+              </div>
+              <div class="value">{(percent * 100).toFixed(2)}%</div>
             </div>
-            <div class="value">{(percent * 100).toFixed(2)}%</div>
-          </div>
+          {/if}
         {/each}
       </div>
     </div>
@@ -127,7 +129,7 @@
       <div class="title">Summary</div>
 
       <div class="item">
-        <div class="name">Average Kills / s</div>
+        <div class="name">Average Kills per second</div>
         <div class="value">
           {wave.analytics.summary.avg_kills_per_second.toFixed(2)}
         </div>
@@ -146,6 +148,7 @@
     gap: 0.5rem 1rem;
 
     height: 100%;
+    font-size: 14px;
   }
 
   .title {

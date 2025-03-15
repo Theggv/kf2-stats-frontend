@@ -47,7 +47,7 @@
   <div class="content">
     <div class="item">
       <div class="name">
-        Zed time
+        Zed Time
         {#if completed}
           ended
         {:else}

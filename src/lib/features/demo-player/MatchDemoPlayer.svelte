@@ -21,6 +21,7 @@
   import { SelectWaves } from './components/select-waves';
   import { writable } from 'svelte/store';
   import { MatchAnalysis, WaveAnalysis, WaveReplay } from './tabs';
+  import { SelectEvents } from './components/select-events';
 
   export let data: DemoRecordAnalysis;
   $: users = data.players;
@@ -32,6 +33,7 @@
   setContext(ContextName, store);
 
   const { speed, playing, currentTick, currentTickWithOffset } = store.control;
+  const { eventFilter } = store.events;
 
   const tabs: { title: string; value: ReplayTabsEnum }[] = [
     { title: 'Wave Replay', value: 'wave-replay' },
@@ -89,6 +91,12 @@
           {tab.title}
         </div>
       {/each}
+
+      {#if $selectedTab === 'wave-replay'}
+        <div class="last">
+          <SelectEvents bind:value={$eventFilter} />
+        </div>
+      {/if}
     </div>
 
     <div class="players">
@@ -176,11 +184,11 @@
   .root {
     display: grid;
     grid-template:
-      'waves tabs tabs' auto
+      'waves tabs tabs' 56px
       'players tab-content tab-content' 1fr
       'progress progress progress' 1px
       'control control control' auto
-      / 300px 1fr 300px;
+      / 350px 1fr 300px;
 
     gap: 0.5rem 1rem;
     height: calc(100% - 1rem);
@@ -194,16 +202,24 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    align-items: center;
   }
 
   .root > .tabs > .item {
     display: flex;
     padding: 0.25rem;
     border-bottom: 2px solid transparent;
+    height: min-content;
   }
 
   .root > .tabs > .item.selected {
     border-bottom-color: var(--text-secondary);
+  }
+
+  .root > .tabs > .last {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .title {

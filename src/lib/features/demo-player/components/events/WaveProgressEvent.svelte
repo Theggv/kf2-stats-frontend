@@ -15,7 +15,7 @@
 
   {#if ticksSinceLastZt > 0}
     <div class="last-zt">
-      <span> Time since last Zed time: </span>
+      <span> Time since last Zed Time: </span>
       <span class="time">{tickToTime(ticksSinceLastZt, true)} </span>
     </div>
   {/if}

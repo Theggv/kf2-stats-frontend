@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { DemoRecordAnalysisWave } from '$lib/api/sessions/demo';
   import Select from 'svelte-select';
-  import { tickToTime } from '../../utils';
   import SelectWavesItem from './SelectWavesItem.svelte';
+  import { onMount } from 'svelte';
 
   export let items: DemoRecordAnalysisWave[];
   export let selectedIndex: number;
@@ -14,9 +14,29 @@
     selectedIndex = index;
     listOpen = false;
   }
+
+  let el: HTMLElement;
+
+  onMount(() => {
+    function handleScroll(ev: WheelEvent) {
+      if (ev.deltaY > 0) {
+        selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+      } else if (ev.deltaY < 0) {
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+      }
+    }
+
+    el.addEventListener('wheel', handleScroll);
+
+    return () => {
+      el.removeEventListener('wheel', handleScroll);
+    };
+  });
 </script>
 
 <Select
+  bind:container={el}
+  on:keydown={(e) => console.log(e)}
   class="waves-select"
   bind:listOpen
   {value}

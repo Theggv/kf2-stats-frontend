@@ -52,7 +52,9 @@ export const externalTooltipHandler =
 
       const div = document.createElement('div');
       div.appendChild(
-        document.createTextNode(tickToTime(selectedTick - waveStartTick))
+        document.createTextNode(
+          tickToTime(Math.max(0, selectedTick - waveStartTick))
+        )
       );
 
       timer.appendChild(div);

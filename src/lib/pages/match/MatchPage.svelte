@@ -10,12 +10,9 @@
   } from './tabs';
   import { setContext } from 'svelte';
   import { MatchHeader } from './components/match-header';
-  import { page } from '$app/stores';
   import { get } from 'svelte/store';
 
   export let matchId: number;
-
-  $: isPreview = $page.url.searchParams.has('preview');
 
   const store = getMatchStore();
   const { live, loading } = store.match;
@@ -38,7 +35,6 @@
     {
       label: 'Replay',
       component: ReplayTab,
-      render: () => isPreview,
       onClick: handleClickReplay,
     },
   ] as TabData[];
