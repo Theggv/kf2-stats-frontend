@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "NODE_ENV=production && vite preview --host --port 5000",
+    "start": "cross-env NODE_ENV=production && vite preview --host --port 5000",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
@@ -16,6 +16,7 @@
     "@sveltejs/kit": "^1.20.4",
     "@types/chartjs-plugin-trendline": "^1.0.4",
     "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.31",
     "svelte": "^4.2.2",
     "svelte-check": "^3.6.2",
