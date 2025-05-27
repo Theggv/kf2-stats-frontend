@@ -35,7 +35,7 @@
 </script>
 
 <Select
-  bind:container={el}
+  bind:input={el}
   on:keydown={(e) => console.log(e)}
   class="waves-select"
   bind:listOpen
