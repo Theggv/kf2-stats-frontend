@@ -12,15 +12,18 @@ export enum LeaderBoardType {
   TotalHuskRages,
   TotalHeals,
   AverageZedtime,
+  AverageBuffsUptime,
   TotalPlaytime,
 }
 
 export interface LeaderBoardsRequest {
-  type: LeaderBoardType;
   perk?: Perk;
 
   date_from: Date;
   date_to: Date;
+
+  type: LeaderBoardType;
+  page?: number;
 }
 
 export interface MostDamageMatch {
@@ -50,9 +53,11 @@ export interface LeaderBoardsResponseItem {
 
   total_heals: number;
   avg_zt: number;
+  avg_buffs_uptime: number;
   total_playtime: number;
 }
 
 export interface LeaderBoardsResponse {
   items: LeaderBoardsResponseItem[];
+  total: number;
 }
