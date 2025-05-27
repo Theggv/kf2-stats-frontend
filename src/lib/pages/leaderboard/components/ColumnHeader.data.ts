@@ -28,6 +28,13 @@ export const columns: TableColumn[] = [
     width: 130,
   },
   {
+    label: 'Buffs Uptime',
+    type: LeaderBoardType.AverageBuffsUptime,
+    condition: (perk) => perk === Perk.Medic,
+    render: (item) => `${(item.avg_buffs_uptime * 100).toFixed(0)}%`,
+    width: 130,
+  },
+  {
     label: 'Total Heals',
     type: LeaderBoardType.TotalHeals,
     condition: (perk) => perk === Perk.Medic,

@@ -11,6 +11,7 @@ import { debounce } from '$lib/util';
 
 export function getStore() {
   const type = writable<LeaderBoardType>(LeaderBoardType.TotalGames);
+  const page = writable(0);
   const perk = writable<Perk>(0);
   const period = writable(0);
 
@@ -18,38 +19,53 @@ export function getStore() {
   const users = writable<LeaderBoardsResponseItem[]>([]);
   const abortController = writable(new AbortController());
 
-  const fetch = debounce(async (type: number, perk: Perk, period: number) => {
-    if (get(loading)) {
-      get(abortController).abort();
-      abortController.set(new AbortController());
-    }
+  const fetch = debounce(
+    async (type: number, perk: Perk, period: number, page: number) => {
+      if (get(loading)) {
+        get(abortController).abort();
+        abortController.set(new AbortController());
+      }
 
-    try {
-      loading.set(true);
+      try {
+        loading.set(true);
 
-      const { data } = await LeaderBoardsApiService.getLeaderboard(
-        { type, perk, ...periods[period] },
-        get(abortController).signal
-      );
+        const { data } = await LeaderBoardsApiService.getLeaderboard(
+          { type, perk, page, ...periods[period] },
+          get(abortController).signal
+        );
 
-      users.set(data.items);
-    } catch (err) {
-    } finally {
-      loading.set(false);
-    }
-  }, 100);
+        users.set(data.items);
+      } catch (err) {
+      } finally {
+        loading.set(false);
+      }
+    },
+    100
+  );
 
-  perk.subscribe((_) => type.set(LeaderBoardType.TotalGames));
+  perk.subscribe(() => {
+    type.set(LeaderBoardType.TotalGames);
+    page.set(0);
+  });
 
-  const args = derived([perk, type, period], ([perk, type, period]) => ({
-    perk,
-    type,
-    period,
-  }));
+  type.subscribe(() => page.set(0));
+  period.subscribe(() => page.set(0));
 
-  args.subscribe(({ perk, type, period }) => fetch(type, perk, period));
+  const args = derived(
+    [perk, type, period, page],
+    ([perk, type, period, page]) => ({
+      perk,
+      type,
+      period,
+      page,
+    })
+  );
 
-  return { type, perk, period, users, loading };
+  args.subscribe(({ perk, type, period, page }) =>
+    fetch(type, perk, period, page)
+  );
+
+  return { type, page, perk, period, users, loading };
 }
 
 export const LoaderBoardCtxKey = 'leaderboards';
