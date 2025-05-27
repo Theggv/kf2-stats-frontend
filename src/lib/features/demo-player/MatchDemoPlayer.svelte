@@ -107,6 +107,7 @@
           {#each wavePlayers as [user_index, player] (user_index)}
             {@const hp = getLastHealthEvent($currentTick, player.health)}
             {@const buffs = getLastBuffEvent($currentTick, player.buffs)}
+            {@const isDead = player.death && $currentTick >= player.death.tick}
 
             <PlayerState
               on:click={() => handleClickUser(user_index)}
@@ -115,9 +116,9 @@
               selected={$selectedUserIndexes.includes(user_index)}
               profile={player.profile}
               perk={player.perk}
-              health={hp.health}
-              armor={hp.armor}
-              {buffs}
+              health={isDead ? 0 : hp.health}
+              armor={isDead ? 0 : hp.armor}
+              buffs={isDead ? 0 : buffs}
             />
           {/each}
         {/if}

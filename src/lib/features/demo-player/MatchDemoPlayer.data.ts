@@ -40,6 +40,7 @@ export type PreparedPlayerWaveData = {
 
   health: DemoRecordParsedEventHpChange[];
   buffs: DemoRecordParsedEventBuff[];
+  death?: DemoRecordParsedEventDeath;
 };
 
 export function getPlayerWaveData(
@@ -65,21 +66,13 @@ export function getPlayerWaveData(
       (x) => x.user_index === ev.user_index
     );
 
-    if (death) {
-      health.push({
-        user_index: ev.user_index,
-        tick: death.tick,
-        armor: 0,
-        health: 0,
-      });
-    }
-
     lookup.set(ev.user_index, {
       perk: ev.perk,
 
       profile: player?.profile,
       health,
       buffs,
+      death,
     });
   }
 
