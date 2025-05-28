@@ -1,4 +1,5 @@
 import type { Perk } from '$lib/api/matches';
+import type { PaginationResponse } from '../common';
 
 export enum LeaderBoardType {
   TotalGames = 1,
@@ -59,5 +60,5 @@ export interface LeaderBoardsResponseItem {
 
 export interface LeaderBoardsResponse {
   items: LeaderBoardsResponseItem[];
-  total: number;
+  metadata: PaginationResponse;
 }

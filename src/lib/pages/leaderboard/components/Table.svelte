@@ -2,17 +2,21 @@
   import RowHeader from './RowHeader.svelte';
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import { getContext } from 'svelte';
-  import { type LeaderBoardStore, LoaderBoardCtxKey } from '../store';
+  import { type LeaderboardStore, LeaderboardCtxKey } from '../store';
   import { AutoScroll } from '$lib/components/auto-scroll';
   import ColumnHeader from './ColumnHeader.svelte';
   import TableRow from './TableRow.svelte';
 
   export let data: LeaderBoardsResponseItem[];
+  export let offset: number;
 
-  const { loading } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
+  const { loading } = getContext<LeaderboardStore>(LeaderboardCtxKey);
+
+  let el: HTMLElement;
+  $: data && el && el.scrollTo({ top: 0, behavior: 'instant' });
 </script>
 
-<AutoScroll>
+<AutoScroll bind:root={el}>
   <img
     class="loader"
     class:visible={$loading}
@@ -32,7 +36,7 @@
         </div>
 
         {#each data as player, index (player.id)}
-          <RowHeader {index} data={player} />
+          <RowHeader index={index + offset} data={player} />
         {/each}
       </div>
 
@@ -43,7 +47,7 @@
 
         {#each data as player, index (player.id)}
           <div class="item">
-            <TableRow data={player} {index} />
+            <TableRow index={index + offset} data={player} />
           </div>
         {/each}
       </div>
@@ -79,6 +83,8 @@
     transition-duration: 200ms;
     transition-delay: 0;
     transition-timing-function: ease-in-out;
+    user-select: none;
+    pointer-events: none;
   }
 
   .loader.visible {

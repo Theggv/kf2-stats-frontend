@@ -1,4 +1,8 @@
-<div class="root {$$restProps.class || ''}">
+<script lang="ts">
+  export let root: HTMLElement | undefined = undefined;
+</script>
+
+<div bind:this={root} class="root {$$restProps.class || ''}">
   <slot />
 </div>
 

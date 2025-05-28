@@ -6,9 +6,9 @@
   import { getContext } from 'svelte';
 
   import { iconSettings } from '$lib/ui/icons';
-  import { LoaderBoardCtxKey, type LeaderBoardStore } from '../store';
+  import { LeaderboardCtxKey, type LeaderboardStore } from '../store';
 
-  const { type, perk } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
+  const { type, perk } = getContext<LeaderboardStore>(LeaderboardCtxKey);
 </script>
 
 <div class="root">

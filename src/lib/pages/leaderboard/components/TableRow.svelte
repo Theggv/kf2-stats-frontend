@@ -2,12 +2,12 @@
   import type { LeaderBoardsResponseItem } from '$lib/api/leaderboards';
   import { getContext } from 'svelte';
   import { columns } from './ColumnHeader.data';
-  import { type LeaderBoardStore, LoaderBoardCtxKey } from '../store';
+  import { type LeaderboardStore, LeaderboardCtxKey } from '../store';
 
   export let index: number;
   export let data: LeaderBoardsResponseItem;
 
-  const { type, perk } = getContext<LeaderBoardStore>(LoaderBoardCtxKey);
+  const { type, perk } = getContext<LeaderboardStore>(LeaderboardCtxKey);
 </script>
 
 <div class="root {index % 2 ? 'even' : 'odd'}">
