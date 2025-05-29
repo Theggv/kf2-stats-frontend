@@ -120,6 +120,7 @@
 
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   .periods > .list {
@@ -146,6 +147,11 @@
   }
 
   @media (max-width: 768px) {
+    .root {
+      display: flex;
+      flex-direction: column;
+    }
+
     .perks {
       justify-content: center;
     }
