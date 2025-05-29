@@ -19,6 +19,7 @@ export enum LeaderBoardType {
 
 export interface LeaderBoardsRequest {
   perk?: Perk;
+  server_id?: number[];
 
   date_from: Date;
   date_to: Date;

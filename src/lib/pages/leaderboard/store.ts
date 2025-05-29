@@ -16,6 +16,7 @@ export function getStore() {
   const perk = writable<Perk>(0);
   const periodIdx = writable(0);
   const period = writable<{ from: Date; to: Date }>();
+  const serverIds = writable<number[]>([]);
 
   const loading = writable(false);
   const users = writable<LeaderBoardsResponseItem[]>([]);
@@ -24,6 +25,7 @@ export function getStore() {
 
   const fetch = debounce(
     async (
+      server_id: number[],
       type: number,
       perk: Perk,
       page: number,
@@ -40,6 +42,7 @@ export function getStore() {
 
         const { data } = await LeaderBoardsApiService.getLeaderboard(
           {
+            server_id,
             type,
             perk,
             page,
@@ -59,21 +62,21 @@ export function getStore() {
     100
   );
 
+  periodIdx.subscribe((idx) => period.set(periods[idx].initialPeriod));
+
   perk.subscribe(() => {
     type.set(LeaderBoardType.TotalGames);
     page.set(0);
   });
 
   type.subscribe(() => page.set(0));
-  periodIdx.subscribe((idx) => {
-    period.set(periods[idx].initialPeriod);
-
-    page.set(0);
-  });
+  serverIds.subscribe(() => page.set(0));
+  period.subscribe(() => page.set(0));
 
   const args = derived(
-    [perk, type, periodIdx, period, page],
-    ([perk, type, periodIdx, period, page]) => ({
+    [serverIds, perk, type, periodIdx, period, page],
+    ([serverIds, perk, type, periodIdx, period, page]) => ({
+      serverIds,
       perk,
       type,
       periodIdx,
@@ -82,11 +85,12 @@ export function getStore() {
     })
   );
 
-  args.subscribe(({ perk, type, period, page }) =>
-    fetch(type, perk, page, period.from, period.to)
+  args.subscribe(({ serverIds, perk, type, period, page }) =>
+    fetch(serverIds, type, perk, page, period.from, period.to)
   );
 
   return {
+    serverIds,
     type,
     page,
     perk,

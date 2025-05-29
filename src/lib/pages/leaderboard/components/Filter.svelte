@@ -3,11 +3,17 @@
   import { getContext } from 'svelte';
   import { LeaderboardCtxKey, type LeaderboardStore } from '../store';
   import { periods } from '../periods';
+  import MultiSelect from 'svelte-multiselect';
+  import { getStore, type SelectOption } from './Filter.store';
+  import { slide } from 'svelte/transition';
 
-  const { periodIdx, period, perk } =
+  const { serverIds, periodIdx, period, perk } =
     getContext<LeaderboardStore>(LeaderboardCtxKey);
-
   $: selectedPeriod = periods[$periodIdx];
+
+  const { servers } = getStore();
+  let selectedServers: SelectOption[] = [];
+  $: serverIds.set(selectedServers.map((x) => x.id));
 
   function changePeriod(previous: boolean) {
     const newPeriod = selectedPeriod.transform!(
@@ -19,7 +25,7 @@
   }
 </script>
 
-<div class="filters">
+<div class="root">
   <div class="perks">
     {#each Array(10).fill(0) as _, index}
       {@const perkIdx = index + 1}
@@ -63,19 +69,36 @@
       {/if}
     </div>
   </div>
+
+  <div class="advanced">
+    <div class="content" transition:slide>
+      <div class="multiple">
+        <MultiSelect
+          id="filter_server"
+          bind:selected={selectedServers}
+          options={$servers.map((x) => ({ id: x.id, label: x.name }))}
+          placeholder="Server"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
-  .filters {
-    padding-top: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
+  .root {
+    padding-top: 0.25rem;
+    display: grid;
+    grid-template:
+      'perks periods' auto
+      'advanced advanced' auto
+      / auto auto;
+
+    gap: 0.5rem;
   }
 
   .perks {
+    grid-area: perks;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -84,10 +107,19 @@
   }
 
   .periods {
+    grid-area: periods;
+
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 0.5rem;
+  }
+
+  .advanced {
+    grid-area: advanced;
+
+    display: flex;
+    flex-direction: column;
   }
 
   .periods > .list {
@@ -118,15 +150,54 @@
       justify-content: center;
     }
 
-    .filters,
+    .root,
     .periods,
     .periods > .list {
       align-items: center;
     }
 
-    .filters {
+    .root {
       flex-direction: column;
       gap: 0.5rem;
     }
+  }
+
+  :global(div.multiselect > .selected) {
+    min-height: 32px;
+  }
+
+  :global(div.multiselect > ul.options) {
+    /* dropdown options */
+    --sms-options-bg: rgb(40 40 40);
+  }
+
+  :global(div.multiselect > ul.options::-webkit-scrollbar) {
+    width: 12px;
+  }
+
+  :global(div.multiselect > ul.options::-webkit-scrollbar-track) {
+    border-radius: 100px;
+    background-color: rgb(212 212 212);
+  }
+
+  :global(div.multiselect > ul.options::-webkit-scrollbar-thumb) {
+    border-radius: 100px;
+    background-color: #9ca3af;
+  }
+
+  :global(div.multiselect > ul.options > li.selected) {
+    /* selected options in the dropdown list */
+    background: linear-gradient(to right, var(--selected-primary), transparent);
+  }
+
+  :global(div.multiselect > ul.options > li.active),
+  :global(div.multiselect > ul.options > li:not(.selected):hover) {
+    /* unselected but hovered options in the dropdown list */
+    background: linear-gradient(to right, var(--hover-primary), transparent);
+  }
+
+  :global(div.multiselect > ul.options > li.disabled) {
+    background-color: transparent;
+    text-decoration: line-through;
   }
 </style>
