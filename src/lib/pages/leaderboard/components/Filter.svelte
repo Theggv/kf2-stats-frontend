@@ -5,7 +5,6 @@
   import { periods } from '../periods';
   import MultiSelect from 'svelte-multiselect';
   import { getStore, type SelectOption } from './Filter.store';
-  import { slide } from 'svelte/transition';
 
   const { serverIds, periodIdx, period, perk } =
     getContext<LeaderboardStore>(LeaderboardCtxKey);
@@ -71,7 +70,7 @@
   </div>
 
   <div class="advanced">
-    <div class="content" transition:slide>
+    <div class="content">
       <div class="multiple">
         <MultiSelect
           id="filter_server"
