@@ -2,6 +2,12 @@ import { $proxyApi } from '$lib/http';
 
 import type {
   AccuracyHist,
+  GetLastSeenUsersRequest,
+  GetLastSeenUsersResponse,
+  GetLastSessionsWithUserRequest,
+  GetLastSessionsWithUserResponse,
+  GetPlayedMapsRequest,
+  GetPlayedMapsResponse,
   GetTeammatesRequest,
   GetTeammatesResponse,
   PlayTimeHist,
@@ -41,6 +47,20 @@ export class UserAnalyticsApiService {
   static getTeammates(body: GetTeammatesRequest) {
     return $proxyApi.post<GetTeammatesResponse>(
       `/analytics/users/teammates`,
+      body
+    );
+  }
+
+  static getLastSeenUsers(body: GetLastSeenUsersRequest) {
+    return $proxyApi.post<GetLastSeenUsersResponse>(
+      `/analytics/users/lastseen`,
+      body
+    );
+  }
+
+  static getLastGamesWithUser(body: GetLastSessionsWithUserRequest) {
+    return $proxyApi.post<GetLastSessionsWithUserResponse>(
+      `/analytics/users/lastgameswithuser`,
       body
     );
   }

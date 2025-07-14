@@ -1,3 +1,4 @@
+import type { PaginationRequest, PaginationResponse } from '$lib/api/common';
 import type { Perk } from '$lib/api/matches';
 import type { TimePeriod } from '../dto';
 
@@ -86,4 +87,88 @@ export interface GetTeammatesResponseItem {
 
 export interface GetTeammatesResponse {
   items: GetTeammatesResponseItem[];
+}
+
+export interface GetPlayedMapsRequest {
+  user_id: number;
+
+  perks?: number[];
+  server_ids?: number[];
+
+  date_from?: number;
+  date_to?: number;
+}
+
+export interface GetPlayedMapsResponseItem {
+  name: string;
+
+  total_games: number;
+  total_wins: number;
+
+  last_played: string;
+}
+
+export interface GetPlayedMapsResponse {
+  items: GetPlayedMapsResponseItem[];
+}
+
+export interface GetLastSeenUsersRequest {
+  user_id: number;
+
+  perks?: number[];
+  server_ids?: number[];
+
+  date_from?: number;
+  date_to?: number;
+
+  pager: PaginationRequest;
+}
+
+export interface GetLastSeenUsersResponseItem {
+  id: number;
+  name: number;
+
+  profile_url: number;
+  avatar: number;
+
+  session_id: number;
+  server: { id: number; name: string };
+  map: { id: number; name: string };
+
+  perks: number[];
+
+  last_seen: string;
+}
+
+export interface GetLastSeenUsersResponse {
+  items: GetLastSeenUsersResponseItem[];
+  metadata: PaginationResponse;
+}
+
+export interface GetLastSessionsWithUserRequest {
+  user_id: number;
+  other_user_id: number;
+
+  perks: number;
+  server_ids: number;
+
+  date_from: number;
+  date_to: number;
+
+  pager: PaginationRequest;
+}
+
+export interface GetLastSessionsWithUserResponseItem {
+  session_id: number;
+  server: { id: number; name: string };
+  map: { id: number; name: string };
+
+  perks: number[];
+
+  last_seen: string;
+}
+
+export interface GetLastSessionsWithUserResponse {
+  items: GetLastSessionsWithUserResponseItem[];
+  metadata: PaginationResponse;
 }
