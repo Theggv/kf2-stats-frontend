@@ -99,8 +99,6 @@
   :root {
     --color-bg-even: rgba(117, 147, 147, 0.1);
     --color-bg-odd: rgba(175, 215, 215, 0.1);
-    --color-grad-win: rgba(46, 158, 46, 0.1);
-    --color-grad-lose: rgba(217, 100, 100, 0.05);
   }
 
   .root {
