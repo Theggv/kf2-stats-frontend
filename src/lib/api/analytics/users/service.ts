@@ -1,4 +1,5 @@
-import { $proxyApi } from '$lib/http';
+import { $authProxyApi, $proxyApi } from '$lib/http';
+import type { GenericAbortSignal } from 'axios';
 
 import type {
   AccuracyHist,
@@ -51,17 +52,29 @@ export class UserAnalyticsApiService {
     );
   }
 
-  static getLastSeenUsers(body: GetLastSeenUsersRequest) {
-    return $proxyApi.post<GetLastSeenUsersResponse>(
+  static getMaps(body: GetPlayedMapsRequest) {
+    return $proxyApi.post<GetPlayedMapsResponse>(`/analytics/users/maps`, body);
+  }
+
+  static getLastSeenUsers(
+    body: GetLastSeenUsersRequest,
+    signal?: GenericAbortSignal
+  ) {
+    return $authProxyApi.post<GetLastSeenUsersResponse>(
       `/analytics/users/lastseen`,
-      body
+      body,
+      { signal }
     );
   }
 
-  static getLastGamesWithUser(body: GetLastSessionsWithUserRequest) {
-    return $proxyApi.post<GetLastSessionsWithUserResponse>(
+  static getLastGamesWithUser(
+    body: GetLastSessionsWithUserRequest,
+    signal?: GenericAbortSignal
+  ) {
+    return $authProxyApi.post<GetLastSessionsWithUserResponse>(
       `/analytics/users/lastgameswithuser`,
-      body
+      body,
+      { signal }
     );
   }
 }

@@ -3,6 +3,7 @@ type TabData = {
   id: string;
   href: string;
   content: string;
+  show?: 'user-profile' | 'another-user';
 };
 
 export const tabs: TabData[] = [

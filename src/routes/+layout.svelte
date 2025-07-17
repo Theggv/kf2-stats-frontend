@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, setContext } from 'svelte';
   import '../app.css';
 
   import {
@@ -22,6 +22,7 @@
   import chartTrendline from 'chartjs-plugin-trendline';
   import { AppNavBar } from '$lib/components/navbar';
   import { LiveMatches } from '$lib/features/live-matches';
+  import { getAuth, AuthContextName } from '$lib/hooks';
 
   ChartJS.register(
     Title,
@@ -40,6 +41,9 @@
   );
 
   let active = false;
+
+  const auth = getAuth();
+  setContext(AuthContextName, auth);
 
   onMount(() => (active = true));
 </script>

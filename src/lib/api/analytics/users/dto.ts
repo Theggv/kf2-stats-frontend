@@ -1,6 +1,25 @@
 import type { PaginationRequest, PaginationResponse } from '$lib/api/common';
 import type { Perk } from '$lib/api/matches';
+import type { Difficulty, Length, Mode, Status } from '$lib/api/sessions';
 import type { TimePeriod } from '../dto';
+
+export interface SessionData {
+  id: number;
+  mode: Mode;
+  length: Length;
+  diff: Difficulty;
+  status: Status;
+}
+
+export interface ServerData {
+  id: number;
+  name: string;
+}
+
+export interface MapData {
+  id: number;
+  name: string;
+}
 
 export interface UserAnalyticsRequest {
   user_id: number;
@@ -91,12 +110,13 @@ export interface GetTeammatesResponse {
 
 export interface GetPlayedMapsRequest {
   user_id: number;
+  search_text?: string;
 
   perks?: number[];
   server_ids?: number[];
 
-  date_from?: number;
-  date_to?: number;
+  date_from?: Date;
+  date_to?: Date;
 }
 
 export interface GetPlayedMapsResponseItem {
@@ -118,22 +138,22 @@ export interface GetLastSeenUsersRequest {
   perks?: number[];
   server_ids?: number[];
 
-  date_from?: number;
-  date_to?: number;
+  date_from?: Date;
+  date_to?: Date;
 
   pager: PaginationRequest;
 }
 
 export interface GetLastSeenUsersResponseItem {
   id: number;
-  name: number;
+  name: string;
 
-  profile_url: number;
-  avatar: number;
+  profile_url: string;
+  avatar: string;
 
-  session_id: number;
-  server: { id: number; name: string };
-  map: { id: number; name: string };
+  session: SessionData;
+  server: ServerData;
+  map: MapData;
 
   perks: number[];
 
@@ -149,19 +169,19 @@ export interface GetLastSessionsWithUserRequest {
   user_id: number;
   other_user_id: number;
 
-  perks: number;
-  server_ids: number;
+  perks?: number[];
+  server_ids?: number[];
 
-  date_from: number;
-  date_to: number;
+  date_from?: Date;
+  date_to?: Date;
 
   pager: PaginationRequest;
 }
 
 export interface GetLastSessionsWithUserResponseItem {
-  session_id: number;
-  server: { id: number; name: string };
-  map: { id: number; name: string };
+  session: SessionData;
+  server: ServerData;
+  map: MapData;
 
   perks: number[];
 

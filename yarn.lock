@@ -396,6 +396,13 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
 
+"@types/node@*":
+  version "24.0.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.0.14.tgz#6e3d4fb6d858c48c69707394e1a0e08ce1ecc1bc"
+  integrity sha512-4zXMWD91vBLGRtHK3YbIoFMia+1nqEz72coM42C5ETjnNCa/heoj7NT1G67iAfOqMmcfhuCZ4uNpyz8EjlAejw==
+  dependencies:
+    undici-types "~7.8.0"
+
 "@types/pug@^2.0.6":
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.10.tgz#52f8dbd6113517aef901db20b4f3fca543b88c1f"
@@ -405,6 +412,13 @@
   version "1.20.2"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.20.2.tgz#97d26e00cd4a0423b4af620abecf3e6f442b7975"
   integrity sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==
+
+"@types/set-cookie-parser@^2.4.10":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@types/set-cookie-parser/-/set-cookie-parser-2.4.10.tgz#ad3a807d6d921db9720621ea3374c5d92020bcbc"
+  integrity sha512-GGmQVGpQWUe5qglJozEjZV/5dyxbOOZ0LHe/lqyWssB88Y4svNfst0uqBVscdDeIKl5Jy5+aPSvy7mI9tYRguw==
+  dependencies:
+    "@types/node" "*"
 
 acorn@^8.10.0, acorn@^8.9.0:
   version "8.13.0"
@@ -1023,6 +1037,11 @@ jiti@^1.21.0:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.6.tgz#6c7f7398dd4b3142767f9a168af2f317a428d268"
   integrity sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==
 
+jwt-decode@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-4.0.0.tgz#2270352425fd413785b2faf11f6e755c5151bd4b"
+  integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
+
 kleur@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.5.tgz#95106101795f7050c6c650f350c683febddb1780"
@@ -1400,7 +1419,7 @@ schema-dts@^1.1.2:
   resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-1.1.2.tgz#82ccf71b5dcb80065a1cc5941888507a4ce1e44b"
   integrity sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==
 
-set-cookie-parser@^2.6.0:
+set-cookie-parser@^2.6.0, set-cookie-parser@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.7.1.tgz#3016f150072202dfbe90fadee053573cc89d2943"
   integrity sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==
@@ -1693,6 +1712,11 @@ typescript@^5.0.0, typescript@^5.0.3:
   version "5.6.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.6.3.tgz#5f3449e31c9d94febb17de03cc081dd56d81db5b"
   integrity sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==
+
+undici-types@~7.8.0:
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.8.0.tgz#de00b85b710c54122e44fbfd911f8d70174cd294"
+  integrity sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==
 
 undici@^5.28.3:
   version "5.28.4"
