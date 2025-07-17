@@ -1,14 +1,7 @@
 import type { PlayTimeHistItem } from '$lib/api/analytics';
+import type { Treshhold } from '$lib/components/activity-calendar';
 
-export type Treshhold = {
-  title: string;
-  evaluate: (value: PlayTimeHistItem) => number;
-  tooltip: (date: Date, value?: PlayTimeHistItem) => string;
-  values: number[];
-  colors: string[];
-};
-
-export const treshholds: Treshhold[] = [
+export const treshholds: Treshhold<PlayTimeHistItem>[] = [
   {
     title: 'Playtime, hrs',
     evaluate: (value) => Math.round(value.minutes / 60),

@@ -3,6 +3,7 @@
   import { Line } from 'svelte-chartjs';
   import { writable } from 'svelte/store';
   import { lineHoverPlugin } from '../common/line-hover-plugin';
+  import { Tabs } from '$lib/components/tabs';
 
   export let data: AccuracyHistItem[] = [];
 
@@ -16,20 +17,8 @@
 
 <div class="overview-accuracy-root">
   {#if data.length}
-    <ul>
-      {#each tabs as tab, index (tab)}
-        <li class:selected={$selectedTab === index}>
-          <div
-            on:click={() => selectedTab.set(index)}
-            on:keypress={(e) => e.code === 'Enter' && selectedTab.set(index)}
-            role="button"
-            tabindex="0"
-          >
-            {tab}
-          </div>
-        </li>
-      {/each}
-    </ul>
+    <Tabs {tabs} bind:selectedTab={$selectedTab} />
+
     <Line
       plugins={[lineHoverPlugin]}
       options={{
@@ -99,21 +88,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  .overview-accuracy-root > ul {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    font-weight: bold;
-  }
-
-  .overview-accuracy-root > ul > li {
-    border-bottom: 2px solid transparent;
-  }
-
-  .overview-accuracy-root > ul > .selected {
-    border-bottom-color: var(--text-primary);
   }
 
   :global(.overview-accuracy-root > canvas) {

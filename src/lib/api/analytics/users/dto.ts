@@ -73,7 +73,7 @@ export interface PlayTimeHist {
 
 export interface GetTeammatesRequest {
   user_id: number;
-  limit?: number;
+  pager: PaginationRequest;
 }
 
 export interface GetTeammatesResponseItem {

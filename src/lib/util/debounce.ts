@@ -1,5 +1,5 @@
 export const debounce = (fn: Function, ms = 300) => {
-  let timeoutId: number;
+  let timeoutId: any;
 
   return function (this: any, ...args: any[]) {
     clearTimeout(timeoutId);

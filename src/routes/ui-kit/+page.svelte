@@ -1,9 +1,12 @@
 <script lang="ts">
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
+  import { AutoScroll } from '$lib/components/auto-scroll';
+  import ActivityCalendarKit from './ActivityCalendarKit.svelte';
 </script>
 
 <AutoScroll>
-  <div class="root">Why are you here?</div>
+  <div class="root">
+    <ActivityCalendarKit />
+  </div>
 </AutoScroll>
 
 <style>

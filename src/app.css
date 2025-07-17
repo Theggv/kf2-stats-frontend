@@ -20,6 +20,10 @@
   --color-win: rgb(46, 158, 46);
   --color-lose: rgb(217, 100, 100);
   --color-in-progress: rgb(184, 197, 68);
+
+  --color-grad-win: rgba(46, 158, 46, 0.1);
+  --color-grad-lose: rgba(217, 100, 100, 0.05);
+  --color-grad-aborted: rgba(225, 220, 220, 0.05);
 }
 
 hr {

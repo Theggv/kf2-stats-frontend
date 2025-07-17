@@ -46,7 +46,8 @@ export function getStore() {
 
       await UserAnalyticsApiService.getTeammates({
         user_id,
-      }).then(({ data }) => teammates.set(data.items));
+        pager: { page: 0 },
+      }).then(({ data }) => teammates.set(data.items.slice(0, 5)));
 
       await UserAnalyticsApiService.getUserPerksAnalytics({
         user_id,
