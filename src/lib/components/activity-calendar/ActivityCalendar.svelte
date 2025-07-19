@@ -9,11 +9,26 @@
   export let treshhold: Treshhold<T>;
   export let period: 'month' | '45-days' | '90-days' | 'year' = 'month';
   export let to: Date = new Date();
+  export let clickBehaviour: 'select' | 'range' = 'select';
+
+  $: mappedData = new Map(
+    data.map((x) => [new Date(x.period).toDateString(), x])
+  );
+
+  $: rangeFrom = -1;
+  $: rangeTo = -1;
+  $: hoveredIndex = -1;
+
+  $: to && clearRange();
 
   $: totalDays = transformPeriod(period);
   $: small = ['90-days', 'year'].includes(period);
 
-  const dispatch = createEventDispatcher<{ click: Date }>();
+  const dispatch = createEventDispatcher<{
+    click: Date;
+    rangeSelected: { from: Date; to: Date };
+    rangeClear: {};
+  }>();
 
   const days = getDayNames();
   const months = getMonthNames();
@@ -21,27 +36,54 @@
   const msInDay = 1000 * 60 * 60 * 24;
   $: filler = (3710 + to.getDay() - totalDays + 1) % 7;
 
-  function findByDate(data: T[], date: Date) {
-    return data.find(
-      (x) => new Date(x.period).toDateString() === date.toDateString()
-    );
-  }
+  function getColor(treshhold: Treshhold<T>, hovered: boolean, item?: T) {
+    const colors =
+      hovered && treshhold.altColors ? treshhold.altColors : treshhold.colors;
 
-  function getColor(treshhold: Treshhold<T>, item?: T) {
-    if (!item) return treshhold.colors[0];
+    if (!item) return colors[0];
 
     for (let i = 0; i < treshhold.values.length; i++) {
       if (!treshhold.values[i]) continue;
-      if (treshhold.evaluate(item) <= treshhold.values[i])
-        return treshhold.colors[i];
+      if (treshhold.evaluate(item) <= treshhold.values[i]) return colors[i];
     }
 
-    return treshhold.colors[treshhold.colors.length - 1];
+    return colors[colors.length - 1];
   }
 
-  function onClickDate(date: Date, value?: T) {
+  function onClickDate(date: Date, index: number, value?: T) {
+    if (clickBehaviour === 'range') {
+      if (index >= 0 && rangeTo >= 0) {
+        clearRange();
+      }
+
+      if (index >= 0 && rangeFrom >= 0) {
+        let min = Math.min(index, rangeFrom);
+        let max = Math.max(index, rangeFrom);
+
+        dispatch('rangeSelected', {
+          from: new Date(to.getTime() - msInDay * (totalDays - min - 1)),
+          to: new Date(to.getTime() - msInDay * (totalDays - max - 1)),
+        });
+
+        rangeFrom = min;
+        rangeTo = max;
+        hoveredIndex = -1;
+
+        return;
+      }
+
+      rangeFrom = index;
+      hoveredIndex = index;
+    }
+
     if (!value) return;
     dispatch('click', date);
+  }
+
+  function clearRange() {
+    rangeFrom = -1;
+    rangeTo = -1;
+    dispatch('rangeClear', {});
   }
 
   function transformPeriod(p: typeof period): number {
@@ -52,6 +94,11 @@
 
     return 0;
   }
+
+  function isInRange(index: number, from: number, to: number) {
+    if (from < 0) return false;
+    return index >= from && index <= to;
+  }
 </script>
 
 <div class="root" class:small>
@@ -61,7 +108,12 @@
     </div>
   {/if}
 
-  <div class="calendar">
+  <div
+    class="calendar"
+    role="button"
+    on:dblclick={() => clearRange()}
+    tabindex="0"
+  >
     <div class="filler" />
     {#each days as day (day)}
       <div class="day-name secondary">{day}</div>
@@ -72,16 +124,36 @@
     {/each}
     {#each new Array(totalDays) as _, index}
       {@const date = new Date(to.getTime() - msInDay * (totalDays - index - 1))}
-      {@const value = findByDate(data, date)}
+      {@const value = mappedData.get(date.toDateString())}
+      {@const hover = isInRange(
+        index,
+        Math.min(rangeTo >= 0 ? rangeTo : hoveredIndex, rangeFrom),
+        Math.max(rangeTo >= 0 ? rangeTo : hoveredIndex, rangeFrom)
+      )}
 
       <div
         class="cell"
-        style="background-color: {getColor(treshhold, value)};"
+        class:hover
         role="button"
-        on:click={() => onClickDate(date, value)}
-        on:keypress={(e) => e.code === 'Enter' && onClickDate(date, value)}
+        on:click={() => onClickDate(date, index, value)}
+        on:keypress={(e) =>
+          e.code === 'Enter' && onClickDate(date, index, value)}
+        on:mouseenter={() =>
+          clickBehaviour === 'range' &&
+          rangeFrom >= 0 &&
+          rangeTo < 0 &&
+          (hoveredIndex = index)}
+        on:mouseleave={() =>
+          clickBehaviour === 'range' &&
+          rangeFrom >= 0 &&
+          rangeTo < 0 &&
+          (hoveredIndex = -1)}
         tabindex="0"
       >
+        <div
+          class="content"
+          style="background-color: {getColor(treshhold, hover, value)};"
+        />
         <div class="tooltip">
           {@html treshhold.tooltip(date, value)}
         </div>
@@ -125,22 +197,30 @@
     display: grid;
     grid-template-rows: repeat(8, 1fr);
     grid-auto-flow: column dense;
-    gap: 3px;
     justify-content: start;
     align-items: center;
   }
 
   .filler,
   .cell {
+    padding: 2px;
     width: 20px;
     aspect-ratio: 1;
   }
 
   .cell {
     position: relative;
-    background: rgba(200, 200, 250, 0.15);
-    border-radius: 0.25rem;
     display: flex;
+  }
+
+  .cell .content {
+    position: relative;
+    border-radius: 0.25rem;
+    flex: 1;
+  }
+
+  .cell.hover .content {
+    border-radius: 0.25rem;
   }
 
   .tooltip {
@@ -211,17 +291,17 @@
     padding-right: 0.5rem;
   }
 
-  .root.small .calendar,
   .root.small .grades {
     gap: 2px;
   }
 
   .root.small .filler,
   .root.small .cell {
-    width: 10px;
+    padding: 1.5px;
+    width: 14px;
   }
 
-  .root.small .cell {
+  .root.small .cell .content {
     border-radius: 0.125rem;
   }
 

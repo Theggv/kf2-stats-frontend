@@ -4,4 +4,5 @@ export type Treshhold<T extends { period: string }> = {
   tooltip: (date: Date, value?: T) => number | string;
   values: number[];
   colors: string[];
+  altColors?: string[];
 };
