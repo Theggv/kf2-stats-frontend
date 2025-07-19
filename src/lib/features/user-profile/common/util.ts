@@ -1,13 +1,19 @@
+import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
 import { Perk } from '$lib/api/matches';
 import { Status } from '$lib/api/sessions';
-import type { RecentSessionsResponseSession } from '$lib/api/users';
 
-export function inProgress(item: RecentSessionsResponseSession) {
-  return item.status === Status.Lobby || item.status === Status.InProgress;
+export function inProgress(item: FindUserSessionsResponseItem) {
+  return (
+    item.session.status === Status.Lobby ||
+    item.session.status === Status.InProgress
+  );
 }
 
-export function notInProgress(item: RecentSessionsResponseSession) {
-  return item.status !== Status.Lobby && item.status !== Status.InProgress;
+export function notInProgress(item: FindUserSessionsResponseItem) {
+  return (
+    item.session.status !== Status.Lobby &&
+    item.session.status !== Status.InProgress
+  );
 }
 
 export function isPrecisionPerk(perk: Perk) {
@@ -15,7 +21,9 @@ export function isPrecisionPerk(perk: Perk) {
     perk === Perk.Gunslinger ||
     perk === Perk.Sharpshooter ||
     perk === Perk.Commando
-  )
+  ) {
     return true;
+  }
+
   return false;
 }
