@@ -36,9 +36,8 @@
 
 <Select
   bind:input={el}
-  on:keydown={(e) => console.log(e)}
-  class="waves-select"
   bind:listOpen
+  class="waves-select"
   {value}
   {items}
   clearable={false}
