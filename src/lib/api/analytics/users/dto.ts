@@ -1,6 +1,16 @@
-import type { PaginationRequest, PaginationResponse } from '$lib/api/common';
+import type {
+  PaginationRequest,
+  PaginationResponse,
+  SortByRequest,
+} from '$lib/api/common';
 import type { Perk } from '$lib/api/matches';
-import type { Difficulty, Length, Mode, Status } from '$lib/api/sessions';
+import type {
+  Difficulty,
+  ExtraGameData,
+  Length,
+  Mode,
+  Status,
+} from '$lib/api/sessions';
 import type { TimePeriod } from '../dto';
 
 export interface SessionData {
@@ -190,5 +200,57 @@ export interface GetLastSessionsWithUserResponseItem {
 
 export interface GetLastSessionsWithUserResponse {
   items: GetLastSessionsWithUserResponseItem[];
+  metadata: PaginationResponse;
+}
+
+export interface FindUserSessionsRequest {
+  user_id: number;
+
+  date_from?: Date;
+  date_to?: Date;
+
+  perks?: number[];
+  server_ids?: number[];
+  map_ids?: number[];
+
+  mode?: Mode;
+  length?: Length;
+  diff?: Difficulty;
+  status?: Status;
+
+  spawn_cycle?: string;
+  zeds_type?: string;
+  min_wave?: number;
+  max_monsters?: number;
+
+  sort_by: SortByRequest;
+  pager: PaginationRequest;
+}
+
+export interface FindUserSessionsResponseItemGameData {
+  wave: number;
+  zeds_left: number;
+}
+
+export interface FindUserSessionsResponseItemStats {
+  damage_dealt: number;
+}
+
+export interface FindUserSessionsResponseItem {
+  session: SessionData;
+  server: ServerData;
+  map: MapData;
+  perks: number[];
+
+  game_data: FindUserSessionsResponseItemGameData;
+  extra_game_data: ExtraGameData;
+
+  stats: FindUserSessionsResponseItemStats;
+
+  updated_at: string;
+}
+
+export interface FindUserSessionsResponse {
+  items: FindUserSessionsResponseItem[];
   metadata: PaginationResponse;
 }

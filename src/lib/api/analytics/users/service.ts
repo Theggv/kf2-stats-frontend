@@ -3,6 +3,8 @@ import type { GenericAbortSignal } from 'axios';
 
 import type {
   AccuracyHist,
+  FindUserSessionsRequest,
+  FindUserSessionsResponse,
   GetLastSeenUsersRequest,
   GetLastSeenUsersResponse,
   GetLastSessionsWithUserRequest,
@@ -54,6 +56,17 @@ export class UserAnalyticsApiService {
 
   static getMaps(body: GetPlayedMapsRequest) {
     return $proxyApi.post<GetPlayedMapsResponse>(`/analytics/users/maps`, body);
+  }
+
+  static findSessions(
+    body: FindUserSessionsRequest,
+    signal?: GenericAbortSignal
+  ) {
+    return $authProxyApi.post<FindUserSessionsResponse>(
+      `/analytics/users/sessions`,
+      body,
+      { signal }
+    );
   }
 
   static getLastSeenUsers(
