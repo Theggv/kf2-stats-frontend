@@ -1,8 +1,8 @@
 import { $backendApi } from '$lib/http';
-import { isAxiosError } from 'axios';
 
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { handleApiError } from '$lib/util';
 
 export const GET: RequestHandler = async ({ params }) => {
   const id = parseInt(params.id);
@@ -13,7 +13,6 @@ export const GET: RequestHandler = async ({ params }) => {
     const { data } = await $backendApi.get(`/servers/${id}/last-session`);
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

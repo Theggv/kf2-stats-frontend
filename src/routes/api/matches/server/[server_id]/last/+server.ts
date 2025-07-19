@@ -1,5 +1,5 @@
 import { $backendApi } from '$lib/http';
-import { isAxiosError } from 'axios';
+import { handleApiError } from '$lib/util';
 
 import { error, json } from '@sveltejs/kit';
 
@@ -18,7 +18,6 @@ export const GET: RequestHandler = async ({ params }) => {
     );
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

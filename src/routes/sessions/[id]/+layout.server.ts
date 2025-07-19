@@ -14,7 +14,7 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
 
   const match: MatchData = await fetch(`/api/matches/${sessionId}`).then(
     (x) => {
-      if (!x.ok) throw error(404, { message: 'session was not found' });
+      if (!x.ok) throw error(x.status, { message: 'session was not found' });
       return x.json();
     }
   );

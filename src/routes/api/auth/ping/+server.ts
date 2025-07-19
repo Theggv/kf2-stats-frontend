@@ -7,7 +7,8 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
   try {
-    const { data } = await $backendApi.get(`/analytics/server/popular`);
+    const { data } = await $backendApi.get('/auth/ping');
+
     return json(data);
   } catch (err) {
     throw handleApiError(err);

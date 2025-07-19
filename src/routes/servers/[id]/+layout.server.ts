@@ -12,7 +12,7 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
 
   const server: ServerData = await fetch(`/api/servers/${serverId}`).then(
     (x) => {
-      if (!x.ok) throw error(404, { message: 'server was not found' });
+      if (!x.ok) throw error(x.status, { message: 'server was not found' });
       return x.json();
     }
   );

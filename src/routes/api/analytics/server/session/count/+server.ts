@@ -1,22 +1,20 @@
 import { $backendApi } from '$lib/http';
-import { isAxiosError } from 'axios';
+import { handleApiError } from '$lib/util';
 
-import { error, json } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 import type { RequestHandler } from './$types';
-import type { SessionOnlineResponse } from '$lib/api/analytics/server';
 
 export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
 
   try {
-    const { data } = await $backendApi.post<SessionOnlineResponse>(
+    const { data } = await $backendApi.post(
       `/analytics/server/session/count`,
       body
     );
     return json(data.items);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

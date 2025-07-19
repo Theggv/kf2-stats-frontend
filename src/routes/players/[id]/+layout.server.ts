@@ -12,7 +12,7 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const user: FilterUsersResponseUser = await fetch(
     `/api/users/${userId}/detailed`
   ).then((x) => {
-    if (!x.ok) throw error(404, { message: 'user was not found' });
+    if (!x.ok) throw error(x.status, { message: 'user was not found' });
     return x.json();
   });
 

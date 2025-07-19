@@ -3,11 +3,15 @@
 </script>
 
 <div>
-  <h1>Something went wrong</h1>
-  <span>
-    <h2>{$page.status}</h2>
-    <h2>{$page.error?.message}</h2>
-  </span>
+  {#if $page.status === 503}
+    <h1>Backend server is not available</h1>
+  {:else}
+    <h1>Something went wrong</h1>
+    <span>
+      <h2>{$page.status}</h2>
+      <h2>{$page.error?.message}</h2>
+    </span>
+  {/if}
 </div>
 
 <style>

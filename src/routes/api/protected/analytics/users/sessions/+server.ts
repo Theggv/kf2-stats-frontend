@@ -1,10 +1,10 @@
 import { $authApi } from '$lib/http';
-import { type AxiosRequestConfig } from 'axios';
+import { handleApiError } from '$lib/util';
 
 import { json } from '@sveltejs/kit';
 
+import type { AxiosRequestConfig } from 'axios';
 import type { RequestHandler } from './$types';
-import { handleApiError } from '$lib/util';
 
 export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request }) => {
     };
 
     const { data } = await $authApi.post(
-      `/analytics/users/lastseen`,
+      `/analytics/users/sessions`,
       body,
       config
     );

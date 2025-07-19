@@ -1,9 +1,10 @@
 import { $authApi } from '$lib/http';
-import { isAxiosError, type AxiosRequestConfig } from 'axios';
+import { type AxiosRequestConfig } from 'axios';
 
-import { error, json } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 import type { RequestHandler } from './$types';
+import { handleApiError } from '$lib/util';
 
 export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
@@ -21,7 +22,6 @@ export const POST: RequestHandler = async ({ request }) => {
 
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(err.status || 400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

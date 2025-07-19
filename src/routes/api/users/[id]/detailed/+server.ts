@@ -1,7 +1,8 @@
 import { $backendApi } from '$lib/http';
-import { isAxiosError } from 'axios';
+import { handleApiError } from '$lib/util';
 
 import { error, json } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ params }) => {
@@ -12,7 +13,6 @@ export const GET: RequestHandler = async ({ params }) => {
     const { data } = await $backendApi.get(`/users/${id}/detailed`);
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

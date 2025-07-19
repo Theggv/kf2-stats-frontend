@@ -1,10 +1,10 @@
-import { isAxiosError } from 'axios';
-
-import { error, json } from '@sveltejs/kit';
+import { $backendApi } from '$lib/http';
+import { handleApiError } from '$lib/util';
 import cookieParser from 'set-cookie-parser';
 
+import { error, json } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
-import { $backendApi } from '$lib/http';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
   const body = await request.json();
@@ -19,7 +19,6 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
     cookies.set(name, value, { ...opts, sameSite: opts.sameSite as any });
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };

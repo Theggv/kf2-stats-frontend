@@ -1,9 +1,9 @@
-import { isAxiosError } from 'axios';
+import { $backendApi } from '$lib/http';
+import { handleApiError } from '$lib/util';
 
-import { error, json } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 import type { RequestHandler } from './$types';
-import { $backendApi } from '$lib/http';
 
 export const POST: RequestHandler = async ({ cookies }) => {
   try {
@@ -14,7 +14,6 @@ export const POST: RequestHandler = async ({ cookies }) => {
     cookies.delete('refreshToken', { path: '/' });
     return json(data);
   } catch (err) {
-    if (isAxiosError(err)) throw error(400, err.message);
-    throw error(404, `${err}`);
+    throw handleApiError(err);
   }
 };
