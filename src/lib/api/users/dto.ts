@@ -1,5 +1,11 @@
 import type { PaginationRequest, PaginationResponse } from '../common';
-import type { CDGameData, Difficulty, Length, Mode, Status } from '../sessions';
+import type {
+  ExtraGameData,
+  Difficulty,
+  Length,
+  Mode,
+  Status,
+} from '../sessions';
 
 export enum AuthType {
   Steam = 1,
@@ -44,7 +50,7 @@ export interface FilterUsersResponseUserSession {
   diff: Difficulty;
   status: Status;
   wave: number;
-  cd_data?: CDGameData;
+  cd_data?: ExtraGameData;
   server_name: string;
   map_name: string;
 }

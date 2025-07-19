@@ -5,7 +5,7 @@ import type {
   ZedCounter,
 } from '../common';
 import type {
-  CDGameData,
+  ExtraGameData,
   Difficulty,
   GameData,
   Length,
@@ -69,7 +69,7 @@ export interface MatchData {
   server?: MatchServer;
 
   game_data?: GameData;
-  cd_data?: CDGameData;
+  cd_data?: ExtraGameData;
 
   players?: MatchPlayer[];
   spectators?: MatchPlayer[];
@@ -163,7 +163,7 @@ export interface GetMatchLiveDataResponsePlayer {
 export interface GetMatchLiveDataResponse {
   status: Status;
   game_data: GameData;
-  cd_data?: CDGameData;
+  cd_data?: ExtraGameData;
   players: GetMatchLiveDataResponsePlayer[];
   spectators: GetMatchLiveDataResponsePlayer[];
 }

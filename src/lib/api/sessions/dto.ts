@@ -86,7 +86,7 @@ export interface GameData {
   zeds_left: number;
 }
 
-export interface CDGameData {
+export interface ExtraGameData {
   spawn_cycle: string;
   max_monsters: number;
   wave_size_fakes: number;

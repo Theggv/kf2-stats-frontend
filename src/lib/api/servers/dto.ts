@@ -1,5 +1,11 @@
 import type { PaginationRequest, PaginationResponse } from '../common';
-import type { CDGameData, Difficulty, Length, Mode, Status } from '../sessions';
+import type {
+  ExtraGameData,
+  Difficulty,
+  Length,
+  Mode,
+  Status,
+} from '../sessions';
 
 export interface ServerData {
   id: number;
@@ -36,7 +42,7 @@ export interface RecentUsersResponseUserSession {
   length: Length;
   diff: Difficulty;
   status: Status;
-  cd_data?: CDGameData;
+  cd_data?: ExtraGameData;
   map_name: string;
   perks: number[];
   wave: number;
