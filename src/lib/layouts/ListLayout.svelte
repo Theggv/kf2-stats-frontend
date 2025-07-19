@@ -1,6 +1,7 @@
 <div class="root">
   <slot name="header" class="header" />
   <slot name="content" />
+  <slot />
 </div>
 
 <style>
