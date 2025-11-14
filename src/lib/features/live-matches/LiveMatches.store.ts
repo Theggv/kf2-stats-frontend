@@ -57,20 +57,22 @@ export function getStore() {
           include_game_data: true,
           include_cd_data: true,
           include_players: true,
-          status: [Status.Win],
+          statuses: [Status.Lobby, Status.InProgress],
           pager: { page, results_per_page: 10 },
-          mode: Mode.ControlledDifficulty,
         });
 
         temp.push(...(data.items as LiveMatchData[]));
         const meta = data.metadata;
         page += 1;
-        break;
 
         if (meta.total_results <= page * meta.results_per_page) break;
       } while (true);
 
-      matches.set(temp.sort(compareMatches));
+      matches.set(
+        temp
+          .filter((x) => x.players?.length || x.spectators?.length)
+          .sort(compareMatches)
+      );
     } catch (err) {
       error.set(err);
     } finally {
