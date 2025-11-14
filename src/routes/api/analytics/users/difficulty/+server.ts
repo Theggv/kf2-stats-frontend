@@ -9,7 +9,10 @@ export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
 
   try {
-    const { data } = await $backendApi.post(`/analytics/users/`, body);
+    const { data } = await $backendApi.post(
+      `/analytics/users/difficulty`,
+      body
+    );
     return json(data);
   } catch (err) {
     throw handleApiError(err);

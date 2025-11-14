@@ -13,6 +13,7 @@ import type {
   GetPlayedMapsResponse,
   GetTeammatesRequest,
   GetTeammatesResponse,
+  GetUserDifficultyHistRequest,
   PlayTimeHist,
   UserAnalyticsRequest,
   UserAnalyticsResponse,
@@ -20,6 +21,7 @@ import type {
   UserPerksAnalyticsRequest,
   UserPerksAnalyticsResponse,
 } from './dto';
+import type { PeriodData } from '../dto';
 
 export class UserAnalyticsApiService {
   static getUserAnalytics(body: UserAnalyticsRequest) {
@@ -45,6 +47,10 @@ export class UserAnalyticsApiService {
       `/analytics/users/perks/accuracy`,
       body
     );
+  }
+
+  static getDifficultyHist(body: GetUserDifficultyHistRequest) {
+    return $proxyApi.post<PeriodData[]>(`/analytics/users/difficulty`, body);
   }
 
   static getTeammates(body: GetTeammatesRequest) {

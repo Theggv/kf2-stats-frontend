@@ -1,5 +1,5 @@
 import type { Difficulty } from '$lib/api/sessions';
-import type { TimePeriod } from '../dto';
+import type { PeriodData, TimePeriod } from '../dto';
 
 export interface SessionOnlineRequest {
   server_id?: number;
@@ -8,16 +8,6 @@ export interface SessionOnlineRequest {
   date_to?: Date;
 
   period: TimePeriod;
-}
-
-export interface PeriodData {
-  period: string;
-
-  value: number;
-  prev: number;
-  diff: number;
-  max_value: number;
-  trend: number;
 }
 
 export interface SessionOnlineResponse {

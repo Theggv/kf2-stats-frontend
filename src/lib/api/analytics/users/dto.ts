@@ -12,7 +12,7 @@ import type {
   Status,
 } from '$lib/api/sessions';
 import type { GetSessionDifficultyResponse } from '$lib/api/sessions/difficulty';
-import type { TimePeriod } from '../dto';
+import { TimePeriod } from '../dto';
 
 export interface SessionData {
   id: number;
@@ -264,4 +264,16 @@ export interface FindUserSessionsResponseItem {
 export interface FindUserSessionsResponse {
   items: FindUserSessionsResponseItem[];
   metadata: PaginationResponse;
+}
+
+export interface GetUserDifficultyHistRequest {
+  user_id: number;
+
+  date_from?: Date;
+  date_to?: Date;
+  period: TimePeriod;
+
+  perks?: number[];
+  server_ids?: number[];
+  map_ids?: number[];
 }

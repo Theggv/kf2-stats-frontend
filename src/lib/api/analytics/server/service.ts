@@ -1,7 +1,7 @@
 import { $proxyApi } from '$lib/http';
+import type { PeriodData } from '../dto';
 
 import type {
-  PeriodData,
   PlayersOnlineRequest,
   PopularServersResponse,
   SessionOnlineRequest,
