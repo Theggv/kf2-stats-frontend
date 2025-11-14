@@ -56,7 +56,9 @@ export const authOnErrorInterceptor = async (error: any) => {
       localStorage.setItem('accessToken', data.access_token);
       addAuthHeader(originalRequest, data.access_token);
     } catch (error) {
-      localStorage.setItem('invalidate-token', '1');
+      if (isAxiosError(error) && error.status === 401) {
+        localStorage.setItem('invalidate-token', '1');
+      }
       throw error;
     }
 

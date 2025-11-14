@@ -71,7 +71,8 @@ export function getAuth() {
     const invalidate = localStorage.getItem('invalidate-token');
 
     if (invalidate) {
-      onTokenChanged(localStorage.getItem('accessToken'));
+      onTokenChanged(null);
+      localStorage.removeItem('accessToken');
       localStorage.removeItem('invalidate-token');
     } else {
       token.set(localStorage.getItem('accessToken'));
