@@ -38,7 +38,7 @@ function compareMatches(a: LiveMatchData, b: LiveMatchData) {
   return a.map.name.localeCompare(b.map.name);
 }
 
-export function matchesStore() {
+export function getStore() {
   const loading = writable(false);
   const error = writable<unknown>(false);
   const matches = writable<LiveMatchData[]>([]);
@@ -57,22 +57,20 @@ export function matchesStore() {
           include_game_data: true,
           include_cd_data: true,
           include_players: true,
-          status: [Status.Lobby, Status.InProgress],
-          pager: { page, results_per_page: 100 },
+          status: [Status.Win],
+          pager: { page, results_per_page: 10 },
+          mode: Mode.ControlledDifficulty,
         });
 
         temp.push(...(data.items as LiveMatchData[]));
         const meta = data.metadata;
         page += 1;
+        break;
 
         if (meta.total_results <= page * meta.results_per_page) break;
       } while (true);
 
-      matches.set(
-        temp
-          .filter((x) => x.players?.length || x.spectators?.length)
-          .sort(compareMatches)
-      );
+      matches.set(temp.sort(compareMatches));
     } catch (err) {
       error.set(err);
     } finally {

@@ -3,7 +3,7 @@
   import StyledLink from '$lib/ui/a/StyledLink.svelte';
   import { dateDiff } from '$lib/util/date';
   import { getWaveText } from '$lib/util/converters';
-  import { type LiveMatchData } from './store';
+  import { type LiveMatchData } from './LiveMatches.store';
   import UserProfile from './UserProfile.svelte';
   import { statusToString } from '$lib/util/enum-to-text';
   import { Accordion } from '@svelteuidev/core';

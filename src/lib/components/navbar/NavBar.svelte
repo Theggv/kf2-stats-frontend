@@ -65,6 +65,7 @@
           profile_url: $user.profile_url,
         }}
       />
+      <span>|</span>
       <button class="logout" on:click={() => logout()}>Logout</button>
     {:else}
       <a href={steamOpenIdUrl.href}>
@@ -90,6 +91,7 @@
   .last {
     flex: 1;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     gap: 0.5rem;
   }

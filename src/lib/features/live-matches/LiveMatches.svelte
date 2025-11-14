@@ -3,10 +3,10 @@
   import MatchCard from './MatchCard.svelte';
   import RefreshIcon from '$lib/ui/icons/RefreshIcon.svelte';
   import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
-  import { matchesStore } from './store';
+  import { getStore } from './LiveMatches.store';
 
-  let refreshIntervalId: number;
-  const { matches, loading, error, fetch: fetchMatches } = matchesStore();
+  let refreshIntervalId: NodeJS.Timeout | number;
+  const { matches, loading, error, fetch: fetchMatches } = getStore();
 
   function updateData() {
     clearInterval(refreshIntervalId);
