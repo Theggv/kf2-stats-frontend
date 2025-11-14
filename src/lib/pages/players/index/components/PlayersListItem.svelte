@@ -5,6 +5,8 @@
     FilterUsersResponseUserSession,
   } from '$lib/api/users';
   import Player from '$lib/components/player/Player.svelte';
+  import { DifficultyIcon } from '$lib/ui/icons';
+  import { getMatchDifficulty } from '$lib/util';
   import { getWaveText } from '$lib/util/converters';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import MediaQuery from 'svelte-media-queries';
@@ -38,6 +40,10 @@
   </div>
 
   {#if session}
+    <div class="difficulty">
+      <DifficultyIcon difficulty={getMatchDifficulty(session?.metadata.diff)} />
+    </div>
+
     <MediaQuery query="(max-width: 1024px)" let:matches>
       {#if matches}
         <a
@@ -208,6 +214,10 @@
     align-items: center;
     gap: 1rem;
     width: 275px;
+  }
+
+  .difficulty {
+    width: 40px;
   }
 
   .settings {

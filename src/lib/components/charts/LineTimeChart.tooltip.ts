@@ -103,7 +103,7 @@ export const externalTooltipHandler =
             )
           );
           diff.style.color = 'var(--color-win)';
-        } else {
+        } else if (raw.diff < 0) {
           diff.appendChild(
             document.createTextNode(
               `(-${((raw.prev / raw.value - 1) * 100).toFixed(0)}%)`

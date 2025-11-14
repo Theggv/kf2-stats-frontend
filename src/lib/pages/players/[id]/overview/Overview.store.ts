@@ -6,9 +6,10 @@ import {
   type AccuracyHistItem,
   type GetTeammatesResponseItem,
   type UserPerksAnalyticsResponseItem,
+  type PeriodData,
 } from '$lib/api/analytics';
 import { debounce } from '$lib/util';
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 
 export function getStore() {
   const userIdStore = writable<number | null>(null);
@@ -16,6 +17,7 @@ export function getStore() {
   const recentMatches = writable<FindUserSessionsResponseItem[]>([]);
   const playtime = writable<PlayTimeHistItem[]>([]);
   const accuracy = writable<AccuracyHistItem[]>([]);
+  const difficulty = writable<PeriodData[]>([]);
   const teammates = writable<GetTeammatesResponseItem[]>([]);
   const perks = writable<UserPerksAnalyticsResponseItem[]>([]);
 
@@ -34,6 +36,14 @@ export function getStore() {
         date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 45),
         date_to: new Date(),
       }).then(({ data }) => playtime.set(data.items));
+
+      // Difficulty for 45 days
+      await UserAnalyticsApiService.getDifficultyHist({
+        user_id,
+        period: TimePeriod.Date,
+        date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 45),
+        date_to: new Date(),
+      }).then(({ data }) => difficulty.set(data));
 
       await UserAnalyticsApiService.getAccuracyHist({
         user_id,
@@ -58,5 +68,24 @@ export function getStore() {
     fetch(id);
   });
 
-  return { userIdStore, recentMatches, playtime, accuracy, teammates, perks };
+  return {
+    userIdStore,
+    recentMatches,
+    hist: {
+      playtime,
+      accuracy,
+      difficulty: derived([difficulty], ([difficulty]) =>
+        difficulty.map((x) => ({
+          period: x.period,
+          value: x.value,
+          prev: x.prev,
+          diff: 0,
+          max_value: x.max_value,
+          trend: x.trend,
+        }))
+      ),
+    },
+    teammates,
+    perks,
+  };
 }

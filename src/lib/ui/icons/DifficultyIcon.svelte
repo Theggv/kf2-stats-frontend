@@ -21,7 +21,7 @@
 
   function getAngle(difficulty: number) {
     if (difficulty >= 10) return '360deg';
-    if (difficulty < 1) return '36deg';
+    if (difficulty <= 0) return '0deg';
 
     return Math.round((difficulty / 10) * 360) + 'deg';
   }

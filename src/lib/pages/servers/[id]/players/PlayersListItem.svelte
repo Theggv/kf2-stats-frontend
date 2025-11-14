@@ -2,7 +2,9 @@
   import type { RecentUsersResponseUser } from '$lib/api/servers';
   import { Mode, Status } from '$lib/api/sessions';
   import Player from '$lib/components/player/Player.svelte';
+  import { DifficultyIcon } from '$lib/ui/icons';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
+  import { getMatchDifficulty } from '$lib/util';
   import { getWaveText } from '$lib/util/converters';
   import { getTimeSinceNow } from '$lib/util/date';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
@@ -39,6 +41,12 @@
     {#each data.session.perks.filter((x) => x) as perk (perk)}
       <PerkIcon {perk} prestige={0} />
     {/each}
+  </div>
+
+  <div class="difficulty">
+    <DifficultyIcon
+      difficulty={getMatchDifficulty(data.session.metadata.diff)}
+    />
   </div>
 
   <a class="settings" href="/sessions/{data.session.id}">
@@ -203,6 +211,10 @@
     gap: 0.5rem;
     flex-wrap: wrap;
     width: 100px;
+  }
+
+  .difficulty {
+    width: 40px;
   }
 
   .settings {

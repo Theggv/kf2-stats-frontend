@@ -18,11 +18,13 @@
   import { inProgress, notInProgress } from '../common';
   import Layout from '../common/Layout.svelte';
   import { iconSettings } from '$lib/ui/icons';
+  import { LineTimeChart, periods } from '$lib/components/charts';
 
   export let userId: number;
 
-  const { userIdStore, recentMatches, playtime, accuracy, teammates, perks } =
-    getStore();
+  const { userIdStore, recentMatches, hist, teammates, perks } = getStore();
+  const { playtime, accuracy, difficulty } = hist;
+
   $: userIdStore.set(userId);
 
   $: currentMatch = $recentMatches.find(inProgress);
@@ -63,6 +65,22 @@
       </svelte:fragment>
       <svelte:fragment slot="content">
         <Accuracy data={$accuracy} />
+      </svelte:fragment>
+    </SectionLayout>
+
+    <SectionLayout>
+      <svelte:fragment slot="title">Session Difficulty</svelte:fragment>
+      <svelte:fragment slot="subtitle">Last 45 days</svelte:fragment>
+      <svelte:fragment slot="icon">
+        <Icon src={BiTrendingUp} {...iconSettings} />
+      </svelte:fragment>
+      <svelte:fragment slot="content">
+        <LineTimeChart
+          data={$difficulty}
+          periods={periods.filter((_, i) => i === 2)}
+          label="Avg. Difficulty"
+          fractionDigits={1}
+        />
       </svelte:fragment>
     </SectionLayout>
 

@@ -9,16 +9,23 @@
   export let data: PeriodData[];
 
   export let periods: Period[];
-  export let selectedPeriod: number;
+  export let selectedPeriod: number = 0;
   export let label: string;
+  export let fractionDigits = 0;
 
-  export let renderValue: (item: number) => string = (item) => item.toFixed(0);
+  export let renderValue: (item: number) => string = (item) =>
+    item.toFixed(fractionDigits);
 
   const suppressTypeError = (data: any) => data;
 </script>
 
 <div class="line-time-chart">
-  <Tabs tabs={periods.map((x) => x.label)} bind:selectedTab={selectedPeriod} />
+  {#if periods.length > 1}
+    <Tabs
+      tabs={periods.map((x) => x.label)}
+      bind:selectedTab={selectedPeriod}
+    />
+  {/if}
 
   <div class="container">
     {#if data.length}
