@@ -7,7 +7,7 @@ import type { Match } from './common';
 type AvailableFilters = Partial<
   Pick<
     FilterMatchesRequest,
-    'diff' | 'length' | 'mode' | 'map_id' | 'status' | 'server_id'
+    'diff' | 'length' | 'mode' | 'map_ids' | 'statuses' | 'server_ids'
   >
 >;
 

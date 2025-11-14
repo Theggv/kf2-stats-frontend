@@ -1,3 +1,4 @@
+import type { SessionMetadata } from '../analytics';
 import type { PaginationRequest, PaginationResponse } from '../common';
 import type {
   ExtraGameData,
@@ -46,6 +47,8 @@ export interface RecentUsersResponseUserSession {
   map_name: string;
   perks: number[];
   wave: number;
+
+  metadata: SessionMetadata;
 }
 
 export interface RecentUsersResponseUser {

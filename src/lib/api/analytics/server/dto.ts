@@ -1,4 +1,4 @@
-import type { Difficulty } from '$lib/api/sessions';
+import type { Difficulty, Status } from '$lib/api/sessions';
 import type { PeriodData, TimePeriod } from '../dto';
 
 export interface SessionOnlineRequest {
@@ -55,4 +55,19 @@ export interface PopularServersResponse {
 
 export interface TotalOnlineResponse {
   count: number;
+}
+
+export interface SessionCountHistRequest {
+  server_id: number;
+
+  date_from?: Date;
+  date_to?: Date;
+
+  map_ids?: number[];
+  statuses?: Status[];
+
+  spawn_cycle?: string;
+  zeds_type?: string;
+  min_wave?: number;
+  max_monsters?: number;
 }

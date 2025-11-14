@@ -4,6 +4,7 @@ import type { PeriodData } from '../dto';
 import type {
   PlayersOnlineRequest,
   PopularServersResponse,
+  SessionCountHistRequest,
   SessionOnlineRequest,
   TotalOnlineResponse,
   UsageInMinutesRequest,
@@ -13,6 +14,13 @@ export class ServerAnalyticsApiService {
   static getSessionCount(body: SessionOnlineRequest) {
     return $proxyApi.post<PeriodData[]>(
       `/analytics/server/session/count`,
+      body
+    );
+  }
+
+  static getSessionCountHist(body: SessionCountHistRequest) {
+    return $proxyApi.post<PeriodData[]>(
+      `/analytics/server/session/count/hist`,
       body
     );
   }

@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
   import { Mode } from '$lib/api/sessions';
-  import { DifficultyIcon } from '$lib/ui/icons';
-  import { getMatchDifficulty } from '$lib/util';
   import { modeToString, diffToString } from '$lib/util/enum-to-text';
 
   export let data: FindUserSessionsResponseItem;

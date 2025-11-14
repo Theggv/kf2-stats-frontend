@@ -1,3 +1,4 @@
+import type { SessionMetadata } from '../analytics';
 import type { PaginationRequest, PaginationResponse } from '../common';
 import type {
   ExtraGameData,
@@ -53,6 +54,8 @@ export interface FilterUsersResponseUserSession {
   cd_data?: ExtraGameData;
   server_name: string;
   map_name: string;
+
+  metadata: SessionMetadata;
 }
 
 export interface FilterUsersResponseUser {

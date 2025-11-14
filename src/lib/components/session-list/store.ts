@@ -3,7 +3,7 @@ import { type FilterMatchesRequest } from '$lib/api/matches';
 import { type ServerData, ServersApiService } from '$lib/api/servers';
 import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
-import { writable, type Readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 export const statusList: SelectOption[] = [
   { id: Status.Aborted, label: 'Aborted' },
@@ -43,9 +43,9 @@ export type AvailableFilters = Partial<
     | 'diff'
     | 'length'
     | 'mode'
-    | 'server_id'
-    | 'map_id'
-    | 'status'
+    | 'server_ids'
+    | 'map_ids'
+    | 'statuses'
     | 'include_server'
   >
 >;

@@ -15,7 +15,7 @@ export function getStore() {
         include_map: true,
         include_game_data: true,
         include_cd_data: true,
-        server_id: [server_id],
+        server_ids: [server_id],
         reverse_order: true,
         pager: { results_per_page: 20 },
       }).then(({ data }) => lastMatches.set(data.items as any));

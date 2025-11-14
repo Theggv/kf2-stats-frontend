@@ -1,3 +1,4 @@
+import type { SessionMetadata } from '../analytics';
 import type {
   PaginationRequest,
   PaginationResponse,
@@ -12,7 +13,6 @@ import type {
   Mode,
   Status,
 } from '../sessions';
-import type { GetSessionDifficultyResponse } from '../sessions/difficulty';
 
 export enum Perk {
   Unknown = 0,
@@ -63,10 +63,6 @@ export interface MatchPlayer {
   armor: number;
 }
 
-export interface MatchMetadata {
-  diff?: GetSessionDifficultyResponse;
-}
-
 export interface MatchData {
   session: MatchSession;
 
@@ -79,7 +75,7 @@ export interface MatchData {
   players?: MatchPlayer[];
   spectators?: MatchPlayer[];
 
-  metadata: MatchMetadata;
+  metadata: SessionMetadata;
 }
 
 export interface MatchWave {
@@ -127,9 +123,9 @@ export interface MatchWavePlayerStats {
 }
 
 export interface FilterMatchesRequest {
-  server_id: number[];
-  map_id: number[];
-  status: Status[];
+  server_ids: number[];
+  map_ids: number[];
+  statuses: Status[];
 
   mode: Mode;
   length: Length;

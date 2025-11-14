@@ -1,4 +1,5 @@
 import { $proxyApi } from '$lib/http';
+import type { GenericAbortSignal } from 'axios';
 
 import type {
   FilterMatchesRequest,
@@ -27,7 +28,12 @@ export class MatchesApiService {
     return $proxyApi.get<MatchData>(`/matches/server/${server_id}/last`);
   }
 
-  static filter(body: Partial<FilterMatchesRequest>) {
-    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter`, body);
+  static filter(
+    body: Partial<FilterMatchesRequest>,
+    signal?: GenericAbortSignal
+  ) {
+    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter`, body, {
+      signal,
+    });
   }
 }
