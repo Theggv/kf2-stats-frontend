@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import { MatchPage } from '$lib/pages/match';
+  import { MatchPage } from '$lib/pages/matches/[id]';
 
   export let data: PageData;
 </script>

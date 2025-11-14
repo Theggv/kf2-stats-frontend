@@ -103,9 +103,9 @@
     </div>
 
     {#if $selectedWave}
-      {#each $killEvents as kill, index (`${$demo.session_id} ${$selectedWave.meta_data.start_tick} ${index} ${JSON.stringify(kill)}`)}
+      {#each $killEvents as kill, index (`${$demo.session_id} ${$selectedWave.metadata.start_tick} ${index} ${JSON.stringify(kill)}`)}
         <PlayerZedKillEvent
-          offset={$selectedWave.meta_data.start_tick}
+          offset={$selectedWave.metadata.start_tick}
           event={kill}
           user={getUserProfileByUserIndex(kill.user_index, users)}
         />

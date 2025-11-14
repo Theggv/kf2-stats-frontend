@@ -7,7 +7,7 @@
   export let event: DemoRecordAnalysisZedtime;
 
   function getExtendsCount(zt: DemoRecordAnalysisZedtime, tick: number) {
-    const meta = zt.meta_data;
+    const meta = zt.metadata;
 
     return meta.ticks.filter(
       (x) => x !== meta.start_tick && x != meta.end_tick && tick >= x
@@ -17,19 +17,19 @@
   function getTicks(zt: DemoRecordAnalysisZedtime, tick: number) {
     const ticks: number[] = [];
 
-    for (let i = 1; i < zt.meta_data.ticks.length - 1; i++) {
-      if (tick < zt.meta_data.ticks[i]) break;
-      ticks.push((zt.meta_data.ticks[i] - zt.meta_data.ticks[i - 1]) / 100);
+    for (let i = 1; i < zt.metadata.ticks.length - 1; i++) {
+      if (tick < zt.metadata.ticks[i]) break;
+      ticks.push((zt.metadata.ticks[i] - zt.metadata.ticks[i - 1]) / 100);
     }
 
     return ticks;
   }
 
-  $: completed = tick > event.meta_data.end_tick;
+  $: completed = tick > event.metadata.end_tick;
 
   $: duration = completed
-    ? event.meta_data.duration
-    : (tick - event.meta_data.start_tick) / 100;
+    ? event.metadata.duration
+    : (tick - event.metadata.start_tick) / 100;
   $: extends_count = getExtendsCount(event, tick);
   $: ticks = getTicks(event, tick);
 </script>
@@ -37,11 +37,11 @@
 <div class="root">
   <div class="time">
     {#if completed}
-      {tickToTime(event.meta_data.start_tick - offset, true)}
+      {tickToTime(event.metadata.start_tick - offset, true)}
       -
-      {tickToTime(event.meta_data.end_tick - offset, true)}
+      {tickToTime(event.metadata.end_tick - offset, true)}
     {:else}
-      {tickToTime(event.meta_data.start_tick - offset, true)}
+      {tickToTime(event.metadata.start_tick - offset, true)}
     {/if}
   </div>
   <div class="content">

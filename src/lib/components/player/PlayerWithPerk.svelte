@@ -4,7 +4,10 @@
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { perkToString } from '$lib/util/enum-to-text';
 
-  export let profile: UserProfile;
+  export let profile: Pick<
+    UserProfile,
+    'id' | 'name' | 'profile_url' | 'avatar'
+  >;
   export let playerData: Pick<
     MatchWavePlayer,
     'is_dead' | 'perk' | 'level' | 'prestige'

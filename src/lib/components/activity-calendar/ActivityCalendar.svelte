@@ -90,7 +90,7 @@
     if (p === 'month') return 30;
     if (p === '45-days') return 45;
     if (p === '90-days') return 90;
-    if (p === 'year') return 365;
+    if (p === 'year') return 366;
 
     return 0;
   }

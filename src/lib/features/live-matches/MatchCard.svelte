@@ -8,6 +8,8 @@
   import { statusToString } from '$lib/util/enum-to-text';
   import { Accordion } from '@svelteuidev/core';
   import { Status } from '$lib/api/sessions';
+  import { DifficultyIcon } from '$lib/ui/icons';
+  import { getMatchDifficulty } from '$lib/util';
 
   $: selected =
     $page.url.pathname.includes(`/sessions`) &&
@@ -18,6 +20,12 @@
 
 <StyledLink href="/sessions/{match.session.session_id}" {selected}>
   <div class="match-view-container">
+    <div class="difficulty">
+      <DifficultyIcon
+        difficulty={getMatchDifficulty(match.metadata.diff)}
+        size="small"
+      />
+    </div>
     <div class="server">
       {match.server.name}
     </div>
@@ -91,10 +99,10 @@
   .match-view-container {
     display: grid;
     grid-template:
-      'server server status' auto
-      'map wave game-length' auto
-      'accordion accordion accordion' auto
-      / 140px auto auto;
+      'difficulty server server status' auto
+      'difficulty map wave game-length' auto
+      'accordion accordion accordion accordion' auto
+      / 24px 140px auto auto;
 
     gap: 0.25rem 0.5rem;
     padding: 0.5rem;
@@ -102,11 +110,17 @@
     font-size: 12px;
   }
 
+  .difficulty {
+    grid-area: difficulty;
+    align-self: center;
+  }
+
   .server {
     grid-area: server;
     word-wrap: normal;
     text-wrap: pretty;
     font-weight: bold;
+    font-size: 10px;
   }
 
   .map {

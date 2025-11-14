@@ -18,8 +18,8 @@
   export let wave: DemoRecordAnalysisWave;
   export let currentTick: number;
 
-  $: start_tick = wave.meta_data.start_tick;
-  $: end_tick = wave.meta_data.end_tick;
+  $: start_tick = wave.metadata.start_tick;
+  $: end_tick = wave.metadata.end_tick;
 
   $: difficulty = prepareDifficultyDataset(wave);
   $: zedtime = prepareZedtimeDataset(wave);

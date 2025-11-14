@@ -24,7 +24,7 @@
         datasets: [
           {
             label,
-            data: data.map((x) => x.count),
+            data: data.map((x) => x.value),
             backgroundColor: barBackgroundColors,
           },
         ],

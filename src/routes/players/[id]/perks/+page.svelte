@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { LayoutData } from '../$types';
-  import Perks from '$lib/features/user-profile/perks/Perks.svelte';
+  import { PlayerPerksTab } from '$lib/pages/players/[id]';
 
   export let data: LayoutData;
 </script>
 
-<Perks userId={data.user.id} />
+<PlayerPerksTab userId={data.user.id} />

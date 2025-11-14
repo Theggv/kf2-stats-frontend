@@ -3,8 +3,8 @@ import { TimePeriod } from '$lib/api/analytics';
 export type Period = {
   id: string;
   label: string;
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
   period: TimePeriod;
   chartData?: any;
 };
@@ -12,7 +12,7 @@ export type Period = {
 export const periods: Period[] = [
   {
     id: 'all',
-    label: 'All Time',
+    label: 'Yearly',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 18250),
     date_to: new Date(),
     period: TimePeriod.Year,
@@ -26,13 +26,13 @@ export const periods: Period[] = [
   },
   {
     id: 'year',
-    label: 'Year',
-    date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365),
+    label: 'Monthly',
+    date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 18250),
     date_to: new Date(),
     period: TimePeriod.Month,
     chartData: {
       unit: 'month',
-      tooltipFormat: 'MMMM',
+      tooltipFormat: 'MMMM, yyyy',
       displayFormats: {
         month: 'MMM, yyyy',
       },
@@ -40,27 +40,13 @@ export const periods: Period[] = [
   },
   {
     id: '3-month',
-    label: '3 Months',
+    label: 'Last 90 Days',
     date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 90),
     date_to: new Date(),
     period: TimePeriod.Date,
     chartData: {
       unit: 'week',
-      tooltipFormat: 'd MMM',
-      displayFormats: {
-        week: 'd MMM, yyyy',
-      },
-    },
-  },
-  {
-    id: 'month',
-    label: 'Month',
-    date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
-    date_to: new Date(),
-    period: TimePeriod.Date,
-    chartData: {
-      unit: 'week',
-      tooltipFormat: 'd MMM',
+      tooltipFormat: 'd MMM, yyyy',
       displayFormats: {
         week: 'd MMM, yyyy',
       },
@@ -68,9 +54,11 @@ export const periods: Period[] = [
   },
   {
     id: 'week',
-    label: 'Week',
-    date_from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
-    date_to: new Date(),
+    label: 'By Hour',
+    date_from: new Date(
+      Date.now() - 1000 * 60 * 60 * 24 * 90 - 1000 * 60 * 60 * 24 * 7
+    ),
+    date_to: new Date(Date.now() - 1000 * 60 * 60 * 24 * 90),
     period: TimePeriod.DateHour,
     chartData: {
       unit: 'day',

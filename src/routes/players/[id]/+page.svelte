@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { LayoutData } from './$types';
-  import Overview from '$lib/features/user-profile/overview/Overview.svelte';
   import { goto } from '$app/navigation';
+  import { PlayerOverviewTab } from '$lib/pages/players/[id]';
 
   export let data: LayoutData;
 
@@ -14,4 +14,7 @@
   }
 </script>
 
-<Overview userId={data.user.id} on:onClickDate={(e) => onClickDate(e.detail)} />
+<PlayerOverviewTab
+  userId={data.user.id}
+  on:onClickDate={(e) => onClickDate(e.detail)}
+/>

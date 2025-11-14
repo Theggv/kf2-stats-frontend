@@ -5,7 +5,8 @@ export type TabData = {
 };
 
 export const isTabSelected = (current: string, tab: TabData) =>
-  tab.href === current || tab.options?.includes(current);
+  [tab.href, tab.href + '/'].includes(current) ||
+  tab.options?.includes(current);
 
 import Tabs from './Tabs.svelte';
 

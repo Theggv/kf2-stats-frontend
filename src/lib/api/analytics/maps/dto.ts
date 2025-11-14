@@ -1,8 +1,8 @@
 export interface MapAnalyticsRequest {
   server_id?: number;
 
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 
   limit?: number;
 }

@@ -66,7 +66,7 @@
         xLabels: data.map((x) => new Date(x.period)),
         datasets: [
           {
-            data: data.map((x) => x.count),
+            data: data.map((x) => x.value),
             backgroundColor: barBackgroundColors,
           },
         ],

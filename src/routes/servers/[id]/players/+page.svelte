@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Players from '$lib/features/server-page/players/Players.svelte';
+  import { ServerPlayersTab } from '$lib/pages/servers/[id]';
   import type { PageData } from './$types';
 
   export let data: PageData;
 </script>
 
-<Players server={data.server} />
+<ServerPlayersTab server={data.server} />

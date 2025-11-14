@@ -8,8 +8,8 @@ export interface PerkStats {
 export interface PerksPlayTimeRequest {
   server_id?: number;
   user_id?: number;
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 }
 
 export interface PerksPlayTimeResponse {
@@ -19,8 +19,8 @@ export interface PerksPlayTimeResponse {
 export interface PerksKillsRequest {
   server_id?: number;
   user_id?: number;
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 }
 
 export interface PerksKillsResponse {

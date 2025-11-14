@@ -14,7 +14,7 @@ export function prepareDifficultyDataset(wave: DemoRecordAnalysisWave) {
   const diff = wave.analytics.difficulty.details;
 
   const dataset = diff.buckets.map((bucket, i) => ({
-    x: wave.meta_data.start_tick + diff.step * i,
+    x: wave.metadata.start_tick + diff.step * i,
     y: bucket.score + 10,
   }));
 
@@ -25,8 +25,8 @@ export function prepareZedtimeDataset(wave: DemoRecordAnalysisWave) {
   if (!wave.zedtimes) return { dataset: [] };
 
   const dataset = wave.zedtimes.map((x) => [
-    { x: x.meta_data.start_tick, y: 1 },
-    { x: x.meta_data.end_tick, y: 1 },
+    { x: x.metadata.start_tick, y: 1 },
+    { x: x.metadata.end_tick, y: 1 },
   ]);
 
   return { dataset };

@@ -5,5 +5,6 @@ export const iconSettings = {
 
 import PerkIcon from './PerkIcon.svelte';
 import RefreshIcon from './RefreshIcon.svelte';
+import DifficultyIcon from './DifficultyIcon.svelte';
 
-export { PerkIcon, RefreshIcon };
+export { PerkIcon, RefreshIcon, DifficultyIcon };

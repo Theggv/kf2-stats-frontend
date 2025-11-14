@@ -34,7 +34,7 @@ export class UserAnalyticsApiService {
   }
 
   static getPlaytimeHist(body: UserPerkHistRequest) {
-    return $proxyApi.post<PlayTimeHist>(
+    return $authProxyApi.post<PlayTimeHist>(
       `/analytics/users/perks/playtime`,
       body
     );
@@ -48,7 +48,7 @@ export class UserAnalyticsApiService {
   }
 
   static getTeammates(body: GetTeammatesRequest) {
-    return $proxyApi.post<GetTeammatesResponse>(
+    return $authProxyApi.post<GetTeammatesResponse>(
       `/analytics/users/teammates`,
       body
     );

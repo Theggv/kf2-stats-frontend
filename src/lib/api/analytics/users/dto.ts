@@ -11,6 +11,7 @@ import type {
   Mode,
   Status,
 } from '$lib/api/sessions';
+import type { GetSessionDifficultyResponse } from '$lib/api/sessions/difficulty';
 import type { TimePeriod } from '../dto';
 
 export interface SessionData {
@@ -167,6 +168,8 @@ export interface GetLastSeenUsersResponseItem {
 
   perks: number[];
 
+  metadata: SessionMetadata;
+
   last_seen: string;
 }
 
@@ -194,6 +197,8 @@ export interface GetLastSessionsWithUserResponseItem {
   map: MapData;
 
   perks: number[];
+
+  metadata: SessionMetadata;
 
   last_seen: string;
 }
@@ -236,6 +241,10 @@ export interface FindUserSessionsResponseItemStats {
   damage_dealt: number;
 }
 
+export interface SessionMetadata {
+  diff?: GetSessionDifficultyResponse;
+}
+
 export interface FindUserSessionsResponseItem {
   session: SessionData;
   server: ServerData;
@@ -246,6 +255,8 @@ export interface FindUserSessionsResponseItem {
   extra_game_data: ExtraGameData;
 
   stats: FindUserSessionsResponseItemStats;
+
+  metadata: SessionMetadata;
 
   updated_at: string;
 }

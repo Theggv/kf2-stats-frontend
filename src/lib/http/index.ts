@@ -44,22 +44,23 @@ export const authOnErrorInterceptor = async (error: any) => {
 
   const originalRequest = error.config;
 
-  if (error.response && error.response.status === 401 && originalRequest) {
-    if (!(originalRequest as any)._isRetry) {
-      (originalRequest as any)._isRetry = true;
+  if (
+    error.response &&
+    error.response.status === 401 &&
+    originalRequest &&
+    !(originalRequest as any)._isRetry
+  ) {
+    try {
+      const { data } = await AuthApiService.refresh();
 
-      try {
-        const { data } = await AuthApiService.refresh();
-
-        localStorage.setItem('accessToken', data.access_token);
-        addAuthHeader(originalRequest, data.access_token);
-
-        return $authProxyApi.request(originalRequest);
-      } catch (error) {
-        localStorage.setItem('invalidate-token', '1');
-      }
-    } else {
+      localStorage.setItem('accessToken', data.access_token);
+      addAuthHeader(originalRequest, data.access_token);
+    } catch (error) {
+      localStorage.setItem('invalidate-token', '1');
+      throw error;
     }
+
+    return $authProxyApi.request(originalRequest);
   }
 
   throw error;

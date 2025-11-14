@@ -160,8 +160,7 @@
       <div class="timer">
         {#if $selectedWave}
           {tickToTime($currentTickWithOffset)} / {tickToTime(
-            $selectedWave.meta_data.end_tick -
-              $selectedWave.meta_data.start_tick
+            $selectedWave.metadata.end_tick - $selectedWave.metadata.start_tick
           )}
         {/if}
       </div>

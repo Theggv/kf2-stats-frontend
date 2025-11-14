@@ -4,15 +4,20 @@ import type { TimePeriod } from '../dto';
 export interface SessionOnlineRequest {
   server_id?: number;
 
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 
   period: TimePeriod;
 }
 
 export interface PeriodData {
-  count: number;
   period: string;
+
+  value: number;
+  prev: number;
+  diff: number;
+  max_value: number;
+  trend: number;
 }
 
 export interface SessionOnlineResponse {
@@ -22,8 +27,8 @@ export interface SessionOnlineResponse {
 export interface UsageInMinutesRequest {
   server_id: number;
 
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 
   period: TimePeriod;
 }
@@ -35,8 +40,8 @@ export interface UsageInMinutesResponse {
 export interface PlayersOnlineRequest {
   server_id?: number;
 
-  date_from: Date;
-  date_to: Date;
+  date_from?: Date;
+  date_to?: Date;
 
   period: TimePeriod;
 }

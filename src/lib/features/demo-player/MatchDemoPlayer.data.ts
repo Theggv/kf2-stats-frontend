@@ -263,20 +263,20 @@ export function prepareWaveEventsFeed(
 
   const events: EventUnion[] = [];
 
-  if (tick - 1000 <= wave.meta_data.start_tick) {
+  if (tick - 1000 <= wave.metadata.start_tick) {
     events.push({
       type: 'wave-started',
-      from: wave.meta_data.start_tick,
-      to: wave.meta_data.start_tick,
+      from: wave.metadata.start_tick,
+      to: wave.metadata.start_tick,
       payload: undefined,
     });
   }
 
-  if (tick >= wave.meta_data.end_tick - 100) {
+  if (tick >= wave.metadata.end_tick - 100) {
     events.push({
       type: 'wave-ended',
-      from: wave.meta_data.end_tick,
-      to: wave.meta_data.end_tick,
+      from: wave.metadata.end_tick,
+      to: wave.metadata.end_tick,
       payload: undefined,
     });
   }
@@ -402,7 +402,7 @@ export function prepareWaveEventsFeed(
   if (!eventFilter.length || eventFilter.includes('zedtime')) {
     const items = filterByRange(
       wave.zedtimes,
-      ({ meta_data: { start_tick, end_tick } }, needle) => {
+      ({ metadata: { start_tick, end_tick } }, needle) => {
         if (needle >= start_tick && needle <= end_tick) return 0;
 
         return needle < start_tick ? 1 : -1;
@@ -414,8 +414,8 @@ export function prepareWaveEventsFeed(
     for (const ev of items) {
       events.push({
         type: 'zedtime',
-        from: ev.meta_data.start_tick,
-        to: ev.meta_data.end_tick,
+        from: ev.metadata.start_tick,
+        to: ev.metadata.end_tick,
         payload: ev,
       });
     }

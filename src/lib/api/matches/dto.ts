@@ -12,6 +12,7 @@ import type {
   Mode,
   Status,
 } from '../sessions';
+import type { GetSessionDifficultyResponse } from '../sessions/difficulty';
 
 export enum Perk {
   Unknown = 0,
@@ -62,6 +63,10 @@ export interface MatchPlayer {
   armor: number;
 }
 
+export interface MatchMetadata {
+  diff?: GetSessionDifficultyResponse;
+}
+
 export interface MatchData {
   session: MatchSession;
 
@@ -73,6 +78,8 @@ export interface MatchData {
 
   players?: MatchPlayer[];
   spectators?: MatchPlayer[];
+
+  metadata: MatchMetadata;
 }
 
 export interface MatchWave {

@@ -6,16 +6,16 @@
 </script>
 
 <div class="wave small">
-  Wave {item.meta_data.wave}
-  {#if item.meta_data.attempt > 1}
-    (#{item.meta_data.attempt})
+  Wave {item.metadata.wave}
+  {#if item.metadata.attempt > 1}
+    (#{item.metadata.attempt})
   {/if}
 </div>
 
 <div class="small">
-  ({tickToTime(item.meta_data.start_tick)}
+  ({tickToTime(item.metadata.start_tick)}
   &mdash;
-  {tickToTime(item.meta_data.end_tick)})
+  {tickToTime(item.metadata.end_tick)})
 </div>
 
 {#if item.analytics.summary.zeds_left > 1}

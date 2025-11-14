@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Matches from '$lib/features/server-page/matches/Matches.svelte';
+  import { ServerMatchesTab } from '$lib/pages/servers/[id]';
   import type { PageData } from './$types';
 
   export let data: PageData;
 </script>
 
-<Matches server={data.server} />
+<ServerMatchesTab server={data.server} />

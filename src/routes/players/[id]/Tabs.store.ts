@@ -22,4 +22,21 @@ export const tabs: TabData[] = [
     href: '/perks',
     content: 'Perks',
   },
+  {
+    id: 'maps',
+    href: '/maps',
+    content: 'Most Played Maps',
+  },
+  {
+    id: 'last-seen',
+    href: '/coplay',
+    content: 'Last Seen',
+    show: 'user-profile',
+  },
+  {
+    id: 'coplay',
+    href: '/coplay/games',
+    content: 'Last Games Together',
+    show: 'another-user',
+  },
 ];

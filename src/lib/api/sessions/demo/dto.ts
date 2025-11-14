@@ -126,7 +126,7 @@ export interface DemoRecordAnalysisWaveBuffsUptime {
 }
 
 export interface DemoRecordAnalysisZedtime {
-  meta_data: DemoRecordParsedZedtime;
+  metadata: DemoRecordParsedZedtime;
 
   ticks_since_last: number;
 
@@ -197,7 +197,7 @@ export interface DemoRecordAnalysisWaveAnalytics {
 }
 
 export interface DemoRecordAnalysisWave {
-  meta_data: DemoRecordParsedWave;
+  metadata: DemoRecordParsedWave;
   analytics: DemoRecordAnalysisWaveAnalytics;
 
   zedtimes: DemoRecordAnalysisZedtime[];

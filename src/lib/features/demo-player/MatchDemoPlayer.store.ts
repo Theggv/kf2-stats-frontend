@@ -78,7 +78,7 @@ export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
 
           const idx = findLastLowerIndex(
             wave?.zedtimes,
-            ({ meta_data: { start_tick, end_tick } }, needle) => {
+            ({ metadata: { start_tick, end_tick } }, needle) => {
               if (needle >= start_tick && needle <= end_tick) return 0;
 
               return needle < start_tick ? 1 : -1;
@@ -93,15 +93,15 @@ export function getDemoRecordStore(demoRecord: DemoRecordAnalysis) {
 
           if (
             idx > 0 &&
-            tick >= zt.meta_data.start_tick &&
-            tick <= zt.meta_data.end_tick
+            tick >= zt.metadata.start_tick &&
+            tick <= zt.metadata.end_tick
           ) {
             const prev = wave.zedtimes[idx - 1];
 
-            return zt.meta_data.start_tick - prev.meta_data.end_tick;
+            return zt.metadata.start_tick - prev.metadata.end_tick;
           }
 
-          return tick - zt.meta_data.end_tick;
+          return tick - zt.metadata.end_tick;
         }
       ),
       feed: derived([eventsFeed], ([feed]) =>
@@ -165,8 +165,8 @@ export function getControlStore(tickRate: number = 10) {
     if (!wave) return;
 
     range.set({
-      start_tick: wave.meta_data.start_tick,
-      end_tick: wave.meta_data.end_tick,
+      start_tick: wave.metadata.start_tick,
+      end_tick: wave.metadata.end_tick,
     });
   }
 

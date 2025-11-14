@@ -1,10 +1,10 @@
 <script lang="ts">
-  import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { getContext } from 'svelte';
   import { LeaderboardCtxKey, type LeaderboardStore } from '../store';
   import { periods } from '../periods';
   import MultiSelect from 'svelte-multiselect';
   import { getStore, type SelectOption } from './Filter.store';
+  import { PerkSelector } from '$lib/components/perk-selector';
 
   const { serverIds, periodIdx, period, perk } =
     getContext<LeaderboardStore>(LeaderboardCtxKey);
@@ -24,21 +24,9 @@
   }
 </script>
 
-<div class="root">
+<div class="root-leaderboard">
   <div class="perks">
-    {#each Array(10).fill(0) as _, index}
-      {@const perkIdx = index + 1}
-      <div
-        role="button"
-        tabindex="0"
-        on:click={() => perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
-        on:keypress={(e) =>
-          e.code === 'Enter' &&
-          perk.update((prev) => (prev === perkIdx ? 0 : perkIdx))}
-      >
-        <PerkIcon perk={perkIdx} prestige={0} disabled={$perk !== perkIdx} />
-      </div>
-    {/each}
+    <PerkSelector bind:perk={$perk} />
   </div>
 
   <div class="periods">
@@ -84,7 +72,7 @@
 </div>
 
 <style>
-  .root {
+  .root-leaderboard {
     padding-top: 0.25rem;
     display: grid;
     grid-template:
@@ -97,12 +85,6 @@
 
   .perks {
     grid-area: perks;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
   }
 
   .periods {
@@ -146,7 +128,7 @@
   }
 
   @media (max-width: 768px) {
-    .root {
+    .root-leaderboard {
       display: flex;
       flex-direction: column;
     }
@@ -155,53 +137,59 @@
       justify-content: center;
     }
 
-    .root,
+    .root-leaderboard,
     .periods,
     .periods > .list {
       align-items: center;
     }
 
-    .root {
+    .root-leaderboard {
       flex-direction: column;
       gap: 0.5rem;
     }
   }
 
-  :global(div.multiselect > .selected) {
+  :global(.root-leaderboard div.multiselect > .selected) {
     min-height: 32px;
   }
 
-  :global(div.multiselect > ul.options) {
+  :global(.root-leaderboard div.multiselect > ul.options) {
     /* dropdown options */
     --sms-options-bg: rgb(40 40 40);
   }
 
-  :global(div.multiselect > ul.options::-webkit-scrollbar) {
+  :global(.root-leaderboard div.multiselect > ul.options::-webkit-scrollbar) {
     width: 12px;
   }
 
-  :global(div.multiselect > ul.options::-webkit-scrollbar-track) {
+  :global(
+      .root-leaderboard div.multiselect > ul.options::-webkit-scrollbar-track
+    ) {
     border-radius: 100px;
     background-color: rgb(212 212 212);
   }
 
-  :global(div.multiselect > ul.options::-webkit-scrollbar-thumb) {
+  :global(
+      .root-leaderboard div.multiselect > ul.options::-webkit-scrollbar-thumb
+    ) {
     border-radius: 100px;
     background-color: #9ca3af;
   }
 
-  :global(div.multiselect > ul.options > li.selected) {
+  :global(.root-leaderboard div.multiselect > ul.options > li.selected) {
     /* selected options in the dropdown list */
     background: linear-gradient(to right, var(--selected-primary), transparent);
   }
 
-  :global(div.multiselect > ul.options > li.active),
-  :global(div.multiselect > ul.options > li:not(.selected):hover) {
+  :global(.root-leaderboard div.multiselect > ul.options > li.active),
+  :global(
+      .root-leaderboard div.multiselect > ul.options > li:not(.selected):hover
+    ) {
     /* unselected but hovered options in the dropdown list */
     background: linear-gradient(to right, var(--hover-primary), transparent);
   }
 
-  :global(div.multiselect > ul.options > li.disabled) {
+  :global(.root-leaderboard div.multiselect > ul.options > li.disabled) {
     background-color: transparent;
     text-decoration: line-through;
   }
