@@ -15,19 +15,26 @@
   const auth = getContext<AuthContextType>(AuthContextName);
   const { isLogin, user, logout } = auth;
 
-  const steamOpenIdUrl = new URL('https://steamcommunity.com/openid/login');
-  const params: Record<string, string> = {
+  $: params = {
     'openid.ns': 'http://specs.openid.net/auth/2.0',
     'openid.mode': 'checkid_setup',
-    'openid.return_to': $page.url.origin,
-    'openid.realm': $page.url.origin,
+    'openid.return_to': $page.url.toString(),
+    'openid.realm': $page.url.toString(),
     'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
     'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select',
   };
 
-  Object.entries(params).forEach(([key, value]) =>
-    steamOpenIdUrl.searchParams.set(key, value)
-  );
+  $: steamOpenIdUrl = generateOpenIdUrl(params);
+
+  function generateOpenIdUrl(params: Record<string, string>) {
+    const steamOpenIdUrl = new URL('https://steamcommunity.com/openid/login');
+
+    Object.entries(params).forEach(([key, value]) =>
+      steamOpenIdUrl.searchParams.set(key, value)
+    );
+
+    return steamOpenIdUrl;
+  }
 </script>
 
 <ul class="root">

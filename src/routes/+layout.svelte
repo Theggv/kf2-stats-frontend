@@ -23,6 +23,8 @@
   import { AppNavBar } from '$lib/components/navbar';
   import { LiveMatches } from '$lib/features/live-matches';
   import { getAuth, AuthContextName } from '$lib/hooks';
+  import { page } from '$app/stores';
+  import { goto } from '$app/navigation';
 
   ChartJS.register(
     Title,
@@ -43,9 +45,41 @@
   let active = false;
 
   const auth = getAuth();
+  const { isLogin } = auth;
   setContext(AuthContextName, auth);
 
   onMount(() => (active = true));
+
+  function getOpenIdParams(page: typeof $page) {
+    const params = new URLSearchParams();
+    page.url.searchParams.forEach((value, key) => {
+      if (key.startsWith('openid.')) params.set(key, value);
+    });
+
+    return params;
+  }
+
+  async function clearParams(page: typeof $page, params: URLSearchParams) {
+    let hasOpenIdParams = false;
+    params.forEach((_, key) => {
+      if (key.startsWith('openid.')) {
+        page.url.searchParams.delete(key);
+        hasOpenIdParams = true;
+      }
+    });
+
+    if (!hasOpenIdParams) return;
+
+    goto(page.url.origin + page.url.pathname, {
+      replaceState: true,
+      invalidateAll: true,
+    });
+  }
+
+  $: openIdParams = getOpenIdParams($page);
+  $: !$isLogin && openIdParams.size > 0 && auth.login(openIdParams);
+
+  $: $isLogin && clearParams($page, openIdParams);
 </script>
 
 <SvelteUIProvider themeObserver={'dark'}>

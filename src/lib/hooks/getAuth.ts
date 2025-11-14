@@ -20,7 +20,10 @@ export function getAuth() {
       const { data } = await AuthApiService.refresh();
 
       token.set(data.access_token);
-    } catch {}
+    } catch {
+      isLogin.set(false);
+      user.set(null);
+    }
   }
 
   async function logout() {
@@ -57,15 +60,26 @@ export function getAuth() {
     user.set(data.payload);
   }
 
+  async function onTokenChanged(token: string | null) {
+    validateToken(token);
+
+    if (token) localStorage.setItem('accessToken', token);
+    else localStorage.removeItem('accessToken');
+  }
+
   setInterval(() => {
-    token.set(localStorage.getItem('accessToken'));
+    const invalidate = localStorage.getItem('invalidate-token');
+
+    if (invalidate) {
+      onTokenChanged(localStorage.getItem('accessToken'));
+      localStorage.removeItem('invalidate-token');
+    } else {
+      token.set(localStorage.getItem('accessToken'));
+    }
   }, 500);
 
   token.subscribe((x) => {
-    validateToken(x);
-
-    if (x) localStorage.setItem('accessToken', x);
-    else localStorage.removeItem('accessToken');
+    onTokenChanged(x);
   });
 
   return { isLogin, user, token, login, logout };
