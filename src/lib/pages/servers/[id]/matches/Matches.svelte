@@ -5,7 +5,7 @@
 
   import InfiniteScroll from '$lib/components/infinite-scroll/InfiniteScroll.svelte';
   import { groupBy } from '$lib/util';
-  import { getStore } from './Matches.store';
+  import { getStore, ServerPageMatchesName } from './Matches.store';
 
   import Filter from './Filter.svelte';
   import type { SelectOption } from './Filter.store';
@@ -14,11 +14,19 @@
   import MatchesList from './MatchesList.svelte';
   import { iconSettings } from '$lib/ui/icons';
   import ContentLayout from '$lib/layouts/ContentLayout.svelte';
+  import { setContext } from 'svelte';
+  import { YearSelector } from '$lib/components/year-selector';
+  import ServerActivity from './ServerActivity.svelte';
 
   export let server: ServerData;
 
-  const { serverIdStore, page, filter, matches, total, hasMore } = getStore();
-  $: serverIdStore.set(server.id);
+  const store = getStore();
+  const { filter, total, year, matches } = store;
+  const { page, hasMore } = store;
+
+  $: store.serverIdStore.set(server.id);
+
+  setContext(ServerPageMatchesName, store);
 
   $: groupedMatches = groupBy($matches, (item) =>
     new Date(item.session.updated_at).toDateString()
@@ -28,8 +36,8 @@
   let selectedStatus: SelectOption[] = [];
 
   $: filter.set({
-    map_id: selectedMaps.map((x) => x.id),
-    status: selectedStatus.length ? [selectedStatus[0].id] : undefined,
+    map_ids: selectedMaps.map((x) => x.id),
+    statuses: selectedStatus.length ? [selectedStatus[0].id] : undefined,
   });
 </script>
 
@@ -47,6 +55,17 @@
   </svelte:fragment>
 
   <svelte:fragment slot="content">
+    <SectionLayout>
+      <svelte:fragment slot="subtitle">
+        <div class="activity-filter">
+          <YearSelector bind:year={$year} />
+        </div>
+      </svelte:fragment>
+      <svelte:fragment slot="content">
+        <ServerActivity />
+      </svelte:fragment>
+    </SectionLayout>
+
     <SectionLayout>
       <svelte:fragment slot="title">Match History</svelte:fragment>
       <svelte:fragment slot="subtitle">

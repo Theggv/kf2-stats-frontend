@@ -4,6 +4,8 @@
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import MediaQuery from 'svelte-media-queries';
   import type { ServerMatch } from '../common';
+  import { DifficultyIcon } from '$lib/ui/icons';
+  import { getMatchDifficulty } from '$lib/util';
 
   export let data: ServerMatch;
 
@@ -42,6 +44,10 @@
 
   <div class="map">
     {data.map.name}
+  </div>
+
+  <div class="difficulty">
+    <DifficultyIcon difficulty={getMatchDifficulty(data.metadata.diff)} />
   </div>
 
   <div class="settings">
@@ -188,6 +194,10 @@
     text-overflow: ellipsis;
     width: 200px;
     font-size: 14px;
+  }
+
+  .difficulty {
+    width: 40px;
   }
 
   .settings {
