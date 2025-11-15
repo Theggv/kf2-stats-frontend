@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
-  import { Mode } from '$lib/api/sessions';
+  import { GameMode } from '$lib/api/sessions';
   import { modeToString, diffToString } from '$lib/util/enum-to-text';
 
   export let data: FindUserSessionsResponseItem;
@@ -12,7 +12,7 @@
     <span>
       {modeToString(data.session.mode, false)}
     </span>
-    {#if data.session.mode !== Mode.Endless}
+    {#if data.session.mode !== GameMode.Endless}
       <span>
         ({data.session.length} Waves)
       </span>

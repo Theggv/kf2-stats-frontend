@@ -1,59 +1,64 @@
 import { Perk } from '$lib/api/matches';
-import { Difficulty, Length, Mode, Status } from '$lib/api/sessions';
+import {
+  GameDifficulty,
+  GameLength,
+  GameMode,
+  GameStatus,
+} from '$lib/api/sessions';
 
-export function diffToString(diff: Difficulty) {
+export function diffToString(diff: GameDifficulty) {
   switch (diff) {
-    case Difficulty.Normal:
+    case GameDifficulty.Normal:
       return 'Normal';
-    case Difficulty.Hard:
+    case GameDifficulty.Hard:
       return 'Hard';
-    case Difficulty.Suicidal:
+    case GameDifficulty.Suicidal:
       return 'Suicidal';
-    case Difficulty.HellOnEarth:
+    case GameDifficulty.HellOnEarth:
       return 'HoE';
   }
 }
 
 export function lengthToString(len: number) {
   switch (len) {
-    case Length.Short:
+    case GameLength.Short:
       return 'Short';
-    case Length.Medium:
+    case GameLength.Medium:
       return 'Medium';
-    case Length.Long:
+    case GameLength.Long:
       return 'Long';
     default:
       return 'Custom';
   }
 }
 
-export function modeToString(mode: Mode, shorten: boolean = true) {
+export function modeToString(mode: GameMode, shorten: boolean = true) {
   const data: any = {
-    [Mode.Any]: {
+    [GameMode.Any]: {
       short: 'Any',
       long: 'Any',
     },
-    [Mode.Survival]: {
+    [GameMode.Survival]: {
       short: 'Survival',
       long: 'Survival',
     },
-    [Mode.Endless]: {
+    [GameMode.Endless]: {
       short: 'Endless',
       long: 'Endless',
     },
-    [Mode.ControlledDifficulty]: {
+    [GameMode.ControlledDifficulty]: {
       short: 'CD',
       long: 'Controlled Difficulty',
     },
-    [Mode.Weekly]: {
+    [GameMode.Weekly]: {
       short: 'Weekly',
       long: 'Weekly',
     },
-    [Mode.Objective]: {
+    [GameMode.Objective]: {
       short: 'Objective',
       long: 'Objective',
     },
-    [Mode.Versus]: {
+    [GameMode.Versus]: {
       short: 'Versus',
       long: 'Versus',
     },
@@ -64,19 +69,19 @@ export function modeToString(mode: Mode, shorten: boolean = true) {
   return data[mode][format];
 }
 
-export function statusToString(status?: Status) {
+export function statusToString(status?: GameStatus) {
   switch (status) {
-    case Status.Lobby:
+    case GameStatus.Lobby:
       return 'In Lobby';
-    case Status.InProgress:
+    case GameStatus.InProgress:
       return 'In Progress';
-    case Status.Win:
+    case GameStatus.Win:
       return 'Win';
-    case Status.Lose:
+    case GameStatus.Lose:
       return 'Loss';
-    case Status.Solomode:
+    case GameStatus.Solomode:
       return 'Solomode';
-    case Status.Aborted:
+    case GameStatus.Aborted:
       return 'Aborted';
     default:
       return 'Unknown';

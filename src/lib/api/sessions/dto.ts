@@ -1,4 +1,4 @@
-export enum Mode {
+export enum GameMode {
   Any = 0,
   Survival,
   Endless,
@@ -8,21 +8,21 @@ export enum Mode {
   Versus,
 }
 
-export enum Length {
+export enum GameLength {
   Short = 4,
   Medium = 7,
   Long = 10,
   Custom = -1,
 }
 
-export enum Difficulty {
+export enum GameDifficulty {
   Normal = 1,
   Hard,
   Suicidal,
   HellOnEarth,
 }
 
-export enum Status {
+export enum GameStatus {
   Lobby = 0,
   InProgress,
   Win,
@@ -46,11 +46,11 @@ export interface SessionData {
   server_id: number;
   map_id: number;
 
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
 
-  status: Status;
+  status: GameStatus;
 
   created_at: string;
   updated_at: string;
@@ -63,9 +63,9 @@ export interface CreateSessionRequest {
   server_id: number;
   map_id: number;
 
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
 }
 
 export interface CreateSessionResponse {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import type {
     FilterUsersResponseUser,
     FilterUsersResponseUserSession,
@@ -19,12 +19,12 @@
 
   function getMatchClass(session?: FilterUsersResponseUserSession) {
     if (!session) return '';
-    if (session.status === Status.InProgress) return 'in-progress';
+    if (session.status === GameStatus.InProgress) return 'in-progress';
 
-    if (session.mode === Mode.Endless) return '';
+    if (session.mode === GameMode.Endless) return '';
 
-    if (session.status === Status.Lose) return 'lose';
-    if (session.status === Status.Win) return 'win';
+    if (session.status === GameStatus.Lose) return 'lose';
+    if (session.status === GameStatus.Win) return 'win';
 
     return '';
   }
@@ -99,7 +99,7 @@
               <span>
                 {diffToString(session.diff)}
               </span>
-              {#if session?.mode !== Mode.Endless}
+              {#if session?.mode !== GameMode.Endless}
                 <span>
                   ({session?.length} Waves)
                 </span>

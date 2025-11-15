@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 import type { MatchData } from '$lib/api/matches';
 import { SITE_NAME } from '$lib';
-import { Mode, Status } from '$lib/api/sessions';
+import { GameMode, GameStatus } from '$lib/api/sessions';
 import { diffToString, modeToString } from '$lib/util/enum-to-text';
 import { dateDiff } from '$lib/util/date';
 
@@ -35,14 +35,14 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
   };
 };
 
-function getColorByStatus(status: Status): string {
+function getColorByStatus(status: GameStatus): string {
   switch (status) {
-    case Status.Lobby:
-    case Status.InProgress:
+    case GameStatus.Lobby:
+    case GameStatus.InProgress:
       return '#B8C544';
-    case Status.Win:
+    case GameStatus.Win:
       return '#2E9E2E';
-    case Status.Lose:
+    case GameStatus.Lose:
       return '#D96464';
     default:
       return '#D4D4D4';
@@ -63,7 +63,7 @@ function getDescription(data: MatchData): string {
   }
 
   body += ' — ';
-  if (data.session.mode === Mode.Endless) {
+  if (data.session.mode === GameMode.Endless) {
     body += `Wave ${data.game_data?.wave || 0}`;
   } else {
     body += `${data.game_data?.wave || 0} / ${data.session.length}`;

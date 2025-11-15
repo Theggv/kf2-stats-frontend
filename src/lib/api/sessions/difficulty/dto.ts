@@ -1,4 +1,4 @@
-import type { Difficulty, Length, Mode, Status } from '../dto';
+import type { GameDifficulty, GameLength, GameMode, GameStatus } from '../dto';
 
 export interface DifficultyCalculatorGameScore {
   avg_zeds_difficulty: number;
@@ -18,10 +18,10 @@ export interface DifficultyCalculatorGameSession {
   server_id: number;
   map_id: number;
 
-  mode: Mode;
-  status: Status;
-  length: Length;
-  diff: Difficulty;
+  mode: GameMode;
+  status: GameStatus;
+  length: GameLength;
+  diff: GameDifficulty;
 }
 
 export interface DifficultyCalculatorGameWaveScore {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
   import type { FilterUsersResponseUser } from '$lib/api/users';
   import { getWaveText } from '$lib/util/converters';
   import { statusToString } from '$lib/util/enum-to-text';
@@ -36,9 +36,9 @@
 
   <div
     class="status"
-    class:lost={session.status === Status.Lose}
-    class:won={session.status === Status.Win}
-    class:in-progress={session.status === Status.InProgress}
+    class:lost={session.status === GameStatus.Lose}
+    class:won={session.status === GameStatus.Win}
+    class:in-progress={session.status === GameStatus.InProgress}
   >
     {statusToString(session.status)}
   </div>

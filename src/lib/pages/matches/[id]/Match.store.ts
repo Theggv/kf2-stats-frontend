@@ -6,7 +6,7 @@ import {
   type MatchWavePlayerStats,
   MatchesApiService,
 } from '$lib/api/matches';
-import { Status } from '$lib/api/sessions';
+import { GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
 import { tweened } from 'svelte/motion';
 import { derived, get, writable, type Readable } from 'svelte/store';
@@ -18,8 +18,8 @@ import {
 
 export type Match = WithRequired<MatchData, 'game_data' | 'map' | 'server'>;
 
-function isMatchLive(status?: Status) {
-  return status === Status.Lobby || status === Status.InProgress;
+function isMatchLive(status?: GameStatus) {
+  return status === GameStatus.Lobby || status === GameStatus.InProgress;
 }
 
 export type ContextType = ReturnType<typeof getMatchStore>;

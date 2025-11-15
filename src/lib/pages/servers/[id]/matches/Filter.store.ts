@@ -1,5 +1,5 @@
 import { MapsApiService, type MapData } from '$lib/api/maps';
-import { Status } from '$lib/api/sessions';
+import { GameStatus } from '$lib/api/sessions';
 import { writable } from 'svelte/store';
 
 export type SelectOption = {
@@ -12,12 +12,12 @@ export function getStore() {
   const maps = writable<MapData[]>([]);
 
   const statuses: SelectOption[] = [
-    { id: Status.Aborted, label: 'Aborted' },
-    { id: Status.InProgress, label: 'In Progress' },
-    { id: Status.Lobby, label: 'In Lobby' },
-    { id: Status.Lose, label: 'Loss' },
-    { id: Status.Win, label: 'Win' },
-    { id: Status.Solomode, label: 'Solomode', disabled: true },
+    { id: GameStatus.Aborted, label: 'Aborted' },
+    { id: GameStatus.InProgress, label: 'In Progress' },
+    { id: GameStatus.Lobby, label: 'In Lobby' },
+    { id: GameStatus.Lose, label: 'Loss' },
+    { id: GameStatus.Win, label: 'Win' },
+    { id: GameStatus.Solomode, label: 'Solomode', disabled: true },
   ];
 
   const fetch = async () => {

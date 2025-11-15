@@ -1,4 +1,4 @@
-import type { Difficulty, Status } from '$lib/api/sessions';
+import type { GameDifficulty, GameStatus } from '$lib/api/sessions';
 import type { PeriodData, TimePeriod } from '../dto';
 
 export interface SessionOnlineRequest {
@@ -43,7 +43,7 @@ export interface PlayersOnlineResponse {
 export interface PopularServersResponseItem {
   id: number;
   name: string;
-  diff: Difficulty;
+  diff: GameDifficulty;
 
   total_sessions: number;
   total_users: number;
@@ -64,7 +64,7 @@ export interface SessionCountHistRequest {
   date_to?: Date;
 
   map_ids?: number[];
-  statuses?: Status[];
+  statuses?: GameStatus[];
 
   spawn_cycle?: string;
   zeds_type?: string;

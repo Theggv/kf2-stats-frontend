@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import { getWaveText } from '$lib/util/converters';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import MediaQuery from 'svelte-media-queries';
@@ -10,12 +10,12 @@
   export let data: ServerMatch;
 
   function getMatchClass(data: ServerMatch) {
-    if (data.session.status === Status.InProgress) return 'in-progress';
+    if (data.session.status === GameStatus.InProgress) return 'in-progress';
 
-    if (data.session.mode === Mode.Endless) return '';
+    if (data.session.mode === GameMode.Endless) return '';
 
-    if (data.session.status === Status.Lose) return 'lose';
-    if (data.session.status === Status.Win) return 'win';
+    if (data.session.status === GameStatus.Lose) return 'lose';
+    if (data.session.status === GameStatus.Win) return 'win';
 
     return '';
   }
@@ -61,7 +61,7 @@
           <span>
             {modeToString(data.session.mode, false)}
           </span>
-          {#if data.session.mode !== Mode.Endless}
+          {#if data.session.mode !== GameMode.Endless}
             <span>
               ({data.session.length} Waves)
             </span>

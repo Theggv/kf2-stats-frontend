@@ -1,36 +1,41 @@
 import { type MapData, MapsApiService } from '$lib/api/maps';
 import { type ServerData, ServersApiService } from '$lib/api/servers';
-import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
+import {
+  GameStatus,
+  GameDifficulty,
+  GameMode,
+  GameLength,
+} from '$lib/api/sessions';
 import { writable } from 'svelte/store';
 
 export const statusList: SelectOption[] = [
-  { id: Status.Aborted, label: 'Aborted' },
-  { id: Status.InProgress, label: 'In Progress' },
-  { id: Status.Lobby, label: 'In Lobby' },
-  { id: Status.Lose, label: 'Loss' },
-  { id: Status.Win, label: 'Win' },
-  { id: Status.Solomode, label: 'Solomode', disabled: true },
+  { id: GameStatus.Aborted, label: 'Aborted' },
+  { id: GameStatus.InProgress, label: 'In Progress' },
+  { id: GameStatus.Lobby, label: 'In Lobby' },
+  { id: GameStatus.Lose, label: 'Loss' },
+  { id: GameStatus.Win, label: 'Win' },
+  { id: GameStatus.Solomode, label: 'Solomode', disabled: true },
 ];
 
 export const difficultyList: SelectOption[] = [
-  { id: Difficulty.Normal, label: 'Normal' },
-  { id: Difficulty.Hard, label: 'Hard' },
-  { id: Difficulty.Suicidal, label: 'Suicidal' },
-  { id: Difficulty.HellOnEarth, label: 'Hell On Earth' },
+  { id: GameDifficulty.Normal, label: 'Normal' },
+  { id: GameDifficulty.Hard, label: 'Hard' },
+  { id: GameDifficulty.Suicidal, label: 'Suicidal' },
+  { id: GameDifficulty.HellOnEarth, label: 'Hell On Earth' },
 ];
 
 export const modeList: SelectOption[] = [
-  { id: Mode.Survival, label: 'Survival' },
-  { id: Mode.Endless, label: 'Endless' },
-  { id: Mode.ControlledDifficulty, label: 'Controlled Difficulty' },
-  { id: Mode.Any, label: 'Other' },
+  { id: GameMode.Survival, label: 'Survival' },
+  { id: GameMode.Endless, label: 'Endless' },
+  { id: GameMode.ControlledDifficulty, label: 'Controlled Difficulty' },
+  { id: GameMode.Any, label: 'Other' },
 ];
 
 export const lengthList: SelectOption[] = [
-  { id: Length.Short, label: 'Short' },
-  { id: Length.Medium, label: 'Medium' },
-  { id: Length.Long, label: 'Long' },
-  { id: Length.Custom, label: 'Custom' },
+  { id: GameLength.Short, label: 'Short' },
+  { id: GameLength.Medium, label: 'Medium' },
+  { id: GameLength.Long, label: 'Long' },
+  { id: GameLength.Custom, label: 'Custom' },
 ];
 
 export type SelectOption = { id: number; label: string; disabled?: boolean };

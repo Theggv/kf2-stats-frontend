@@ -7,7 +7,7 @@
   import UserProfile from './UserProfile.svelte';
   import { statusToString } from '$lib/util/enum-to-text';
   import { Accordion } from '@svelteuidev/core';
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
 
@@ -39,7 +39,7 @@
       {getWaveText(match.game_data.wave, match.session)}
     </div>
     <div class="game-length">
-      {#if match.session.status === Status.InProgress}
+      {#if match.session.status === GameStatus.InProgress}
         {dateDiff(new Date(match.session.started_at), new Date())}
       {/if}
     </div>

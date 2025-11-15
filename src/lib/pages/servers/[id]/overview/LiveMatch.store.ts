@@ -3,12 +3,12 @@ import {
   type GetMatchLiveDataResponse,
 } from '$lib/api/matches';
 import { ServersApiService } from '$lib/api/servers';
-import { Status } from '$lib/api/sessions';
+import { GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
-function isMatchLive(status: Status) {
-  return status === Status.Lobby || status === Status.InProgress;
+function isMatchLive(status: GameStatus) {
+  return status === GameStatus.Lobby || status === GameStatus.InProgress;
 }
 
 export function getStore() {

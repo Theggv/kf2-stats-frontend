@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { MatchData } from '$lib/api/matches';
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import StyledLink from '$lib/ui/a/StyledLink.svelte';
   import { getWaveText } from '$lib/util/converters';
   import { dateDiff } from '$lib/util/date';
@@ -58,7 +58,7 @@
         </span>
       {/if}
 
-      {#if data.session.mode !== Mode.Endless}
+      {#if data.session.mode !== GameMode.Endless}
         <span>
           {data.session.length} Waves
         </span>
@@ -72,9 +72,9 @@
 
   <div
     class="status"
-    class:lost={data.session.status === Status.Lose}
-    class:won={data.session.status === Status.Win}
-    class:in-progress={data.session.status === Status.InProgress}
+    class:lost={data.session.status === GameStatus.Lose}
+    class:won={data.session.status === GameStatus.Win}
+    class:in-progress={data.session.status === GameStatus.InProgress}
   >
     {statusToString(data.session.status)}
   </div>
@@ -85,7 +85,7 @@
         new Date(data.session.started_at),
         new Date(data.session.completed_at)
       )}
-    {:else if data.session.status === Status.InProgress}
+    {:else if data.session.status === GameStatus.InProgress}
       {dateDiff(new Date(data.session.started_at), new Date())}
     {:else if data.session.started_at && data.session.started_at != data.session.updated_at}
       {dateDiff(

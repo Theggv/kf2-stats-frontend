@@ -2,7 +2,7 @@
   import type { RowData } from './Table.data';
 
   import type { TableColumn } from '$lib/components/table';
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
 
   export let index: number;
   export let item: RowData;
@@ -14,8 +14,8 @@
 <a
   href="/players/{item.id}/coplay/games"
   class="row"
-  class:win={item.session.status === Status.Win}
-  class:lose={item.session.status !== Status.Win}
+  class:win={item.session.status === GameStatus.Win}
+  class:lose={item.session.status !== GameStatus.Win}
   class:hover
   role="row"
   tabindex="-1"

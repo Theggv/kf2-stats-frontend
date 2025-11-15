@@ -7,11 +7,11 @@ import type {
 } from '../common';
 import type {
   ExtraGameData,
-  Difficulty,
+  GameDifficulty,
   GameData,
-  Length,
-  Mode,
-  Status,
+  GameLength,
+  GameMode,
+  GameStatus,
 } from '../sessions';
 
 export enum Perk {
@@ -32,10 +32,10 @@ export interface MatchSession {
   session_id: number;
   server_id: number;
   map_id: number;
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
-  status: Status;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
+  status: GameStatus;
   created_at: string;
   updated_at: string;
   started_at: string;
@@ -125,11 +125,11 @@ export interface MatchWavePlayerStats {
 export interface FilterMatchesRequest {
   server_ids: number[];
   map_ids: number[];
-  statuses: Status[];
+  statuses: GameStatus[];
 
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
 
   include_server?: boolean;
   include_map?: boolean;
@@ -164,7 +164,7 @@ export interface GetMatchLiveDataResponsePlayer {
 }
 
 export interface GetMatchLiveDataResponse {
-  status: Status;
+  status: GameStatus;
   game_data: GameData;
   cd_data?: ExtraGameData;
   players: GetMatchLiveDataResponsePlayer[];

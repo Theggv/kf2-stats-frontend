@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { MatchData } from '$lib/api/matches';
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import { getTimeSince } from '$lib/hooks';
   import { dateDiff } from '$lib/util/date';
   import {
@@ -42,7 +42,7 @@
   <div class="keyvalue">
     <span>Wave</span>
     <span>
-      {#if match.session.mode === Mode.Endless}
+      {#if match.session.mode === GameMode.Endless}
         {match.game_data.wave}
       {:else}
         {match.game_data.wave} / {match.session.length}
@@ -58,7 +58,7 @@
           new Date(match.session.completed_at)
         )}
       </span>
-    {:else if match.session.status === Status.InProgress}
+    {:else if match.session.status === GameStatus.InProgress}
       <span>{$timeSince} </span>
     {:else if match.session.started_at && match.session.started_at != match.session.updated_at}
       <span>

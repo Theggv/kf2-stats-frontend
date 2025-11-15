@@ -5,21 +5,21 @@ import type {
 } from '$lib/api/common';
 import type { Perk } from '$lib/api/matches';
 import type {
-  Difficulty,
+  GameDifficulty,
   ExtraGameData,
-  Length,
-  Mode,
-  Status,
+  GameLength,
+  GameMode,
+  GameStatus,
 } from '$lib/api/sessions';
 import type { GetSessionDifficultyResponse } from '$lib/api/sessions/difficulty';
 import { TimePeriod } from '../dto';
 
 export interface SessionData {
   id: number;
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
-  status: Status;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
+  status: GameStatus;
 }
 
 export interface ServerData {
@@ -218,10 +218,10 @@ export interface FindUserSessionsRequest {
   server_ids?: number[];
   map_ids?: number[];
 
-  mode?: Mode;
-  length?: Length;
-  diff?: Difficulty;
-  status?: Status;
+  mode?: GameMode;
+  length?: GameLength;
+  diff?: GameDifficulty;
+  status?: GameStatus;
 
   spawn_cycle?: string;
   zeds_type?: string;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { RecentUsersResponseUser } from '$lib/api/servers';
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import Player from '$lib/components/player/Player.svelte';
   import { DifficultyIcon } from '$lib/ui/icons';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
@@ -12,12 +12,12 @@
   export let data: RecentUsersResponseUser;
 
   function getMatchClass(data: RecentUsersResponseUser) {
-    if (data.session.status === Status.InProgress) return 'in-progress';
+    if (data.session.status === GameStatus.InProgress) return 'in-progress';
 
-    if (data.session.mode === Mode.Endless) return '';
+    if (data.session.mode === GameMode.Endless) return '';
 
-    if (data.session.status === Status.Lose) return 'lose';
-    if (data.session.status === Status.Win) return 'win';
+    if (data.session.status === GameStatus.Lose) return 'lose';
+    if (data.session.status === GameStatus.Win) return 'win';
 
     return '';
   }
@@ -54,7 +54,7 @@
       <span>
         {modeToString(data.session.mode, false)}
       </span>
-      {#if data.session.mode !== Mode.Endless}
+      {#if data.session.mode !== GameMode.Endless}
         <span>
           ({data.session.length} Waves)
         </span>

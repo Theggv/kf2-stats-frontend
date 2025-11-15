@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { GetLastSeenUsersResponseItem } from '$lib/api/analytics';
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
   import { Table } from '$lib/components/table';
   import { columns, stickyColumns, type RowData } from './Table.data';
   import TableRow from './TableRow.svelte';
@@ -24,7 +24,7 @@
       `background: linear-gradient(to right, ${color} calc(100% - 200px), rgb(0 0 0 / 0)`,
     ];
 
-    if (item.session.status === Status.Win)
+    if (item.session.status === GameStatus.Win)
       return pattern('var(--color-grad-win)');
 
     return pattern('var(--color-grad-lose)');

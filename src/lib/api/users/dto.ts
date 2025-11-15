@@ -2,10 +2,10 @@ import type { SessionMetadata } from '../analytics';
 import type { PaginationRequest, PaginationResponse } from '../common';
 import type {
   ExtraGameData,
-  Difficulty,
-  Length,
-  Mode,
-  Status,
+  GameDifficulty,
+  GameLength,
+  GameMode,
+  GameStatus,
 } from '../sessions';
 
 export enum AuthType {
@@ -46,10 +46,10 @@ export interface FilterUsersRequest {
 
 export interface FilterUsersResponseUserSession {
   id: number;
-  mode: Mode;
-  length: Length;
-  diff: Difficulty;
-  status: Status;
+  mode: GameMode;
+  length: GameLength;
+  diff: GameDifficulty;
+  status: GameStatus;
   wave: number;
   cd_data?: ExtraGameData;
   server_name: string;

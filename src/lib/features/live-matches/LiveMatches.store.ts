@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 import { MatchesApiService, type MatchData } from '$lib/api/matches';
 import type { WithRequired } from '$lib/util/types';
-import { Mode, Status } from '$lib/api/sessions';
+import { GameMode, GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
 
 export type LiveMatchData = WithRequired<
@@ -10,15 +10,15 @@ export type LiveMatchData = WithRequired<
   'game_data' | 'server' | 'map'
 >;
 
-function getModePriority(mode: Mode) {
+function getModePriority(mode: GameMode) {
   const priority = {
-    [Mode.ControlledDifficulty]: 1,
-    [Mode.Survival]: 2,
-    [Mode.Endless]: 3,
-    [Mode.Weekly]: 4,
-    [Mode.Objective]: 5,
-    [Mode.Versus]: 6,
-    [Mode.Any]: 7,
+    [GameMode.ControlledDifficulty]: 1,
+    [GameMode.Survival]: 2,
+    [GameMode.Endless]: 3,
+    [GameMode.Weekly]: 4,
+    [GameMode.Objective]: 5,
+    [GameMode.Versus]: 6,
+    [GameMode.Any]: 7,
   };
 
   return priority[mode];
@@ -57,7 +57,7 @@ export function getStore() {
           include_game_data: true,
           include_cd_data: true,
           include_players: true,
-          statuses: [Status.Lobby, Status.InProgress],
+          statuses: [GameStatus.Lobby, GameStatus.InProgress],
           pager: { page, results_per_page: 10 },
         });
 

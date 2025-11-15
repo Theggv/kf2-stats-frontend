@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mode, Status } from '$lib/api/sessions';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
   import type { TableColumn } from '$lib/components/table';
   import type { RowData } from './Table.data';
 
@@ -16,19 +16,19 @@
     const pattern = (color: string): string =>
       `background: linear-gradient(to right, ${color}, ${mainColor}`;
 
-    if (item.session.status === Status.Win)
+    if (item.session.status === GameStatus.Win)
       return pattern('var(--color-grad-win)');
 
     return pattern('var(--color-grad-lose)');
   }
 
   function getMatchClass(data: RowData) {
-    if (data.session.status === Status.InProgress) return 'in-progress';
+    if (data.session.status === GameStatus.InProgress) return 'in-progress';
 
-    if (data.session.mode === Mode.Endless) return '';
+    if (data.session.mode === GameMode.Endless) return '';
 
-    if (data.session.status === Status.Lose) return 'lose';
-    if (data.session.status === Status.Win) return 'win';
+    if (data.session.status === GameStatus.Lose) return 'lose';
+    if (data.session.status === GameStatus.Win) return 'win';
 
     return '';
   }

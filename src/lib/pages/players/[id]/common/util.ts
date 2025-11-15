@@ -1,18 +1,18 @@
 import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
 import { Perk } from '$lib/api/matches';
-import { Status } from '$lib/api/sessions';
+import { GameStatus } from '$lib/api/sessions';
 
 export function inProgress(item: FindUserSessionsResponseItem) {
   return (
-    item.session.status === Status.Lobby ||
-    item.session.status === Status.InProgress
+    item.session.status === GameStatus.Lobby ||
+    item.session.status === GameStatus.InProgress
   );
 }
 
 export function notInProgress(item: FindUserSessionsResponseItem) {
   return (
-    item.session.status !== Status.Lobby &&
-    item.session.status !== Status.InProgress
+    item.session.status !== GameStatus.Lobby &&
+    item.session.status !== GameStatus.InProgress
   );
 }
 

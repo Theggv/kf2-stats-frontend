@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
 
   import type { RowData } from './Table.data';
 
@@ -16,8 +16,8 @@
 
 <div
   class="row"
-  class:win={item.session.status === Status.Win}
-  class:lose={item.session.status !== Status.Win}
+  class:win={item.session.status === GameStatus.Win}
+  class:lose={item.session.status !== GameStatus.Win}
   class:hover
   role="row"
   tabindex="-1"

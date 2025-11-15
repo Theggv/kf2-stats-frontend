@@ -1,6 +1,11 @@
 import { MapsApiService, type MapData } from '$lib/api/maps';
 import { ServersApiService, type ServerData } from '$lib/api/servers';
-import { Status, Difficulty, Mode, Length } from '$lib/api/sessions';
+import {
+  GameStatus,
+  GameDifficulty,
+  GameMode,
+  GameLength,
+} from '$lib/api/sessions';
 import { perkToString } from '$lib/util/enum-to-text';
 import { writable } from 'svelte/store';
 
@@ -23,36 +28,36 @@ export function getStore() {
     }));
 
   const statuses: SelectOption[] = [
-    { id: Status.Aborted, label: 'Aborted' },
-    { id: Status.InProgress, label: 'In Progress' },
-    { id: Status.Lobby, label: 'In Lobby' },
-    { id: Status.Lose, label: 'Loss' },
-    { id: Status.Win, label: 'Win' },
-    { id: Status.Solomode, label: 'Solomode', disabled: true },
+    { id: GameStatus.Aborted, label: 'Aborted' },
+    { id: GameStatus.InProgress, label: 'In Progress' },
+    { id: GameStatus.Lobby, label: 'In Lobby' },
+    { id: GameStatus.Lose, label: 'Loss' },
+    { id: GameStatus.Win, label: 'Win' },
+    { id: GameStatus.Solomode, label: 'Solomode', disabled: true },
   ];
 
   const difficulties: SelectOption[] = [
-    { id: Difficulty.Normal, label: 'Normal' },
-    { id: Difficulty.Hard, label: 'Hard' },
-    { id: Difficulty.Suicidal, label: 'Suicidal' },
-    { id: Difficulty.HellOnEarth, label: 'Hell On Earth' },
+    { id: GameDifficulty.Normal, label: 'Normal' },
+    { id: GameDifficulty.Hard, label: 'Hard' },
+    { id: GameDifficulty.Suicidal, label: 'Suicidal' },
+    { id: GameDifficulty.HellOnEarth, label: 'Hell On Earth' },
   ];
 
   const modes: SelectOption[] = [
-    { id: Mode.Survival, label: 'Survival' },
-    { id: Mode.Endless, label: 'Endless' },
-    { id: Mode.ControlledDifficulty, label: 'CD' },
-    { id: Mode.Weekly, label: 'Weekly' },
-    { id: Mode.Objective, label: 'Objective' },
-    { id: Mode.Versus, label: 'Versus' },
-    { id: Mode.Any, label: 'Other' },
+    { id: GameMode.Survival, label: 'Survival' },
+    { id: GameMode.Endless, label: 'Endless' },
+    { id: GameMode.ControlledDifficulty, label: 'CD' },
+    { id: GameMode.Weekly, label: 'Weekly' },
+    { id: GameMode.Objective, label: 'Objective' },
+    { id: GameMode.Versus, label: 'Versus' },
+    { id: GameMode.Any, label: 'Other' },
   ];
 
   const lengths: SelectOption[] = [
-    { id: Length.Short, label: 'Short' },
-    { id: Length.Medium, label: 'Medium' },
-    { id: Length.Long, label: 'Long' },
-    { id: Length.Custom, label: 'Custom' },
+    { id: GameLength.Short, label: 'Short' },
+    { id: GameLength.Medium, label: 'Medium' },
+    { id: GameLength.Long, label: 'Long' },
+    { id: GameLength.Custom, label: 'Custom' },
   ];
 
   const zedsTypes: SelectOption[] = [

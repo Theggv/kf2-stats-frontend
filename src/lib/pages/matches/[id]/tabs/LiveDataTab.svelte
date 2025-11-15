@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Status } from '$lib/api/sessions';
+  import { GameStatus } from '$lib/api/sessions';
   import { AutoScroll } from '$lib/components/auto-scroll';
   import Player from '$lib/components/player/Player.svelte';
   import { PerkIcon } from '$lib/ui/icons';
@@ -11,7 +11,7 @@
   const store = getContext<ContextType>(ContextName);
   const { overview, live } = store.match;
 
-  $: started = !!$live && $live.status === Status.InProgress;
+  $: started = !!$live && $live.status === GameStatus.InProgress;
 </script>
 
 <div class="root">

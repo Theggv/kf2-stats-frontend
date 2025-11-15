@@ -1,7 +1,7 @@
 <script lang="ts">
   import { MultiSelect } from 'svelte-multiselect';
   import { getStore, type SelectOption, convertZedType } from './Filter.store';
-  import { Mode } from '$lib/api/sessions';
+  import { GameMode } from '$lib/api/sessions';
   import { getContext } from 'svelte';
   import {
     UserProfileMatchesName,
@@ -111,7 +111,7 @@
     />
   </div>
 
-  {#if selectedMode.length && selectedMode[0].id === Mode.ControlledDifficulty}
+  {#if selectedMode.length && selectedMode[0].id === GameMode.ControlledDifficulty}
     <div class="advanced">
       <div class="title">CD Settings</div>
 
