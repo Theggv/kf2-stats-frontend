@@ -1,38 +1,139 @@
 <script lang="ts">
   import { MultiSelect } from 'svelte-multiselect';
-  import { getStore, type SelectOption } from './Filter.store';
+  import { convertZedType, getStore, type SelectOption } from './Filter.store';
+  import { getContext } from 'svelte';
+  import {
+    ServerPageMatchesName,
+    type ServerPageMatchesType,
+  } from './Matches.store';
+  import { parseFilterExpr } from '$lib/util';
+  import type { ServerData } from '$lib/api/servers';
 
-  const { maps, statuses } = getStore();
+  const { maps, statuses, zedsTypes } = getStore();
 
-  export let selectedMaps: SelectOption[] = [];
-  export let selectedStatus: SelectOption[] = [];
+  const store = getContext<ServerPageMatchesType>(ServerPageMatchesName);
+  const { filter } = store;
+
+  let selectedMaps: SelectOption[] = [];
+  let selectedStatus: SelectOption[] = [];
+  let selectedZedsType: SelectOption[] = [];
+
+  let wave: string = '';
+  let spawnCycle: string = '';
+  let maxMonsters: string = '';
+  let calcDiff: string = '';
+
+  $: filter.update((prev) => ({
+    ...prev,
+    map_ids: selectedMaps.map((x) => x.id),
+    statuses: selectedStatus.map((x) => x.id),
+    extra: {
+      wave: parseFilterExpr(wave),
+      max_monsters: parseFilterExpr(maxMonsters),
+      difficulty: parseFilterExpr(calcDiff),
+      spawn_cycle: spawnCycle || undefined,
+      zeds_type: selectedZedsType.length
+        ? convertZedType(selectedZedsType[0])
+        : undefined,
+    },
+  }));
 </script>
 
 <div class="filter-container">
-  {#if $maps.length}
+  <div class="servers">
+    <div class="title">Map Filter</div>
+
+    {#if $maps.length}
+      <MultiSelect
+        id="filter_map"
+        maxSelect={1}
+        bind:selected={selectedMaps}
+        options={$maps.map((x) => ({ id: x.id, label: x.name }))}
+        placeholder="Map"
+      />
+    {/if}
+  </div>
+
+  <div class="filters">
+    <div class="title">Game Filters</div>
+
     <MultiSelect
-      id="filter_map"
-      maxSelect={1}
-      bind:selected={selectedMaps}
-      options={$maps.map((x) => ({ id: x.id, label: x.name }))}
-      placeholder="Map"
+      id="filter_status"
+      bind:selected={selectedStatus}
+      options={statuses}
+      placeholder="Status"
     />
-  {/if}
-  <MultiSelect
-    id="filter_status"
-    maxSelect={1}
-    bind:selected={selectedStatus}
-    options={statuses}
-    placeholder="Status"
-  />
+
+    <input class="input" placeholder="Wave" bind:value={wave} type="text" />
+
+    <input
+      class="input"
+      placeholder="Match Difficulty"
+      bind:value={calcDiff}
+      type="text"
+    />
+  </div>
+
+  <div class="advanced">
+    <div class="title">CD Settings</div>
+
+    <input class="input" placeholder="Spawn cycle" bind:value={spawnCycle} />
+    <input
+      class="input"
+      placeholder="Max Monsters"
+      bind:value={maxMonsters}
+      type="text"
+    />
+    <MultiSelect
+      id="filter_zeds_type"
+      maxSelect={1}
+      bind:selected={selectedZedsType}
+      options={zedsTypes}
+      placeholder="Zeds type"
+    />
+  </div>
 </div>
 
 <style>
   .filter-container {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+  }
+
+  .servers,
+  .filters,
+  .advanced {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .title {
+    padding-left: 0.5rem;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    opacity: 0.75;
+  }
+
+  .input {
+    background: transparent;
+    border-radius: 0.25rem;
+    border: 1px solid var(--text-primary);
+    height: 32px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    font-weight: bold;
+    color: var(--text-secondary);
+    font-size: 12px;
+  }
+
+  .input::placeholder {
+    color: var(--text-secondary);
+    font-size: 14px;
   }
 
   :global(.filter-container .selected) {

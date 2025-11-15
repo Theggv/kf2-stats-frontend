@@ -1,6 +1,7 @@
 <script lang="ts">
   import { GameStatus } from '$lib/api/sessions';
   import type { Match } from '$lib/api/matches/filter';
+  import { formatDate } from '$lib/util/date';
 
   export let date: string;
   export let matches: Match[];
@@ -10,13 +11,6 @@
   ).length;
 
   $: gamesLost = matches.length - gamesWon;
-
-  function formatDate(str: string) {
-    return new Date(str).toLocaleString('en', {
-      day: 'numeric',
-      month: 'long',
-    });
-  }
 </script>
 
 <div class="root">

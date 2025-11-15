@@ -11,18 +11,33 @@
   import type { ServerData } from '$lib/api/servers';
 
   import { getStore } from './Overview.store';
-  import { inProgress, notInProgress } from '../common';
   import MatchesList from '../matches/MatchesList.svelte';
   import MatchesListItem from '../matches/MatchesListItem.svelte';
   import LiveMatch from './LiveMatch.svelte';
 
   import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
   import { iconSettings } from '$lib/ui/icons';
+  import type { Match } from '$lib/api/matches/filter';
+  import { GameStatus } from '$lib/api/sessions';
 
   export let server: ServerData;
 
   const { serverIdStore, lastMatches } = getStore();
   $: serverIdStore.set(server.id);
+
+  function inProgress(item: Match) {
+    return (
+      item.session.status === GameStatus.Lobby ||
+      item.session.status === GameStatus.InProgress
+    );
+  }
+
+  function notInProgress(item: Match) {
+    return (
+      item.session.status !== GameStatus.Lobby &&
+      item.session.status !== GameStatus.InProgress
+    );
+  }
 
   $: currentMatch = $lastMatches.find(inProgress);
   $: groupedLastMatches = groupBy($lastMatches.filter(notInProgress), (item) =>

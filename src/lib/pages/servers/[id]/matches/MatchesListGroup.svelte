@@ -1,15 +1,9 @@
 <script lang="ts">
-  import type { ServerMatch } from '../common';
+  import type { Match } from '$lib/api/matches/filter';
+  import { formatDate } from '$lib/util/date';
 
   export let date: string;
-  export let games: ServerMatch[];
-
-  function formatDate(str: string) {
-    return new Date(str).toLocaleString('en', {
-      day: 'numeric',
-      month: 'long',
-    });
-  }
+  export let games: Match[];
 </script>
 
 <div class="root">

@@ -4,13 +4,7 @@
   import type { RecentUsersResponseUser } from '$lib/api/servers';
   import PlayerListItem from './PlayerListItem.svelte';
   import Skeleton from './Skeleton.svelte';
-
-  function formatDate(str: string) {
-    return new Date(str).toLocaleString('en', {
-      day: 'numeric',
-      month: 'long',
-    });
-  }
+  import { formatDate } from '$lib/util/date';
 
   function sortByDate(a: RecentUsersResponseUser, b: RecentUsersResponseUser) {
     return b.updated_at.localeCompare(a.updated_at);

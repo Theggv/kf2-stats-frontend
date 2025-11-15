@@ -3,13 +3,15 @@
   import { getWaveText } from '$lib/util/converters';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import MediaQuery from 'svelte-media-queries';
-  import type { ServerMatch } from '../common';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
+  import type { Match } from '$lib/api/matches/filter';
 
-  export let data: ServerMatch;
+  export let data: Match;
 
-  function getMatchClass(data: ServerMatch) {
+  $: details = data.details as Required<Match['details']>;
+
+  function getMatchClass(data: Match) {
     if (data.session.status === GameStatus.InProgress) return 'in-progress';
 
     if (data.session.mode === GameMode.Endless) return '';
@@ -34,7 +36,7 @@
 
 <a
   class="root {getMatchClass(data)}"
-  href="/sessions/{data.session.session_id}"
+  href="/sessions/{data.session.id}"
   target="_blank"
   rel="noopener noreferrer"
 >
@@ -43,7 +45,7 @@
   </div>
 
   <div class="map">
-    {data.map.name}
+    {details.map.name}
   </div>
 
   <div class="difficulty">
@@ -54,7 +56,7 @@
     <MediaQuery query="(max-width: 768px)" let:matches>
       {#if matches}
         <div class="title">
-          {data.map.name}
+          {details.map.name}
         </div>
       {:else}
         <div class="title list">
@@ -71,16 +73,16 @@
     </MediaQuery>
 
     <div class="list">
-      {#if data.cd_data}
+      {#if details.extra_data}
         <span>
-          {data.cd_data.spawn_cycle}
+          {details.extra_data.spawn_cycle}
         </span>
         <span>
-          {data.cd_data.max_monsters}mm
+          {details.extra_data.max_monsters}mm
         </span>
-        {#if data.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+        {#if details.extra_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {getZedsType(data.cd_data.zeds_type)}
+            {getZedsType(details.extra_data.zeds_type)}
           </span>
         {/if}
       {:else}
@@ -95,7 +97,7 @@
     <div class="wave">
       <div class="title">Wave</div>
       <div>
-        {getWaveText(data.game_data.wave, data.session)}
+        {getWaveText(details.game_data.wave, data.session)}
       </div>
     </div>
   </div>

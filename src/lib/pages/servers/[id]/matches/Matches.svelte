@@ -49,7 +49,7 @@
         <Icon src={BsFilter} {...iconSettings} />
       </svelte:fragment>
       <svelte:fragment slot="content">
-        <Filter bind:selectedMaps bind:selectedStatus />
+        <Filter />
       </svelte:fragment>
     </SectionLayout>
   </svelte:fragment>

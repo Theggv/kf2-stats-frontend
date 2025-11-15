@@ -1,12 +1,7 @@
 <script lang="ts">
-  export let date: string;
+  import { formatDate } from '$lib/util/date';
 
-  function formatDate(str: string) {
-    return new Date(str).toLocaleString('en', {
-      day: 'numeric',
-      month: 'long',
-    });
-  }
+  export let date: string;
 </script>
 
 <div class="root">

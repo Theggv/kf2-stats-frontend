@@ -7,7 +7,6 @@
     UserProfileMatchesName,
     type UserProfileMatchesType,
   } from './Matches.store';
-  import { AdvancedFilterOp } from '$lib/api/common';
   import { parseFilterExpr } from '$lib/util';
 
   const { difficulties, maps, modes, servers, lengths, statuses, zedsTypes } =

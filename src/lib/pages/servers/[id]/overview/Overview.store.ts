@@ -1,22 +1,23 @@
-import { MatchesApiService } from '$lib/api/matches';
 import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
-import type { ServerMatch } from '../common';
+import { MatchesFilterApiService, type Match } from '$lib/api/matches/filter';
 
 export function getStore() {
   const serverIdStore = writable<number | null>(null);
 
-  const lastMatches = writable<ServerMatch[]>([]);
+  const lastMatches = writable<Match[]>([]);
 
   const fetch = debounce(async (server_id: number) => {
     try {
-      await MatchesApiService.filter({
-        include_map: true,
-        include_game_data: true,
-        include_cd_data: true,
+      await MatchesFilterApiService.filter({
         server_ids: [server_id],
-        reverse_order: true,
+        includes: {
+          map_data: true,
+          game_data: true,
+          extra_game_data: true,
+        },
+        sort_by: { direction: 1 },
         pager: { results_per_page: 20 },
       }).then(({ data }) => lastMatches.set(data.items as any));
     } catch (err) {}

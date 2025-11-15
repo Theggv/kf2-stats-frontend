@@ -10,10 +10,14 @@ export function dateDiff(from: Date, to: Date): string {
   return `${pad(minutes)}:${pad(seconds)}`;
 }
 
-export function getDayAndMonth(str: string) {
+export function formatDate(str: string) {
   return new Date(str).toLocaleString('en', {
     day: 'numeric',
     month: 'long',
+    year:
+      new Date(str).getFullYear() !== new Date().getFullYear()
+        ? 'numeric'
+        : undefined,
   });
 }
 

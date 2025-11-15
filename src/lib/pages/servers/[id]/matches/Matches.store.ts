@@ -1,28 +1,17 @@
-import { MatchesApiService } from '$lib/api/matches';
-
 import { debounce } from '$lib/util';
 import { derived, get, writable } from 'svelte/store';
-import type { ServerMatch } from '../common';
+import { ServerAnalyticsApiService, type PeriodData } from '$lib/api/analytics';
 import {
-  ServerAnalyticsApiService,
-  type PeriodData,
-  type SessionCountHistRequest,
-} from '$lib/api/analytics';
+  MatchesFilterApiService,
+  type FilterMatchesRequest,
+  type Match,
+} from '$lib/api/matches/filter';
 
 export type ActivityType = PeriodData;
 
-type AvailableFilters = Partial<
-  Pick<
-    SessionCountHistRequest,
-    | 'date_from'
-    | 'date_to'
-    | 'map_ids'
-    | 'statuses'
-    | 'min_wave'
-    | 'max_monsters'
-    | 'spawn_cycle'
-    | 'zeds_type'
-  >
+type AvailableFilters = Omit<
+  FilterMatchesRequest,
+  'user_ids' | 'server_ids' | 'pager' | 'sort_by' | 'includes'
 >;
 
 export function getStore() {
@@ -34,7 +23,7 @@ export function getStore() {
 
   const year = writable<number>(new Date().getFullYear());
   const activity = writable<ActivityType[]>([]);
-  const matches = writable<ServerMatch[]>([]);
+  const matches = writable<Match[]>([]);
   const total = writable(0);
   const hasMore = writable(true);
   const abortController = writable(new AbortController());
@@ -49,13 +38,15 @@ export function getStore() {
 
         loading.set(true);
 
-        await MatchesApiService.filter(
+        await MatchesFilterApiService.filter(
           {
-            include_map: true,
-            include_game_data: true,
-            include_cd_data: true,
             server_ids: [server_id],
-            reverse_order: true,
+            includes: {
+              map_data: true,
+              game_data: true,
+              extra_game_data: true,
+            },
+            sort_by: { direction: 1 },
             pager: { page, results_per_page: 100 },
             ...args,
           },
