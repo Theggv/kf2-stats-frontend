@@ -1,14 +1,8 @@
 import { writable } from 'svelte/store';
 
-import { MatchesApiService, type MatchData } from '$lib/api/matches';
-import type { WithRequired } from '$lib/util/types';
+import { MatchesFilterApiService, type Match } from '$lib/api/matches/filter';
 import { GameMode, GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
-
-export type LiveMatchData = WithRequired<
-  MatchData,
-  'game_data' | 'server' | 'map'
->;
 
 function getModePriority(mode: GameMode) {
   const priority = {
@@ -24,55 +18,67 @@ function getModePriority(mode: GameMode) {
   return priority[mode];
 }
 
-function compareMatches(a: LiveMatchData, b: LiveMatchData) {
-  if (a.session.diff !== b.session.diff) return b.session.diff - a.session.diff;
-  if (a.session.mode !== b.session.mode)
-    return getModePriority(a.session.mode) - getModePriority(b.session.mode);
-  if (a.session.length !== b.session.length)
-    return b.session.length - a.session.length;
-  if (a.game_data.wave != b.game_data.wave)
-    return b.game_data.wave - a.game_data.wave;
-  if (a.game_data.players_online != b.game_data.players_online)
-    return b.game_data.players_online - a.game_data.players_online;
+function compareMatches(a: Match, b: Match) {
+  if (a.session.diff !== b.session.diff) {
+    return b.session.diff - a.session.diff;
+  }
 
-  return a.map.name.localeCompare(b.map.name);
+  if (a.session.mode !== b.session.mode) {
+    return getModePriority(a.session.mode) - getModePriority(b.session.mode);
+  }
+
+  if (a.session.length !== b.session.length) {
+    return b.session.length - a.session.length;
+  }
+
+  if (a.details.game_data!.wave !== b.details.game_data!.wave) {
+    return b.details.game_data!.wave - a.details.game_data!.wave;
+  }
+
+  if (
+    a.details.game_data!.players_online !== b.details.game_data!.players_online
+  ) {
+    return (
+      b.details.game_data!.players_online - a.details.game_data!.players_online
+    );
+  }
+
+  return a.details.map!.name.localeCompare(b.details.map!.name);
 }
 
 export function getStore() {
   const loading = writable(false);
   const error = writable<unknown>(false);
-  const matches = writable<LiveMatchData[]>([]);
+  const matches = writable<Match[]>([]);
 
   const update = debounce(async () => {
     try {
       loading.set(true);
 
       let page = 0;
-      const temp: LiveMatchData[] = [];
+      const temp: Match[] = [];
 
       do {
-        const { data } = await MatchesApiService.filter({
-          include_server: true,
-          include_map: true,
-          include_game_data: true,
-          include_cd_data: true,
-          include_players: true,
+        const { data } = await MatchesFilterApiService.filter({
           statuses: [GameStatus.Lobby, GameStatus.InProgress],
+          includes: {
+            server_data: true,
+            map_data: true,
+            game_data: true,
+            extra_game_data: true,
+            live_data: true,
+          },
           pager: { page, results_per_page: 10 },
         });
 
-        temp.push(...(data.items as LiveMatchData[]));
+        temp.push(...(data.items as Match[]));
         const meta = data.metadata;
         page += 1;
 
         if (meta.total_results <= page * meta.results_per_page) break;
       } while (true);
 
-      matches.set(
-        temp
-          .filter((x) => x.players?.length || x.spectators?.length)
-          .sort(compareMatches)
-      );
+      matches.set(temp.sort(compareMatches));
     } catch (err) {
       error.set(err);
     } finally {

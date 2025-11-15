@@ -71,7 +71,7 @@ export interface MatchLiveData {
 }
 
 export interface MatchPlayer {
-  profile?: UserProfile;
+  profile: UserProfile;
 
   perk: Perk;
   level: number;
@@ -108,8 +108,9 @@ export interface FilterMatchesRequestExtra {
 }
 
 export interface FilterMatchesRequestExclude {
-  server_ids: number[];
-  map_ids: number[];
+  server_ids?: number[];
+  map_ids?: number[];
+  statuses?: number[];
 }
 
 export interface FilterMatchesRequest {

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import MatchCard from './MatchCard.svelte';
-  import RefreshIcon from '$lib/ui/icons/RefreshIcon.svelte';
-  import AutoScroll from '$lib/components/auto-scroll/AutoScroll.svelte';
+  import { RefreshIcon } from '$lib/ui/icons';
+  import { AutoScroll } from '$lib/components/auto-scroll';
   import { getStore } from './LiveMatches.store';
 
   let refreshIntervalId: NodeJS.Timeout | number;

@@ -3,22 +3,24 @@
   import StyledLink from '$lib/ui/a/StyledLink.svelte';
   import { dateDiff } from '$lib/util/date';
   import { getWaveText } from '$lib/util/converters';
-  import { type LiveMatchData } from './LiveMatches.store';
   import UserProfile from './UserProfile.svelte';
   import { statusToString } from '$lib/util/enum-to-text';
   import { Accordion } from '@svelteuidev/core';
   import { GameStatus } from '$lib/api/sessions';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
+  import type { Match } from '$lib/api/matches/filter';
 
   $: selected =
     $page.url.pathname.includes(`/sessions`) &&
-    Number($page.params.slug) === match.session.session_id;
+    Number($page.params.slug) === match.session.id;
 
-  export let match: LiveMatchData;
+  export let match: Match;
+
+  $: details = match.details as Required<Match['details']>;
 </script>
 
-<StyledLink href="/sessions/{match.session.session_id}" {selected}>
+<StyledLink href="/sessions/{match.session.id}" {selected}>
   <div class="match-view-container">
     <div class="difficulty">
       <DifficultyIcon
@@ -27,29 +29,29 @@
       />
     </div>
     <div class="server">
-      {match.server.name}
+      {details.server.name}
     </div>
     <div class="status">
       {statusToString(match.session.status)}
     </div>
     <div class="map">
-      {match.map.name}
+      {details.map.name}
     </div>
     <div class="wave">
-      {getWaveText(match.game_data.wave, match.session)}
+      {getWaveText(details.game_data.wave, match.session)}
     </div>
     <div class="game-length">
       {#if match.session.status === GameStatus.InProgress}
-        {dateDiff(new Date(match.session.started_at), new Date())}
+        {dateDiff(new Date(match.session.started_at || ''), new Date())}
       {/if}
     </div>
     <div class="accordion">
-      {#if match.players?.length || match.spectators?.length}
+      {#if details.live_data.players?.length || details.live_data.spectators?.length}
         <Accordion variant="default">
           <Accordion.Item on:click={(e) => e.preventDefault()} value="0">
             <div slot="control" class="control">
-              Players ({match.players?.length || 0}), Spectators ({match
-                .spectators?.length || 0})
+              Players ({details.live_data.players?.length || 0}), Spectators ({details
+                .live_data.spectators?.length || 0})
             </div>
 
             <div
@@ -60,10 +62,10 @@
               on:keypress={(e) => e.key === 'Enter' && e.preventDefault()}
             >
               <div class="players">
-                {#if match.players}
-                  <div>Players ({match.players.length})</div>
+                {#if details.live_data.players}
+                  <div>Players ({details.live_data.players.length})</div>
                   <div class="items">
-                    {#each match.players as player (player.profile.id)}
+                    {#each details.live_data.players as player (player.profile.id)}
                       <UserProfile
                         profile={player.profile}
                         playerData={{
@@ -78,10 +80,10 @@
               </div>
 
               <div class="spectators">
-                {#if match.spectators}
-                  <div>Spectators ({match.spectators?.length})</div>
+                {#if details.live_data.spectators}
+                  <div>Spectators ({details.live_data.spectators?.length})</div>
                   <div class="items">
-                    {#each match.spectators as player (player.profile.id)}
+                    {#each details.live_data.spectators as player (player.profile.id)}
                       <UserProfile profile={player.profile} />
                     {/each}
                   </div>
