@@ -1,16 +1,18 @@
 <script lang="ts">
   import { GameMode, GameStatus } from '$lib/api/sessions';
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics/users';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
   import { getWaveText } from '$lib/util/converters';
   import { getTimeSinceNow } from '$lib/util/date';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
+  import type { Match } from '$lib/api/matches/filter';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
 
-  function getMatchClass(data: FindUserSessionsResponseItem) {
+  $: details = data.details as Required<Match['details']>;
+
+  function getMatchClass(data: Match) {
     if (data.session.status === GameStatus.InProgress) return 'in-progress';
 
     if (data.session.mode === GameMode.Endless) return '';
@@ -31,21 +33,21 @@
   <div class="match">
     <div class="title">
       <div class="server">
-        {data.server.name}
+        {details.server.name}
       </div>
     </div>
     <div class="secondary">
       <div class="map">
-        {data.map.name}
+        {details.map.name}
       </div>
       <div class="time">
-        {getTimeSinceNow(new Date(data.updated_at), true)}
+        {getTimeSinceNow(new Date(data.session.updated_at), true)}
       </div>
     </div>
   </div>
 
   <div class="perks">
-    {#each data.perks.filter((x) => x) as perk (perk)}
+    {#each details.user_data.perks.filter((x) => x) as perk (perk)}
       <PerkIcon {perk} prestige={0} />
     {/each}
   </div>
@@ -66,16 +68,16 @@
       {/if}
     </div>
     <div class="list">
-      {#if data.extra_game_data}
+      {#if details.extra_data}
         <span>
-          {data.extra_game_data.spawn_cycle}
+          {details.extra_data.spawn_cycle}
         </span>
         <span>
-          {data.extra_game_data.max_monsters}mm
+          {details.extra_data.max_monsters}mm
         </span>
-        {#if data.extra_game_data.zeds_type.toLowerCase() !== 'vanilla'}
+        {#if details.extra_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {data.extra_game_data.zeds_type.toLowerCase()} zeds
+            {details.extra_data.zeds_type.toLowerCase()} zeds
           </span>
         {/if}
       {:else}
@@ -90,7 +92,7 @@
     <div class="wave">
       <div class="title">Wave</div>
       <div>
-        {getWaveText(data.game_data.wave, data.session)}
+        {getWaveText(details.game_data.wave, data.session)}
       </div>
     </div>
   </div>

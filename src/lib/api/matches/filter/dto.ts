@@ -114,15 +114,15 @@ export interface FilterMatchesRequestExclude {
 }
 
 export interface FilterMatchesRequest {
-  user_ids: number[];
+  user_ids?: number[];
 
-  server_ids: number[];
-  map_ids: number[];
+  server_ids?: number[];
+  map_ids?: number[];
 
   exclude?: FilterMatchesRequestExclude;
 
-  perks: Perk[];
-  statuses: GameStatus[];
+  perks?: Perk[];
+  statuses?: GameStatus[];
 
   mode?: GameMode;
   length?: GameLength;
@@ -134,8 +134,8 @@ export interface FilterMatchesRequest {
   includes?: FilterMatchesRequestIncludes;
   extra?: FilterMatchesRequestExtra;
 
-  sort_by: SortByRequest;
-  pager: PaginationRequest;
+  sort_by?: SortByRequest;
+  pager?: PaginationRequest;
 }
 
 export interface FilterMatchesResponse {

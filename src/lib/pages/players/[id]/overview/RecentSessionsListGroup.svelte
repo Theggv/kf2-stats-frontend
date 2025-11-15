@@ -1,12 +1,15 @@
 <script lang="ts">
   import { GameStatus } from '$lib/api/sessions';
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics/users';
+  import type { Match } from '$lib/api/matches/filter';
 
   export let date: string;
-  export let games: FindUserSessionsResponseItem[];
+  export let matches: Match[];
 
-  $: gamesWon = games.filter((x) => x.session.status === GameStatus.Win).length;
-  $: gamesLost = games.length - gamesWon;
+  $: gamesWon = matches.filter(
+    (x) => x.session.status === GameStatus.Win
+  ).length;
+
+  $: gamesLost = matches.length - gamesWon;
 
   function formatDate(str: string) {
     return new Date(str).toLocaleString('en', {

@@ -1,4 +1,4 @@
-import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+import type { Match } from '$lib/api/matches/filter';
 import type { TableColumn } from '$lib/components/table';
 import DateWrapper from './DateWrapper.svelte';
 import DifficultyWrapper from './DifficultyWrapper.svelte';
@@ -7,7 +7,7 @@ import SessionWrapper from './SessionWrapper.svelte';
 import SettingsWrapper from './SettingsWrapper.svelte';
 import WaveWrapper from './WaveWrapper.svelte';
 
-export type RowData = FindUserSessionsResponseItem & {
+export type RowData = Match & {
   key: string;
 };
 
@@ -20,8 +20,8 @@ export const stickyColumns: TableColumn<RowData>[] = [
     sorting: {
       compare: (dir) => (a, b) => {
         return dir === 'asc'
-          ? a.updated_at.localeCompare(b.updated_at)
-          : b.updated_at.localeCompare(a.updated_at);
+          ? a.session.updated_at.localeCompare(b.session.updated_at)
+          : b.session.updated_at.localeCompare(a.session.updated_at);
       },
       direction: 'desc',
     },
@@ -72,13 +72,15 @@ export const columns: TableColumn<RowData>[] = [
   {
     label: 'Total Damage',
     id: 'damage_dealt',
-    render: (item) => item.stats.damage_dealt,
+    render: (item) => item.details.user_data!.stats.damage_dealt,
     width: 130,
     sorting: {
       compare: (dir) => (a, b) => {
         return dir === 'asc'
-          ? a.stats.damage_dealt - b.stats.damage_dealt
-          : b.stats.damage_dealt - a.stats.damage_dealt;
+          ? a.details.user_data!.stats.damage_dealt -
+              b.details.user_data!.stats.damage_dealt
+          : b.details.user_data!.stats.damage_dealt -
+              a.details.user_data!.stats.damage_dealt;
       },
       direction: 'desc',
     },

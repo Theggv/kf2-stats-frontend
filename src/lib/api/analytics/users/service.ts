@@ -3,8 +3,6 @@ import type { GenericAbortSignal } from 'axios';
 
 import type {
   AccuracyHist,
-  FindUserSessionsRequest,
-  FindUserSessionsResponse,
   GetLastSeenUsersRequest,
   GetLastSeenUsersResponse,
   GetLastSessionsWithUserRequest,
@@ -22,6 +20,10 @@ import type {
   UserPerksAnalyticsResponse,
 } from './dto';
 import type { PeriodData } from '../dto';
+import type {
+  FilterMatchesRequest,
+  FilterMatchesResponse,
+} from '$lib/api/matches/filter';
 
 export class UserAnalyticsApiService {
   static getUserAnalytics(body: UserAnalyticsRequest) {
@@ -64,11 +66,11 @@ export class UserAnalyticsApiService {
     return $proxyApi.post<GetPlayedMapsResponse>(`/analytics/users/maps`, body);
   }
 
-  static findSessions(
-    body: FindUserSessionsRequest,
+  static getUserSessions(
+    body: FilterMatchesRequest,
     signal?: GenericAbortSignal
   ) {
-    return $authProxyApi.post<FindUserSessionsResponse>(
+    return $authProxyApi.post<FilterMatchesResponse>(
       `/analytics/users/sessions`,
       body,
       { signal }

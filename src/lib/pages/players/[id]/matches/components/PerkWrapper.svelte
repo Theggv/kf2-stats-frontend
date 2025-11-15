@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
   import { PerkIcon } from '$lib/ui/icons';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
 
-  $: perks = data.perks.filter((_, i) => i < 2);
+  $: details = data.details as Required<Match['details']>;
+  $: perks = details.user_data.perks.filter((_, i) => i < 2);
 </script>
 
 <div class="perks">

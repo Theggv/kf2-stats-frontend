@@ -1,21 +1,18 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics/users';
   import RecentSessionsListItem from './RecentSessionsListItem.svelte';
   import RecentSessionsListGroup from './RecentSessionsListGroup.svelte';
+  import type { Match } from '$lib/api/matches/filter';
 
-  function sortByDate(
-    a: FindUserSessionsResponseItem,
-    b: FindUserSessionsResponseItem
-  ) {
-    return b.updated_at.localeCompare(a.updated_at);
+  function sortByDate(a: Match, b: Match) {
+    return b.session.updated_at.localeCompare(a.session.updated_at);
   }
 
-  export let data: Map<string, FindUserSessionsResponseItem[]>;
+  export let data: Map<string, Match[]>;
 </script>
 
 <div class="session-list">
   {#each data as [date, sessions] (date)}
-    <RecentSessionsListGroup {date} games={sessions} />
+    <RecentSessionsListGroup {date} matches={sessions} />
     {#each sessions.sort(sortByDate) as data (data.session.id)}
       <RecentSessionsListItem {data} />
     {/each}

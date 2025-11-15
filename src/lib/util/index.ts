@@ -4,3 +4,4 @@ export * from './debounce';
 export * from './pad';
 export * from './api-error-handler';
 export * from './difficulty';
+export * from './advanced-filter';

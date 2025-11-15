@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
 </script>
 

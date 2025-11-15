@@ -1,18 +1,18 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
 </script>
 
 <div class="datetime">
   <div class="title">
     <div class="date">
-      {new Date(data.updated_at).toDateString()}
+      {new Date(data.session.updated_at).toDateString()}
     </div>
   </div>
   <div class="time">
-    {new Date(data.updated_at).toLocaleTimeString()}
+    {new Date(data.session.updated_at).toLocaleTimeString()}
   </div>
 </div>
 

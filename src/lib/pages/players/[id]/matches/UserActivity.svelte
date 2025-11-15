@@ -6,6 +6,7 @@
     type UserProfileMatchesType,
   } from './Matches.store';
   import { treshhold } from './Matches.data';
+  import { page } from '$app/stores';
 
   const store = getContext<UserProfileMatchesType>(UserProfileMatchesName);
   const { filter, activity, year } = store;
@@ -14,6 +15,14 @@
   let date_to: Date | undefined;
 
   $: filter.update((prev) => ({ ...prev, date_from, date_to }));
+
+  page.subscribe((x) => {
+    const selectedDate = x.url.searchParams.get('date');
+    if (!selectedDate) return;
+
+    date_from = new Date(selectedDate);
+    date_to = new Date(date_from.getTime() + 1000 * 60 * 60 * 24 - 1);
+  });
 </script>
 
 <div class="activity">

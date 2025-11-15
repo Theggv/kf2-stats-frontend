@@ -7,23 +7,38 @@
 
   import { getStore } from './Overview.store';
   import { groupBy } from '$lib/util';
-  import RecentSessionsList from '../matches/RecentSessionsList.svelte';
-  import RecentSessionsListItem from '../matches/RecentSessionsListItem.svelte';
+  import RecentSessionsList from './RecentSessionsList.svelte';
+  import RecentSessionsListItem from './RecentSessionsListItem.svelte';
 
   import Playtime from './Playtime.svelte';
   import Perks from './Perks.svelte';
   import Accuracy from './Accuracy.svelte';
   import Teammates from './Teammates.svelte';
   import SectionLayout from '../common/SectionLayout.svelte';
-  import { inProgress, notInProgress } from '../common';
   import Layout from '../common/Layout.svelte';
   import { iconSettings } from '$lib/ui/icons';
   import { LineTimeChart, periods } from '$lib/components/charts';
+  import type { Match } from '$lib/api/matches/filter';
+  import { GameStatus } from '$lib/api/sessions';
 
   export let userId: number;
 
   const { userIdStore, recentMatches, hist, teammates, perks } = getStore();
   const { playtime, accuracy, difficulty } = hist;
+
+  function inProgress(item: Match) {
+    return (
+      item.session.status === GameStatus.Lobby ||
+      item.session.status === GameStatus.InProgress
+    );
+  }
+
+  function notInProgress(item: Match) {
+    return (
+      item.session.status !== GameStatus.Lobby &&
+      item.session.status !== GameStatus.InProgress
+    );
+  }
 
   $: userIdStore.set(userId);
 
@@ -31,7 +46,7 @@
 
   $: groupedRecentMatches = groupBy(
     $recentMatches.filter(notInProgress),
-    (item) => new Date(item.updated_at).toDateString()
+    (item) => new Date(item.session.updated_at).toDateString()
   );
 </script>
 

@@ -1,16 +1,18 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
   import { getWaveText } from '$lib/util/converters';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
+
+  $: details = data.details as Required<Match['details']>;
 </script>
 
 <div class="wave">
   <div class="content">
     <div class="title">Wave</div>
     <div>
-      {getWaveText(data.game_data.wave, data.session)}
+      {getWaveText(details.game_data.wave, data.session)}
     </div>
   </div>
 </div>

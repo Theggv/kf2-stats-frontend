@@ -13,6 +13,7 @@
   import UserActivity from './UserActivity.svelte';
   import { AuthContextName, type AuthContextType } from '$lib/hooks';
   import YearSelector from './components/YearSelector.svelte';
+  import { page as pageStore } from '$app/stores';
 
   export let userId: number;
 
@@ -29,6 +30,21 @@
 
   let perk: number = 0;
   $: filter.update((prev) => ({ ...prev, perks: perk ? [perk] : undefined }));
+
+  pageStore.subscribe((x) => {
+    let date_from: Date;
+    let date_to: Date;
+
+    const selectedDate = x.url.searchParams.get('date');
+    if (!selectedDate) {
+      filter.update((prev) => ({ ...prev, date_from, date_to }));
+      return;
+    }
+
+    date_from = new Date(selectedDate);
+    date_to = new Date(date_from.getTime() + 1000 * 60 * 60 * 24 - 1);
+    filter.update((prev) => ({ ...prev, date_from, date_to }));
+  });
 </script>
 
 <ContentLayout>

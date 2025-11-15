@@ -1,20 +1,20 @@
 import {
   TimePeriod,
   UserAnalyticsApiService,
-  type FindUserSessionsResponseItem,
   type PlayTimeHistItem,
   type AccuracyHistItem,
   type GetTeammatesResponseItem,
   type UserPerksAnalyticsResponseItem,
   type PeriodData,
 } from '$lib/api/analytics';
+import type { Match } from '$lib/api/matches/filter';
 import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 
 export function getStore() {
   const userIdStore = writable<number | null>(null);
 
-  const recentMatches = writable<FindUserSessionsResponseItem[]>([]);
+  const recentMatches = writable<Match[]>([]);
   const playtime = writable<PlayTimeHistItem[]>([]);
   const accuracy = writable<AccuracyHistItem[]>([]);
   const difficulty = writable<PeriodData[]>([]);
@@ -23,8 +23,14 @@ export function getStore() {
 
   const fetch = debounce(async (user_id: number) => {
     try {
-      await UserAnalyticsApiService.findSessions({
-        user_id,
+      await UserAnalyticsApiService.getUserSessions({
+        user_ids: [user_id],
+        includes: {
+          server_data: true,
+          map_data: true,
+          game_data: true,
+          extra_game_data: true,
+        },
         sort_by: { direction: 1 },
         pager: { results_per_page: 20 },
       }).then(({ data }) => recentMatches.set(data.items));

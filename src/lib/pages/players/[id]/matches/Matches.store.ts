@@ -1,19 +1,18 @@
 import {
   TimePeriod,
   UserAnalyticsApiService,
-  type FindUserSessionsRequest,
-  type FindUserSessionsResponseItem,
   type PlayTimeHistItem,
 } from '$lib/api/analytics';
 import type { TokenPayload } from '$lib/api/auth';
+import type { FilterMatchesRequest, Match } from '$lib/api/matches/filter';
 import { debounce } from '$lib/util';
 import { writable, derived, get, type Readable } from 'svelte/store';
 
 export type ActivityType = Pick<PlayTimeHistItem, 'period' | 'count'>;
 
 type AvailableFilters = Omit<
-  FindUserSessionsRequest,
-  'user_id' | 'pager' | 'sort_by'
+  FilterMatchesRequest,
+  'user_ids' | 'pager' | 'sort_by' | 'includes'
 >;
 
 export function getStore(user: Readable<TokenPayload | null>) {
@@ -27,7 +26,7 @@ export function getStore(user: Readable<TokenPayload | null>) {
 
   const year = writable<number>(new Date().getFullYear());
   const activity = writable<ActivityType[]>([]);
-  const matches = writable<FindUserSessionsResponseItem[]>([]);
+  const matches = writable<Match[]>([]);
   const total = writable(0);
   const hasMore = writable(true);
   const abortController = writable(new AbortController());
@@ -53,9 +52,15 @@ export function getStore(user: Readable<TokenPayload | null>) {
 
         loading.set(true);
 
-        await UserAnalyticsApiService.findSessions(
+        await UserAnalyticsApiService.getUserSessions(
           {
-            user_id,
+            user_ids: [user_id],
+            includes: {
+              server_data: true,
+              map_data: true,
+              game_data: true,
+              extra_game_data: true,
+            },
             sort_by: { field, direction: direction === 'desc' ? 1 : 0 },
             pager: { page, results_per_page: 100 },
             ...args,

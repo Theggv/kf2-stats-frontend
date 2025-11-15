@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
   import { getTimeSinceNow } from '$lib/util/date';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
 
-  $: mapNameLength = data.map.name.length;
+  $: details = data.details as Required<Match['details']>;
+  $: mapNameLength = details.map.name.length;
 </script>
 
 <a
@@ -16,15 +17,15 @@
 >
   <div class="title">
     <div class="server">
-      {data.server.name}
+      {details.server.name}
     </div>
   </div>
   <div class="secondary" class:long={mapNameLength >= 18}>
-    <div class="map" title={data.map.name}>
-      {data.map.name}
+    <div class="map" title={details.map.name}>
+      {details.map.name}
     </div>
     <div class="time">
-      {getTimeSinceNow(new Date(data.updated_at), true)}
+      {getTimeSinceNow(new Date(data.session.updated_at), true)}
     </div>
   </div>
 </a>

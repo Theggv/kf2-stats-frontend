@@ -7,6 +7,8 @@
     UserProfileMatchesName,
     type UserProfileMatchesType,
   } from './Matches.store';
+  import { AdvancedFilterOp } from '$lib/api/common';
+  import { parseFilterExpr } from '$lib/util';
 
   const { difficulties, maps, modes, servers, lengths, statuses, zedsTypes } =
     getStore();
@@ -21,10 +23,12 @@
   let selectedMode: SelectOption[] = [];
   let selectedStatus: SelectOption[] = [];
   let selectedLength: SelectOption[] = [];
-  let minWave: number;
-  let maxMonsters: number;
   let selectedZedsType: SelectOption[] = [];
   let spawnCycle: string;
+
+  let wave: string = '';
+  let maxMonsters: string = '';
+  let calcDiff: string = '';
 
   $: filter.update((prev) => ({
     ...prev,
@@ -32,15 +36,18 @@
     server_ids: selectedServers.map((x) => x.id),
     map_ids: selectedMaps.map((x) => x.id),
     diff: selectedDiff.length ? selectedDiff[0].id : undefined,
-    status: selectedStatus.length ? selectedStatus[0].id : undefined,
+    statuses: selectedStatus.map((x) => x.id),
     mode: selectedMode.length ? selectedMode[0].id : undefined,
     length: selectedLength.length ? selectedLength[0].id : undefined,
-    min_wave: minWave || undefined,
-    spawn_cycle: spawnCycle || undefined,
-    zeds_type: selectedZedsType.length
-      ? convertZedType(selectedZedsType[0])
-      : undefined,
-    max_monsters: maxMonsters || undefined,
+    extra: {
+      wave: parseFilterExpr(wave),
+      max_monsters: parseFilterExpr(maxMonsters),
+      difficulty: parseFilterExpr(calcDiff),
+      spawn_cycle: spawnCycle || undefined,
+      zeds_type: selectedZedsType.length
+        ? convertZedType(selectedZedsType[0])
+        : undefined,
+    },
   }));
 </script>
 
@@ -76,12 +83,11 @@
       maxSelect={1}
       bind:selected={selectedDiff}
       options={difficulties}
-      placeholder="Difficulty"
+      placeholder="Game Difficulty"
     />
 
     <MultiSelect
       id="filter_status"
-      maxSelect={1}
       bind:selected={selectedStatus}
       options={statuses}
       placeholder="Status"
@@ -103,11 +109,13 @@
       placeholder="Game Length"
     />
 
+    <input class="input" placeholder="Wave" bind:value={wave} type="text" />
+
     <input
       class="input"
-      placeholder="Min wave"
-      bind:value={minWave}
-      type="number"
+      placeholder="Match Difficulty"
+      bind:value={calcDiff}
+      type="text"
     />
   </div>
 
@@ -120,7 +128,7 @@
         class="input"
         placeholder="Max Monsters"
         bind:value={maxMonsters}
-        type="number"
+        type="text"
       />
       <MultiSelect
         id="filter_zeds_type"

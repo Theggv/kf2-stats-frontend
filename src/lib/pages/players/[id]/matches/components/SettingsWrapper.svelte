@@ -1,10 +1,12 @@
 <script lang="ts">
-  import type { FindUserSessionsResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches/filter';
   import { GameMode } from '$lib/api/sessions';
   import { modeToString, diffToString } from '$lib/util/enum-to-text';
 
-  export let data: FindUserSessionsResponseItem;
+  export let data: Match;
   export let index = 0;
+
+  $: details = data.details as Required<Match['details']>;
 </script>
 
 <div class="settings">
@@ -19,16 +21,16 @@
     {/if}
   </div>
   <div class="list">
-    {#if data.extra_game_data}
+    {#if details.extra_data}
       <span>
-        {data.extra_game_data.spawn_cycle}
+        {details.extra_data.spawn_cycle}
       </span>
       <span>
-        {data.extra_game_data.max_monsters}mm
+        {details.extra_data.max_monsters}mm
       </span>
-      {#if data.extra_game_data.zeds_type.toLowerCase() !== 'vanilla'}
+      {#if details.extra_data.zeds_type.toLowerCase() !== 'vanilla'}
         <span>
-          {data.extra_game_data.zeds_type.toLowerCase()} zeds
+          {details.extra_data.zeds_type.toLowerCase()} zeds
         </span>
       {/if}
     {:else}
