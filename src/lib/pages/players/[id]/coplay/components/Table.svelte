@@ -14,9 +14,11 @@
   $: formattedData = data.map(
     (x): RowData => ({
       ...x,
-      key: `${x.id}-${x.session.id}`,
+      key: `${x.user_profile.id}-${x.match.session.id}`,
     })
   );
+
+  $: console.log(formattedData);
 
   function getBgColor(item: RowData): [string, string] {
     const pattern = (color: string): [string, string] => [
@@ -24,7 +26,7 @@
       `background: linear-gradient(to right, ${color} calc(100% - 200px), rgb(0 0 0 / 0)`,
     ];
 
-    if (item.session.status === GameStatus.Win)
+    if (item.match.session.status === GameStatus.Win)
       return pattern('var(--color-grad-win)');
 
     return pattern('var(--color-grad-lose)');

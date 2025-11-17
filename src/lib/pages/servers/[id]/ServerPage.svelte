@@ -3,7 +3,7 @@
   import type { ServerData } from '$lib/api/servers';
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
   import LinkTabs from '$lib/components/tabs/LinkTabs.svelte';
-  import { tabs } from './common/tabs';
+  import { tabs } from './common';
   import { page } from '$app/stores';
 
   export let server: ServerData;

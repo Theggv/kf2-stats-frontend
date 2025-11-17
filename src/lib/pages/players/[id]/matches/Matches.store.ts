@@ -4,7 +4,8 @@ import {
   type PlayTimeHistItem,
 } from '$lib/api/analytics';
 import type { TokenPayload } from '$lib/api/auth';
-import type { FilterMatchesRequest, Match } from '$lib/api/matches/filter';
+import type { Match } from '$lib/api/matches';
+import type { FilterMatchesRequest } from '$lib/api/matches/filter';
 import { debounce } from '$lib/util';
 import { writable, derived, get, type Readable } from 'svelte/store';
 

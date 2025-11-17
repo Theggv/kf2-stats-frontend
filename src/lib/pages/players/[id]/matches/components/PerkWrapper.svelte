@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
   import { PerkIcon } from '$lib/ui/icons';
 
   export let data: Match;

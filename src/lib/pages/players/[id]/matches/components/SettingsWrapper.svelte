@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
   import { GameMode } from '$lib/api/sessions';
   import { modeToString, diffToString } from '$lib/util/enum-to-text';
 

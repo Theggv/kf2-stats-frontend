@@ -6,7 +6,7 @@
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
 
   export let data: Match;
 

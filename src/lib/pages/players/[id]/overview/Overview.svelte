@@ -18,7 +18,7 @@
   import Layout from '../common/Layout.svelte';
   import { iconSettings } from '$lib/ui/icons';
   import { LineTimeChart, periods } from '$lib/components/charts';
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
   import { GameStatus } from '$lib/api/sessions';
 
   export let userId: number;

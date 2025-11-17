@@ -7,7 +7,7 @@ import {
   type UserPerksAnalyticsResponseItem,
   type PeriodData,
 } from '$lib/api/analytics';
-import type { Match } from '$lib/api/matches/filter';
+import type { Match } from '$lib/api/matches';
 import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
 

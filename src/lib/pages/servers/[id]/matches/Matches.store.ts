@@ -1,10 +1,10 @@
 import { debounce } from '$lib/util';
 import { derived, get, writable } from 'svelte/store';
 import { ServerAnalyticsApiService, type PeriodData } from '$lib/api/analytics';
+import type { Match } from '$lib/api/matches';
 import {
   MatchesFilterApiService,
   type FilterMatchesRequest,
-  type Match,
 } from '$lib/api/matches/filter';
 
 export type ActivityType = PeriodData;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import MatchesListItem from './MatchesListItem.svelte';
   import MatchesListGroup from './MatchesListGroup.svelte';
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
 
   function sortByDate(a: Match, b: Match) {
     return b.session.updated_at.localeCompare(a.session.updated_at);

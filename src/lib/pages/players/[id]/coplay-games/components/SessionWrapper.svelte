@@ -1,8 +1,10 @@
 <script lang="ts">
-  import type { GetLastSeenUsersResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches';
 
-  export let data: GetLastSeenUsersResponseItem;
+  export let data: Match;
   export let index = 0;
+
+  $: details = data.details as Required<Match['details']>;
 </script>
 
 <a
@@ -12,10 +14,10 @@
   rel="noopener noreferrer"
 >
   <div class="primary">
-    {data.map.name}
+    {details.map.name}
   </div>
   <div class="secondary">
-    {data.server.name}
+    {details.server.name}
   </div>
 </a>
 

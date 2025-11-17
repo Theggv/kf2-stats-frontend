@@ -1,17 +1,14 @@
 import { $proxyApi } from '$lib/http';
-import type { GenericAbortSignal } from 'axios';
 
 import type {
-  FilterMatchesRequest,
-  FilterMatchesResponse,
   GetMatchLiveDataResponse,
   GetMatchWavesResponse,
-  MatchData,
+  Match,
 } from './dto';
 
 export class MatchesApiService {
   static getById(session_id: number) {
-    return $proxyApi.get<MatchData>(`/matches/${session_id}`);
+    return $proxyApi.get<Match>(`/matches/${session_id}`);
   }
 
   static getMatchLive(session_id: number) {
@@ -25,15 +22,6 @@ export class MatchesApiService {
   }
 
   static getLastServerMatch(server_id: number) {
-    return $proxyApi.get<MatchData>(`/matches/server/${server_id}/last`);
-  }
-
-  static filter(
-    body: Partial<FilterMatchesRequest>,
-    signal?: GenericAbortSignal
-  ) {
-    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter`, body, {
-      signal,
-    });
+    return $proxyApi.get<Match>(`/matches/server/${server_id}/last`);
   }
 }

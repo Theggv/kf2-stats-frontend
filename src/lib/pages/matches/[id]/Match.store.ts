@@ -1,7 +1,7 @@
 import { groupZeds, type UserProfile } from '$lib/api/common';
 import {
   type GetMatchLiveDataResponse,
-  type MatchData,
+  type Match,
   type MatchWave,
   type MatchWavePlayerStats,
   MatchesApiService,
@@ -10,13 +10,10 @@ import { GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
 import { tweened } from 'svelte/motion';
 import { derived, get, writable, type Readable } from 'svelte/store';
-import type { WithRequired } from '$lib/util/types';
 import {
   DemoApiService,
   type DemoRecordAnalysis,
 } from '$lib/api/sessions/demo';
-
-export type Match = WithRequired<MatchData, 'game_data' | 'map' | 'server'>;
 
 function isMatchLive(status?: GameStatus) {
   return status === GameStatus.Lobby || status === GameStatus.InProgress;

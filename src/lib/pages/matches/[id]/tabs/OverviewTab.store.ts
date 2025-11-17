@@ -1,7 +1,6 @@
 import { type UserProfile, type ZedGroups, groupZeds } from '$lib/api/common';
-import type { MatchWave, MatchWavePlayerStats } from '$lib/api/matches';
+import type { Match, MatchWave, MatchWavePlayerStats } from '$lib/api/matches';
 import { derived, type Writable } from 'svelte/store';
-import type { Match } from '../Match.store';
 import { findUserProfile, groupByUserId } from './util';
 
 function getWavesZedGroups(waves: MatchWave[]): ZedGroups[] {
@@ -46,8 +45,8 @@ function calcDifficulty(match: Match | null, zeds: ZedGroups): number {
 
   let baseDiff = (largePercent * 2 + mediumPercent) * 15;
 
-  if (match?.cd_data?.zeds_type === 'harder') baseDiff *= 1.2;
-  if (match?.cd_data?.zeds_type === 'nightcore') baseDiff *= 1.3;
+  if (match?.details.extra_data?.zeds_type === 'harder') baseDiff *= 1.2;
+  if (match?.details.extra_data?.zeds_type === 'nightcore') baseDiff *= 1.3;
 
   return baseDiff;
 }

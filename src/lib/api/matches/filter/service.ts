@@ -7,7 +7,7 @@ export class MatchesFilterApiService {
     body: Partial<FilterMatchesRequest>,
     signal?: GenericAbortSignal
   ) {
-    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter/new`, body, {
+    return $proxyApi.post<FilterMatchesResponse>(`/matches/filter`, body, {
       signal,
     });
   }

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MatchData } from '$lib/api/matches';
+  import type { Match } from '$lib/api/matches';
   import { GameMode, GameStatus } from '$lib/api/sessions';
   import { getTimeSince } from '$lib/hooks';
   import { dateDiff } from '$lib/util/date';
@@ -8,32 +8,32 @@
     modeToString,
     statusToString,
   } from '$lib/util/enum-to-text';
-  import type { WithRequired } from '$lib/util/types';
   import { onDestroy } from 'svelte';
 
-  export let match: WithRequired<MatchData, 'game_data' | 'map'>;
+  export let item: Match;
+  $: details = item.details as Required<Match['details']>;
 
   const { from, data: timeSince, interval } = getTimeSince();
-  $: match.session.started_at && from.set(new Date(match.session.started_at));
+  $: item.session.started_at && from.set(new Date(item.session.started_at));
 
   onDestroy(() => clearInterval(interval));
 </script>
 
 <div class="root">
-  <span class="map">{match.map.name}</span>
+  <span class="map">{details.map.name}</span>
 
   <div class="keyvalue">
     <span>
-      {modeToString(match.session.mode)}
+      {modeToString(item.session.mode)}
     </span>
     <span>
-      {#if !match.cd_data || !match.cd_data.spawn_cycle}
-        {diffToString(match.session.diff)}
+      {#if !details.extra_data || !details.extra_data.spawn_cycle}
+        {diffToString(item.session.diff)}
       {:else}
-        <span>{match.cd_data.spawn_cycle}</span>
-        <span>{match.cd_data.max_monsters}mm</span>
-        {#if match.cd_data.zeds_type != 'vanilla'}
-          <span>{match.cd_data.zeds_type} zeds</span>
+        <span>{details.extra_data.spawn_cycle}</span>
+        <span>{details.extra_data.max_monsters}mm</span>
+        {#if details.extra_data.zeds_type != 'vanilla'}
+          <span>{details.extra_data.zeds_type} zeds</span>
         {/if}
       {/if}
     </span>
@@ -42,33 +42,33 @@
   <div class="keyvalue">
     <span>Wave</span>
     <span>
-      {#if match.session.mode === GameMode.Endless}
-        {match.game_data.wave}
+      {#if item.session.mode === GameMode.Endless}
+        {details.game_data.wave}
       {:else}
-        {match.game_data.wave} / {match.session.length}
+        {details.game_data.wave} / {item.session.length}
       {/if}
     </span>
   </div>
 
   <div class="keyvalue">
-    {#if match.session.started_at && match.session.completed_at}
+    {#if item.session.started_at && item.session.completed_at}
       <span>
         {dateDiff(
-          new Date(match.session.started_at),
-          new Date(match.session.completed_at)
+          new Date(item.session.started_at),
+          new Date(item.session.completed_at)
         )}
       </span>
-    {:else if match.session.status === GameStatus.InProgress}
+    {:else if item.session.status === GameStatus.InProgress}
       <span>{$timeSince} </span>
-    {:else if match.session.started_at && match.session.started_at != match.session.updated_at}
+    {:else if item.session.started_at && item.session.started_at != item.session.updated_at}
       <span>
         {dateDiff(
-          new Date(match.session.started_at),
-          new Date(match.session.updated_at)
+          new Date(item.session.started_at),
+          new Date(item.session.updated_at)
         )}
       </span>
     {/if}
-    <span>{statusToString(match.session.status)}</span>
+    <span>{statusToString(item.session.status)}</span>
   </div>
 </div>
 

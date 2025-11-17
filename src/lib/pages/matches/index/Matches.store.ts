@@ -1,8 +1,11 @@
-import { MatchesApiService, type FilterMatchesRequest } from '$lib/api/matches';
+import { type Match } from '$lib/api/matches';
+import {
+  MatchesFilterApiService,
+  type FilterMatchesRequest,
+} from '$lib/api/matches/filter';
 
 import { debounce } from '$lib/util';
 import { derived, writable } from 'svelte/store';
-import type { Match } from './common';
 
 type AvailableFilters = Partial<
   Pick<
@@ -21,12 +24,14 @@ export function getStore() {
 
   const fetch = debounce(async (page: number, args: AvailableFilters) => {
     try {
-      await MatchesApiService.filter({
-        include_server: true,
-        include_map: true,
-        include_game_data: true,
-        include_cd_data: true,
-        reverse_order: true,
+      await MatchesFilterApiService.filter({
+        includes: {
+          server_data: true,
+          map_data: true,
+          game_data: true,
+          extra_game_data: true,
+        },
+        sort_by: { direction: 1 },
         pager: { page, results_per_page: 100 },
         ...args,
       }).then(({ data }) => {

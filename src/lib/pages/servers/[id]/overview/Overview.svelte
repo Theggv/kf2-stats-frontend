@@ -17,7 +17,7 @@
 
   import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
   import { iconSettings } from '$lib/ui/icons';
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
   import { GameStatus } from '$lib/api/sessions';
 
   export let server: ServerData;

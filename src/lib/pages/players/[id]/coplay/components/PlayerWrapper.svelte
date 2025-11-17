@@ -6,4 +6,4 @@
   export let index = 0;
 </script>
 
-<Player profile={data} newTab compact />
+<Player profile={data.user_profile} newTab compact />

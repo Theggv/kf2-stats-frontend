@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
   import { getTimeSinceNow } from '$lib/util/date';
 
   export let data: Match;

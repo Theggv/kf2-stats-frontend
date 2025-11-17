@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
 
   export let data: Match;
   export let index = 0;

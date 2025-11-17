@@ -42,12 +42,13 @@ export const columns: TableColumn<RowData>[] = [
     label: 'Perks',
     id: 'perks',
     render: () => PerkWrapper,
-    width: 150,
+    width: 100,
   },
   {
     label: 'Last Played',
     id: 'last_seen',
-    render: (item) => getTimeSinceNow(new Date(item.last_seen)),
+    render: (item) =>
+      getTimeSinceNow(new Date(item.match.details.user_data!.last_seen)),
     width: 100,
   },
 ];

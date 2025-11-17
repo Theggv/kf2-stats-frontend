@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type { Match } from '$lib/api/matches';
   import { GameMode, GameStatus } from '$lib/api/sessions';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
   import { getWaveText } from '$lib/util/converters';
   import { diffToString, modeToString } from '$lib/util/enum-to-text';
-  import type { Match } from '../common';
 
-  export let data: Match;
+  export let item: Match;
+  $: details = item.details as Required<Match['details']>;
 
   function getMatchClass(data: Match) {
     if (data.session.status === GameStatus.InProgress) return 'in-progress';
@@ -21,59 +22,59 @@
 </script>
 
 <a
-  class="root {getMatchClass(data)}"
-  href="/sessions/{data.session.session_id}"
+  class="root {getMatchClass(item)}"
+  href="/sessions/{item.session.id}"
   target="_blank"
   rel="noopener noreferrer"
 >
   <div class="time">
-    {new Date(data.session.updated_at).toLocaleTimeString()}
+    {new Date(item.session.updated_at).toLocaleTimeString()}
   </div>
 
   <div class="match">
     <div class="title">
       <div class="server">
-        {data.server.name}
+        {details.server.name}
       </div>
     </div>
     <div class="secondary">
       <div class="map">
-        {data.map.name}
+        {details.map.name}
       </div>
     </div>
   </div>
 
   <div class="difficulty">
-    <DifficultyIcon difficulty={getMatchDifficulty(data.metadata.diff)} />
+    <DifficultyIcon difficulty={getMatchDifficulty(item.metadata.diff)} />
   </div>
 
   <div class="settings">
     <div class="title list">
       <span>
-        {modeToString(data.session.mode, false)}
+        {modeToString(item.session.mode, false)}
       </span>
-      {#if data.session.mode !== GameMode.Endless}
+      {#if item.session.mode !== GameMode.Endless}
         <span>
-          ({data.session.length} Waves)
+          ({item.session.length} Waves)
         </span>
       {/if}
     </div>
     <div class="list">
-      {#if data.cd_data}
+      {#if details.extra_data}
         <span>
-          {data.cd_data.spawn_cycle}
+          {details.extra_data.spawn_cycle}
         </span>
         <span>
-          {data.cd_data.max_monsters}mm
+          {details.extra_data.max_monsters}mm
         </span>
-        {#if data.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+        {#if details.extra_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {data.cd_data.zeds_type.toLowerCase()} zeds
+            {details.extra_data.zeds_type.toLowerCase()} zeds
           </span>
         {/if}
       {:else}
         <span>
-          {diffToString(data.session.diff)}
+          {diffToString(item.session.diff)}
         </span>
       {/if}
     </div>
@@ -83,7 +84,7 @@
     <div class="wave">
       <div class="title">Wave</div>
       <div>
-        {getWaveText(data.game_data.wave, data.session)}
+        {getWaveText(details.game_data.wave, item.session)}
       </div>
     </div>
   </div>

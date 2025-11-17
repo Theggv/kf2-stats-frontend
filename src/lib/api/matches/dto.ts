@@ -1,15 +1,9 @@
 import type { SessionMetadata } from '../analytics';
-import type {
-  PaginationRequest,
-  PaginationResponse,
-  UserProfile,
-  ZedCounter,
-} from '../common';
+import type { UserProfile, ZedCounter } from '../common';
 import type {
   ExtraGameData,
   GameDifficulty,
   GameData,
-  GameLength,
   GameMode,
   GameStatus,
 } from '../sessions';
@@ -28,28 +22,58 @@ export enum Perk {
   Survivalist,
 }
 
+export interface Match {
+  session: MatchSession;
+
+  details: MatchDetails;
+
+  metadata: SessionMetadata;
+}
+
 export interface MatchSession {
-  session_id: number;
+  id: number;
+
   server_id: number;
   map_id: number;
+
   mode: GameMode;
-  length: GameLength;
+  length: number;
   diff: GameDifficulty;
+
   status: GameStatus;
+
   created_at: string;
   updated_at: string;
-  started_at: string;
-  completed_at: string;
+
+  started_at?: string;
+  completed_at?: string;
+}
+
+export interface MatchDetails {
+  map?: MatchMap;
+  server?: MatchServer;
+
+  game_data?: GameData;
+  extra_data?: ExtraGameData;
+
+  live_data?: MatchLiveData;
+
+  user_data?: MatchUserData;
 }
 
 export interface MatchMap {
   name: string;
-  preview: string;
+  preview?: string;
 }
 
 export interface MatchServer {
   name: string;
   address: string;
+}
+
+export interface MatchLiveData {
+  players: MatchPlayer[];
+  spectators: MatchPlayer[];
 }
 
 export interface MatchPlayer {
@@ -63,19 +87,16 @@ export interface MatchPlayer {
   armor: number;
 }
 
-export interface MatchData {
-  session: MatchSession;
+export interface MatchUserData {
+  last_seen: string;
 
-  map?: MatchMap;
-  server?: MatchServer;
+  perks: number[];
 
-  game_data?: GameData;
-  cd_data?: ExtraGameData;
+  stats: MatchUserDataStats;
+}
 
-  players?: MatchPlayer[];
-  spectators?: MatchPlayer[];
-
-  metadata: SessionMetadata;
+export interface MatchUserDataStats {
+  damage_dealt: number;
 }
 
 export interface MatchWave {
@@ -120,30 +141,6 @@ export interface MatchWavePlayerStats {
   kills: ZedCounter;
   husk_b: number;
   husk_r: number;
-}
-
-export interface FilterMatchesRequest {
-  server_ids: number[];
-  map_ids: number[];
-  statuses: GameStatus[];
-
-  mode: GameMode;
-  length: GameLength;
-  diff: GameDifficulty;
-
-  include_server?: boolean;
-  include_map?: boolean;
-  include_game_data?: boolean;
-  include_cd_data?: boolean;
-  include_players?: boolean;
-
-  reverse_order?: boolean;
-  pager?: PaginationRequest;
-}
-
-export interface FilterMatchesResponse {
-  items: MatchData[];
-  metadata: PaginationResponse;
 }
 
 export interface GetMatchWavesResponse {

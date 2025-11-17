@@ -1,36 +1,12 @@
 import type {
   PaginationRequest,
   PaginationResponse,
-  SortByRequest,
+  UserProfile,
 } from '$lib/api/common';
-import type { Perk } from '$lib/api/matches';
-import type {
-  GameDifficulty,
-  ExtraGameData,
-  GameLength,
-  GameMode,
-  GameStatus,
-} from '$lib/api/sessions';
+import type { Match, Perk } from '$lib/api/matches';
+
 import type { GetSessionDifficultyResponse } from '$lib/api/sessions/difficulty';
 import { TimePeriod } from '../dto';
-
-export interface SessionData {
-  id: number;
-  mode: GameMode;
-  length: GameLength;
-  diff: GameDifficulty;
-  status: GameStatus;
-}
-
-export interface ServerData {
-  id: number;
-  name: string;
-}
-
-export interface MapData {
-  id: number;
-  name: string;
-}
 
 export interface UserAnalyticsRequest {
   user_id: number;
@@ -156,21 +132,8 @@ export interface GetLastSeenUsersRequest {
 }
 
 export interface GetLastSeenUsersResponseItem {
-  id: number;
-  name: string;
-
-  profile_url: string;
-  avatar: string;
-
-  session: SessionData;
-  server: ServerData;
-  map: MapData;
-
-  perks: number[];
-
-  metadata: SessionMetadata;
-
-  last_seen: string;
+  user_profile: UserProfile;
+  match: Match;
 }
 
 export interface GetLastSeenUsersResponse {
@@ -191,79 +154,13 @@ export interface GetLastSessionsWithUserRequest {
   pager: PaginationRequest;
 }
 
-export interface GetLastSessionsWithUserResponseItem {
-  session: SessionData;
-  server: ServerData;
-  map: MapData;
-
-  perks: number[];
-
-  metadata: SessionMetadata;
-
-  last_seen: string;
-}
-
 export interface GetLastSessionsWithUserResponse {
-  items: GetLastSessionsWithUserResponseItem[];
+  items: Match[];
   metadata: PaginationResponse;
-}
-
-export interface FindUserSessionsRequest {
-  user_id: number;
-
-  date_from?: Date;
-  date_to?: Date;
-
-  perks?: number[];
-  server_ids?: number[];
-  map_ids?: number[];
-
-  mode?: GameMode;
-  length?: GameLength;
-  diff?: GameDifficulty;
-  status?: GameStatus;
-
-  spawn_cycle?: string;
-  zeds_type?: string;
-  min_wave?: number;
-  max_monsters?: number;
-
-  sort_by: SortByRequest;
-  pager: PaginationRequest;
-}
-
-export interface FindUserSessionsResponseItemGameData {
-  wave: number;
-  zeds_left: number;
-}
-
-export interface FindUserSessionsResponseItemStats {
-  damage_dealt: number;
 }
 
 export interface SessionMetadata {
   diff?: GetSessionDifficultyResponse;
-}
-
-export interface FindUserSessionsResponseItem {
-  session: SessionData;
-  server: ServerData;
-  map: MapData;
-  perks: number[];
-
-  game_data: FindUserSessionsResponseItemGameData;
-  extra_game_data: ExtraGameData;
-
-  stats: FindUserSessionsResponseItemStats;
-
-  metadata: SessionMetadata;
-
-  updated_at: string;
-}
-
-export interface FindUserSessionsResponse {
-  items: FindUserSessionsResponseItem[];
-  metadata: PaginationResponse;
 }
 
 export interface GetUserDifficultyHistRequest {

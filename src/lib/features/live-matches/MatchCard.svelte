@@ -9,7 +9,7 @@
   import { GameStatus } from '$lib/api/sessions';
   import { DifficultyIcon } from '$lib/ui/icons';
   import { getMatchDifficulty } from '$lib/util';
-  import type { Match } from '$lib/api/matches/filter';
+  import type { Match } from '$lib/api/matches';
 
   $: selected =
     $page.url.pathname.includes(`/sessions`) &&

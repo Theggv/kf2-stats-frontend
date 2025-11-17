@@ -1,9 +1,9 @@
 import {
   UserAnalyticsApiService,
   type GetLastSessionsWithUserRequest,
-  type GetLastSessionsWithUserResponseItem,
 } from '$lib/api/analytics';
 import type { PaginationResponse } from '$lib/api/common';
+import type { Match } from '$lib/api/matches';
 import { debounce } from '$lib/util';
 import { derived, get, writable } from 'svelte/store';
 
@@ -20,7 +20,7 @@ export function getStore() {
   const page = writable<number>(0);
 
   const loading = writable<boolean>(false);
-  const items = writable<GetLastSessionsWithUserResponseItem[]>([]);
+  const items = writable<Match[]>([]);
   const metadata = writable<PaginationResponse>();
   const abortController = writable(new AbortController());
 

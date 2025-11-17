@@ -1,4 +1,4 @@
-import type { Match } from '$lib/api/matches/filter';
+import type { Match } from '$lib/api/matches';
 import type { TableColumn } from '$lib/components/table';
 import DateWrapper from './DateWrapper.svelte';
 import DifficultyWrapper from './DifficultyWrapper.svelte';

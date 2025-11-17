@@ -12,10 +12,10 @@
 </script>
 
 <a
-  href="/players/{item.id}/coplay/games"
+  href="/players/{item.user_profile.id}/coplay/games"
   class="row"
-  class:win={item.session.status === GameStatus.Win}
-  class:lose={item.session.status !== GameStatus.Win}
+  class:win={item.match.session.status === GameStatus.Win}
+  class:lose={item.match.session.status !== GameStatus.Win}
   class:hover
   role="row"
   tabindex="-1"

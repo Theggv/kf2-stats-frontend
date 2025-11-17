@@ -1,10 +1,12 @@
-import { error } from '@sveltejs/kit';
-import type { LayoutServerLoad } from './$types';
-import type { MatchData } from '$lib/api/matches';
 import { SITE_NAME } from '$lib';
 import { GameMode, GameStatus } from '$lib/api/sessions';
-import { diffToString, modeToString } from '$lib/util/enum-to-text';
 import { dateDiff } from '$lib/util/date';
+import { diffToString, modeToString } from '$lib/util/enum-to-text';
+
+import { error } from '@sveltejs/kit';
+
+import type { LayoutServerLoad } from './$types';
+import type { Match } from '$lib/api/matches';
 
 export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const sessionId = Number(params.id);
@@ -12,19 +14,17 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
     throw error(400, 'session_id should be a number');
   }
 
-  const match: MatchData = await fetch(`/api/matches/${sessionId}`).then(
-    (x) => {
-      if (!x.ok) throw error(x.status, { message: 'session was not found' });
-      return x.json();
-    }
-  );
+  const match: Match = await fetch(`/api/matches/${sessionId}`).then((x) => {
+    if (!x.ok) throw error(x.status, { message: 'session was not found' });
+    return x.json();
+  });
 
   return {
     sessionId,
     metatags: {
-      title: `${match.server?.name} | ${SITE_NAME}`,
+      title: `${match.details.server?.name} | ${SITE_NAME}`,
       openGraph: {
-        title: `${match.server?.name} | ${SITE_NAME}`,
+        title: `${match.details.server?.name} | ${SITE_NAME}`,
         description: getDescription(match),
         type: 'profile',
       },
@@ -49,14 +49,14 @@ function getColorByStatus(status: GameStatus): string {
   }
 }
 
-function getDescription(data: MatchData): string {
+function getDescription(data: Match): string {
   let body = '';
 
-  body += `${data.map?.name} — `;
+  body += `${data.details.map?.name} — `;
 
-  if (data.cd_data) {
-    body += `CD ${data.cd_data.spawn_cycle} ${data.cd_data.max_monsters}mm`;
-    body += getZedsType(data.cd_data.zeds_type);
+  if (data.details.extra_data) {
+    body += `CD ${data.details.extra_data.spawn_cycle} ${data.details.extra_data.max_monsters}mm`;
+    body += getZedsType(data.details.extra_data.zeds_type);
   } else {
     body += `${modeToString(data.session.mode)} `;
     body += `${diffToString(data.session.diff)}`;
@@ -64,9 +64,9 @@ function getDescription(data: MatchData): string {
 
   body += ' — ';
   if (data.session.mode === GameMode.Endless) {
-    body += `Wave ${data.game_data?.wave || 0}`;
+    body += `Wave ${data.details.game_data?.wave || 0}`;
   } else {
-    body += `${data.game_data?.wave || 0} / ${data.session.length}`;
+    body += `${data.details.game_data?.wave || 0} / ${data.session.length}`;
   }
 
   if (data.session.started_at) {

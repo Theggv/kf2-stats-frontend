@@ -1,11 +1,11 @@
-import type { GetLastSessionsWithUserResponseItem } from '$lib/api/analytics';
+import type { Match } from '$lib/api/matches';
 import type { TableColumn } from '$lib/components/table';
 import { getTimeSinceNow } from '$lib/util/date';
 import DifficultyWrapper from './DifficultyWrapper.svelte';
 import PerkWrapper from './PerkWrapper.svelte';
 import SessionWrapper from './SessionWrapper.svelte';
 
-export type RowData = GetLastSessionsWithUserResponseItem & {
+export type RowData = Match & {
   key: string;
 };
 
@@ -40,7 +40,8 @@ export const columns: TableColumn<RowData>[] = [
   {
     label: 'Last Played',
     id: 'last_seen',
-    render: (item) => getTimeSinceNow(new Date(item.last_seen)),
+    render: (item) =>
+      getTimeSinceNow(new Date(item.details.user_data!.last_seen)),
     width: 100,
   },
 ];

@@ -17,7 +17,7 @@
 <div class="root">
   {#if $overview && $live}
     <div class="session">
-      <CurrentMatch match={$overview} />
+      <CurrentMatch item={$overview} />
 
       {#if started}
         <div class="game-info">

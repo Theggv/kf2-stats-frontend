@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Match } from '../common';
+  import type { Match } from '$lib/api/matches';
   import MatchesListItem from './MatchesListItem.svelte';
   import MatchesListGroup from './MatchesListGroup.svelte';
 
@@ -12,9 +12,9 @@
 
 <div class="session-list">
   {#each data as [date, sessions] (date)}
-    <MatchesListGroup {date} games={sessions} />
-    {#each sessions.sort(sortByDate) as data (data.session.session_id)}
-      <MatchesListItem {data} />
+    <MatchesListGroup {date} items={sessions} />
+    {#each sessions.sort(sortByDate) as item (item.session.id)}
+      <MatchesListItem {item} />
     {/each}
   {:else}
     <div class="empty-list">No matches found</div>

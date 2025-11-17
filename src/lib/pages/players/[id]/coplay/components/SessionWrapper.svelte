@@ -1,21 +1,24 @@
 <script lang="ts">
   import type { GetLastSeenUsersResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches';
 
   export let data: GetLastSeenUsersResponseItem;
   export let index = 0;
+
+  $: details = data.match.details as Required<Match['details']>;
 </script>
 
 <a
   class="root"
-  href="/sessions/{data.session.id}"
+  href="/sessions/{data.match.session.id}"
   target="_blank"
   rel="noopener noreferrer"
 >
   <div class="primary">
-    {data.map.name}
+    {details.map.name}
   </div>
   <div class="secondary">
-    {data.server.name}
+    {details.server.name}
   </div>
 </a>
 

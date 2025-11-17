@@ -1,9 +1,9 @@
 <script lang="ts">
+  import type { Match } from '$lib/api/matches';
   import { formatDate } from '$lib/util/date';
-  import type { Match } from '../common';
 
   export let date: string;
-  export let games: Match[];
+  export let items: Match[];
 </script>
 
 <div class="root">
@@ -11,7 +11,7 @@
     {formatDate(date)}
   </div>
   <div class="secondary">
-    {games.length} matches
+    {items.length} matches
   </div>
 </div>
 

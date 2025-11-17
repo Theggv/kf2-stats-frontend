@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { GetLastSessionsWithUserResponseItem } from '$lib/api/analytics';
+  import type { Match } from '$lib/api/matches';
   import { GameStatus } from '$lib/api/sessions';
   import { Table } from '$lib/components/table';
   import { columns, stickyColumns, type RowData } from './Table.data';
   import TableRow from './TableRow.svelte';
   import TableRowHeader from './TableRowHeader.svelte';
 
-  export let data: GetLastSessionsWithUserResponseItem[];
+  export let data: Match[];
   export let loading: boolean;
 
   $: hover = -1;

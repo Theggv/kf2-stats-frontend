@@ -1,7 +1,8 @@
 import { debounce } from '$lib/util';
 import { writable } from 'svelte/store';
 
-import { MatchesFilterApiService, type Match } from '$lib/api/matches/filter';
+import type { Match } from '$lib/api/matches';
+import { MatchesFilterApiService } from '$lib/api/matches/filter';
 
 export function getStore() {
   const serverIdStore = writable<number | null>(null);

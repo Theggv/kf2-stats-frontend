@@ -8,9 +8,12 @@
   import StyledAddress from '$lib/ui/a/StyledAddress.svelte';
   import { ActionIcon } from '@svelteuidev/core';
   import CurrentMatch from './CurrentMatch.svelte';
+  import type { Match } from '$lib/api/matches';
 
   const store = getContext<ContextType>(ContextName);
   const { overview } = store.match;
+
+  $: details = $overview?.details as Required<Match['details']>;
 </script>
 
 <HeaderLayout>
@@ -18,12 +21,12 @@
     <div class="header">
       {#if $overview}
         <a class="server-name" href="/servers/{$overview.session.server_id}">
-          {$overview.server.name}
+          {details.server.name}
         </a>
 
         <div class="address">
-          <StyledAddress address={$overview.server.address}>
-            {$overview.server.address}
+          <StyledAddress address={details.server.address}>
+            {details.server.address}
           </StyledAddress>
         </div>
 
@@ -42,7 +45,7 @@
 
   <svelte:fragment slot="subtitle">
     {#if $overview}
-      <CurrentMatch match={$overview} />
+      <CurrentMatch item={$overview} />
     {/if}
   </svelte:fragment>
 

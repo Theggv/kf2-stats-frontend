@@ -1,8 +1,9 @@
 import { writable } from 'svelte/store';
 
-import { MatchesFilterApiService, type Match } from '$lib/api/matches/filter';
+import { MatchesFilterApiService } from '$lib/api/matches/filter';
 import { GameMode, GameStatus } from '$lib/api/sessions';
 import { debounce } from '$lib/util';
+import type { Match } from '$lib/api/matches';
 
 function getModePriority(mode: GameMode) {
   const priority = {
