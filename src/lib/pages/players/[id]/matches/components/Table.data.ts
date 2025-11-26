@@ -72,15 +72,15 @@ export const columns: TableColumn<RowData>[] = [
   {
     label: 'Total Damage',
     id: 'damage_dealt',
-    render: (item) => item.details.user_data!.stats.damage_dealt,
+    render: (item) => item.details.user_data!.stats!.damage_dealt,
     width: 130,
     sorting: {
       compare: (dir) => (a, b) => {
         return dir === 'asc'
-          ? a.details.user_data!.stats.damage_dealt -
-              b.details.user_data!.stats.damage_dealt
-          : b.details.user_data!.stats.damage_dealt -
-              a.details.user_data!.stats.damage_dealt;
+          ? a.details.user_data!.stats!.damage_dealt -
+              b.details.user_data!.stats!.damage_dealt
+          : b.details.user_data!.stats!.damage_dealt -
+              a.details.user_data!.stats!.damage_dealt;
       },
       direction: 'desc',
     },

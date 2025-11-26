@@ -92,7 +92,7 @@ export interface MatchUserData {
 
   perks: number[];
 
-  stats: MatchUserDataStats;
+  stats?: MatchUserDataStats;
 }
 
 export interface MatchUserDataStats {

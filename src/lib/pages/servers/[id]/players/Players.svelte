@@ -18,7 +18,7 @@
   $: serverIdStore.set(server.id);
 
   $: groupedPlayers = groupBy($players, (item) =>
-    new Date(item.updated_at).toDateString()
+    new Date(item.match.details.user_data!.last_seen).toDateString()
   );
 </script>
 

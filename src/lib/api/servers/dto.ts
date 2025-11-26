@@ -1,12 +1,10 @@
-import type { SessionMetadata } from '../analytics';
-import type { PaginationRequest, PaginationResponse } from '../common';
 import type {
-  ExtraGameData,
-  GameDifficulty,
-  GameLength,
-  GameMode,
-  GameStatus,
-} from '../sessions';
+  PaginationRequest,
+  PaginationResponse,
+  UserProfile,
+} from '../common';
+import type { Match } from '../matches';
+import type { GameStatus } from '../sessions';
 
 export interface ServerData {
   id: number;
@@ -37,27 +35,10 @@ export interface RecentUsersRequest {
   pager: PaginationRequest;
 }
 
-export interface RecentUsersResponseUserSession {
-  id: number;
-  mode: GameMode;
-  length: GameLength;
-  diff: GameDifficulty;
-  status: GameStatus;
-  cd_data?: ExtraGameData;
-  map_name: string;
-  perks: number[];
-  wave: number;
-
-  metadata: SessionMetadata;
-}
-
 export interface RecentUsersResponseUser {
-  id: number;
-  name: string;
-  profile_url?: string;
-  avatar?: string;
-  session: RecentUsersResponseUserSession;
-  updated_at: string;
+  user_profile: UserProfile;
+
+  match: Match;
 }
 
 export interface RecentUsersResponse {

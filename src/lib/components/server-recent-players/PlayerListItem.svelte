@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Match } from '$lib/api/matches';
   import type { RecentUsersResponseUser } from '$lib/api/servers';
   import { GameMode, GameStatus } from '$lib/api/sessions';
   import PerkIcon from '$lib/ui/icons/PerkIcon.svelte';
@@ -12,13 +13,16 @@
 
   export let data: RecentUsersResponseUser;
 
-  $: perks = data.session.perks.filter((x) => x);
+  $: details = data.match.details as Required<Match['details']>;
+
+  $: perks = details.user_data.perks.filter((x) => x);
 </script>
 
 <div class="time">
-  {new Date(data.updated_at).toLocaleTimeString()}
+  {new Date(details.user_data.last_seen).toLocaleTimeString()}
 </div>
-<Player profile={data} />
+
+<Player profile={data.user_profile} />
 
 <div class="perks">
   {#each perks as perk (perk)}
@@ -26,51 +30,53 @@
   {/each}
 </div>
 
-<a class="settings" href="/sessions/{data.session.id}">
+<a class="settings" href="/sessions/{data.match.session.id}">
   <div class="map">
-    {data.session?.map_name}
+    {details.map.name}
   </div>
   <div class="game-info">
     <span>
-      {modeToString(data.session.mode)}
+      {modeToString(data.match.session.mode)}
     </span>
-    {#if data.session.cd_data}
+    {#if details.extra_data}
+      {@const extra_data = details.extra_data}
+
       <span>
-        {data.session.cd_data.spawn_cycle}
+        {extra_data.spawn_cycle}
       </span>
       <span>
-        {data.session.cd_data.max_monsters}mm
+        {extra_data.max_monsters}mm
       </span>
-      {#if data.session.cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+      {#if extra_data.zeds_type.toLowerCase() !== 'vanilla'}
         <span>
-          {data.session.cd_data.zeds_type.toLowerCase()} zeds
+          {extra_data.zeds_type.toLowerCase()} zeds
         </span>
       {/if}
     {:else}
       <span>
-        {diffToString(data.session.diff)}
+        {diffToString(data.match.session.diff)}
       </span>
     {/if}
 
-    {#if data.session.mode !== GameMode.Endless}
+    {#if data.match.session.mode !== GameMode.Endless}
       <span>
-        ({data.session.length} Waves)
+        ({data.match.session.length} Waves)
       </span>
     {/if}
   </div>
 </a>
 
 <div class="wave">
-  {getWaveText(data.session.wave, data.session)}
+  {getWaveText(details.game_data.wave, data.match.session)}
 </div>
 
 <div
   class="status"
-  class:lost={data.session.status === GameStatus.Lose}
-  class:won={data.session.status === GameStatus.Win}
-  class:in-progress={data.session.status === GameStatus.InProgress}
+  class:lost={data.match.session.status === GameStatus.Lose}
+  class:won={data.match.session.status === GameStatus.Win}
+  class:in-progress={data.match.session.status === GameStatus.InProgress}
 >
-  {statusToString(data.session.status)}
+  {statusToString(data.match.session.status)}
 </div>
 
 <style>

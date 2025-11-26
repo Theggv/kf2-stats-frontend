@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Match } from '$lib/api/matches';
   import type { RecentUsersResponseUser } from '$lib/api/servers';
   import { GameMode, GameStatus } from '$lib/api/sessions';
   import Player from '$lib/components/player/Player.svelte';
@@ -11,13 +12,17 @@
 
   export let data: RecentUsersResponseUser;
 
+  $: details = data.match.details as Required<Match['details']>;
+
   function getMatchClass(data: RecentUsersResponseUser) {
-    if (data.session.status === GameStatus.InProgress) return 'in-progress';
+    const session = data.match.session;
 
-    if (data.session.mode === GameMode.Endless) return '';
+    if (session.status === GameStatus.InProgress) return 'in-progress';
 
-    if (data.session.status === GameStatus.Lose) return 'lose';
-    if (data.session.status === GameStatus.Win) return 'win';
+    if (session.mode === GameMode.Endless) return '';
+
+    if (session.status === GameStatus.Lose) return 'lose';
+    if (session.status === GameStatus.Win) return 'win';
 
     return '';
   }
@@ -25,58 +30,56 @@
 
 <div class="root {getMatchClass(data)}">
   <div class="match">
-    <Player profile={data} compact>
+    <Player profile={data.user_profile} compact>
       <div class="secondary">
         <div class="map">
-          {data.session.map_name}
+          {details.map.name}
         </div>
         <div class="time">
-          {getTimeSinceNow(new Date(data.updated_at), true)}
+          {getTimeSinceNow(new Date(details.user_data.last_seen), true)}
         </div>
       </div>
     </Player>
   </div>
 
   <div class="perks">
-    {#each data.session.perks.filter((x) => x) as perk (perk)}
+    {#each details.user_data.perks.filter((x) => x) as perk (perk)}
       <PerkIcon {perk} prestige={0} />
     {/each}
   </div>
 
   <div class="difficulty">
-    <DifficultyIcon
-      difficulty={getMatchDifficulty(data.session.metadata.diff)}
-    />
+    <DifficultyIcon difficulty={getMatchDifficulty(data.match.metadata.diff)} />
   </div>
 
-  <a class="settings" href="/sessions/{data.session.id}">
+  <a class="settings" href="/sessions/{data.match.session.id}">
     <div class="title list">
       <span>
-        {modeToString(data.session.mode, false)}
+        {modeToString(data.match.session.mode, false)}
       </span>
-      {#if data.session.mode !== GameMode.Endless}
+      {#if data.match.session.mode !== GameMode.Endless}
         <span>
-          ({data.session.length} Waves)
+          ({data.match.session.length} Waves)
         </span>
       {/if}
     </div>
     <div class="list">
-      {#if data.session.cd_data}
-        {@const cd_data = data.session.cd_data}
+      {#if details.extra_data}
+        {@const extra_data = details.extra_data}
         <span>
-          {cd_data.spawn_cycle}
+          {extra_data.spawn_cycle}
         </span>
         <span>
-          {cd_data.max_monsters}mm
+          {extra_data.max_monsters}mm
         </span>
-        {#if cd_data.zeds_type.toLowerCase() !== 'vanilla'}
+        {#if extra_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {cd_data.zeds_type.toLowerCase()} zeds
+            {extra_data.zeds_type.toLowerCase()} zeds
           </span>
         {/if}
       {:else}
         <span>
-          {diffToString(data.session.diff)}
+          {diffToString(data.match.session.diff)}
         </span>
       {/if}
     </div>
@@ -86,7 +89,7 @@
     <div class="wave">
       <div class="title">Wave</div>
       <div>
-        {getWaveText(data.session.wave, data.session)}
+        {getWaveText(details.game_data.wave, data.match.session)}
       </div>
     </div>
   </div>

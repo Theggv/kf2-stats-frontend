@@ -4,7 +4,9 @@
   import type { RecentUsersResponseUser } from '$lib/api/servers';
 
   function sortByDate(a: RecentUsersResponseUser, b: RecentUsersResponseUser) {
-    return b.updated_at.localeCompare(a.updated_at);
+    return b.match.details.user_data!.last_seen.localeCompare(
+      a.match.details.user_data!.last_seen
+    );
   }
 
   export let data: Map<string, RecentUsersResponseUser[]>;
@@ -13,7 +15,7 @@
 <div class="session-list">
   {#each data as [date, players] (date)}
     <PlayerListGroup {date} />
-    {#each players.sort(sortByDate) as data (data.id)}
+    {#each players.sort(sortByDate) as data (data.user_profile.id)}
       <PlayerListItem {data} />
     {/each}
   {:else}

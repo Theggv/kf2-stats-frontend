@@ -7,7 +7,9 @@
   import { formatDate } from '$lib/util/date';
 
   function sortByDate(a: RecentUsersResponseUser, b: RecentUsersResponseUser) {
-    return b.updated_at.localeCompare(a.updated_at);
+    return b.match.details.user_data!.last_seen.localeCompare(
+      a.match.details.user_data!.last_seen
+    );
   }
 
   export let data: Map<string, RecentUsersResponseUser[]>;
@@ -26,7 +28,7 @@
 
     {#each data as [date, sessions] (date)}
       <div class="date">{formatDate(date)}</div>
-      {#each sessions.sort(sortByDate) as data (data.id)}
+      {#each sessions.sort(sortByDate) as data (data.user_profile.id)}
         <PlayerListItem {data} />
       {/each}
     {:else}
