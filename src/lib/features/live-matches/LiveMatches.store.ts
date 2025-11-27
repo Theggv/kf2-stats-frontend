@@ -79,7 +79,15 @@ export function getStore() {
         if (meta.total_results <= page * meta.results_per_page) break;
       } while (true);
 
-      matches.set(temp.sort(compareMatches));
+      matches.set(
+        temp
+          .filter(
+            (x) =>
+              x.details.live_data?.players?.length ||
+              x.details.live_data?.spectators?.length
+          )
+          .sort(compareMatches)
+      );
     } catch (err) {
       error.set(err);
     } finally {
