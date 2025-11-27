@@ -23,10 +23,12 @@
 <StyledLink href="/sessions/{match.session.id}" {selected}>
   <div class="match-view-container">
     <div class="difficulty">
-      <DifficultyIcon
-        difficulty={getMatchDifficulty(match.metadata.diff)}
-        size="small"
-      />
+      {#if match.session.status !== GameStatus.Lobby}
+        <DifficultyIcon
+          difficulty={getMatchDifficulty(match.metadata.diff)}
+          size="small"
+        />
+      {/if}
     </div>
     <div class="server">
       {details.server.name}
