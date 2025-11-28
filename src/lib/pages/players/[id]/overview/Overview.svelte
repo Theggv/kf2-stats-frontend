@@ -8,7 +8,6 @@
   import { getStore } from './Overview.store';
   import { groupBy } from '$lib/util';
   import RecentSessionsList from './RecentSessionsList.svelte';
-  import RecentSessionsListItem from './RecentSessionsListItem.svelte';
 
   import Playtime from './Playtime.svelte';
   import Perks from './Perks.svelte';
@@ -20,6 +19,7 @@
   import { LineTimeChart, periods } from '$lib/components/charts';
   import type { Match } from '$lib/api/matches';
   import { GameStatus } from '$lib/api/sessions';
+  import { MatchesListItem } from '$lib/components/matches-list';
 
   export let userId: number;
 
@@ -119,7 +119,13 @@
           <div class="live-icon" />
         </svelte:fragment>
         <svelte:fragment slot="content">
-          <RecentSessionsListItem data={currentMatch} />
+          <MatchesListItem
+            item={currentMatch}
+            withServer
+            withPreview
+            withPerks
+            datetimeFormat="compact"
+          />
         </svelte:fragment>
       </SectionLayout>
     {/if}
