@@ -1,29 +1,35 @@
 <script lang="ts">
-  import { Image } from '@svelteuidev/core';
-
   export let data: string;
   export let width: number = 72;
 
   $: formatted = data.replaceAll("'", '').toUpperCase();
+  $: pathname = `/assets/preview/${formatted}.PNG`;
+  $: placeholder = `/assets/preview/PLACEHOLDER.PNG`;
+
+  $: loaded = false;
+  $: error = false;
+  $: data && (error = false);
+
+  $: src = !loaded ? pathname : !error ? pathname : placeholder;
 </script>
 
-<Image
-  src="/assets/preview/{formatted}.PNG"
-  usePlaceholder
-  radius="xs"
-  style="user-select:none;"
-  draggable={false}
+<img
+  class="preview"
+  {src}
+  alt=""
+  hidden={error}
   {width}
   height={width / 2}
->
-  <svelte:fragment slot="placeholder">
-    <Image
-      src="/assets/preview/PLACEHOLDER.PNG"
-      radius="xs"
-      style="user-select:none;"
-      draggable={false}
-      {width}
-      height={width / 2}
-    />
-  </svelte:fragment>
-</Image>
+  on:load={() => (loaded = true)}
+  on:error={() => (error = true)}
+/>
+
+{#if error}
+  <img class="preview" src={placeholder} alt="" {width} height={width / 2} />
+{/if}
+
+<style>
+  .preview {
+    border-radius: 0.25rem;
+  }
+</style>
