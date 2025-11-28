@@ -1,13 +1,26 @@
 <script lang="ts">
   import type { Match } from '$lib/api/matches';
   import { GameMode, GameStatus } from '$lib/api/sessions';
-  import { DifficultyIcon } from '$lib/ui/icons';
+  import { DifficultyIcon, PerkIcon } from '$lib/ui/icons';
+  import { MapPreview } from '$lib/ui/img';
   import { getMatchDifficulty } from '$lib/util';
   import { getWaveText } from '$lib/util/converters';
-  import { diffToString, modeToString } from '$lib/util/enum-to-text';
+  import { getTimeSinceNow } from '$lib/util/date';
+  import {
+    diffToString,
+    lengthToString,
+    modeToString,
+  } from '$lib/util/enum-to-text';
 
   export let item: Match;
+
+  export let withServer: boolean = false;
+  export let withPerks: boolean = false;
+  export let withPreview: boolean = false;
+  export let datetimeFormat: 'full' | 'only-time' | 'compact' = 'only-time';
+
   $: details = item.details as Required<Match['details']>;
+  $: perks = details.user_data?.perks.filter((_, i) => i < 2) || [];
 
   function getMatchClass(data: Match) {
     if (data.session.status === GameStatus.InProgress) return 'in-progress';
@@ -23,26 +36,59 @@
 
 <a
   class="root {getMatchClass(item)}"
+  class:compact={datetimeFormat === 'compact'}
   href="/sessions/{item.session.id}"
   target="_blank"
   rel="noopener noreferrer"
 >
-  <div class="time">
-    {new Date(item.session.updated_at).toLocaleTimeString()}
-  </div>
-
-  <div class="match">
-    <div class="title">
-      <div class="server">
-        {details.server.name}
+  {#if datetimeFormat === 'full'}
+    <div class="time">
+      <div class="title">
+        {new Date(item.session.updated_at).toDateString()}
+      </div>
+      <div class="secondary">
+        {new Date(item.session.updated_at).toLocaleTimeString()}
       </div>
     </div>
+  {:else if datetimeFormat === 'only-time'}
+    <div class="time">
+      {new Date(item.session.updated_at).toLocaleTimeString()}
+    </div>
+  {/if}
+
+  {#if withPreview}
+    <div class="preview">
+      <MapPreview data={details.map.name} />
+    </div>
+  {/if}
+
+  <div class="match">
+    {#if withServer}
+      <div class="title">
+        <div class="server">
+          {details.server.name}
+        </div>
+      </div>
+    {/if}
     <div class="secondary">
       <div class="map">
         {details.map.name}
       </div>
+      {#if datetimeFormat === 'compact'}
+        <div class="time">
+          {getTimeSinceNow(new Date(item.session.updated_at), true)}
+        </div>
+      {/if}
     </div>
   </div>
+
+  {#if withPerks}
+    <div class="perks">
+      {#each perks as perk (perk)}
+        <PerkIcon {perk} prestige={0} />
+      {/each}
+    </div>
+  {/if}
 
   <div class="difficulty">
     <DifficultyIcon difficulty={getMatchDifficulty(item.metadata.diff)} />
@@ -55,7 +101,7 @@
       </span>
       {#if item.session.mode !== GameMode.Endless}
         <span>
-          ({item.session.length} Waves)
+          {lengthToString(item.session.length)}
         </span>
       {/if}
     </div>
@@ -105,6 +151,7 @@
     padding: 0 0.25rem;
     padding-left: 2rem;
     font-weight: bold;
+    height: 48px;
   }
 
   .root:nth-child(even) {
@@ -147,9 +194,25 @@
     );
   }
 
+  .root > .time {
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5rem;
+  }
+
+  .root > .time .secondary {
+    color: var(--text-primary);
+  }
+
+  .preview {
+    width: 76px;
+    margin-right: 4px;
+  }
+
   .title {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .list,
@@ -184,20 +247,38 @@
     gap: 0.25rem;
   }
 
+  .match .server {
+    font-size: 12px;
+  }
+
   .match .map {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
   }
 
-  .difficulty {
-    width: 40px;
-  }
-
-  .time {
+  .match .time {
     color: var(--text-secondary);
     display: flex;
-    padding-right: 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .match .time::before {
+    font-size: 10px;
+    content: '•';
+  }
+
+  .perks {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: 80px;
+  }
+
+  .difficulty {
+    width: 40px;
   }
 
   .settings {
@@ -230,6 +311,10 @@
     width: 3px;
     top: 0.25rem;
     bottom: 0.25rem;
+  }
+
+  .root.compact::before {
+    width: 2px;
   }
 
   .root.win::before {

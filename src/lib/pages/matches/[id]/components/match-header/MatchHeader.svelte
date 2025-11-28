@@ -9,11 +9,13 @@
   import { ActionIcon } from '@svelteuidev/core';
   import CurrentMatch from './CurrentMatch.svelte';
   import type { Match } from '$lib/api/matches';
+  import { MapPreview } from '$lib/ui/img';
 
   const store = getContext<ContextType>(ContextName);
   const { overview } = store.match;
 
   $: details = $overview?.details as Required<Match['details']>;
+  $: preview = details?.map.name || '';
 </script>
 
 <HeaderLayout>
@@ -53,6 +55,12 @@
     <ActionIcon variant="transparent" on:click={() => history.back()}>
       <Icon src={BsArrowLeft} {...iconSettings} />
     </ActionIcon>
+  </svelte:fragment>
+
+  <svelte:fragment slot="preview">
+    {#if preview}
+      <MapPreview data={preview} />
+    {/if}
   </svelte:fragment>
 
   <svelte:fragment slot="content">

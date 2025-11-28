@@ -3,6 +3,7 @@ import type { TableColumn } from '$lib/components/table';
 import DateWrapper from './DateWrapper.svelte';
 import DifficultyWrapper from './DifficultyWrapper.svelte';
 import PerkWrapper from './PerkWrapper.svelte';
+import PreviewWrapper from './PreviewWrapper.svelte';
 import SessionWrapper from './SessionWrapper.svelte';
 import SettingsWrapper from './SettingsWrapper.svelte';
 import WaveWrapper from './WaveWrapper.svelte';
@@ -25,6 +26,12 @@ export const stickyColumns: TableColumn<RowData>[] = [
       },
       direction: 'desc',
     },
+  },
+  {
+    label: '',
+    id: 'preview',
+    render: () => PreviewWrapper,
+    width: 80,
   },
   {
     label: 'Match',

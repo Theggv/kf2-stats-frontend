@@ -13,6 +13,13 @@
         {/if}
       </MediaQuery>
     </div>
+    <div class="preview">
+      <MediaQuery query="(max-width: 600px)" let:matches>
+        {#if !matches}
+          <slot name="preview" />
+        {/if}
+      </MediaQuery>
+    </div>
     <div class="title">
       <slot name="title" />
     </div>
@@ -44,14 +51,19 @@
     font-size: 16px;
     display: grid;
     grid-template:
-      'icon title' auto
-      'icon subtitle' auto
-      / auto 1fr;
-    gap: 0 1rem;
+      'icon preview title' auto
+      'icon preview subtitle' auto
+      / auto 72px 1fr;
+    gap: 0 0.5rem;
   }
 
   .icon {
     grid-area: icon;
+    align-self: center;
+  }
+
+  .preview {
+    grid-area: preview;
     align-self: center;
   }
 

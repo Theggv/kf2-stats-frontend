@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Match } from '$lib/api/matches';
-  import MatchesListItem from './MatchesListItem.svelte';
+  import { MatchesListItem } from '$lib/components/matches-list';
   import MatchesListGroup from './MatchesListGroup.svelte';
 
   function sortByDate(a: Match, b: Match) {
@@ -14,7 +14,7 @@
   {#each data as [date, sessions] (date)}
     <MatchesListGroup {date} items={sessions} />
     {#each sessions.sort(sortByDate) as item (item.session.id)}
-      <MatchesListItem {item} />
+      <MatchesListItem {item} withPreview withServer />
     {/each}
   {:else}
     <div class="empty-list">No matches found</div>

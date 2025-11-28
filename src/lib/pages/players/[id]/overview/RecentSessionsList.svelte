@@ -1,7 +1,7 @@
 <script lang="ts">
-  import RecentSessionsListItem from './RecentSessionsListItem.svelte';
   import RecentSessionsListGroup from './RecentSessionsListGroup.svelte';
   import type { Match } from '$lib/api/matches';
+  import { MatchesListItem } from '$lib/components/matches-list';
 
   function sortByDate(a: Match, b: Match) {
     return b.session.updated_at.localeCompare(a.session.updated_at);
@@ -13,8 +13,14 @@
 <div class="session-list">
   {#each data as [date, sessions] (date)}
     <RecentSessionsListGroup {date} matches={sessions} />
-    {#each sessions.sort(sortByDate) as data (data.session.id)}
-      <RecentSessionsListItem {data} />
+    {#each sessions.sort(sortByDate) as item (item.session.id)}
+      <MatchesListItem
+        {item}
+        withServer
+        withPreview
+        withPerks
+        datetimeFormat="compact"
+      />
     {/each}
   {:else}
     <div class="empty-list">No matches found</div>

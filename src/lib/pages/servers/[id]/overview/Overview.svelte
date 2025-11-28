@@ -12,13 +12,13 @@
 
   import { getStore } from './Overview.store';
   import MatchesList from '../matches/MatchesList.svelte';
-  import MatchesListItem from '../matches/MatchesListItem.svelte';
   import LiveMatch from './LiveMatch.svelte';
 
   import { getStore as perkPlaytimeStore } from './charts/PerkPlaytime';
   import { iconSettings } from '$lib/ui/icons';
   import type { Match } from '$lib/api/matches';
   import { GameStatus } from '$lib/api/sessions';
+  import { MatchesListItem } from '$lib/components/matches-list';
 
   export let server: ServerData;
 
@@ -82,7 +82,7 @@
           <div class="live-icon" />
         </svelte:fragment>
         <svelte:fragment slot="content">
-          <MatchesListItem data={currentMatch} />
+          <MatchesListItem item={currentMatch} withPreview />
         </svelte:fragment>
       </SectionLayout>
     {/if}

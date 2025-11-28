@@ -1,15 +1,26 @@
 <script lang="ts">
-  import { GameMode, GameStatus } from '$lib/api/sessions';
-  import { getWaveText } from '$lib/util/converters';
-  import { diffToString, modeToString } from '$lib/util/enum-to-text';
-  import MediaQuery from 'svelte-media-queries';
-  import { DifficultyIcon } from '$lib/ui/icons';
-  import { getMatchDifficulty } from '$lib/util';
   import type { Match } from '$lib/api/matches';
+  import { GameMode, GameStatus } from '$lib/api/sessions';
+  import { DifficultyIcon, PerkIcon } from '$lib/ui/icons';
+  import { MapPreview } from '$lib/ui/img';
+  import { getMatchDifficulty } from '$lib/util';
+  import { getWaveText } from '$lib/util/converters';
+  import { getTimeSinceNow } from '$lib/util/date';
+  import {
+    diffToString,
+    lengthToString,
+    modeToString,
+  } from '$lib/util/enum-to-text';
 
-  export let data: Match;
+  export let item: Match;
 
-  $: details = data.details as Required<Match['details']>;
+  export let withServer: boolean = false;
+  export let withPerks: boolean = false;
+  export let withPreview: boolean = false;
+  export let datetimeFormat: 'full' | 'only-time' | 'compact' = 'only-time';
+
+  $: details = item.details as Required<Match['details']>;
+  $: perks = details.user_data?.perks.filter((_, i) => i < 2) || [];
 
   function getMatchClass(data: Match) {
     if (data.session.status === GameStatus.InProgress) return 'in-progress';
@@ -22,7 +33,7 @@
     return '';
   }
 
-  function getZedsType(zedsType: string) {
+  function formatZedsType(zedsType: string) {
     switch (zedsType.toLowerCase()) {
       case 'harder':
         return 'HZ';
@@ -35,43 +46,76 @@
 </script>
 
 <a
-  class="root {getMatchClass(data)}"
-  href="/sessions/{data.session.id}"
+  class="root {getMatchClass(item)}"
+  class:compact={datetimeFormat === 'compact'}
+  href="/sessions/{item.session.id}"
   target="_blank"
   rel="noopener noreferrer"
 >
-  <div class="time">
-    {new Date(data.session.updated_at).toLocaleTimeString()}
+  {#if datetimeFormat === 'full'}
+    <div class="time">
+      <div class="title">
+        {new Date(item.session.updated_at).toDateString()}
+      </div>
+      <div class="secondary">
+        {new Date(item.session.updated_at).toLocaleTimeString()}
+      </div>
+    </div>
+  {:else if datetimeFormat === 'only-time'}
+    <div class="time">
+      {new Date(item.session.updated_at).toLocaleTimeString()}
+    </div>
+  {/if}
+
+  {#if withPreview}
+    <div class="preview">
+      <MapPreview data={details.map.name} />
+    </div>
+  {/if}
+
+  <div class="match">
+    {#if withServer}
+      <div class="title">
+        <div class="server">
+          {details.server.name}
+        </div>
+      </div>
+    {/if}
+    <div class="secondary">
+      <div class="map">
+        {details.map.name}
+      </div>
+      {#if datetimeFormat === 'compact'}
+        <div class="time">
+          {getTimeSinceNow(new Date(item.session.updated_at), true)}
+        </div>
+      {/if}
+    </div>
   </div>
 
-  <div class="map">
-    {details.map.name}
-  </div>
+  {#if withPerks}
+    <div class="perks">
+      {#each perks as perk (perk)}
+        <PerkIcon {perk} prestige={0} />
+      {/each}
+    </div>
+  {/if}
 
   <div class="difficulty">
-    <DifficultyIcon difficulty={getMatchDifficulty(data.metadata.diff)} />
+    <DifficultyIcon difficulty={getMatchDifficulty(item.metadata.diff)} />
   </div>
 
   <div class="settings">
-    <MediaQuery query="(max-width: 768px)" let:matches>
-      {#if matches}
-        <div class="title">
-          {details.map.name}
-        </div>
-      {:else}
-        <div class="title list">
-          <span>
-            {modeToString(data.session.mode, false)}
-          </span>
-          {#if data.session.mode !== GameMode.Endless}
-            <span>
-              ({data.session.length} Waves)
-            </span>
-          {/if}
-        </div>
+    <div class="title list">
+      <span>
+        {modeToString(item.session.mode, false)}
+      </span>
+      {#if item.session.mode !== GameMode.Endless}
+        <span>
+          {lengthToString(item.session.length)}
+        </span>
       {/if}
-    </MediaQuery>
-
+    </div>
     <div class="list">
       {#if details.extra_data}
         <span>
@@ -82,12 +126,12 @@
         </span>
         {#if details.extra_data.zeds_type.toLowerCase() !== 'vanilla'}
           <span>
-            {getZedsType(details.extra_data.zeds_type)}
+            {formatZedsType(details.extra_data.zeds_type)}
           </span>
         {/if}
       {:else}
         <span>
-          {diffToString(data.session.diff)}
+          {diffToString(item.session.diff)}
         </span>
       {/if}
     </div>
@@ -97,7 +141,7 @@
     <div class="wave">
       <div class="title">Wave</div>
       <div>
-        {getWaveText(details.game_data.wave, data.session)}
+        {getWaveText(details.game_data.wave, item.session)}
       </div>
     </div>
   </div>
@@ -118,6 +162,7 @@
     padding: 0 0.25rem;
     padding-left: 2rem;
     font-weight: bold;
+    height: 48px;
   }
 
   .root:nth-child(even) {
@@ -160,9 +205,25 @@
     );
   }
 
+  .root > .time {
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5rem;
+  }
+
+  .root > .time .secondary {
+    color: var(--text-primary);
+  }
+
+  .preview {
+    width: 80px;
+    margin: auto;
+  }
+
   .title {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .list,
@@ -184,18 +245,47 @@
     margin: 0;
   }
 
-  .time {
-    color: var(--text-secondary);
+  .match {
     display: flex;
-    padding-right: 0.5rem;
+    flex-direction: column;
+    text-wrap: nowrap;
+    width: 250px;
   }
 
-  .map {
+  .match .secondary {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .match .server {
+    font-size: 12px;
+  }
+
+  .match .map {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
-    width: 200px;
-    font-size: 14px;
+  }
+
+  .match .time {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .match .time::before {
+    font-size: 10px;
+    content: '•';
+  }
+
+  .perks {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: 80px;
   }
 
   .difficulty {
@@ -234,6 +324,10 @@
     bottom: 0.25rem;
   }
 
+  .root.compact::before {
+    width: 2px;
+  }
+
   .root.win::before {
     background: var(--color-win);
   }
@@ -244,21 +338,5 @@
 
   .root.in-progress::before {
     background: var(--color-in-progress);
-  }
-
-  @media (max-width: 600px) {
-    .wave {
-      display: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .root {
-      padding-left: 1rem;
-    }
-
-    .map {
-      display: none;
-    }
   }
 </style>

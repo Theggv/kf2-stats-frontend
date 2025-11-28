@@ -1,0 +1,4757 @@
+{
+  "items": [
+    {
+      "session": {
+        "id": 287475,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-13T00:31:22+05:00",
+        "updated_at": "2025-11-13T00:49:24+05:00",
+        "started_at": "2025-11-13T00:32:04+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 5,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 190
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287475,
+          "summary": {
+            "avg_zeds_difficulty": 3.146299808625013,
+            "map_bonus": 0,
+            "completion_p": 0.6428571428571428,
+            "restarts_penalty": 1,
+            "potential_score": 3.146299808625013,
+            "final_score": 2.022621305544651
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287470,
+        "server_id": 18,
+        "map_id": 14,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-13T00:23:38+05:00",
+        "updated_at": "2025-11-13T00:48:21+05:00",
+        "started_at": "2025-11-13T00:25:35+05:00",
+        "completed_at": "2025-11-13T00:48:21+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SPILLWAY",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 8,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287470,
+          "summary": {
+            "avg_zeds_difficulty": 1.8888267588363414,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.8778287749653735,
+            "final_score": 1.8778287749653735
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287478,
+        "server_id": 9,
+        "map_id": 187315,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:39:42+05:00",
+        "updated_at": "2025-11-13T00:45:57+05:00",
+        "started_at": "2025-11-13T00:43:39+05:00",
+        "completed_at": "2025-11-13T00:45:57+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DEATHSENTENCEFINAL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 0,
+          "wave": 1,
+          "is_trader_time": true,
+          "zeds_left": 39
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287478,
+          "summary": {
+            "avg_zeds_difficulty": 1.4705882352941178,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.27226988372821176,
+            "final_score": 0.13613494186410588
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287477,
+        "server_id": 9,
+        "map_id": 144539,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:34:14+05:00",
+        "updated_at": "2025-11-13T00:38:10+05:00",
+        "started_at": "2025-11-13T00:36:53+05:00",
+        "completed_at": "2025-11-13T00:38:10+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-AFGHANISTAN",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 45
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287477,
+          "summary": {
+            "avg_zeds_difficulty": 1.5183823529411764,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.573189338235294,
+            "final_score": 0.286594669117647
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287471,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-13T00:25:21+05:00",
+        "updated_at": "2025-11-13T00:31:08+05:00",
+        "started_at": "2025-11-13T00:26:13+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 5,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 233
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287471,
+          "summary": {
+            "avg_zeds_difficulty": 2.191071428571428,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 2.191071428571428,
+            "final_score": 1.095535714285714
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287474,
+        "server_id": 9,
+        "map_id": 1238,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:30:12+05:00",
+        "updated_at": "2025-11-13T00:30:54+05:00",
+        "started_at": "2025-11-13T00:30:42+05:00",
+        "completed_at": "2025-11-13T00:30:54+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-MEOW_REMAKE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287474,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287472,
+        "server_id": 9,
+        "map_id": 1977,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:26:52+05:00",
+        "updated_at": "2025-11-13T00:29:14+05:00",
+        "started_at": "2025-11-13T00:28:57+05:00",
+        "completed_at": "2025-11-13T00:29:14+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NAUSEA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287472,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287466,
+        "server_id": 9,
+        "map_id": 58669,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:21:01+05:00",
+        "updated_at": "2025-11-13T00:22:28+05:00",
+        "started_at": "2025-11-13T00:21:27+05:00",
+        "completed_at": "2025-11-13T00:22:28+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-FRIENDLYGROUNDS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 53
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287466,
+          "summary": {
+            "avg_zeds_difficulty": 1.5192307692307692,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.5279326923076924,
+            "final_score": 0.2639663461538462
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287462,
+        "server_id": 148920,
+        "map_id": 182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:14:08+05:00",
+        "updated_at": "2025-11-13T00:21:25+05:00",
+        "started_at": "2025-11-13T00:16:55+05:00",
+        "completed_at": "2025-11-13T00:21:25+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PK-ORIENTALCASTLE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 10
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287462,
+          "summary": {
+            "avg_zeds_difficulty": 1.5610294117647059,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.17435550969946176,
+            "final_score": 0.08717775484973088
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287460,
+        "server_id": 9,
+        "map_id": 650,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-13T00:13:19+05:00",
+        "updated_at": "2025-11-13T00:14:12+05:00",
+        "started_at": "2025-11-13T00:13:54+05:00",
+        "completed_at": "2025-11-13T00:14:12+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PAYDAY2_ALASKAN_DEAL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287460,
+          "summary": {
+            "avg_zeds_difficulty": 1.5625,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.4609375,
+            "final_score": 0.23046875
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287456,
+        "server_id": 148920,
+        "map_id": 155,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:56:42+05:00",
+        "updated_at": "2025-11-13T00:13:05+05:00",
+        "started_at": "2025-11-13T00:01:17+05:00",
+        "completed_at": "2025-11-13T00:13:05+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-FORESTNUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 12
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287456,
+          "summary": {
+            "avg_zeds_difficulty": 1.6477903561955287,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.18906571425611027,
+            "final_score": 0.10398614284086066
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287453,
+        "server_id": 9,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:48:32+05:00",
+        "updated_at": "2025-11-13T00:12:25+05:00",
+        "started_at": "2025-11-12T23:49:13+05:00",
+        "completed_at": "2025-11-13T00:12:25+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 9,
+          "is_trader_time": false,
+          "zeds_left": 18
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287453,
+          "summary": {
+            "avg_zeds_difficulty": 2.6875976454833483,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 1.460566506672143,
+            "final_score": 1.3145098560049286
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287425,
+        "server_id": 12,
+        "map_id": 45,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T22:13:11+05:00",
+        "updated_at": "2025-11-13T00:05:08+05:00",
+        "started_at": "2025-11-12T23:17:56+05:00",
+        "completed_at": "2025-11-13T00:05:08+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SHOPPINGSPREE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 6,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287425,
+          "summary": {
+            "avg_zeds_difficulty": 3.0161341638928323,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 3.0161341638928323,
+            "final_score": 3.0161341638928323
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287452,
+        "server_id": 20,
+        "map_id": 202342,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:43:10+05:00",
+        "updated_at": "2025-11-13T00:01:58+05:00",
+        "started_at": "2025-11-12T23:44:16+05:00",
+        "completed_at": "2025-11-13T00:01:58+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CYTOLOGYLAB",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 105
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287452,
+          "summary": {
+            "avg_zeds_difficulty": 1.7534991224496879,
+            "map_bonus": 0,
+            "completion_p": 0.875,
+            "restarts_penalty": 1,
+            "potential_score": 0.6930233696255159,
+            "final_score": 0.6063954484223264
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287447,
+        "server_id": 148920,
+        "map_id": 1296,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:35:07+05:00",
+        "updated_at": "2025-11-12T23:55:45+05:00",
+        "started_at": "2025-11-12T23:38:14+05:00",
+        "completed_at": "2025-11-12T23:55:45+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PK-ENCLAVE-WINTER",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 3,
+          "is_trader_time": false,
+          "zeds_left": 32
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287447,
+          "summary": {
+            "avg_zeds_difficulty": 1.80056278491782,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 0.3326804945146154,
+            "final_score": 0.19960829670876926
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287443,
+        "server_id": 20,
+        "map_id": 4,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:21:33+05:00",
+        "updated_at": "2025-11-12T23:42:09+05:00",
+        "started_at": "2025-11-12T23:22:35+05:00",
+        "completed_at": "2025-11-12T23:42:09+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CONTAINMENTSTATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 3
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287443,
+          "summary": {
+            "avg_zeds_difficulty": 1.7255758279796916,
+            "map_bonus": 0,
+            "completion_p": 0.875,
+            "restarts_penalty": 1,
+            "potential_score": 1.5391579227747059,
+            "final_score": 1.3467631824278676
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287434,
+        "server_id": 7,
+        "map_id": 522,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T22:50:13+05:00",
+        "updated_at": "2025-11-12T23:35:00+05:00",
+        "started_at": "2025-11-12T22:51:12+05:00",
+        "completed_at": "2025-11-12T23:35:00+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-LIGHTARENA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#06 SPB-GS | Precision | The Crestfallen",
+          "address": "93.100.232.131:7784"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 18
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287434,
+          "summary": {
+            "avg_zeds_difficulty": 2.2337256771519147,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.0626641762870048,
+            "final_score": 1.0626641762870048
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287374,
+        "server_id": 148920,
+        "map_id": 32,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T18:37:23+05:00",
+        "updated_at": "2025-11-12T23:24:05+05:00",
+        "started_at": "2025-11-12T23:17:07+05:00",
+        "completed_at": "2025-11-12T23:24:05+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CARILLONHAMLET",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 44
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287374,
+          "summary": {
+            "avg_zeds_difficulty": 1.4621205357142857,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.26400025111607145,
+            "final_score": 0.1452001381138393
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287440,
+        "server_id": 20,
+        "map_id": 101,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T23:05:01+05:00",
+        "updated_at": "2025-11-12T23:20:07+05:00",
+        "started_at": "2025-11-12T23:05:46+05:00",
+        "completed_at": "2025-11-12T23:20:07+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-FARMHOUSE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 4,
+          "players_alive": 1,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 12
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287440,
+          "summary": {
+            "avg_zeds_difficulty": 1.7378749801104723,
+            "map_bonus": 0,
+            "completion_p": 0.875,
+            "restarts_penalty": 1,
+            "potential_score": 1.435097155310287,
+            "final_score": 1.2557100108965011
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287432,
+        "server_id": 20,
+        "map_id": 20,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T22:40:21+05:00",
+        "updated_at": "2025-11-12T23:03:40+05:00",
+        "started_at": "2025-11-12T22:42:06+05:00",
+        "completed_at": "2025-11-12T23:03:40+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-STEAMFORTRESS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 4,
+          "players_alive": 4,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 13
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287432,
+          "summary": {
+            "avg_zeds_difficulty": 1.7923773403001344,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.2054479272061265,
+            "final_score": 1.2054479272061265
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287426,
+        "server_id": 7,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T22:14:17+05:00",
+        "updated_at": "2025-11-12T22:48:56+05:00",
+        "started_at": "2025-11-12T22:15:35+05:00",
+        "completed_at": "2025-11-12T22:48:56+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#06 SPB-GS | Precision | The Crestfallen",
+          "address": "93.100.232.131:7784"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 4,
+          "players_alive": 3,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 38
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287426,
+          "summary": {
+            "avg_zeds_difficulty": 2.2572371884783116,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 2.0719083831403955,
+            "final_score": 2.0719083831403955
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287429,
+        "server_id": 20,
+        "map_id": 704,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T22:19:30+05:00",
+        "updated_at": "2025-11-12T22:39:08+05:00",
+        "started_at": "2025-11-12T22:20:26+05:00",
+        "completed_at": "2025-11-12T22:39:08+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-INFERNO",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 4,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 123
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287429,
+          "summary": {
+            "avg_zeds_difficulty": 1.7067654967280543,
+            "map_bonus": 0,
+            "completion_p": 0.875,
+            "restarts_penalty": 1,
+            "potential_score": 1.2918260039728733,
+            "final_score": 1.130347753476264
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287418,
+        "server_id": 20,
+        "map_id": 41,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T21:56:11+05:00",
+        "updated_at": "2025-11-12T22:18:20+05:00",
+        "started_at": "2025-11-12T21:57:13+05:00",
+        "completed_at": "2025-11-12T22:18:20+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ELYSIUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 2,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287418,
+          "summary": {
+            "avg_zeds_difficulty": 1.760761853448276,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.7066102106081624,
+            "final_score": 1.7066102106081624
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287422,
+        "server_id": 9,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T22:03:47+05:00",
+        "updated_at": "2025-11-12T22:16:39+05:00",
+        "started_at": "2025-11-12T22:04:15+05:00",
+        "completed_at": "2025-11-12T22:16:39+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 4
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287422,
+          "summary": {
+            "avg_zeds_difficulty": 2.086352930909174,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 1.8750469167582307,
+            "final_score": 1.1250281500549386
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287414,
+        "server_id": 7,
+        "map_id": 522,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T21:44:01+05:00",
+        "updated_at": "2025-11-12T22:13:10+05:00",
+        "started_at": "2025-11-12T21:44:53+05:00",
+        "completed_at": "2025-11-12T22:13:10+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-LIGHTARENA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#06 SPB-GS | Precision | The Crestfallen",
+          "address": "93.100.232.131:7784"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 1,
+          "wave": 7,
+          "is_trader_time": false,
+          "zeds_left": 67
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287414,
+          "summary": {
+            "avg_zeds_difficulty": 2.0305680717598187,
+            "map_bonus": 0,
+            "completion_p": 0.8,
+            "restarts_penalty": 1,
+            "potential_score": 1.4504911165091257,
+            "final_score": 1.1603928932073007
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287421,
+        "server_id": 12,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T22:00:41+05:00",
+        "updated_at": "2025-11-12T22:12:56+05:00",
+        "started_at": "2025-11-12T22:01:28+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 6,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287421,
+          "summary": {
+            "avg_zeds_difficulty": 2.279062916343139,
+            "map_bonus": 0,
+            "completion_p": 0.75,
+            "restarts_penalty": 1,
+            "potential_score": 1.4800407290857847,
+            "final_score": 1.1100305468143385
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287412,
+        "server_id": 3,
+        "map_id": 19,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T21:36:06+05:00",
+        "updated_at": "2025-11-12T22:03:40+05:00",
+        "started_at": "2025-11-12T21:37:32+05:00",
+        "completed_at": "2025-11-12T22:03:40+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-THEDESCENT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 2,
+          "wave": 9,
+          "is_trader_time": false,
+          "zeds_left": 76
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287412,
+          "summary": {
+            "avg_zeds_difficulty": 1.7794998014904353,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 1.7794998014904353,
+            "final_score": 1.601549821341392
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287416,
+        "server_id": 12,
+        "map_id": 71,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T21:49:31+05:00",
+        "updated_at": "2025-11-12T22:00:00+05:00",
+        "started_at": "2025-11-12T21:59:54+05:00",
+        "completed_at": "2025-11-12T22:00:00+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CASTLEVOLTER",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287416,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287404,
+        "server_id": 2,
+        "map_id": 123,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T21:08:58+05:00",
+        "updated_at": "2025-11-12T21:56:03+05:00",
+        "started_at": "2025-11-12T21:09:45+05:00",
+        "completed_at": "2025-11-12T21:56:03+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-STALKER-CORDON",
+          "preview": ""
+        },
+        "server": {
+          "name": "#01 SPB-GS | Endzeit",
+          "address": "93.100.232.131:7779"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 4
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287404,
+          "summary": {
+            "avg_zeds_difficulty": 1.9773315092774273,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.7221683122161368,
+            "final_score": 0.7221683122161368
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287413,
+        "server_id": 20,
+        "map_id": 133,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T21:37:21+05:00",
+        "updated_at": "2025-11-12T21:55:12+05:00",
+        "started_at": "2025-11-12T21:38:49+05:00",
+        "completed_at": "2025-11-12T21:55:12+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PARISBRIDGEWW2",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 5,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 13
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287413,
+          "summary": {
+            "avg_zeds_difficulty": 1.7444646547842795,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.7444646547842795,
+            "final_score": 1.7444646547842795
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287409,
+        "server_id": 12,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T21:21:36+05:00",
+        "updated_at": "2025-11-12T21:49:20+05:00",
+        "started_at": "2025-11-12T21:22:28+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 0,
+          "players_alive": 0,
+          "wave": 10,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287409,
+          "summary": {
+            "avg_zeds_difficulty": 2.5752286564164764,
+            "map_bonus": 0,
+            "completion_p": 0.95,
+            "restarts_penalty": 1,
+            "potential_score": 2.184231586611282,
+            "final_score": 2.0750200072807177
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287339,
+        "server_id": 7,
+        "map_id": 12,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T14:40:06+05:00",
+        "updated_at": "2025-11-12T21:42:50+05:00",
+        "started_at": "2025-11-12T21:09:54+05:00",
+        "completed_at": "2025-11-12T21:42:50+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SUMMERNIGHTNUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#06 SPB-GS | Precision | The Crestfallen",
+          "address": "93.100.232.131:7784"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 9,
+          "is_trader_time": false,
+          "zeds_left": 71
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287339,
+          "summary": {
+            "avg_zeds_difficulty": 2.178727508478525,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 1.1112170251967806,
+            "final_score": 1.0000953226771025
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287403,
+        "server_id": 20,
+        "map_id": 2313,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T21:06:10+05:00",
+        "updated_at": "2025-11-12T21:35:44+05:00",
+        "started_at": "2025-11-12T21:07:34+05:00",
+        "completed_at": "2025-11-12T21:35:44+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-STALKER-ROSTOK-BAR",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 3,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 2
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287403,
+          "summary": {
+            "avg_zeds_difficulty": 1.7507460811413016,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.7536803753292223,
+            "final_score": 0.7536803753292223
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287400,
+        "server_id": 3,
+        "map_id": 184,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T20:52:43+05:00",
+        "updated_at": "2025-11-12T21:35:10+05:00",
+        "started_at": "2025-11-12T20:54:13+05:00",
+        "completed_at": "2025-11-12T21:35:10+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-KILLINGPOOL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 5,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287400,
+          "summary": {
+            "avg_zeds_difficulty": 1.7929572846713626,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.7770335714360683,
+            "final_score": 1.7770335714360683
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287269,
+        "server_id": 20,
+        "map_id": 271,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T02:30:27+05:00",
+        "updated_at": "2025-11-12T21:05:03+05:00",
+        "started_at": "2025-11-12T20:57:33+05:00",
+        "completed_at": "2025-11-12T21:05:03+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NIGHTMARE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 4,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 83
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287269,
+          "summary": {
+            "avg_zeds_difficulty": 1.5052853231106242,
+            "map_bonus": 0,
+            "completion_p": 0.625,
+            "restarts_penalty": 1,
+            "potential_score": 0.8823670484494798,
+            "final_score": 0.5514794052809249
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287398,
+        "server_id": 12,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T20:41:03+05:00",
+        "updated_at": "2025-11-12T20:54:03+05:00",
+        "started_at": "2025-11-12T20:41:32+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 3
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287398,
+          "summary": {
+            "avg_zeds_difficulty": 2.1523517855209975,
+            "map_bonus": 0,
+            "completion_p": 0.6499999999999999,
+            "restarts_penalty": 1,
+            "potential_score": 1.9503683671536507,
+            "final_score": 1.2677394386498728
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287392,
+        "server_id": 3,
+        "map_id": 12,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T20:13:14+05:00",
+        "updated_at": "2025-11-12T20:51:17+05:00",
+        "started_at": "2025-11-12T20:15:25+05:00",
+        "completed_at": "2025-11-12T20:51:17+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SUMMERNIGHTNUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 2,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 13
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287392,
+          "summary": {
+            "avg_zeds_difficulty": 1.8220664478458712,
+            "map_bonus": 0,
+            "completion_p": 0.95,
+            "restarts_penalty": 1,
+            "potential_score": 1.8220664478458712,
+            "final_score": 1.7309631254535776
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287382,
+        "server_id": 3,
+        "map_id": 67,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T19:20:21+05:00",
+        "updated_at": "2025-11-12T20:12:22+05:00",
+        "started_at": "2025-11-12T19:21:06+05:00",
+        "completed_at": "2025-11-12T20:12:22+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DEFENCE_THYSELF",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 2,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 14
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287382,
+          "summary": {
+            "avg_zeds_difficulty": 1.7965819641955776,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.6438486463521871,
+            "final_score": 0.6438486463521871
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287380,
+        "server_id": 9,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T19:09:53+05:00",
+        "updated_at": "2025-11-12T19:30:25+05:00",
+        "started_at": "2025-11-12T19:12:25+05:00",
+        "completed_at": "2025-11-12T19:30:25+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 10,
+          "is_trader_time": false,
+          "zeds_left": 13
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287380,
+          "summary": {
+            "avg_zeds_difficulty": 2.1470357806425535,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 1.590350611827305,
+            "final_score": 1.4313155506445745
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287375,
+        "server_id": 3,
+        "map_id": 20,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T18:55:10+05:00",
+        "updated_at": "2025-11-12T19:19:36+05:00",
+        "started_at": "2025-11-12T19:19:30+05:00",
+        "completed_at": "2025-11-12T19:19:36+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-STEAMFORTRESS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 0,
+          "wave": 1,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287375,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287378,
+        "server_id": 5,
+        "map_id": 12,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T19:01:26+05:00",
+        "updated_at": "2025-11-12T19:11:52+05:00",
+        "started_at": "2025-11-12T19:02:36+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-SUMMERNIGHTNUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 3,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287378,
+          "summary": {
+            "avg_zeds_difficulty": 1.5708734380276932,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 0.7864834321691849,
+            "final_score": 0.471890059301511
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287369,
+        "server_id": 3,
+        "map_id": 661,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T18:07:32+05:00",
+        "updated_at": "2025-11-12T18:53:42+05:00",
+        "started_at": "2025-11-12T18:09:12+05:00",
+        "completed_at": "2025-11-12T18:53:42+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ARID_ZEDLANDS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 4,
+          "players_alive": 4,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287369,
+          "summary": {
+            "avg_zeds_difficulty": 1.8606920907103361,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.5985789392332173,
+            "final_score": 1.5985789392332173
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287363,
+        "server_id": 148920,
+        "map_id": 6,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T17:15:41+05:00",
+        "updated_at": "2025-11-12T18:35:55+05:00",
+        "started_at": "2025-11-12T17:32:29+05:00",
+        "completed_at": "2025-11-12T18:35:55+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-BURNINGPARIS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 4
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287363,
+          "summary": {
+            "avg_zeds_difficulty": 2.4635372309830403,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.4314895752806807,
+            "final_score": 0.4314895752806807
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287370,
+        "server_id": 5,
+        "map_id": 7,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T18:13:31+05:00",
+        "updated_at": "2025-11-12T18:14:17+05:00",
+        "started_at": "2025-11-12T18:14:02+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-ZEDLANDING",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": true,
+          "zeds_left": 38
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287370,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287361,
+        "server_id": 5,
+        "map_id": 14,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T16:57:02+05:00",
+        "updated_at": "2025-11-12T17:31:52+05:00",
+        "started_at": "2025-11-12T16:57:30+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-SPILLWAY",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 9,
+          "is_trader_time": false,
+          "zeds_left": 2
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287361,
+          "summary": {
+            "avg_zeds_difficulty": 1.8679154342742343,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 1.0649821215677635,
+            "final_score": 0.9584839094109872
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287360,
+        "server_id": 148920,
+        "map_id": 116,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T16:56:36+05:00",
+        "updated_at": "2025-11-12T17:14:15+05:00",
+        "started_at": "2025-11-12T16:57:20+05:00",
+        "completed_at": "2025-11-12T17:14:15+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-HOSTILEGROUNDS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 61
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287360,
+          "summary": {
+            "avg_zeds_difficulty": 1.8971945502777383,
+            "map_bonus": 0,
+            "completion_p": 0.7,
+            "restarts_penalty": 1,
+            "potential_score": 0.5372424672271712,
+            "final_score": 0.3760697270590198
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287356,
+        "server_id": 148920,
+        "map_id": 4,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T16:43:17+05:00",
+        "updated_at": "2025-11-12T16:56:19+05:00",
+        "started_at": "2025-11-12T16:43:49+05:00",
+        "completed_at": "2025-11-12T16:56:19+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CONTAINMENTSTATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 4,
+          "is_trader_time": false,
+          "zeds_left": 33
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287356,
+          "summary": {
+            "avg_zeds_difficulty": 1.8729815864455697,
+            "map_bonus": 0,
+            "completion_p": 0.6499999999999999,
+            "restarts_penalty": 1,
+            "potential_score": 0.8206203577912972,
+            "final_score": 0.5334032325643431
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287354,
+        "server_id": 9,
+        "map_id": 22716,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T16:40:04+05:00",
+        "updated_at": "2025-11-12T16:43:27+05:00",
+        "started_at": "2025-11-12T16:41:42+05:00",
+        "completed_at": "2025-11-12T16:43:27+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CORRIDOR",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 15
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287354,
+          "summary": {
+            "avg_zeds_difficulty": 1.5203488372093024,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.8703997093023256,
+            "final_score": 0.4351998546511628
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287338,
+        "server_id": 148920,
+        "map_id": 271,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T14:23:09+05:00",
+        "updated_at": "2025-11-12T16:42:36+05:00",
+        "started_at": "2025-11-12T16:42:32+05:00",
+        "completed_at": "2025-11-12T16:42:36+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NIGHTMARE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 0,
+          "wave": 1,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287338,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287350,
+        "server_id": 9,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T15:52:41+05:00",
+        "updated_at": "2025-11-12T16:39:13+05:00",
+        "started_at": "2025-11-12T15:56:00+05:00",
+        "completed_at": "2025-11-12T16:39:13+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 6,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 6
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287350,
+          "summary": {
+            "avg_zeds_difficulty": 3.300152848704319,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 3.300152848704319,
+            "final_score": 3.300152848704319
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287345,
+        "server_id": 9,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T15:25:22+05:00",
+        "updated_at": "2025-11-12T15:52:00+05:00",
+        "started_at": "2025-11-12T15:25:59+05:00",
+        "completed_at": "2025-11-12T15:52:00+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#07 SPB-GS | Precision | North Lane",
+          "address": "93.100.232.131:7785"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 1,
+          "wave": 9,
+          "is_trader_time": false,
+          "zeds_left": 41
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287345,
+          "summary": {
+            "avg_zeds_difficulty": 2.5891601321432716,
+            "map_bonus": 0,
+            "completion_p": 0.9,
+            "restarts_penalty": 1,
+            "potential_score": 2.287411609872175,
+            "final_score": 2.0586704488849574
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287344,
+        "server_id": 12,
+        "map_id": 1048,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T15:17:52+05:00",
+        "updated_at": "2025-11-12T15:36:23+05:00",
+        "started_at": "2025-11-12T15:21:28+05:00",
+        "completed_at": "2025-11-12T15:36:23+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NUKED-BETA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 79
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287344,
+          "summary": {
+            "avg_zeds_difficulty": 2.165848679126823,
+            "map_bonus": 0,
+            "completion_p": 0.7,
+            "restarts_penalty": 0.6666666666666667,
+            "potential_score": 1.7549111791268233,
+            "final_score": 0.8189585502591842
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287342,
+        "server_id": 12,
+        "map_id": 1048,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T15:10:29+05:00",
+        "updated_at": "2025-11-12T15:17:05+05:00",
+        "started_at": "2025-11-12T15:15:44+05:00",
+        "completed_at": "2025-11-12T15:17:05+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NUKED-BETA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 42
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287342,
+          "summary": {
+            "avg_zeds_difficulty": 1.7332589285714284,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 1.161283482142857,
+            "final_score": 0.5806417410714285
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287341,
+        "server_id": 12,
+        "map_id": 14,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T14:43:28+05:00",
+        "updated_at": "2025-11-12T15:09:12+05:00",
+        "started_at": "2025-11-12T14:47:30+05:00",
+        "completed_at": "2025-11-12T15:09:12+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SPILLWAY",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 0,
+          "wave": 10,
+          "is_trader_time": true,
+          "zeds_left": 86
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287341,
+          "summary": {
+            "avg_zeds_difficulty": 2.536332358553733,
+            "map_bonus": 0,
+            "completion_p": 0.95,
+            "restarts_penalty": 1,
+            "potential_score": 2.10357572870509,
+            "final_score": 1.998396942269835
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287337,
+        "server_id": 12,
+        "map_id": 2182,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T14:11:52+05:00",
+        "updated_at": "2025-11-12T14:42:29+05:00",
+        "started_at": "2025-11-12T14:12:21+05:00",
+        "completed_at": "2025-11-12T14:42:29+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CROSS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 5,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 8
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287337,
+          "summary": {
+            "avg_zeds_difficulty": 2.5016092531038963,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 2.2640555900134425,
+            "final_score": 2.2640555900134425
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287336,
+        "server_id": 148920,
+        "map_id": 4,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T14:05:46+05:00",
+        "updated_at": "2025-11-12T14:22:58+05:00",
+        "started_at": "2025-11-12T14:06:18+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-CONTAINMENTSTATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 0,
+          "players_alive": 0,
+          "wave": 5,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287336,
+          "summary": {
+            "avg_zeds_difficulty": 1.946995749694699,
+            "map_bonus": 0,
+            "completion_p": 0.7,
+            "restarts_penalty": 1,
+            "potential_score": 0.7726697729807903,
+            "final_score": 0.5408688410865532
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287304,
+        "server_id": 148920,
+        "map_id": 15,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T08:05:06+05:00",
+        "updated_at": "2025-11-12T14:05:03+05:00",
+        "started_at": "2025-11-12T14:05:00+05:00",
+        "completed_at": "2025-11-12T14:05:03+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DESOLATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 0,
+          "wave": 1,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287304,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287332,
+        "server_id": 3,
+        "map_id": 144738,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T12:51:47+05:00",
+        "updated_at": "2025-11-12T12:53:27+05:00",
+        "started_at": "2025-11-12T12:52:25+05:00",
+        "completed_at": "2025-11-12T12:53:27+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ZELDA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 26
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287332,
+          "summary": {
+            "avg_zeds_difficulty": 1.2890625,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.476953125,
+            "final_score": 0.2384765625
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287327,
+        "server_id": 3,
+        "map_id": 15,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T12:12:33+05:00",
+        "updated_at": "2025-11-12T12:50:34+05:00",
+        "started_at": "2025-11-12T12:49:57+05:00",
+        "completed_at": "2025-11-12T12:50:34+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DESOLATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 33
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287327,
+          "summary": {
+            "avg_zeds_difficulty": 1.2307692307692308,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.42769230769230776,
+            "final_score": 0.21384615384615388
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287326,
+        "server_id": 3,
+        "map_id": 155,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T12:05:16+05:00",
+        "updated_at": "2025-11-12T12:12:21+05:00",
+        "started_at": "2025-11-12T12:06:02+05:00",
+        "completed_at": "2025-11-12T12:12:21+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-FORESTNUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 3,
+          "is_trader_time": false,
+          "zeds_left": 18
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287326,
+          "summary": {
+            "avg_zeds_difficulty": 1.5341945288753802,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.895892382218845,
+            "final_score": 0.4927408102203648
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287161,
+        "server_id": 3,
+        "map_id": 2,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-11T21:54:40+05:00",
+        "updated_at": "2025-11-12T12:03:41+05:00",
+        "started_at": "2025-11-12T11:54:57+05:00",
+        "completed_at": "2025-11-12T12:03:41+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-POWERCORE_HOLDOUT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#02 SPB-GS | Needled 24/7",
+          "address": "93.100.232.131:7780"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 3,
+          "is_trader_time": false,
+          "zeds_left": 8
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287161,
+          "summary": {
+            "avg_zeds_difficulty": 1.5735410952133837,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 0.7609840275454274,
+            "final_score": 0.4565904165272565
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287303,
+        "server_id": 148920,
+        "map_id": 358,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T07:35:09+05:00",
+        "updated_at": "2025-11-12T08:04:51+05:00",
+        "started_at": "2025-11-12T07:38:48+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-ASYLUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 3,
+          "is_trader_time": true,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287303,
+          "summary": {
+            "avg_zeds_difficulty": 1.893417894483684,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 1.3025302273103692,
+            "final_score": 0.7815181363862216
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287302,
+        "server_id": 148920,
+        "map_id": 358,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T07:23:17+05:00",
+        "updated_at": "2025-11-12T07:34:14+05:00",
+        "started_at": "2025-11-12T07:25:03+05:00",
+        "completed_at": "2025-11-12T07:34:14+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ASYLUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 72
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287302,
+          "summary": {
+            "avg_zeds_difficulty": 1.6997531423737007,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 1.2161861676077128,
+            "final_score": 0.6689023921842421
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287300,
+        "server_id": 148920,
+        "map_id": 358,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T06:41:11+05:00",
+        "updated_at": "2025-11-12T07:13:59+05:00",
+        "started_at": "2025-11-12T06:43:58+05:00",
+        "completed_at": "2025-11-12T07:13:59+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ASYLUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 2,
+          "wave": 6,
+          "is_trader_time": false,
+          "zeds_left": 87
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287300,
+          "summary": {
+            "avg_zeds_difficulty": 2.0516929876436065,
+            "map_bonus": 0,
+            "completion_p": 0.75,
+            "restarts_penalty": 1,
+            "potential_score": 1.515644275873723,
+            "final_score": 1.1367332069052922
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287299,
+        "server_id": 148920,
+        "map_id": 358,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T05:53:15+05:00",
+        "updated_at": "2025-11-12T06:40:21+05:00",
+        "started_at": "2025-11-12T05:57:44+05:00",
+        "completed_at": "2025-11-12T06:40:21+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ASYLUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 25
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287299,
+          "summary": {
+            "avg_zeds_difficulty": 1.9405956496007704,
+            "map_bonus": 0,
+            "completion_p": 0.7,
+            "restarts_penalty": 1,
+            "potential_score": 0.36601401920465004,
+            "final_score": 0.256209813443255
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287298,
+        "server_id": 148920,
+        "map_id": 358,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T05:44:04+05:00",
+        "updated_at": "2025-11-12T05:52:29+05:00",
+        "started_at": "2025-11-12T05:45:25+05:00",
+        "completed_at": "2025-11-12T05:52:29+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ASYLUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 0,
+          "wave": 2,
+          "is_trader_time": true,
+          "zeds_left": 30
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287298,
+          "summary": {
+            "avg_zeds_difficulty": 1.6554052926158682,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 1.3158918845460197,
+            "final_score": 0.7237405365003109
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287295,
+        "server_id": 148920,
+        "map_id": 642,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T05:23:45+05:00",
+        "updated_at": "2025-11-12T05:31:45+05:00",
+        "started_at": "2025-11-12T05:25:42+05:00",
+        "completed_at": "2025-11-12T05:31:45+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DE_DUST2-CDEDIT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287295,
+          "summary": {
+            "avg_zeds_difficulty": 1.6155303030303032,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.20042672821969698,
+            "final_score": 0.10021336410984849
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287288,
+        "server_id": 148920,
+        "map_id": 16225,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T04:41:43+05:00",
+        "updated_at": "2025-11-12T05:02:44+05:00",
+        "started_at": "2025-11-12T04:47:15+05:00",
+        "completed_at": "2025-11-12T05:02:44+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DUST2_REDUX",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 22
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287288,
+          "summary": {
+            "avg_zeds_difficulty": 1.5889247912939775,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.1724910091029368,
+            "final_score": 0.09487005500661524
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287284,
+        "server_id": 12,
+        "map_id": 3,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T03:45:32+05:00",
+        "updated_at": "2025-11-12T04:48:01+05:00",
+        "started_at": "2025-11-12T03:48:04+05:00",
+        "completed_at": "2025-11-12T04:48:01+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-NUKED",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 118
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287284,
+          "summary": {
+            "avg_zeds_difficulty": 2.4683496664852784,
+            "map_bonus": 0,
+            "completion_p": 0.85,
+            "restarts_penalty": 1,
+            "potential_score": 0.5763593888438907,
+            "final_score": 0.4899054805173071
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287287,
+        "server_id": 18,
+        "map_id": 105,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T04:02:26+05:00",
+        "updated_at": "2025-11-12T04:46:09+05:00",
+        "started_at": "2025-11-12T04:07:26+05:00",
+        "completed_at": "2025-11-12T04:46:09+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CRASH",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 8,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287287,
+          "summary": {
+            "avg_zeds_difficulty": 1.8282484307291678,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.7888077058720563,
+            "final_score": 0.7888077058720563
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287273,
+        "server_id": 148920,
+        "map_id": 1296,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T02:36:36+05:00",
+        "updated_at": "2025-11-12T04:40:20+05:00",
+        "started_at": "2025-11-12T02:43:54+05:00",
+        "completed_at": "2025-11-12T04:40:20+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PK-ENCLAVE-WINTER",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 5,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 8
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287273,
+          "summary": {
+            "avg_zeds_difficulty": 2.3348033603955254,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.2767158417774972,
+            "final_score": 0.2767158417774972
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287283,
+        "server_id": 18,
+        "map_id": 14,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T03:25:41+05:00",
+        "updated_at": "2025-11-12T04:00:58+05:00",
+        "started_at": "2025-11-12T03:31:15+05:00",
+        "completed_at": "2025-11-12T04:00:58+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SPILLWAY",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 3,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 11
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287283,
+          "summary": {
+            "avg_zeds_difficulty": 1.8847847314145043,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.8847847314145043,
+            "final_score": 1.8847847314145043
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287278,
+        "server_id": 32659,
+        "map_id": 56793,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T02:51:28+05:00",
+        "updated_at": "2025-11-12T03:48:36+05:00",
+        "started_at": "2025-11-12T02:52:05+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-AREA52_A",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 7,
+          "is_trader_time": true,
+          "zeds_left": 141
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 28,
+          "wave_size_fakes": 6,
+          "zeds_type": "vanilla"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287278,
+          "summary": {
+            "avg_zeds_difficulty": 3.141214285714286,
+            "map_bonus": 0,
+            "completion_p": 0,
+            "restarts_penalty": 0,
+            "potential_score": 1.11750815991314,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287171,
+        "server_id": 12,
+        "map_id": 32,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-11T22:31:52+05:00",
+        "updated_at": "2025-11-12T03:44:41+05:00",
+        "started_at": "2025-11-12T03:44:26+05:00",
+        "completed_at": "2025-11-12T03:44:41+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CARILLONHAMLET",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08 SPB-GS | Precision | Section 8",
+          "address": "93.100.232.131:7786"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287171,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287275,
+        "server_id": 18,
+        "map_id": 21,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T02:43:39+05:00",
+        "updated_at": "2025-11-12T03:21:19+05:00",
+        "started_at": "2025-11-12T02:48:02+05:00",
+        "completed_at": "2025-11-12T03:21:19+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-VOLTERMANOR",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 3,
+          "wave": 7,
+          "is_trader_time": false,
+          "zeds_left": 395
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287275,
+          "summary": {
+            "avg_zeds_difficulty": 1.6763725632993043,
+            "map_bonus": 0,
+            "completion_p": 0.9285714285714286,
+            "restarts_penalty": 1,
+            "potential_score": 1.6763725632993043,
+            "final_score": 1.5566316659207826
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287266,
+        "server_id": 5,
+        "map_id": 144745,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T02:22:26+05:00",
+        "updated_at": "2025-11-12T02:53:23+05:00",
+        "started_at": "2025-11-12T02:23:02+05:00",
+        "completed_at": "2025-11-12T02:53:23+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-GHOSTLAKE",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 68
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287266,
+          "summary": {
+            "avg_zeds_difficulty": 1.5385953817941047,
+            "map_bonus": 0,
+            "completion_p": 0.85,
+            "restarts_penalty": 1,
+            "potential_score": 0.2988020962096278,
+            "final_score": 0.2539817817781836
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287276,
+        "server_id": 32659,
+        "map_id": 56793,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": -1,
+        "created_at": "2025-11-12T02:44:13+05:00",
+        "updated_at": "2025-11-12T02:51:11+05:00",
+        "started_at": "2025-11-12T02:45:12+05:00",
+        "completed_at": null
+      },
+      "details": {
+        "map": {
+          "name": "KF-AREA52_A",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 7,
+          "is_trader_time": true,
+          "zeds_left": 248
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 28,
+          "wave_size_fakes": 6,
+          "zeds_type": "Vanilla"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287276,
+          "summary": {
+            "avg_zeds_difficulty": 2.0644736842105265,
+            "map_bonus": 0,
+            "completion_p": 0,
+            "restarts_penalty": 1,
+            "potential_score": 0.8103059210526317,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287259,
+        "server_id": 18,
+        "map_id": 46,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T02:14:23+05:00",
+        "updated_at": "2025-11-12T02:42:31+05:00",
+        "started_at": "2025-11-12T02:16:57+05:00",
+        "completed_at": "2025-11-12T02:42:31+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SANITARIUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 6,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 21
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287259,
+          "summary": {
+            "avg_zeds_difficulty": 1.722287337258548,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.722287337258548,
+            "final_score": 1.722287337258548
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287263,
+        "server_id": 148920,
+        "map_id": 1296,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T02:19:28+05:00",
+        "updated_at": "2025-11-12T02:35:38+05:00",
+        "started_at": "2025-11-12T02:26:10+05:00",
+        "completed_at": "2025-11-12T02:35:38+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-PK-ENCLAVE-WINTER",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 2
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287263,
+          "summary": {
+            "avg_zeds_difficulty": 1.7000000000000002,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.1328125,
+            "final_score": 0.06640625
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287256,
+        "server_id": 20,
+        "map_id": 184,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T02:11:26+05:00",
+        "updated_at": "2025-11-12T02:28:59+05:00",
+        "started_at": "2025-11-12T02:12:09+05:00",
+        "completed_at": "2025-11-12T02:28:59+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-KILLINGPOOL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 3
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287256,
+          "summary": {
+            "avg_zeds_difficulty": 1.727135827629174,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.5395322268472231,
+            "final_score": 1.5395322268472231
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287238,
+        "server_id": 5,
+        "map_id": 165213,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:32:45+05:00",
+        "updated_at": "2025-11-12T02:21:29+05:00",
+        "started_at": "2025-11-12T02:14:33+05:00",
+        "completed_at": "2025-11-12T02:21:29+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-VORTEX-CDEDIT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 3,
+          "is_trader_time": false,
+          "zeds_left": 15
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287238,
+          "summary": {
+            "avg_zeds_difficulty": 1.5822889876081367,
+            "map_bonus": 0,
+            "completion_p": 0.6000000000000001,
+            "restarts_penalty": 1,
+            "potential_score": 0.8595596806443079,
+            "final_score": 0.5157358083865848
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287262,
+        "server_id": 148920,
+        "map_id": 57187,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T02:15:51+05:00",
+        "updated_at": "2025-11-12T02:18:12+05:00",
+        "started_at": "2025-11-12T02:17:58+05:00",
+        "completed_at": "2025-11-12T02:18:12+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-MIRAS_A",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 56
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287262,
+          "summary": {
+            "avg_zeds_difficulty": 0,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0,
+            "final_score": 0
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287240,
+        "server_id": 7,
+        "map_id": 67,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:33:32+05:00",
+        "updated_at": "2025-11-12T02:14:27+05:00",
+        "started_at": "2025-11-12T01:35:22+05:00",
+        "completed_at": "2025-11-12T02:14:27+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DEFENCE_THYSELF",
+          "preview": ""
+        },
+        "server": {
+          "name": "#06 SPB-GS | Precision | The Crestfallen",
+          "address": "93.100.232.131:7784"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 1,
+          "wave": 7,
+          "is_trader_time": false,
+          "zeds_left": 85
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287240,
+          "summary": {
+            "avg_zeds_difficulty": 2.075898032537282,
+            "map_bonus": 0,
+            "completion_p": 0.8,
+            "restarts_penalty": 1,
+            "potential_score": 0.5481453243715577,
+            "final_score": 0.4385162594972462
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287249,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:51:46+05:00",
+        "updated_at": "2025-11-12T02:13:57+05:00",
+        "started_at": "2025-11-12T01:52:13+05:00",
+        "completed_at": "2025-11-12T02:13:57+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 5,
+          "players_alive": 2,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 190
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287249,
+          "summary": {
+            "avg_zeds_difficulty": 3.6162283813638076,
+            "map_bonus": 0,
+            "completion_p": 0.7857142857142857,
+            "restarts_penalty": 1,
+            "potential_score": 3.6162283813638076,
+            "final_score": 2.8413222996429917
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287245,
+        "server_id": 18,
+        "map_id": 46,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:49:35+05:00",
+        "updated_at": "2025-11-12T02:13:27+05:00",
+        "started_at": "2025-11-12T01:53:00+05:00",
+        "completed_at": "2025-11-12T02:13:27+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-SANITARIUM",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 1,
+          "wave": 6,
+          "is_trader_time": false,
+          "zeds_left": 9
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287245,
+          "summary": {
+            "avg_zeds_difficulty": 1.6125820360341454,
+            "map_bonus": 0,
+            "completion_p": 0.8571428571428572,
+            "restarts_penalty": 1,
+            "potential_score": 1.6125820360341454,
+            "final_score": 1.3822131737435532
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287222,
+        "server_id": 2,
+        "map_id": 105,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T01:07:43+05:00",
+        "updated_at": "2025-11-12T01:55:09+05:00",
+        "started_at": "2025-11-12T01:09:55+05:00",
+        "completed_at": "2025-11-12T01:55:09+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CRASH",
+          "preview": ""
+        },
+        "server": {
+          "name": "#01 SPB-GS | Endzeit",
+          "address": "93.100.232.131:7779"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 4,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 1
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287222,
+          "summary": {
+            "avg_zeds_difficulty": 1.815009503326116,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.7124127181427535,
+            "final_score": 1.7124127181427535
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287227,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:15:44+05:00",
+        "updated_at": "2025-11-12T01:49:19+05:00",
+        "started_at": "2025-11-12T01:16:30+05:00",
+        "completed_at": "2025-11-12T01:49:19+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 4,
+          "wave": 7,
+          "is_trader_time": false,
+          "zeds_left": 244
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287227,
+          "summary": {
+            "avg_zeds_difficulty": 4.194796080562364,
+            "map_bonus": 0,
+            "completion_p": 0.9285714285714286,
+            "restarts_penalty": 1,
+            "potential_score": 4.194796080562364,
+            "final_score": 3.895167789093624
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287230,
+        "server_id": 18,
+        "map_id": 32,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:19:20+05:00",
+        "updated_at": "2025-11-12T01:48:08+05:00",
+        "started_at": "2025-11-12T01:22:52+05:00",
+        "completed_at": "2025-11-12T01:48:08+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CARILLONHAMLET",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 1,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 9
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287230,
+          "summary": {
+            "avg_zeds_difficulty": 1.7067384267099768,
+            "map_bonus": 0,
+            "completion_p": 0.9285714285714286,
+            "restarts_penalty": 1,
+            "potential_score": 1.7067384267099768,
+            "final_score": 1.5848285390878356
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287210,
+        "server_id": 5,
+        "map_id": 22636,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T00:40:17+05:00",
+        "updated_at": "2025-11-12T01:31:47+05:00",
+        "started_at": "2025-11-12T00:40:50+05:00",
+        "completed_at": "2025-11-12T01:31:47+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-WATERONMARS",
+          "preview": ""
+        },
+        "server": {
+          "name": "#04 SPB-GS | Hate Creation",
+          "address": "93.100.232.131:7782"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 11,
+          "is_trader_time": true,
+          "zeds_left": 0
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287210,
+          "summary": {
+            "avg_zeds_difficulty": 1.9791191896280214,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.4027871070495186,
+            "final_score": 0.4027871070495186
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287225,
+        "server_id": 20,
+        "map_id": 184,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T01:08:07+05:00",
+        "updated_at": "2025-11-12T01:31:25+05:00",
+        "started_at": "2025-11-12T01:09:26+05:00",
+        "completed_at": "2025-11-12T01:31:25+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-KILLINGPOOL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 2
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287225,
+          "summary": {
+            "avg_zeds_difficulty": 1.745866245509503,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 0.8580713228708938,
+            "final_score": 0.8580713228708938
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287232,
+        "server_id": 148920,
+        "map_id": 16225,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:20:24+05:00",
+        "updated_at": "2025-11-12T01:31:00+05:00",
+        "started_at": "2025-11-12T01:23:15+05:00",
+        "completed_at": "2025-11-12T01:31:00+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DUST2_REDUX",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 3,
+          "players_alive": 2,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 60
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287232,
+          "summary": {
+            "avg_zeds_difficulty": 1.6262109375,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.6579480468750001,
+            "final_score": 0.3618714257812501
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287212,
+        "server_id": 18,
+        "map_id": 15,
+        "mode": 1,
+        "length": 7,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T00:44:26+05:00",
+        "updated_at": "2025-11-12T01:17:52+05:00",
+        "started_at": "2025-11-12T00:46:57+05:00",
+        "completed_at": "2025-11-12T01:17:52+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-DESOLATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#16 SPB-GS | Brimstone",
+          "address": "93.100.232.131:7794"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 6,
+          "wave": 8,
+          "is_trader_time": false,
+          "zeds_left": 38
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287212,
+          "summary": {
+            "avg_zeds_difficulty": 1.6972017068036531,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.583034162299694,
+            "final_score": 1.583034162299694
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287213,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T00:51:23+05:00",
+        "updated_at": "2025-11-12T01:15:08+05:00",
+        "started_at": "2025-11-12T00:52:13+05:00",
+        "completed_at": "2025-11-12T01:15:08+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 5,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 77
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287213,
+          "summary": {
+            "avg_zeds_difficulty": 3.743495533473537,
+            "map_bonus": 0,
+            "completion_p": 0.7857142857142857,
+            "restarts_penalty": 1,
+            "potential_score": 3.743495533473537,
+            "final_score": 2.941317919157779
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287220,
+        "server_id": 148920,
+        "map_id": 731,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:07:04+05:00",
+        "updated_at": "2025-11-12T01:13:33+05:00",
+        "started_at": "2025-11-12T01:07:53+05:00",
+        "completed_at": "2025-11-12T01:13:33+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-ICEARENA",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 2,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 80
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287220,
+          "summary": {
+            "avg_zeds_difficulty": 1.5780681818181819,
+            "map_bonus": 0,
+            "completion_p": 0.55,
+            "restarts_penalty": 1,
+            "potential_score": 0.6440478816947732,
+            "final_score": 0.3542263349321253
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287218,
+        "server_id": 20,
+        "map_id": 184,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T01:01:28+05:00",
+        "updated_at": "2025-11-12T01:07:23+05:00",
+        "started_at": "2025-11-12T01:02:04+05:00",
+        "completed_at": "2025-11-12T01:07:23+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-KILLINGPOOL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 23
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287218,
+          "summary": {
+            "avg_zeds_difficulty": 1.5538277649769587,
+            "map_bonus": 0,
+            "completion_p": 0.625,
+            "restarts_penalty": 1,
+            "potential_score": 0.6803229948471858,
+            "final_score": 0.42520187177949115
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287206,
+        "server_id": 2,
+        "map_id": 19,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 2,
+        "created_at": "2025-11-12T00:29:38+05:00",
+        "updated_at": "2025-11-12T01:06:34+05:00",
+        "started_at": "2025-11-12T00:32:45+05:00",
+        "completed_at": "2025-11-12T01:06:34+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-THEDESCENT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#01 SPB-GS | Endzeit",
+          "address": "93.100.232.131:7779"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 6,
+          "wave": 11,
+          "is_trader_time": false,
+          "zeds_left": 23
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287206,
+          "summary": {
+            "avg_zeds_difficulty": 1.804850891532085,
+            "map_bonus": 0,
+            "completion_p": 1,
+            "restarts_penalty": 1,
+            "potential_score": 1.804850891532085,
+            "final_score": 1.804850891532085
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287217,
+        "server_id": 148920,
+        "map_id": 4,
+        "mode": 1,
+        "length": 10,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T00:58:35+05:00",
+        "updated_at": "2025-11-12T01:01:02+05:00",
+        "started_at": "2025-11-12T01:00:38+05:00",
+        "completed_at": "2025-11-12T01:01:02+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-CONTAINMENTSTATION",
+          "preview": ""
+        },
+        "server": {
+          "name": "#05.1 SPB-GS | HoE+ | The Void",
+          "address": "93.100.232.131:7802"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 2,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 100
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287217,
+          "summary": {
+            "avg_zeds_difficulty": 1.5,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.3975,
+            "final_score": 0.19875
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287215,
+        "server_id": 20,
+        "map_id": 184,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T00:54:47+05:00",
+        "updated_at": "2025-11-12T01:00:34+05:00",
+        "started_at": "2025-11-12T00:55:28+05:00",
+        "completed_at": "2025-11-12T01:00:34+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-KILLINGPOOL",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 2,
+          "is_trader_time": false,
+          "zeds_left": 30
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287215,
+          "summary": {
+            "avg_zeds_difficulty": 1.567311507936508,
+            "map_bonus": 0,
+            "completion_p": 0.625,
+            "restarts_penalty": 1,
+            "potential_score": 0.5933258235656425,
+            "final_score": 0.37082863972852653
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287191,
+        "server_id": 20,
+        "map_id": 2,
+        "mode": 1,
+        "length": 4,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-11T23:31:11+05:00",
+        "updated_at": "2025-11-12T00:54:03+05:00",
+        "started_at": "2025-11-12T00:52:01+05:00",
+        "completed_at": "2025-11-12T00:54:03+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-POWERCORE_HOLDOUT",
+          "preview": ""
+        },
+        "server": {
+          "name": "#17 SPB-GS | Counterweight",
+          "address": "93.100.232.131:7795"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 1,
+          "players_alive": 1,
+          "wave": 1,
+          "is_trader_time": false,
+          "zeds_left": 12
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287191,
+          "summary": {
+            "avg_zeds_difficulty": 1.3245192307692308,
+            "map_bonus": 0,
+            "completion_p": 0.5,
+            "restarts_penalty": 1,
+            "potential_score": 0.4687566373858063,
+            "final_score": 0.23437831869290315
+          },
+          "waves": []
+        }
+      }
+    },
+    {
+      "session": {
+        "id": 287205,
+        "server_id": 32659,
+        "map_id": 196,
+        "mode": 3,
+        "length": 7,
+        "diff": 4,
+        "status": 3,
+        "created_at": "2025-11-12T00:25:56+05:00",
+        "updated_at": "2025-11-12T00:51:01+05:00",
+        "started_at": "2025-11-12T00:27:32+05:00",
+        "completed_at": "2025-11-12T00:51:01+05:00"
+      },
+      "details": {
+        "map": {
+          "name": "KF-RIG",
+          "preview": ""
+        },
+        "server": {
+          "name": "#08.2 SPB-GS | CIS CD | TOP YEBANS",
+          "address": "93.100.232.131:7801"
+        },
+        "game_data": {
+          "max_players": 6,
+          "players_online": 6,
+          "players_alive": 1,
+          "wave": 5,
+          "is_trader_time": false,
+          "zeds_left": 43
+        },
+        "extra_data": {
+          "spawn_cycle": "ts_mig_v3",
+          "max_monsters": 48,
+          "wave_size_fakes": 12,
+          "zeds_type": "nightcore"
+        }
+      },
+      "metadata": {
+        "diff": {
+          "session_id": 287205,
+          "summary": {
+            "avg_zeds_difficulty": 3.8337902027468806,
+            "map_bonus": 0,
+            "completion_p": 0.7857142857142857,
+            "restarts_penalty": 1,
+            "potential_score": 3.8337902027468806,
+            "final_score": 3.012263730729692
+          },
+          "waves": []
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "page": 2,
+    "results_per_page": 100,
+    "total_results": 129243
+  }
+}
