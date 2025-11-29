@@ -60,7 +60,7 @@
     let:filteredItems
     style={'background: rgb(0 0 0 / 0.1) !important;'}
   >
-    {#each filteredItems as item, index (`${index} ${item.meta_data.start_tick}`)}
+    {#each filteredItems as item, index (`${index} ${item.metadata.start_tick}`)}
       <div
         class="item"
         role="button"
