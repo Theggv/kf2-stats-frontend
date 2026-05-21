@@ -1,11 +1,29 @@
 <script lang="ts">
   export let address: string;
+
+  function copyServerToClipboard(e): void {
+    const linkElement = e.target.parentElement.previousElementSibling;
+    
+    if (undefined !== navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(linkElement.innerText);
+  
+      return;
+    }
+  
+    const area = document.createElement('textarea');
+    area.value = linkElement.innerText;
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
 </script>
 
 <div class="root">
   <a href="steam://connect/{address}?appid=232090"><slot /></a>
   <div
-    on:click={() => navigator.clipboard.writeText(address)}
+    on:click={copyServerToClipboard}
     on:keypress
     tabindex="0"
     role="button"
